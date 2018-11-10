@@ -14,7 +14,7 @@
 	</head>
 	<body>
 	<!-- Main Navbar -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0px">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0px;">
 		<div class="container-fluid">
 			<div class="navbar-brand">
 				<img src="assets/images/icon.png" style="width: 75%; height: 35px; margin-top: -10px" alt="">
@@ -23,17 +23,207 @@
 	  			<span class="navbar-toggler-icon"></span>
 		  	</button>
 
-		  	<div class="collapse navbar-collapse" id="navb">
-			    <ul class="navbar-nav mr-auto nav-me">
-			      	@yield('nav-item')
-			    </ul>
-		  		@guest
+		  	<div class="collapse navbar-collapse fontArial" id="navb">
+			  	@guest
+			    <ul class="navbar-nav mr-auto nav-me">   	
+			  		<script>
+						function openNav() {
+							document.getElementById("myNav").style.display = "block";
+						}
+						function closeNav() {
+							document.getElementById("myNav").style.display = "none";
+						}
+					</script>
+					<li class="nav-item">
+				  		<a class="nav-link" href="/" style="padding: 10px;">Beranda</a>
+				  	</li>
+				  	<span class="span">|</span>
+				  	<li class="nav-item">
+				    	<a class="nav-link" href="/hc" style="padding: 10px;">Hitung Cepat</a>
+				  	</li>  	
+				  	<span class="span">|</span>
+					<li class="nav-item dropdown">
+				    	<a class="nav-link dropdown-toggle" href="javascript:void(0)" onclick="openNav()" style="padding: 10px;">Organisasi </a>
+				   	</li>	
+				  	<div class="dropdown-menu dropdown-me" style="background-color: rgba(0,0,0,0.8); color: #fff;" id="myNav">
+			    		<a href="javascript:void(0)" class="closeNav" onclick="closeNav()">&times;</a>
+			 			<div class="listdrop">
+			 				<h5>Organisasi Mahasiswa</h5>	
+			 				<a class="dropdown-item drop-me" style="font-size: 18px;" href="/org">Sema Universitas</a>
+			 				<a class="dropdown-item drop-me" style="font-size: 18px;" href="/org">Dema Universitas</a>
+			 				<div class="dropdown" style="width: 230px">
+			 					<a class="dropdown-item drop-me" style="font-size: 18px;" data-toggle="dropdown" href="javascript:void(0)">Sema Fakuktas<i style="float: right;" class="fa fa-caret-down"></i></a>
+							  	<div class="dropdown-menu" style="background-color: #000;">
+							      	<a class="dropdown-item" href="/org">Ushuludin</a>
+							      	<a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
+							      	<a class="dropdown-item" href="#">Syariah dan Hukum</a>
+							      	<a class="dropdown-item" href="#">Dakwah dan Komunikasi</a>
+							      	<a class="dropdown-item" href="#">Adab dan Humaniora</a>
+							      	<a class="dropdown-item" href="#">Psikologi</a>
+							      	<a class="dropdown-item" href="#">Saintek dan Teknologi</a>
+							      	<a class="dropdown-item" href="#">Ilmu Sosial dan Ilmu Politik</a>
+							  	</div>
+							</div>
+			 				<div class="dropdown" style="width: 230px">
+			 					<a class="dropdown-item drop-me" style="font-size: 18px;" data-toggle="dropdown" href="javascript:void(0)">Dema Fakuktas<i style="float: right;" class="fa fa-caret-down"></i></a>
+							  	<div class="dropdown-menu" style="background-color:#000;">
+							      	<a class="dropdown-item" href="/org">Ushuludin</a>
+							      	<a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
+							      	<a class="dropdown-item" href="#">Syariah dan Hukum</a>
+							      	<a class="dropdown-item" href="#">Dakwah dan Komunikasi</a>
+							      	<a class="dropdown-item" href="#">Adab dan Humaniora</a>
+							      	<a class="dropdown-item" href="#">Psikologi</a>
+							      	<a class="dropdown-item" href="#">Saintek dan Teknologi</a>
+							      	<a class="dropdown-item" href="#">Ilmu Sosial dan Ilmu Politik</a>
+							  	</div>
+							</div>
+					      	<hr style="border: 0.1px solid #cccccc">
+			 				<h5>HMJ Fak.Tarbiyah dan Keguruan</h5>
+					      	<a class="dropdown-item" href="#">Manajemen Pendidikan Islam</a>
+					      	<a class="dropdown-item" href="#">Pendidikan Agama Islam</a>
+					      	<a class="dropdown-item" href="#">Pendidikan Bahasa Arab</a>
+					      	<a class="dropdown-item" href="#">Pendidikan Matematika</a>
+					      	<a class="dropdown-item" href="#">Pendidikan Biologi</a>
+					      	<a class="dropdown-item" href="#">Pendidikan Fisika</a>
+					      	<a class="dropdown-item" href="#">Pendidikan Kimia</a>
+					      	<a class="dropdown-item" href="#">Pendidikan Guru MI (PGMI)</a>
+					      	<a class="dropdown-item" href="#">Pendidikan Islam Anak Usia Dini</a>
+				    	</div>
+				    	<div class="listdrop">	
+				    		<h5>HMJ Fak.Syariah dan Hukum</h5>
+					      	<a class="dropdown-item" href="/org">Hukum Keluarga (Ahwal Al-Syakhsiyah)</a>
+					      	<a class="dropdown-item" href="#">Hukum Ekonomi Syariah (Muamalah)</a>
+					      	<a class="dropdown-item" href="#">Hukum Tata Negara (Siyasah)</a>
+					      	<a class="dropdown-item" href="#">Perbandingan Madzhab dan Hukum</a>
+					      	<a class="dropdown-item" href="#">Ilmu Hukum</a>
+					      	<a class="dropdown-item" href="#">Hukum Pidana Islam</a>
+					      	<a class="dropdown-item" href="#">Manajemen Keuangan Syariah</a>
+					      	<a class="dropdown-item" href="#">Akutansi Syariah</a>
+					      	<a class="dropdown-item" href="#">Ekonomi Syariah</a>
+					      	<hr style="border: 0.5px solid #cccccc">
+					      	<h5>HMJ Fak.Ilmu Sosial dan Ilmu Politik</h5>
+					      	<a class="dropdown-item" href="/org">Administrai Publik</a>
+					      	<a class="dropdown-item" href="#">Manajemen</a>
+					      	<a class="dropdown-item" href="#">Sosiologi</a>
+					      	<a class="dropdown-item" href="#">Ilmu Politik</a>
+				    	</div>
+				    	<div class="listdrop">	
+				    	 	<h5>HMJ Fak.Dakwah dan  Komunikasi</h5>
+					      	<a class="dropdown-item" href="/org">Bimbingan Konseling Islam</a>
+					      	<a class="dropdown-item" href="#">Komunikasi dan Penyiaran Islam</a>
+					      	<a class="dropdown-item" href="#">Manajemen Dakwah</a>
+					      	<a class="dropdown-item" href="#">Pengembangan Masyarakat Islam</a>
+					      	<a class="dropdown-item" href="#">Ilmu Komunikasi Jurnalistik</a>
+					      	<a class="dropdown-item" href="#">Ilmu Komunikasi Humas</a>
+					      	<hr style="border: 0.3px solid #cccccc">
+				    		<h5>HMJ Fak.Adab dan Humaniora</h5>
+					      	<a class="dropdown-item" href="/org">Sejarah dan Peradaban Islam</a>
+					      	<a class="dropdown-item" href="#">Bahasa dan Sastra Arab</a>
+					      	<a class="dropdown-item" href="#">Sastra Inggris</a>
+					      	<hr style="border: 0.3px solid #cccccc">
+					      	<h5>HMJ Fak.Psikologi</h5>
+					      	<a class="dropdown-item" href="/org">Psikologi</a>
+					    </div>
+				    	<div class="listdrop">
+					     	<h5>HMJ Fak.Sains dan Teknologi</h5>
+					      	<a class="dropdown-item" href="/org">Matematika</a>
+					      	<a class="dropdown-item" href="#">Biologi</a>
+					      	<a class="dropdown-item" href="#">Fisika</a>
+					      	<a class="dropdown-item" href="#">Kimia</a>
+					      	<a class="dropdown-item" href="#">Teknik Informatika</a>
+					      	<a class="dropdown-item" href="#">Agroteknologi</a>
+					      	<a class="dropdown-item" href="#">Teknik Elektro</a>
+					      	<hr style="border: 0.2px solid #cccccc">
+					      	<h5>HMJ Fak.Ushuludin</h5>
+					      	<a class="dropdown-item" href="/org">Aqidah dan Filsafat Islam</a>
+					      	<a class="dropdown-item" href="#">Studi Agama-Agama</a>
+					      	<a class="dropdown-item" href="#">Ilmu Al-Quran dan Tafsir</a>
+					      	<a class="dropdown-item" href="#">Tasawuf Psikoterapi</a>
+				    	</div>
+					</div>
+				  	<span class="span">|</span>
+				  	<li class="nav-item">
+				    	<a class="nav-link" href="javascript:void(0)" style="padding: 10px;">Syarat & Ketentuan</a>
+				  	</li>
+				</ul>
 			    <ul class="navbar-nav">
 			    	<li class="nav-item">
 						<a href="" class="nav-link link-me" data-toggle="modal" data-target="#myModal" style="padding: 10px;">Masuk</a>
 			    	</li>	
 			    </ul>
 				@else
+				<ul class="navbar-nav mr-auto nav-me">   	
+		  	
+					<li class="nav-item">
+			  			<a class="nav-link" href="/" style="padding: 10px;">Beranda</a>
+				  	</li>
+				  	<span class="span">|</span>
+				  	<li class="nav-item">
+				  		<a class="nav-link" href="/pemilihan" style="padding: 10px;">Pemilihan</a>
+				  	</li>
+				  	<span class="span">|</span>
+				  	<li class="nav-item">
+				    	<a class="nav-link" href="/hitung cepat" style="padding: 10px;">Hitung Cepat<span class="sr-only">(current)</span></a>
+				  	</li>
+				   	<span class="span">|</span>
+				  	<li class="nav-item dropdown">
+				    	<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" style="padding: 10px;">Organisasi </a>
+				   		<div class="dropdown-menu">
+					   		<a class="dropdown-item" href="/organisasi">Sema Universitas</a>
+					   		<a class="dropdown-item" href="/organisasi">Dema Universitas</a>
+						   	<div class="dropdown-submenu dropright">
+						        <a class="dropdown-item" href="#">Sema Fakultas</a>
+						        <div class="dropdown-menu">
+							      	<a class="dropdown-item" href="/organisasi">Ushuludin</a>
+							      	<a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
+							      	<a class="dropdown-item" href="#">Syariah dan Hukum</a>
+							      	<a class="dropdown-item" href="#">Dakwah dan Komunikasi</a>
+							      	<a class="dropdown-item" href="#">Adab dan Humaniora</a>
+							      	<a class="dropdown-item" href="#">Psikologi</a>
+							      	<a class="dropdown-item" href="#">Saintek dan Teknologi</a>
+							      	<a class="dropdown-item" href="#">Ilmu Sosial dan Ilmu Politik</a>
+						        </div>
+						    </div>
+					      	<div class="dropdown-submenu dropright">
+						        <a class="dropdown-item" href="#">Dema Fakultas</a>
+						        <div class="dropdown-menu">
+							      	<a class="dropdown-item" href="/organisasi">Ushuludin</a>
+							      	<a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
+							      	<a class="dropdown-item" href="#">Syariah dan Hukum</a>
+							      	<a class="dropdown-item" href="#">Dakwah dan Komunikasi</a>
+							      	<a class="dropdown-item" href="#">Adab dan Humaniora</a>
+							      	<a class="dropdown-item" href="#">Psikologi</a>
+							      	<a class="dropdown-item" href="#">Saintek dan Teknologi</a>
+							      	<a class="dropdown-item" href="#">Ilmu Sosial dan Ilmu Politik</a>
+						        </div>
+						    </div>
+							<div class="dropdown-submenu dropright">
+						        <a class="dropdown-item" href="#">Hima Jurusan <span class="" style="float: right; margin-top: 5px"></span></a>
+						        <div class="dropdown-menu">
+							      	<a class="dropdown-item" href="/organisasi">Ushuludin</a>
+							      	<a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
+							      	<a class="dropdown-item" href="#">Syariah dan Hukum</a>
+							      	<a class="dropdown-item" href="#">Dakwah dan Komunikasi</a>
+							      	<a class="dropdown-item" href="#">Adab dan Humaniora</a>
+							      	<a class="dropdown-item" href="#">Psikologi</a>
+							      	<a class="dropdown-item" href="#">Saintek dan Teknologi</a>
+							      	<a class="dropdown-item" href="#">Ilmu Sosial dan Ilmu Politik</a>
+						        </div>
+						    </div>
+					    </div>
+				  	</li>
+				  	<span class="span">|</span>
+				  	<li class="nav-item dropdown">
+				    	<a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" style="padding: 10px;">Daftar </a>
+				    	 <div class="dropdown-menu">
+					      <a class="dropdown-item" href="#">Calon Kandidat</a>
+					    </div>
+				  	</li>	
+				  	<span class="span">|</span>
+				  	<li class="nav-item">
+				    	<a class="nav-link" href="javascript:void(0)" style="padding: 10px;">Syarat &amp; Ketentuan</a>
+				  	</li>  	
+				</ul>
 			    <ul class="navbar-nav">
 			    	<li class="nav-item dropdown">
 				    	<a class="nav-link dropdown-toggle link-me" href="" data-toggle="dropdown" style="padding: 10px;"><i class="fa fa-user"></i> {{ Auth::user()->nim }} </a>
@@ -43,7 +233,7 @@
 					    </div>
 			  		</li>
 			    </ul>
-			    @endguest
+				@endguest	
 			</div>
 		</div>
 	</nav>
@@ -95,11 +285,11 @@
 
 	<!-- List Bar -->
 	
-	<div class="listbar">
+	<div class="listbar fontArial">
 		<div class="container">
 			<h6 style="margin: 17px; float: left;">Sistem Pemilihan Umum UIN Sunan Gunung Djati Bandung</h6>
 			<form class="form-search">
-				<input type="text" class="in-search" id="myInput" placeholder="Search..">	
+				<input type="text" class="in-search" autocomplete="off" id="myInput" placeholder="Cari...">	
 				<button type="submit" style="outline: none;" class="btn-search"><i class="fa fa-search"></i></button>
 			</form>
 			<div class="clear"></div>

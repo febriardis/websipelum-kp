@@ -10,7 +10,7 @@
 		{{ csrf_field() }}
 		<div class="login-form">
 			<div class="text-center">
-				<img src="assets/images/logo-uin.png" style="width: 35%; max-height: 165px">
+				<img src="/assets/images/logo-uin.png" style="width: 35%; max-height: 165px">
 				<h5 class="content-group-lg">Admin<small class="display-block">Enter your username and password</small></h5>
 			</div>
 			@if(Session::has('pesan'))

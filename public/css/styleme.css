@@ -3,6 +3,14 @@
 	clear: both;
 }
 
+.fontArial {
+	font-family: "Arial", Times, serif;
+}
+
+a.nav-link:hover {
+	background-color: #e6e6e6;
+	color: #fff;
+}
 .span{
 	display: none;
 	margin: 5px;
@@ -10,7 +18,7 @@
 
 .carousel-inner img {
 	width: 100%;
-	max-height: 480px;
+	max-height: 500px;
 }
 
 a.link-me:hover{
@@ -26,6 +34,10 @@ a.link-content:hover{
 	text-decoration: none;
 }
 
+a.drop-me:active {
+	background-color: #cccccc;
+}
+
 .dropdown-submenu {
     position: relative;
 }
@@ -34,6 +46,31 @@ a.link-content:hover{
     top: 0;
     left: 100%;
     margin-top: -1px;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+    position: absolute;
+}
+
+.listdrop {
+	float: left; 
+	margin: 12px;
+}
+
+.listdrop a {
+	color: #ffffff;
+}
+
+a.closeNav {
+	color: #ffffff;
+	float: right; 
+	margin-right:20px; 
+	font-size: 28px;
+}
+a.closeNav:hover {
+	color: #cccccc;
+	text-decoration: none;
 }
 
 @media only screen and (max-width: 990px) {
@@ -136,4 +173,18 @@ a.link-content:hover{
 .button-vote button {
 	float: left;
 	margin: 0px 3px;
+}
+
+.item-SO h6 {
+	float: left;
+}
+
+
+/*---------------------------------------*/
+.dropdown-me{
+	width: 100%; 
+	padding-left: 5px; 
+	background-color: rgba(0,0,0,0.8);
+	color: #fff; 
+	display: none;
 }

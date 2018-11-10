@@ -13,16 +13,20 @@
 
 //////////////////////////////////MAHASISWA////////////////////////////////////////////////
 //Route::get('/', function(){return view('HomePage');})->middleware('guest');
-Route::get('/admin', function(){return view('login_form');})->middleware('guest');
+Route::get('/admin/login', function(){return view('login_form');})->middleware('guest');
 Route::post('/login', 'LoginController@login');
 Route::get('/keluar', 'LoginController@keluar');
 
 //////////////////////////////////PEMILIH////////////////////////////////////////////////
 
 Route::get('/', function(){return view('views_mahasiswa.Beranda');})->middleware('guest');
+Route::get('/hc', function(){return view('views_mahasiswa.QuickCount');})->middleware('guest');
+Route::get('/org', function(){return view('views_mahasiswa.Organisasi');})->middleware('guest');
+
 Route::get('/beranda', function(){return view('views_mahasiswa.Beranda');})->middleware('auth:mahasiswa');
 Route::get('/pemilihan', function(){return view('views_mahasiswa.VoteView');})->middleware('auth:mahasiswa');
 Route::get('/hitung cepat', function(){return view('views_mahasiswa.QuickCount');})->middleware('auth:mahasiswa');
+Route::get('/organisasi', function(){return view('views_mahasiswa.Organisasi');})->middleware('auth:mahasiswa');
 
 
 //======================================ADMINROUTE======================================

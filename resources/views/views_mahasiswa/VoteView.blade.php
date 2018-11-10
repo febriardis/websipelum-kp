@@ -12,6 +12,67 @@
   	<li class="nav-item">
     	<a class="nav-link" href="/hitung cepat" style="padding: 10px;">Hitung Cepat</a>
   	</li>
+    <span class="span">|</span>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" style="padding: 10px;">Organisasi </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="/organisasi">Sema Universitas</a>
+        <a class="dropdown-item" href="/organisasi">Dema Universitas</a>
+        <div class="dropdown-submenu dropright">
+            <a class="dropdown-item" href="#">Sema Fakultas</span></a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/organisasi">Ushuludin</a>
+              <a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
+              <a class="dropdown-item" href="#">Syariah dan Hukum</a>
+              <a class="dropdown-item" href="#">Dakwah dan Komunikasi</a>
+              <a class="dropdown-item" href="#">Adab dan Humaniora</a>
+              <a class="dropdown-item" href="#">Psikologi</a>
+              <a class="dropdown-item" href="#">Saintek dan Teknologi</a>
+              <a class="dropdown-item" href="#">Ilmu Sosial dan Ilmu Politik</a>
+            </div>
+        </div>
+          <div class="dropdown-submenu dropright">
+            <a class="dropdown-item" href="#">Dema Fakultas</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/organisasi">Ushuludin</a>
+              <a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
+              <a class="dropdown-item" href="#">Syariah dan Hukum</a>
+              <a class="dropdown-item" href="#">Dakwah dan Komunikasi</a>
+              <a class="dropdown-item" href="#">Adab dan Humaniora</a>
+              <a class="dropdown-item" href="#">Psikologi</a>
+              <a class="dropdown-item" href="#">Saintek dan Teknologi</a>
+              <a class="dropdown-item" href="#">Ilmu Sosial dan Ilmu Politik</a>
+            </div>
+        </div>
+        <div class="dropdown-submenu dropright">
+              <a class="dropdown-item" href="#">Hima Jurusan <span class="" style="float: right; margin-top: 5px"></span></a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="/organisasi">Ushuludin</a>
+                <a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
+                <a class="dropdown-item" href="#">Syariah dan Hukum</a>
+                <a class="dropdown-item" href="#">Dakwah dan Komunikasi</a>
+                <a class="dropdown-item" href="#">Adab dan Humaniora</a>
+                <a class="dropdown-item" href="#">Psikologi</a>
+                <a class="dropdown-item" href="#">Saintek dan Teknologi</a>
+                <a class="dropdown-item" href="#">Ilmu Sosial dan Ilmu Politik</a>
+              </div>
+          </div>
+        </div>
+      </li>
+
+    <script>
+      $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+          if (!$(this).next().hasClass('show')) {
+            $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+          }
+          var $subMenu = $(this).next(".dropdown-menu");
+          $subMenu.toggleClass('show');
+        $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+            $('.dropdown-submenu .show').removeClass("show");
+          });
+        return false;
+      });
+    </script>
   	<span class="span">|</span>
   	<li class="nav-item dropdown">
     	<a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" style="padding: 10px;">Daftar </a>

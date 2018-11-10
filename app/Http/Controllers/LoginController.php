@@ -33,7 +33,7 @@ class LoginController extends Controller
             return redirect('/');
     	}elseif (Auth::guard('admin')->check()) {
     		Auth::guard('admin')->logout();    
-            return redirect('/admin');
+            return redirect('/admin/login');
         }
 
     }

@@ -3,8 +3,24 @@
 	clear: both;
 }
 
+.fontTNR {
+	font-family: "Times New Roman", Times, serif;
+}
+
 .fontArial {
 	font-family: "Arial", Times, serif;
+}
+
+.text-white {
+	color: #ffffff;
+}
+
+.right {
+	float: right;
+}
+
+.left {
+	float: left;
 }
 
 a.nav-link:hover {
@@ -55,7 +71,7 @@ a.drop-me:active {
 
 .listdrop {
 	float: left; 
-	margin: 12px;
+	margin: 10px 5px 10px 15px;
 }
 
 .listdrop a {
@@ -88,10 +104,11 @@ a.closeNav:hover {
 	}
 
 	.panel-kandidat {
-		border: 5px solid black; 
-		margin: 10px; 
-		width: 257px; 
-		max-height: auto
+		border: 2px solid #e6e6e6; 
+		margin: 10px auto; 
+		width: 270px;
+		padding: 20px; 
+		max-height: auto;
 	}
 }
 
@@ -103,7 +120,7 @@ a.closeNav:hover {
 		display: inline-block;
 		padding: 3px;
 	}
-	.modal{
+	.modal-login{
 		width: 30%; margin: 0px auto;
 	}
 	.content-info{
@@ -114,7 +131,14 @@ a.closeNav:hover {
 		float: right;
 		width: 25%;
 	}
-
+	.panel-kandidat {
+		border: 2px solid #e6e6e6; 
+		float: left; 
+		margin: 10px; 
+		width: 257px; 
+		padding: 20px; 
+		max-height: auto;
+	}
 }
 
 .listbar{
@@ -152,15 +176,6 @@ a.closeNav:hover {
 	color: #ffffff
 }
 
-.panel-kandidat {
-	border: 2px solid #e6e6e6; 
-	float: left; 
-	margin: 10px; 
-	width: 257px; 
-	padding: 20px; 
-	max-height: auto
-}
-
 .content-vote {
 	margin-bottom: 20px;
 }
@@ -184,7 +199,17 @@ a.closeNav:hover {
 .dropdown-me{
 	width: 100%; 
 	padding-left: 5px; 
-	background-color: rgba(0,0,0,0.8);
-	color: #fff; 
 	display: none;
+}
+
+.btn-misi {
+	margin: 1px; 
+	padding: 1px 6px; 
+	float: right; 
+	border: 1px solid #cccccc; 
+	color: #a6a6a6;
+}
+
+.btn-misi:hover {
+	color: #737373;
 }

@@ -12,14 +12,14 @@ class KandidatController extends Controller
     function show(){
     	$tb = Kandidat::all();
 
-    	return view('Kandidat_tabel')
+    	return view('views_admin.Kandidat_tabel')
     	->with('data', $tb);
     }
 
     function viewInsert(){
     	$tbAgenda = Agenda::all();
 
-    	return view('Kandidat_tambah')
+    	return view('views_admin.Kandidat_tambah')
     	->with('agenda', $tbAgenda);
     }
 

@@ -15,7 +15,7 @@ class PemilihController extends Controller
     function show() {
         $tb = Pemilih::all();
 
-        return view('pemilih_tabel')
+        return view('views_admin.pemilih_tabel')
         ->with('data', $tb);
     }
 
@@ -23,7 +23,7 @@ class PemilihController extends Controller
         $tb1 = Agenda::all();
         $tb2 = Tps::all();
 
-        return view('pemilih_tambah')
+        return view('views_admin.pemilih_tambah')
         ->with('tps', $tb2)
         ->with('agenda', $tb1);
     }

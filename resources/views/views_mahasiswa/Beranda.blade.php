@@ -1,4 +1,4 @@
-@extends('views_mahasiswa.LayoutUser')
+@extends('layouts_views.layout_user')
 
 @section('banner')
 	<!-- Slideshow -->

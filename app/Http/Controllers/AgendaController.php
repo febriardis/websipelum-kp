@@ -47,7 +47,7 @@ class AgendaController extends Controller
         //$encrypted = \Crypt::encrypt('secret');
         //$decrypted = \Crypt::decrypt($encrypted);
 
-        return view('agenda_view')
+        return view('views_admin.agenda_view')
         ->with('IdAgenda', $id)
         ->with('tbMhs', $tbMahasiswa)
         ->with('tbP', $tbPemilih)
@@ -57,7 +57,7 @@ class AgendaController extends Controller
     function show(){
     	$table = Agenda::all();  //where('id','=',3)->get();
 
-    	return view('agenda_tabel')
+    	return view('views_admin.agenda_tabel')
     	->with("data", $table);
     }
 
@@ -65,7 +65,7 @@ class AgendaController extends Controller
         $tb = new Agenda;
         $tb->admin_id = $req->admin_id;
         $tb->nm_agenda = $req->nm_agenda;
-        $tb->metodep = $req->metodep;
+        $tb->sistem_vote = $req->metodep;
         $tb->kat_fakultas   = $req->fakultas;
         $tb->kat_jurusan   = $req->jurusan;
         $tb->tgl_agenda= $req->tgl_agenda;
@@ -78,7 +78,7 @@ class AgendaController extends Controller
     function edit($id){
         $tb = Agenda::find($id);
 
-        return view('agenda_edit')
+        return view('views_admin.agenda_edit')
         ->with('data', $tb);
     }
 

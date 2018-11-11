@@ -8,23 +8,28 @@ use App\Admin;
 
 class LoginController extends Controller
 {
-    function login(Request $req)
-    {
+    function login_mhs(Request $req) {
     	if (Auth::guard('mahasiswa')->attempt([
     		'nim' => $req->nim,
-    		'password' => $req->password
-    	])) {
+    		'password' => $req->password ])) 
+        {
     		return redirect('/beranda');
-    	}
-    	elseif (Auth::guard('admin')->attempt([
-    		'username' => $req->username,
-    		'password' => $req->password
-    	])) {
-            return redirect('/dashboard');
     	}else{
     		return redirect('/')
-            ->with('pesan','Username dan Password Salah');
+            ->with('pesan','nim dan Password Salah');
     	}
+    }
+
+    function login_admin(Request $req) {
+        if (Auth::guard('admin')->attempt([
+            'username' => $req->username,
+            'password' => $req->password
+        ])) {
+            return redirect('/dashboard');
+        }else{
+            return redirect('/admin/login')
+            ->with('pesan','Username atau Password Salah');
+        }
     }
 
     function keluar(){

@@ -12,12 +12,12 @@ class AdminController extends Controller
 {
     function show(){
     	$tb = Admin::all();
-    	return view('admin_tabel')
+    	return view('views_admin.admin_tabel')
     	->with('tbAdmin',$tb);
     }
 
     function tambah(){
-        return view('admin_tambah')
+        return view('views_admin.admin_tambah')
         ->with('agenda', Kandidat::where('agenda_id',1)->get())
         ->with('tps', Admin::all());
 

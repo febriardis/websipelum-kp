@@ -17,6 +17,7 @@ class MhsTableSeeder extends Seeder
               'nama'		    => 'Febri Ardi Saputra',
               'jurusan'		  => 'Teknik Informatika',
               'fakultas'    => 'Sains dan Teknologi',
+              'th_angkatan' => '2015',
               'password'    => bcrypt('febri1234'),
               'created_at'	=> \Carbon\Carbon::now('Asia/Jakarta'),
               'updated_at'	=> \Carbon\Carbon::now('Asia/Jakarta')
@@ -26,6 +27,7 @@ class MhsTableSeeder extends Seeder
               'nama'        => 'Rahmat',
               'jurusan'     => 'Manajemen',
               'fakultas'    => 'Ilmu Sosial dan Ilmu Politik',
+              'th_angkatan' => '2016',
               'password'    => bcrypt('rahmat1234'),
               'created_at'  => \Carbon\Carbon::now('Asia/Jakarta'),
               'updated_at'  => \Carbon\Carbon::now('Asia/Jakarta')

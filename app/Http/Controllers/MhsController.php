@@ -10,7 +10,7 @@ class MhsController extends Controller
     function show(){
     	$tb = Mahasiswa::all();
 
-    	return view('views_admin.mahasiswa_tabel')
+    	return view('views_admin.tabel_mahasiswa')
     	->with('tbMhs', $tb);
     }
 }

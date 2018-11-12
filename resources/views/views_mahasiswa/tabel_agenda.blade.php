@@ -21,6 +21,7 @@
             <td>{{date('d M Y')}}</td>
             <td>
               <span class="badge badge-success">Terdaftar</span>
+              <span class="badge badge-info">Menunggu Verifikasi</span>
               <span class="badge badge-secondary">Belum Terdaftar</span>
             </td>
             <td>

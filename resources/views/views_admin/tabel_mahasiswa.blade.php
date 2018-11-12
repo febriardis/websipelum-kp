@@ -9,6 +9,7 @@
 	<div class="panel panel-flat">
 		<div class="panel-heading">
 			<h5 class="panel-title">Data Mahasiswa</h5>
+			<hr>
 		</div>
 
 		<table class="table datatable-basic">
@@ -36,7 +37,7 @@
 						<span class="label label-info">Aktif</span>
 					</td>
 					<td>
-						<a href="#"><i class="icon-eye"></i> show</a>
+						<a href="#"><i class="icon-eye"></i>&nbsp;Lihat</a>
 					</td>
 				</tr>
 				@endforeach

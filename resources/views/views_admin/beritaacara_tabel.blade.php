@@ -14,10 +14,10 @@
 <!-- Basic datatable -->
 	<div class="panel panel-flat">
 		<div class="panel-heading">
-			<h5 class="panel-title">Berita Acara</h5>
+			<h5 class="panel-title">Berita Acara</h5><hr>
 			@if(Auth::user()->ket=='Super Admin')
 			@else
-				<a href="" class="btn btn-info btn-xs">Upload</a>
+				<a href="/upload berita acara" class="btn btn-info btn-xs">Upload</a>
 			@endif
 		</div>
 

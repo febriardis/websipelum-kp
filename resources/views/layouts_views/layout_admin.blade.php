@@ -239,7 +239,7 @@
 					@yield('content')
 					<!-- Footer -->
 					<div class="footer text-muted">
-						&copy; 2018. <a href="" target="_blank">UIN Sunan Gunung Djati Bandung</a>
+						&copy; 2018. <a href="" target="_blank">PTIPD UIN Sunan Gunung Djati Bandung</a>
 					</div>
 					<!-- /footer -->
 				</div>

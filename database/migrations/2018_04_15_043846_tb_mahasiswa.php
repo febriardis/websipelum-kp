@@ -19,6 +19,7 @@ class TbMahasiswa extends Migration
             $table->string('nama');
             $table->string('jurusan');
             $table->string('fakultas');
+            $table->string('th_angkatan');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

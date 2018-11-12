@@ -23,6 +23,10 @@
 	float: left;
 }
 
+select option[data-default] {
+  color: #888;
+}
+
 a.nav-link:hover {
 	background-color: #e6e6e6;
 	color: #fff;
@@ -71,7 +75,7 @@ a.drop-me:active {
 
 .listdrop {
 	float: left; 
-	margin: 10px 5px 10px 15px;
+	margin: 10px 0px 10px 6px;
 }
 
 .listdrop a {

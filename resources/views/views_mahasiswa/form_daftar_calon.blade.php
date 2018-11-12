@@ -57,7 +57,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="form-group">
+ 			<div class="form-group">
 				<div class="row">
 					<label class="control-label col-sm-4">Misi</label>
 					<div class="col-sm-8">
@@ -70,15 +70,15 @@
 						<div id="main"></div>
 					</div>
 				</div>
-			</div>		
-			<!-- <div class="form-group">
+			</div>	
+			 <div class="form-group">
 				<div class="row">
 					<label class="control-label col-sm-4">Misi</label>
 					<div class="col-sm-8">
 						<textarea name="deskripsi" class="ckeditor" id="ckedtor"></textarea>
 					</div>
 				</div>
-			</div> -->
+			</div>
 			<div class="right">
 				<input type="submit" value="Daftar" class="btn btn-primary">
 				<a href="/daftar calon" class="btn btn-danger">Batal</a>

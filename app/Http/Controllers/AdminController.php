@@ -16,13 +16,6 @@ class AdminController extends Controller
     	->with('tbAdmin',$tb);
     }
 
-    function tambah(){
-        return view('views_admin.admin_tambah')
-        ->with('agenda', Kandidat::where('agenda_id',1)->get())
-        ->with('tps', Admin::all());
-
-    }
-
     function insert(Request $req){
     	$tbCek = Admin::where('username', $req->username)->get();
 
@@ -51,7 +44,9 @@ class AdminController extends Controller
 
     }
     
-    function delete(){
-
+    function delete($id){
+        Admin::find($id)->delete();
+        return redirect('/tabel admin')
+        ->with('pesan', 'Data berhasil dihapus');
     }
 }

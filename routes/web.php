@@ -38,8 +38,9 @@ Route::get('/verifikasi berita', function () {return view('views_admin.agenda_ta
 
 // ================================ADMIN-KELOLA-ADMIN==================================
 Route::get('/tabel admin','AdminController@show')->middleware('auth:admin');
-Route::get('/tambah admin','AdminController@tambah')->middleware('auth:admin');
+Route::get('/tambah admin',function(){return view('views_admin.admin_tambah');})->middleware('auth:admin');
 Route::post('/tambah admin','AdminController@insert');
+Route::get('/hapus admin/{id}', 'AdminController@delete');
 
 // ==================================ADMIN-QUICKCOUNT==================================
 Route::get('/data quick count', function () {return view('views_admin.quickcount_tabel');})->middleware('auth:admin');

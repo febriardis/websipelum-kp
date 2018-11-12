@@ -43,14 +43,14 @@
 					<li class="nav-item dropdown">
 				    	<a class="nav-link dropdown-toggle" href="javascript:void(0)" onclick="openNav()" style="padding: 10px;">Organisasi </a>
 				   	</li>	
-				  	<div class="dropdown-menu dropdown-me" style="background-color: rgba(0,0,0,0.8); color: #fff;" id="myNav">
+				  	<div class="dropdown-menu dropdown-me" style="background-color: rgba(0,0,0,0.8); color: #fff; font-size: 15px" id="myNav">
 			    		<a href="javascript:void(0)" class="closeNav" onclick="closeNav()">&times;</a>
 			 			<div class="listdrop">
 			 				<h5>Organisasi Mahasiswa</h5>	
-			 				<a class="dropdown-item drop-me" style="font-size: 18px;" href="/org">Sema Universitas</a>
-			 				<a class="dropdown-item drop-me" style="font-size: 18px;" href="/org">Dema Universitas</a>
+			 				<a class="dropdown-item drop-me" href="/org">Sema Universitas</a>
+			 				<a class="dropdown-item drop-me" href="/org">Dema Universitas</a>
 			 				<div class="dropdown" style="width: 230px">
-			 					<a class="dropdown-item drop-me" style="font-size: 18px;" data-toggle="dropdown" href="javascript:void(0)">Sema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
+			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Sema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
 							  	<div class="dropdown-menu" style="background-color:rgba(0,0,0,0.9);">
 							      	<a class="dropdown-item" href="/org">Ushuludin</a>
 							      	<a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
@@ -63,7 +63,7 @@
 							  	</div>
 							</div>
 			 				<div class="dropdown" style="width: 230px">
-			 					<a class="dropdown-item drop-me" style="font-size: 18px;" data-toggle="dropdown" href="javascript:void(0)">Dema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
+			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Dema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
 							  	<div class="dropdown-menu" style="background-color:rgba(0,0,0,0.9);">
 							      	<a class="dropdown-item" href="/org">Ushuludin</a>
 							      	<a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
@@ -75,68 +75,68 @@
 							      	<a class="dropdown-item" href="#">Ilmu Sosial dan Ilmu Politik</a>
 							  	</div>
 							</div>
-					      	<hr style="border: 0.1px solid #cccccc">
-			 				<h5>HMJ Fak.Tarbiyah dan Keguruan</h5>
-					      	<a class="dropdown-item" href="#">Manajemen Pendidikan Islam</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Agama Islam</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Bahasa Arab</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Matematika</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Biologi</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Fisika</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Kimia</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Guru MI (PGMI)</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Islam Anak Usia Dini</a>
-				    	</div>
-				    	<div class="listdrop">	
-				    		<h5>HMJ Fak.Syariah dan Hukum</h5>
-					      	<a class="dropdown-item" href="/org">Hukum Keluarga (Ahwal Al-Syakhsiyah)</a>
-					      	<a class="dropdown-item" href="#">Hukum Ekonomi Syariah (Muamalah)</a>
-					      	<a class="dropdown-item" href="#">Hukum Tata Negara (Siyasah)</a>
-					      	<a class="dropdown-item" href="#">Perbandingan Madzhab dan Hukum</a>
-					      	<a class="dropdown-item" href="#">Ilmu Hukum</a>
-					      	<a class="dropdown-item" href="#">Hukum Pidana Islam</a>
-					      	<a class="dropdown-item" href="#">Manajemen Keuangan Syariah</a>
-					      	<a class="dropdown-item" href="#">Akutansi Syariah</a>
-					      	<a class="dropdown-item" href="#">Ekonomi Syariah</a>
 					      	<hr style="border: 0.5px solid #cccccc">
-					      	<h5>HMJ Fak.Ilmu Sosial dan Ilmu Politik</h5>
-					      	<a class="dropdown-item" href="/org">Administrai Publik</a>
-					      	<a class="dropdown-item" href="#">Manajemen</a>
-					      	<a class="dropdown-item" href="#">Sosiologi</a>
-					      	<a class="dropdown-item" href="#">Ilmu Politik</a>
+			 				<h5>Fak. Tarbiyah dan Keguruan</h5>
+					      	<a class="dropdown-item" href="#">HMJ Manajemen Pendidikan Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Agama Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Bahasa Arab</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Matematika</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Biologi</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Fisika</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Kimia</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Guru MI (PGMI)</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Islam Anak Usia Dini</a>
 				    	</div>
 				    	<div class="listdrop">	
-				    	 	<h5>HMJ Fak.Dakwah dan  Komunikasi</h5>
-					      	<a class="dropdown-item" href="/org">Bimbingan Konseling Islam</a>
-					      	<a class="dropdown-item" href="#">Komunikasi dan Penyiaran Islam</a>
-					      	<a class="dropdown-item" href="#">Manajemen Dakwah</a>
-					      	<a class="dropdown-item" href="#">Pengembangan Masyarakat Islam</a>
-					      	<a class="dropdown-item" href="#">Ilmu Komunikasi Jurnalistik</a>
-					      	<a class="dropdown-item" href="#">Ilmu Komunikasi Humas</a>
+				    		<h5>Fak. Syariah dan Hukum</h5>
+					      	<a class="dropdown-item" href="/org">HMJ Hukum Keluarga (Ahwal Al-Syakhsiyah)</a>
+					      	<a class="dropdown-item" href="#">HMJ Hukum Ekonomi Syariah (Muamalah)</a>
+					      	<a class="dropdown-item" href="#">HMJ Hukum Tata Negara (Siyasah)</a>
+					      	<a class="dropdown-item" href="#">HMJ Perbandingan Madzhab dan Hukum</a>
+					      	<a class="dropdown-item" href="#">HMJ Ilmu Hukum</a>
+					      	<a class="dropdown-item" href="#">HMJ Hukum Pidana Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Manajemen Keuangan Syariah</a>
+					      	<a class="dropdown-item" href="#">HMJ Akutansi Syariah</a>
+					      	<a class="dropdown-item" href="#">HMJ Ekonomi Syariah</a>
+					      	<hr style="border: 0.5px solid #cccccc">
+					      	<h5>Fak. Ilmu Sosial dan Ilmu Politik</h5>
+					      	<a class="dropdown-item" href="/org">HMJ Administrai Publik</a>
+					      	<a class="dropdown-item" href="#">HMJ Manajemen</a>
+					      	<a class="dropdown-item" href="#">HMJ Sosiologi</a>
+					      	<a class="dropdown-item" href="#">HMJ Ilmu Politik</a>
+				    	</div>
+				    	<div class="listdrop">	
+				    	 	<h5>Fak. Dakwah dan  Komunikasi</h5>
+					      	<a class="dropdown-item" href="/org">HMJ Bimbingan Konseling Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Komunikasi dan Penyiaran Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Manajemen Dakwah</a>
+					      	<a class="dropdown-item" href="#">HMJ Pengembangan Masyarakat Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Ilmu Komunikasi Jurnalistik</a>
+					      	<a class="dropdown-item" href="#">HMJ Ilmu Komunikasi Humas</a>
 					      	<hr style="border: 0.3px solid #cccccc">
-				    		<h5>HMJ Fak.Adab dan Humaniora</h5>
-					      	<a class="dropdown-item" href="/org">Sejarah dan Peradaban Islam</a>
-					      	<a class="dropdown-item" href="#">Bahasa dan Sastra Arab</a>
-					      	<a class="dropdown-item" href="#">Sastra Inggris</a>
+				    		<h5>Fak. Adab dan Humaniora</h5>
+					      	<a class="dropdown-item" href="/org">HMJ Sejarah dan Peradaban Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Bahasa dan Sastra Arab</a>
+					      	<a class="dropdown-item" href="#">HMJ Sastra Inggris</a>
 					      	<hr style="border: 0.3px solid #cccccc">
-					      	<h5>HMJ Fak.Psikologi</h5>
-					      	<a class="dropdown-item" href="/org">Psikologi</a>
+					      	<h5>Fak. Psikologi</h5>
+					      	<a class="dropdown-item" href="/org">HMJ Psikologi</a>
 					    </div>
 				    	<div class="listdrop">
-					     	<h5>HMJ Fak.Sains dan Teknologi</h5>
-					      	<a class="dropdown-item" href="/org">Matematika</a>
-					      	<a class="dropdown-item" href="#">Biologi</a>
-					      	<a class="dropdown-item" href="#">Fisika</a>
-					      	<a class="dropdown-item" href="#">Kimia</a>
-					      	<a class="dropdown-item" href="#">Teknik Informatika</a>
-					      	<a class="dropdown-item" href="#">Agroteknologi</a>
-					      	<a class="dropdown-item" href="#">Teknik Elektro</a>
+					     	<h5>Fak. Sains dan Teknologi</h5>
+					      	<a class="dropdown-item" href="/org">HMJ Matematika</a>
+					      	<a class="dropdown-item" href="#">HMJ Biologi</a>
+					      	<a class="dropdown-item" href="#">HMJ Fisika</a>
+					      	<a class="dropdown-item" href="#">HMJ Kimia</a>
+					      	<a class="dropdown-item" href="#">HMJ Teknik Informatika</a>
+					      	<a class="dropdown-item" href="#">HMJ Agroteknologi</a>
+					      	<a class="dropdown-item" href="#">HMJ Teknik Elektro</a>
 					      	<hr style="border: 0.2px solid #cccccc">
-					      	<h5>HMJ Fak.Ushuludin</h5>
-					      	<a class="dropdown-item" href="/org">Aqidah dan Filsafat Islam</a>
-					      	<a class="dropdown-item" href="#">Studi Agama-Agama</a>
-					      	<a class="dropdown-item" href="#">Ilmu Al-Quran dan Tafsir</a>
-					      	<a class="dropdown-item" href="#">Tasawuf Psikoterapi</a>
+					      	<h5>Fak. Ushuludin</h5>
+					      	<a class="dropdown-item" href="/org">HMJ Aqidah dan Filsafat Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Studi Agama-Agama</a>
+					      	<a class="dropdown-item" href="#">HMJ Ilmu Al-Quran dan Tafsir</a>
+					      	<a class="dropdown-item" href="#">HMJ Tasawuf Psikoterapi</a>
 				    	</div>
 					</div>
 				  	<span class="span">|</span>
@@ -166,14 +166,14 @@
 				  	<li class="nav-item dropdown">
 				    	<a class="nav-link dropdown-toggle" href="javascript:void(0)" onclick="openNav()" style="padding: 10px;">Organisasi </a>
 				   	</li>	
-				  	<div class="dropdown-menu dropdown-me" style="background-color: rgba(0,0,0,0.8); color: #fff;" id="myNav">
+				  	<div class="dropdown-menu dropdown-me" style="background-color: rgba(0,0,0,0.8); color: #fff; font-size: 15px" id="myNav">
 			    		<a href="javascript:void(0)" class="closeNav" onclick="closeNav()">&times;</a>
 			 			<div class="listdrop">
 			 				<h5>Organisasi Mahasiswa</h5>	
-			 				<a class="dropdown-item drop-me" style="font-size: 18px;" href="/organisasi">Sema Universitas</a>
-			 				<a class="dropdown-item drop-me" style="font-size: 18px;" href="/organisasi">Dema Universitas</a>
+			 				<a class="dropdown-item drop-me" href="/organisasi">Sema Universitas</a>
+			 				<a class="dropdown-item drop-me" href="/organisasi">Dema Universitas</a>
 			 				<div class="dropdown" style="width: 230px">
-			 					<a class="dropdown-item drop-me" style="font-size: 18px;" data-toggle="dropdown" href="javascript:void(0)">Sema Fakultas<i style="float: right;margin-top: 2px" class="fa fa-caret-down"></i></a>
+			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Sema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
 							  	<div class="dropdown-menu" style="background-color:rgba(0,0,0,0.9);">
 							      	<a class="dropdown-item" href="/organisasi">Ushuludin</a>
 							      	<a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
@@ -186,7 +186,7 @@
 							  	</div>
 							</div>
 			 				<div class="dropdown" style="width: 230px">
-			 					<a class="dropdown-item drop-me" style="font-size: 18px;" data-toggle="dropdown" href="javascript:void(0)">Dema Fakultas<i style="float: right;margin-top: 2px" class="fa fa-caret-down"></i></a>
+			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Dema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
 							  	<div class="dropdown-menu" style="background-color:rgba(0,0,0,0.9);">
 							      	<a class="dropdown-item" href="/organisasi">Ushuludin</a>
 							      	<a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
@@ -198,68 +198,68 @@
 							      	<a class="dropdown-item" href="#">Ilmu Sosial dan Ilmu Politik</a>
 							  	</div>
 							</div>
-					      	<hr style="border: 0.1px solid #cccccc">
-			 				<h5>HMJ Fak.Tarbiyah dan Keguruan</h5>
-					      	<a class="dropdown-item" href="#">Manajemen Pendidikan Islam</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Agama Islam</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Bahasa Arab</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Matematika</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Biologi</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Fisika</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Kimia</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Guru MI (PGMI)</a>
-					      	<a class="dropdown-item" href="#">Pendidikan Islam Anak Usia Dini</a>
-				    	</div>
-				    	<div class="listdrop">	
-				    		<h5>HMJ Fak.Syariah dan Hukum</h5>
-					      	<a class="dropdown-item" href="/organisasi">Hukum Keluarga (Ahwal Al-Syakhsiyah)</a>
-					      	<a class="dropdown-item" href="#">Hukum Ekonomi Syariah (Muamalah)</a>
-					      	<a class="dropdown-item" href="#">Hukum Tata Negara (Siyasah)</a>
-					      	<a class="dropdown-item" href="#">Perbandingan Madzhab dan Hukum</a>
-					      	<a class="dropdown-item" href="#">Ilmu Hukum</a>
-					      	<a class="dropdown-item" href="#">Hukum Pidana Islam</a>
-					      	<a class="dropdown-item" href="#">Manajemen Keuangan Syariah</a>
-					      	<a class="dropdown-item" href="#">Akutansi Syariah</a>
-					      	<a class="dropdown-item" href="#">Ekonomi Syariah</a>
 					      	<hr style="border: 0.5px solid #cccccc">
-					      	<h5>HMJ Fak.Ilmu Sosial dan Ilmu Politik</h5>
-					      	<a class="dropdown-item" href="/organisasi">Administrai Publik</a>
-					      	<a class="dropdown-item" href="#">Manajemen</a>
-					      	<a class="dropdown-item" href="#">Sosiologi</a>
-					      	<a class="dropdown-item" href="#">Ilmu Politik</a>
+			 				<h5>Fak. Tarbiyah dan Keguruan</h5>
+					      	<a class="dropdown-item" href="#">HMJ Manajemen Pendidikan Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Agama Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Bahasa Arab</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Matematika</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Biologi</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Fisika</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Kimia</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Guru MI (PGMI)</a>
+					      	<a class="dropdown-item" href="#">HMJ Pendidikan Islam Anak Usia Dini</a>
 				    	</div>
 				    	<div class="listdrop">	
-				    	 	<h5>HMJ Fak.Dakwah dan  Komunikasi</h5>
-					      	<a class="dropdown-item" href="/organisasi">Bimbingan Konseling Islam</a>
-					      	<a class="dropdown-item" href="#">Komunikasi dan Penyiaran Islam</a>
-					      	<a class="dropdown-item" href="#">Manajemen Dakwah</a>
-					      	<a class="dropdown-item" href="#">Pengembangan Masyarakat Islam</a>
-					      	<a class="dropdown-item" href="#">Ilmu Komunikasi Jurnalistik</a>
-					      	<a class="dropdown-item" href="#">Ilmu Komunikasi Humas</a>
+				    		<h5>Fak. Syariah dan Hukum</h5>
+					      	<a class="dropdown-item" href="/organisasi">HMJ Hukum Keluarga (Ahwal Al-Syakhsiyah)</a>
+					      	<a class="dropdown-item" href="#">HMJ Hukum Ekonomi Syariah (Muamalah)</a>
+					      	<a class="dropdown-item" href="#">HMJ Hukum Tata Negara (Siyasah)</a>
+					      	<a class="dropdown-item" href="#">HMJ Perbandingan Madzhab dan Hukum</a>
+					      	<a class="dropdown-item" href="#">HMJ Ilmu Hukum</a>
+					      	<a class="dropdown-item" href="#">HMJ Hukum Pidana Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Manajemen Keuangan Syariah</a>
+					      	<a class="dropdown-item" href="#">HMJ Akutansi Syariah</a>
+					      	<a class="dropdown-item" href="#">HMJ Ekonomi Syariah</a>
+					      	<hr style="border: 0.5px solid #cccccc">
+					      	<h5>Fak. Ilmu Sosial dan Ilmu Politik</h5>
+					      	<a class="dropdown-item" href="/organisasi">HMJ Administrai Publik</a>
+					      	<a class="dropdown-item" href="#">HMJ Manajemen</a>
+					      	<a class="dropdown-item" href="#">HMJ Sosiologi</a>
+					      	<a class="dropdown-item" href="#">HMJ Ilmu Politik</a>
+				    	</div>
+				    	<div class="listdrop">	
+				    	 	<h5>Fak. Dakwah dan  Komunikasi</h5>
+					      	<a class="dropdown-item" href="/organisasi">HMJ Bimbingan Konseling Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Komunikasi dan Penyiaran Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Manajemen Dakwah</a>
+					      	<a class="dropdown-item" href="#">HMJ Pengembangan Masyarakat Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Ilmu Komunikasi Jurnalistik</a>
+					      	<a class="dropdown-item" href="#">HMJ Ilmu Komunikasi Humas</a>
 					      	<hr style="border: 0.3px solid #cccccc">
-				    		<h5>HMJ Fak.Adab dan Humaniora</h5>
-					      	<a class="dropdown-item" href="/org">Sejarah dan Peradaban Islam</a>
-					      	<a class="dropdown-item" href="#">Bahasa dan Sastra Arab</a>
-					      	<a class="dropdown-item" href="#">Sastra Inggris</a>
+				    		<h5>Fak. Adab dan Humaniora</h5>
+					      	<a class="dropdown-item" href="/organisasi">HMJ Sejarah dan Peradaban Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Bahasa dan Sastra Arab</a>
+					      	<a class="dropdown-item" href="#">HMJ Sastra Inggris</a>
 					      	<hr style="border: 0.3px solid #cccccc">
-					      	<h5>HMJ Fak.Psikologi</h5>
-					      	<a class="dropdown-item" href="/organisasi">Psikologi</a>
+					      	<h5>Fak. Psikologi</h5>
+					      	<a class="dropdown-item" href="/organisasi">HMJ Psikologi</a>
 					    </div>
 				    	<div class="listdrop">
-					     	<h5>HMJ Fak.Sains dan Teknologi</h5>
-					      	<a class="dropdown-item" href="/organisasi">Matematika</a>
-					      	<a class="dropdown-item" href="#">Biologi</a>
-					      	<a class="dropdown-item" href="#">Fisika</a>
-					      	<a class="dropdown-item" href="#">Kimia</a>
-					      	<a class="dropdown-item" href="#">Teknik Informatika</a>
-					      	<a class="dropdown-item" href="#">Agroteknologi</a>
-					      	<a class="dropdown-item" href="#">Teknik Elektro</a>
+					     	<h5>Fak. Sains dan Teknologi</h5>
+					      	<a class="dropdown-item" href="/organisasi">HMJ Matematika</a>
+					      	<a class="dropdown-item" href="#">HMJ Biologi</a>
+					      	<a class="dropdown-item" href="#">HMJ Fisika</a>
+					      	<a class="dropdown-item" href="#">HMJ Kimia</a>
+					      	<a class="dropdown-item" href="#">HMJ Teknik Informatika</a>
+					      	<a class="dropdown-item" href="#">HMJ Agroteknologi</a>
+					      	<a class="dropdown-item" href="#">HMJ Teknik Elektro</a>
 					      	<hr style="border: 0.2px solid #cccccc">
-					      	<h5>HMJ Fak.Ushuludin</h5>
-					      	<a class="dropdown-item" href="/organisasi">Aqidah dan Filsafat Islam</a>
-					      	<a class="dropdown-item" href="#">Studi Agama-Agama</a>
-					      	<a class="dropdown-item" href="#">Ilmu Al-Quran dan Tafsir</a>
-					      	<a class="dropdown-item" href="#">Tasawuf Psikoterapi</a>
+					      	<h5>Fak. Ushuludin</h5>
+					      	<a class="dropdown-item" href="/organisasi">HMJ Aqidah dan Filsafat Islam</a>
+					      	<a class="dropdown-item" href="#">HMJ Studi Agama-Agama</a>
+					      	<a class="dropdown-item" href="#">HMJ Ilmu Al-Quran dan Tafsir</a>
+					      	<a class="dropdown-item" href="#">HMJ Tasawuf Psikoterapi</a>
 				    	</div>
 					</div>
 				  	<span class="span">|</span>

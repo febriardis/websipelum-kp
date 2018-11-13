@@ -30,38 +30,49 @@
 
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Kategori Pemilih</label>
-					<div class="col-lg-5">
-						<select class="select" name="fakultas" required="" data-placeholder="Pilih Fakultas">
+					<div class="col-lg-5" id="main">
+						<select class="select" id="fakultas" name="fakultas" required="" data-placeholder="Pilih Fakultas">
+							{{! $tb = (App\Fakultas::all()) }}
 							<option></option>
 							<option value="Semua Mahasiswa">Semua Mahasiswa UIN SGD Bandung</option>
-							<option>Sains dan Teknologi</option>
-							<option>Tarbiyah dan Keguruan</option>
-							<option>Syariah dan Hukum</option>
-							<option>Ushuludin</option>
+						@foreach($tb as $dt)
+							<option value="{{$dt->nm_fakultas}}">{{$dt->nm_fakultas}}</option>
+						@endforeach
 						</select>
-					</div>
-					<div class="col-lg-4">
-						<select class="select" name="jurusan" required="" data-placeholder="Pilih Jurusan">
-							<option></option>
-							<option>-</option>
-							<optgroup label="Fak. Sains dan Teknologi">
-								<option>Semua Jurusan</option>
-								<option>Teknik Informatika</option>
-								<option>Teknik Elektro</option>
-							</optgroup>
-							<optgroup label="Fak. Tarbiyah dan Keguruan">
-								<option>Semua Jurusan</option>
-								<option>Pendidikan Matematika</option>
-								<option>Pendidikan Agama Islam</option>
-							</optgroup>
-							<optgroup label="Fak. Ilmu Sosial & Ilmu Politik">
-								<option>Manajemen</option>
-								<option>Administrasi Negara</option>
-								<option>Sosiologi</option>
-							</optgroup>
 						</select>
 					</div>
 				</div>
+
+				{{! $cekFak = (App\Fakultas::all()) }}
+				<script type="text/javascript">
+				$(document).ready(function() {
+				    $("#fakultas").change(function(){
+				    	// CREATE A "DIV" ELEMENT.
+			        	var container = document.createElement("div");
+			        	container.className="col-lg-4";
+			        	@foreach($cekFak as $d)
+				       	if ($(this).val() == "{{$d->nm_fakultas}}"){
+				       		{{! $tb = (App\Jurusan::where('fak_id', $d->id))->get() }}
+			                // ADD TEXTBOX.
+			            	$('#a').remove(); 
+			                $(container).append('<select style="font-size:14px" class="form-control" name="Jurusan" id="a" required="">'+
+			                	'<option hidden>Pilih Jurusan</option>'+
+								@foreach($tb as $dt)
+								'<option>{{$dt->nm_jurusan}}</option>'+
+								@endforeach
+			                	'</select>'
+			                );
+			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
+			                $('#main').after(container);
+			            }
+			            @endforeach
+			            else if ($(this).val() == "Semua Mahasiswa"){
+			            	$('#a').remove(); 
+			            }
+				    });
+				});
+
+				</script>
 
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Tanggal Agenda</label>

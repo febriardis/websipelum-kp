@@ -43,65 +43,6 @@
 				</div>	
 
 				@if(Auth::user()->ket=='Super Admin')
-				<script type="text/javascript">
-				$(document).ready(function() {
-				    $("#pil_ket").change(function(){
-				    	// CREATE A "DIV" ELEMENT.
-			        	var container = document.createElement("div");
-			        	container.className="col-lg-4";
-				        if($(this).val() == "Super Admin" || $(this).val() == "Admin Sema U" || $(this).val() == "Admin Dema U") {
-			                // ADD TEXTBOX.
-			            	$('#a').remove(); 
-			                $(container).append('<input type=hidden name="ket2" class="form-control" value="Super Admin" id="a"/>');
-			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
-			                $('#main').after(container);
-
-			            }else if ($(this).val() == "Admin Sema F" || $(this).val() == "Admin Dema F"){
-			                // ADD TEXTBOX.
-			            	$('#a').remove(); 
-			                $(container).append('<select style="font-size:14px" class="form-control" name="ket2" id="a" required="">'+
-			                	'<option hidden>Pilih Fakultas</option>'+
-								'<option>Sains dan Teknologi</option>'+
-								'<option>Ilmu Sosial dan Ilmu Politik</option>'+
-								'<option>Syariah dan Hulum</option>'+
-								'<option>Ushuludin</option>'+
-								'<option>Tarbiyah dan Keguruan</option>'+
-								'<option>Adab dan Humaniora</option>'+
-								'<option>Dakwah dan Komunikasi</option>'+
-								'<option>Psikologi</option>'+
-			                	'</select>'
-			                );
-			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
-			                $('#main').after(container);
-
-			            }else if ($(this).val() == "Admin HMJ"){
-			                // ADD TEXTBOX.
-			            	$('#a').remove(); 
-			                $(container).append('<select style="font-size:14px" class="form-control" name="ket2" id="a" required="">'+
-			                	'<option hidden>Pilih Jurusan</option>'+
-								'<optgroup label="Fak. Sains dan Teknologi">'+
-									'<option>Teknik Informatika</option>'+
-									'<option>Teknik Elektro</option>'+
-								'</optgroup>'+
-								'<optgroup label="Fak. Tarbiyah dan Keguruan">'+
-									'<option>Pendidikan Matematika</option>'+
-									'<option>Pendidikan Agama Islam</option>'+
-								'</optgroup>'+
-								'<optgroup label="Fak. Ilmu Sosial & Ilmu'+
-									'Politik">'+
-									'<option>Manajemen</option>'+
-									'<option>Administrasi Negara</option>'+
-									'<option>Sosiologi</option>'+
-								'</optgroup>'+
-			                	'</select>'
-			                );
-			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
-			                $('#main').after(container);
-			            }
-				    });
-				});
-				</script>
-
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Keterangan</label>
 					<div class="col-lg-5" id="main">
@@ -117,6 +58,54 @@
 					</div>
 				</div>
 
+				<script type="text/javascript">
+				$(document).ready(function() {
+				    $("#pil_ket").change(function(){
+				    	// CREATE A "DIV" ELEMENT.
+			            {{! $cek = (\App\Fakultas::all())}}
+			        	var container = document.createElement("div");
+			        	container.className="col-lg-4";
+				        if($(this).val() == "Super Admin" || $(this).val() == "Admin Sema U" || $(this).val() == "Admin Dema U") {
+			                // ADD TEXTBOX.
+			            	$('#a').remove(); 
+			                $(container).append('<input type=hidden name="ket2" class="form-control" value="Super Admin" id="a"/>');
+			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
+			                $('#main').after(container);
+
+			            }else if ($(this).val() == "Admin Sema F" || $(this).val() == "Admin Dema F"){
+			                // ADD TEXTBOX.
+			            	$('#a').remove(); 
+			                $(container).append('<select style="font-size:14px" class="form-control" name="ket2" id="a" required="">'+
+			                	'<option hidden>Pilih Fakultas</option>'+
+			                	@foreach($cek as $d)
+								'<option>{{$d->nm_fakultas}}</option>'+
+								@endforeach
+			                	'</select>'
+			                );
+			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
+			                $('#main').after(container);
+
+			            }else if ($(this).val() == "Admin HMJ"){
+			                // ADD TEXTBOX.
+			            	$('#a').remove(); 
+			                $(container).append('<select style="font-size:14px" class="form-control" name="ket2" id="a" required="">'+
+			                	'<option hidden>Pilih Jurusan</option>'+
+			                	@foreach($cek as $d)
+								'<optgroup label="{{$d->nm_fakultas}}">'+
+									{{! $jur = (App\Jurusan::where('fak_id', $d->id))->get() }}
+									@foreach($jur as $t)
+									'<option>{{$t->nm_jurusan}}</option>'+
+									@endforeach
+								'</optgroup>'+
+			                	@endforeach
+			                	'</select>'
+			                );
+			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
+			                $('#main').after(container);
+			            }
+				    });
+				});
+				</script>
 				@else
 					<input type="hidden" name="ket" value="{{ Auth::user()->ket }}" readonly="">
 					<input type="hidden" name="ket2" value="-" readonly="">

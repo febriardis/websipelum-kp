@@ -78,7 +78,7 @@ class AgendaController extends Controller
         $tb->save();
 
         $tb_berita = Berita_acara::find($req->id_bacara);
-        $tb_berita->ket = 'sudah dibuat';
+        $tb_berita->ket = 'sudah diverifikasi';
         $tb_berita->save();
 
     	return redirect('/tabel agenda')

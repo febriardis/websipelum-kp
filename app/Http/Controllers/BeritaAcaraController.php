@@ -26,7 +26,7 @@ class BeritaAcaraController extends Controller {
         $file->move('uploads/surat',$newName);
 
         $tb->file       = $newName;
-        $tb->ket 		= 'belum dibuat'; //agenda sudah ada
+        $tb->ket 		= 'belum diverifikasi'; //agenda sudah ada
         $tb->save();
 
     	return redirect('/berita acara')

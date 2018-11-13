@@ -49,7 +49,7 @@
 						{{ date('d F Y', strtotime($dt->created_at)) }}
 					</td>
 					<td>
-						@if($dt->ket=='belum dibuat')
+						@if($dt->ket=='belum diverifikasi')
 							<span class="badge badge-danger">{{$dt->ket}}</span>
 						@else
 							<span class="badge badge-info">{{$dt->ket}}</span>
@@ -57,7 +57,7 @@
 					</td>
 					<td>
 						@if(Auth::user()->ket=='Super Admin')
-							@if($dt->ket=='belum dibuat')
+							@if($dt->ket=='belum diverifikasi')
 								<a href="/verifikasi/{{$dt->id}}" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-share"></i>&nbsp;Buat Agenda</a>
 							@else
 							@endif

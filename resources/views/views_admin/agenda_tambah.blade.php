@@ -1,35 +1,30 @@
 @extends('layouts_views.layout_admin')
 
 @section('link')
-	<li class="active">Tambah Agenda</li>
+	<li class="active">Verifikasi Agenda</li>
 @endsection
 
 @section('content')
 	<!-- Basic layout-->
-	<form action="/tambah agenda" method="POST" class="form-horizontal">
+	<form action="/tambah agenda/{{$tb->admin_id}}" method="POST" class="form-horizontal">
 		{{ csrf_field() }}
 		<div class="panel panel-flat">
 			<div class="panel-heading">
-				<h5 class="panel-title">Form Pembuatan Agenda Pemilihan</h5>
+				<h5 class="panel-title">Formulir Pembuatan Agenda</h5>
 			</div>
-
-			<input type="hidden" name="admin_id" value="{{ Auth::user()->id }}">
+			<input type="hidden" name="id_bacara" value="{{$tb->id}}">
 			<div class="panel-body">
 				<div class="form-group">
-					<label class="col-lg-3 control-label">Sistem Pemilihan</label>
+					<label class="col-lg-3 control-label">Agenda</label>
 					<div class="col-lg-9">
-						<select class="select" name="metodep" required="" data-placeholder="Pilih Metode Pemilihan">
-							<option value=""></option>
-							<option>Pemilu Raya</option>
-							<option>Delegasi</option>
-						</select>
+						<input type="text" name="nm_agenda" class="form-control" value="{{$tb->nm_agenda}}" readonly="readonly">
 					</div>
 				</div>
 
 				<div class="form-group">			
-					<label class="col-lg-3   control-label">Nama Agenda</label>
+					<label class="col-lg-3   control-label">Sistem Pemilihan</label>
 					<div class="col-lg-9">
-						<input type="text" class="form-control" name="nm_agenda" required="" placeholder="Masukan nama agenda">
+						<input type="text" class="form-control" readonly="readonly" name="sistem_pem" value="{{$tb->sistem_vote}}">
 					</div>
 				</div>
 

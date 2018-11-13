@@ -6,7 +6,7 @@
 
 @section('content')
 	<!-- Basic layout-->
-	<form action="/tambah agenda" method="POST" class="form-horizontal">
+	<form action="/upload berita/{{Auth::user()->id}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
 		{{ csrf_field() }}
 		<div class="panel panel-flat">
 			<div class="panel-heading">
@@ -24,7 +24,7 @@
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Sistem Pemilihan</label>
 					<div class="col-lg-9">
-						<select class="select" name="metodep" required="" data-placeholder="Pilih Metode Pemilihan">
+						<select class="select" name="sistem_pem" required="" data-placeholder="Pilih Metode Pemilihan">
 							<option value=""></option>
 							<option>Pemilu Raya</option>
 							<option>Delegasi</option>

@@ -23,6 +23,18 @@
 	float: left;
 }
 
+.uppercase {
+    text-transform: uppercase;
+}
+
+.lowercase {
+    text-transform: lowercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
 select option[data-default] {
   color: #888;
 }

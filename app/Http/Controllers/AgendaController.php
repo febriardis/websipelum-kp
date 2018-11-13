@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Berita_acara;
 use App\Agenda;
 use App\Mahasiswa;
 use App\Kandidat;
@@ -11,6 +12,11 @@ use \Crypt;
 
 class AgendaController extends Controller
 {   
+    function verif_view($id){
+        $tb = Berita_acara::find($id);
+        return view('views_admin.agenda_tambah')
+        ->with('tb', $tb);
+    }
     
     function agendaview($id){
         $cekJur = Agenda::find($id)->kat_jurusan;
@@ -61,18 +67,22 @@ class AgendaController extends Controller
     	->with("data", $table);
     }
 
-    function insert(Request $req){
+    function insert(Request $req, $idAdmin){
         $tb = new Agenda;
-        $tb->admin_id = $req->admin_id;
+        $tb->admin_id = $idAdmin;
         $tb->nm_agenda = $req->nm_agenda;
-        $tb->sistem_vote = $req->metodep;
+        $tb->sistem_vote = $req->sistem_pem;
         $tb->kat_fakultas   = $req->fakultas;
         $tb->kat_jurusan   = $req->jurusan;
         $tb->tgl_agenda= $req->tgl_agenda;
         $tb->save();
 
+        $tb_berita = Berita_acara::find($req->id_bacara);
+        $tb_berita->ket = 'sudah dibuat';
+        $tb_berita->save();
+
     	return redirect('/tabel agenda')
-        ->with('pesan','Data berhasil disimpan');
+        ->with('pesan','Agenda berhasil dibuat');
     }
 
     function edit($id){

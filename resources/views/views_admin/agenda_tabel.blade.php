@@ -14,8 +14,7 @@
 	<!-- Basic datatable -->
 	<div class="panel panel-flat">
 		<div class="panel-heading">
-			<h5 class="panel-title">Data Agenda</h5>
-			<a href="/tambah agenda" class="btn btn-info btn-xs">Tambah Data</a>
+			<h5 class="panel-title">Data Agenda</h5><hr>
 		</div>
 
 		<table class="table datatable-basic">
@@ -23,7 +22,7 @@
 				<tr>
 					<th>No</th>
 					<th>Nama Agenda</th>
-					<th>Metode Pemilihan</th>
+					<th>Sistem Pemilihan</th>
 					<th>Kategori Pemilih</th>
 					<th>Tanggal Agenda</th>
 					<th>Katerangan</th>
@@ -32,12 +31,17 @@
 				</tr>
 			</thead>
 			<tbody>
-				{{! $no = 1 }}
-				@foreach($data as $dt)
+			{{! $no = 1 }}
+			@foreach($data as $dt)
+				{{! $cek1 = (App\Admin::find($dt->admin_id))->ket }}
+				{{! $cek2 = (App\Admin::find($dt->admin_id))->ket2 }}
+
+				@if(Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2 || Auth::user()->ket=='Admin HMJ' && Auth::user()->ket2==$dt->kat_fakultas || Auth::user()->ket=='Admin HMJ' && Auth::user()->ket2=='Semua Mahasiswa' || Auth::user()->ket=='Super Admin')
+
 				<tr>
 					<td>{{ $no++ }}</td>
 					<td>{{ $dt->nm_agenda }}</td>
-					<td>{{ $dt->metodep }}</td>
+					<td>{{ $dt->sistem_vote }}</td>
 					<td>{{ $dt->kat_jurusan }} <b>({{$dt->kat_fakultas}})</b></td>
 					<td>{{ date('d M Y', strtotime($dt->tgl_agenda)) }}</td>
 					<td>
@@ -58,7 +62,6 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									<i class="icon-menu9"></i>
 								</a>
-
 								<ul class="dropdown-menu dropdown-menu-right">
 									<li><a href="/edit agenda/{{ $dt->id }}"><i class="icon-compose"></i> Edit Data</a></li>
 									<script>
@@ -76,6 +79,7 @@
 						</ul>
 					</td>
 				</tr>
+				@endif
 				@endforeach
 			</tbody>
 		</table>

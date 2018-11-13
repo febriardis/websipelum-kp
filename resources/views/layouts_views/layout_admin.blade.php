@@ -122,18 +122,15 @@
 				</li>
 			</ul>
 			<a class="navbar-brand" href=""><img src="/assets/images/icon.png" style="width: 75%; height: 35px; margin-top: -10px" alt=""></a>
-
 			<div class="navbar-right">
 				<ul class="nav navbar-nav">
 					<li class="dropdown dropdown-user">
 						<a class="dropdown-toggle" data-toggle="dropdown">
-							<span>{{ Auth::user()->nama }}</span>
+							<span style="text-transform: capitalize;"><i class="glyphicon glyphicon-user"></i>&nbsp;{{ Auth::user()->nama }}&nbsp;|&nbsp;{{ Auth::user()->ket }}. {{ Auth::user()->ket2 }} </span>
 							<i class="caret"></i>
 						</a>
 
 						<ul class="dropdown-menu dropdown-menu-right">
-							<li><a href="#"><i class="glyphicon glyphicon-user"></i> {{ Auth::user()->ket }}</a></li>
-							<li class="divider"></li>
 							<li><a href="/keluar"><i class="glyphicon glyphicon-log-out"></i> Keluar</a></li>
 						</ul>
 					</li>					
@@ -155,9 +152,9 @@
 						<div class="category-content">
 							<div class="media">
 								<div class="media-body">
-									<span class="media-heading text-semibold">{{ Auth::user()->nama }}</span>
-									<div class="text-size-mini text-muted">
-										{{ Auth::user()->username }}
+									<span style="text-transform: capitalize;" class="media-heading text-semibold">{{ Auth::user()->nama }}</span>
+									<div style="text-transform: capitalize;" class="text-size-mini text-muted">
+										{{ Auth::user()->ket }}.{{ Auth::user()->ket2 }}
 									</div>
 								</div>
 

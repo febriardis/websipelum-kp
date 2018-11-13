@@ -119,6 +119,7 @@
 
 				@else
 					<input type="hidden" name="ket" value="{{ Auth::user()->ket }}" readonly="">
+					<input type="hidden" name="ket2" value="-" readonly="">
 				@endif
 				<div class="text-right">
 					<button type="submit" class="btn btn-primary">Simpan</button>

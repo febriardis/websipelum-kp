@@ -72,7 +72,7 @@
 								<td>{{ $tb->nama }}</td>
 								<td>{{ $tb->username }}</td>
 								<td>{{ $tb->created_at }}</td>
-								<td>{{ $tb->ket }}</td>
+								<td>{{ $tb->ket }}&nbsp;-&nbsp;<b>{{ $tb->ket2 }}</b></td>
 								<td class="text-center">
 									<ul class="icons-list">
 										<li class="dropdown">

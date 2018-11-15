@@ -9,7 +9,7 @@ class Mahasiswa extends Model
     protected $table = 'tb_mahasiswa';
     protected $primaryKey = 'nim'; //mengganti primary key default==id
     protected $fillable = [
-    	'nim', 'nama', 'jurusan', 'fakultas','password',
+    	'nim', 'nama', 'jurusan', 'fakultas', 'th_angkatan','foto','password',
     ];
 	
 	function FKAdmin(){

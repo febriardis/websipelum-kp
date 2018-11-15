@@ -31,6 +31,16 @@ class MhsTableSeeder extends Seeder
               'password'    => bcrypt('rahmat1234'),
               'created_at'  => \Carbon\Carbon::now('Asia/Jakarta'),
               'updated_at'  => \Carbon\Carbon::now('Asia/Jakarta')
+            ],                    
+            [
+              'nim'         => '1154050012',
+              'nama'        => 'Joko',
+              'jurusan'     => 'Kimia',
+              'fakultas'    => 'Sains dan Teknologi',
+              'th_angkatan' => '2016',
+              'password'    => bcrypt('rahmat1234'),
+              'created_at'  => \Carbon\Carbon::now('Asia/Jakarta'),
+              'updated_at'  => \Carbon\Carbon::now('Asia/Jakarta')
             ], 
         ]);   
     }

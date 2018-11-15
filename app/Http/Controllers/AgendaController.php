@@ -21,7 +21,7 @@ class AgendaController extends Controller
     function agendaview($id){
         $cekJur = Agenda::find($id)->kat_jurusan;
         $cekFak = Agenda::find($id)->kat_fakultas;
-        $cekMet = Agenda::find($id)->metodep;
+        $cekMet = Agenda::find($id)->sistem_vote;
         
         if ($cekFak=='Semua Mahasiswa') {
             if ($cekMet=='Pemilu Raya') {
@@ -60,9 +60,8 @@ class AgendaController extends Controller
         ->with('tbK', $tbKandidat);
     }
 
-    function show(){
-    	$table = Agenda::all();  //where('id','=',3)->get();
-
+    function show(){ //function agenda_tabel
+    	$table = Agenda::all(); 
     	return view('views_admin.agenda_tabel')
     	->with("data", $table);
     }

@@ -14,7 +14,7 @@
 <!-- Basic datatable -->
 	<div class="panel panel-flat">
 		<div class="panel-heading">
-			<h5 class="panel-title">Pengajuan Agendas</h5><hr>
+			<h5 class="panel-title">Pengajuan Agenda</h5><hr>
 			@if(Auth::user()->ket=='Super Admin')
 			@else
 				<a href="/upload berita acara" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-upload"></i>&nbsp;Upload</a>

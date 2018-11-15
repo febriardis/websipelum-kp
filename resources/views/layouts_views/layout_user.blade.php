@@ -12,7 +12,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 		<script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>		
-  		<script type="text/javascript" src="ckeditor/ckeditor.js"></script>	
+  		<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>	
 		<script type="text/javascript">
 			function openNav() {document.getElementById("myNav").style.display = "block";}
 			function closeNav() {document.getElementById("myNav").style.display = "none";}
@@ -274,12 +274,20 @@
 				    	<a class="nav-link" href="javascript:void(0)" style="padding: 10px;">Syarat &amp; Ketentuan</a>
 				  	</li>  	
 				</ul>
+
 			    <ul class="navbar-nav">
 			    	<li class="nav-item dropdown">
-				    	<a class="nav-link dropdown-toggle link-me" href="" data-toggle="dropdown" style="padding: 10px;"><i class="fa fa-user"></i> {{ Auth::user()->nim }} </a>
+				    	<a class="nav-link dropdown-toggle link-me" href="" data-toggle="dropdown" style="padding: 10px;"><i class="fa fa-user-circle-o"></i> {{ Auth::user()->nim }} </a>
 				    	<div class="dropdown-menu dropdown-menu-right">
-					    	<a class="dropdown-item" href="#">{{ Auth::user()->nama }}</a>
-					    	<a class="dropdown-item" href="/keluar">Keluar</a>
+				    		<div class="text-center">
+				    			<img src="/uploads/fotomhs/{{Auth::user()->foto}}" width="80" height="80" alt="image not found" style="border-radius: 100%;border:1px solid #cccccc;margin: 10px">
+				    		</div>
+					    	<a class="dropdown-item drop-me" href="javascript:void(0)">Nama&nbsp;:<br><b>{{ Auth::user()->nama }}</b></a>
+					    	<a class="dropdown-item drop-me" href="javascript:void(0)">Jurusan&nbsp;:<br><b>{{ Auth::user()->jurusan }}</b></a>
+					    	<hr>
+					    	<div class="text-center">
+						    	<a class="btn btn-danger btn-sm" href="/keluar"><i class="fa fa-sign-out"></i>Keluar</a>
+					    	</div>
 					    </div>
 			  		</li>
 			    </ul>

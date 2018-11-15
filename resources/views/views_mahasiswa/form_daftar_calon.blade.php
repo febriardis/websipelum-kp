@@ -5,15 +5,16 @@
 <div class="content">	
 	<div style="width: 80%; margin: 20px auto">
 		<div style="margin: 30px 0px;">
-			<h4>Pendaftaran Bakal Calon Ketua .....</h4>
+			<h4 style="text-transform: capitalize;">Pendaftaran Bakal Calon Ketua <br> Agenda {{ $tb->nm_agenda }}</h4>
 			<hr>
 		</div>
-		<form action="" method="">
+		<form action="/daftar kandidat/{{$tb->id}}" method="POST" enctype="multipart/form-data">
+			{{csrf_field()}}
 			<div class="form-group">
 				<div class="row">
 					<label class="control-label col-sm-4">NIM</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" readonly="readonly" value="{{Auth::user()->nim}}">
+						<input type="text" class="form-control" required="" name="nim" readonly="readonly" value="{{Auth::user()->nim}}">
 					</div>
 				</div>
 			</div>
@@ -21,15 +22,24 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Nama</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" readonly="readonly" value="{{Auth::user()->nama}}">
+						<input type="text" class="form-control" required="" name="nama" readonly="readonly" value="{{Auth::user()->nama}}">
+					</div>
+				</div>
+			</div>
+			<input type="hidden" name="foto" value="{{Auth::user()->foto}}" readonly="readonly">
+			<div class="form-group">
+				<div class="row">
+					<label class="control-label col-sm-4">Jurusan</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" required="" name="jurusan" readonly="readonly" value="{{Auth::user()->jurusan}}">
 					</div>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="row">
-					<label class="control-label col-sm-4">Jurusan</label>
+					<label class="control-label col-sm-4">Tahun Angkatan</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" readonly="readonly" value="{{Auth::user()->jurusan}}">
+						<input type="text" class="form-control" required="" name="th_angkatan" readonly="readonly" value="{{Auth::user()->th_angkatan}}">
 					</div>
 				</div>
 			</div>
@@ -37,7 +47,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">IPK</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" placeholder="Masukan nilai IPK anda">
+						<input type="text" class="form-control" required="" placeholder="Masukan nilai IPK anda" name="ipk">
 					</div>
 				</div>
 			</div>
@@ -45,7 +55,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Transkrip Nilai</label>
 					<div class="col-sm-8">
-						<input type="file">
+						<input type="file" required="" name="transkrip">
 					</div>
 				</div>
 			</div>
@@ -53,7 +63,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Visi</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" placeholder="Masukan visi anda">
+						<input type="text" required="" autocomplete="off" name="visi" class="form-control" placeholder="Masukan visi anda">
 					</div>
 				</div>
 			</div>
@@ -75,7 +85,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Misi</label>
 					<div class="col-sm-8">
-						<textarea name="deskripsi" class="ckeditor" id="ckedtor"></textarea>
+						<textarea name="misi" required="" class="ckeditor" id="ckedtor"></textarea>
 					</div>
 				</div>
 			</div>

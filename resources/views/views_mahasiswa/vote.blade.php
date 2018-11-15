@@ -11,6 +11,7 @@
     </div>
     <!-- /list-content -->
 
+    <!-- jika mahasiswa sudah memilih hilangkan button vote -->
     <!-- content-vote -->
   	<div class="content-vote">
   		@for($i=0; $i<=3; $i++)

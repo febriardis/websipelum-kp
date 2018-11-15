@@ -11,7 +11,7 @@
 			</div>
 
 			<!-- div if pemilihan == tidak ada -->
-			<div class="quickcount-notfound" style="height: 450px; border: 1px solid black; border: 1px solid  #d9d9d9; text-align: center;">
+			<div class="quickcount-notfound" style="min-height: 450px; border: 1px solid  #d9d9d9; text-align: center;">
 				<img src="assets/images/warning-ico.png" style="width: 10%; margin: 100px 0px 20px 0px;" alt="waring">
 				<h3 class="text-muted fontArial">Tidak ada pemilihan !</h3>
 			</div>

@@ -23,6 +23,7 @@ class TbKandidat extends Migration
             $table->unsignedInteger('agenda_id');
             $table->text('visi');
             $table->text('misi');
+            $table->string('keterangan');
             $table->timestamps();
         });
         Schema::table('tb_kandidat', function(Blueprint $kolom){

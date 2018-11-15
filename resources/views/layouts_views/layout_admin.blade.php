@@ -178,6 +178,8 @@
 								<!-- Main -->
 								<li class="navigation-header"><span>Main Menu</span> <i class="icon-menu" title="Main Menu"></i></li>
 								<li><a href="/dashboard"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+
+								@if(Auth::user()->ket=='Super Admin')
 								<li>
 									<a href="#"><i class="glyphicon glyphicon-user"></i> <span>Admin</span></a>
 									<ul>
@@ -185,6 +187,8 @@
 										<li><a href="/tabel admin">Data Admin</a></li>
 									</ul>
 								</li>	
+								@endif
+
 								<li>
 									<a href="/berita acara"><i class="icon-clipboard3"></i><span>Pengajuan Agenda</span></a>
 								</li>							

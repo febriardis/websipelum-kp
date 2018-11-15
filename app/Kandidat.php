@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kandidat extends Model
 {
     protected $table = 'tb_kandidat';
-    protected $fillable = ['nim','nama','foto','jurusan','angkatan','visi','misi'];
+    protected $fillable = ['nim','nama','foto','jurusan','angkatan','visi','misi','keterangan'];
 
     function FKBalonA(){
         return $this->belongsTo(Admin::class);

@@ -25,8 +25,8 @@ Route::get('/beranda', function(){return view('views_mahasiswa.beranda');})->mid
 Route::get('/pemilihan', function(){return view('views_mahasiswa.vote');})->middleware('auth:mahasiswa');
 Route::get('/hitung cepat', function(){return view('views_mahasiswa.quick_count');})->middleware('auth:mahasiswa');
 Route::get('/organisasi', function(){return view('views_mahasiswa.organisasi');})->middleware('auth:mahasiswa');
-Route::get('/daftar calon', function(){return view('views_mahasiswa.tabel_agenda');})->middleware('auth:mahasiswa');
-Route::get('/form pendaftaran', function(){return view('views_mahasiswa.form_daftar_calon');})->middleware('auth:mahasiswa');
+Route::get('/daftar calon', 'MhsController@ShowTabelAgenda')->middleware('auth:mahasiswa');
+Route::get('/form pendaftaran/{nmagenda}', 'KandidatController@daftar')->middleware('auth:mahasiswa');
 
 //======================================ADMIN======================================
 Route::get('/dashboard', function () {return view('views_admin.dashboard_admin');})->middleware('auth:admin');
@@ -58,6 +58,15 @@ Route::get('/tabel agenda', 'AgendaController@show')->middleware('auth:admin');
 Route::get('/data quick count', function () {return view('views_admin.quickcount_tabel');})->middleware('auth:admin');
 Route::get('/quick count', function () {return view('views_admin.quickcount_view');})->middleware('auth:admin');
 
+// ==================================ADMIN-KANDIDAT==================================
+// Route::get('/tabel balon', 'KandidatController@show')->middleware('auth:admin');
+// Route::get('/tambah kandidat', 'KandidatController@viewInsert')->middleware('auth:admin');
+Route::post('/daftar kandidat/{idAgenda}', 'KandidatController@insert');
+
+Route::get('/edit balon/{id}', 'KandidatController@edit')->middleware('auth:admin');
+Route::post('/edit balon/{id}', 'KandidatController@update');
+Route::get('/hapus balon/{id}/{IdAgenda}', 'KandidatController@delete')->middleware('auth:admin');
+
 
 
 ////////////////////////////////////////MAHASISWA/////////////////////////////////
@@ -69,14 +78,6 @@ Route::get('/tabel mahasiswa', 'MhsController@show')->middleware('auth:admin');
 //////////////////////////////////AGENDADETAIL////////////////////////////////////////////////
 // Route::get('/detail agenda/{id}', 'AgendaDetailController@agendaview')->middleware('auth:admin');
 // Route::post('/tambah balon', 'AgendaDetailController@insert');
-
-//////////////////////////////////BALON////////////////////////////////////////////////
-Route::get('/tabel balon', 'KandidatController@show')->middleware('auth:admin');
-Route::get('/tambah kandidat', 'KandidatController@viewInsert')->middleware('auth:admin');
-Route::post('/tambah kandidat', 'KandidatController@insert');
-Route::get('/edit balon/{id}', 'KandidatController@edit')->middleware('auth:admin');
-Route::post('/edit balon/{id}', 'KandidatController@update');
-Route::get('/hapus balon/{id}/{IdAgenda}', 'KandidatController@delete')->middleware('auth:admin');
 
 //////////////////////////////////PEMILIH////////////////////////////////////////////////
 Route::get('/tabel pemilih', 'PemilihController@show')->middleware('auth:admin');

@@ -137,11 +137,11 @@
 						<td>{{$no++}}</td>
 						<td>{{$dt->nim}}</td>
 						<td>{{$dt->nama}}</td>
-						<td><img src="{{ url('uploads/file/'.$dt->foto) }}" alt="" style="width: 90px; float: left; height: 100px"> </td>
+						<td><img src="{{ url('uploads/fotomhs/'.$dt->foto) }}" alt="image not found" style="width: 90px; float: left; height: 100px"> </td>
 						<td>{{$dt->jurusan}}</td>
 						<td>{{$dt->angkatan}}</td>
 						<td>{{$dt->visi}}</td>
-						<td>{{$dt->misi}}</td>
+						<td>{!!$dt->misi!!}</td>
 						<td class="text-center">
 							<ul class="icons-list">
 								<li class="dropdown">

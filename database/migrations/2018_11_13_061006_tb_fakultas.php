@@ -16,7 +16,6 @@ class TbFakultas extends Migration
         Schema::create('tb_fakultas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nm_fakultas');
-            $table->rememberToken();
             $table->timestamps();
         });
     }

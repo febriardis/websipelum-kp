@@ -18,10 +18,9 @@ class TbAgenda extends Migration
             $table->unsignedInteger('admin_id');
             $table->string('nm_agenda');
             $table->string('sistem_vote');
-            $table->string('kat_jurusan');
+            $table->string('kat_jurusan')->nullable(true);
             $table->string('kat_fakultas');
             $table->date('tgl_agenda');
-            $table->rememberToken();
             $table->timestamps();
         });
         Schema::table('tb_agenda', function(Blueprint $kolom) {

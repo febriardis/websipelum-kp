@@ -14,8 +14,8 @@ class TbMahasiswa extends Migration
     public function up()
     {
         Schema::create('tb_mahasiswa', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('nim')->unique();
+            //$table->integer('nim')->primary(); 
+            $table->increments('nim');
             $table->string('nama');
             $table->string('jurusan');
             $table->string('fakultas');

@@ -20,7 +20,6 @@ class TbBeritaacara extends Migration
             $table->string('sistem_vote');
             $table->string('file');
             $table->string('ket');
-            $table->rememberToken();
             $table->timestamps();
         });
 

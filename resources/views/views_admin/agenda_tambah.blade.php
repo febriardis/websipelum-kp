@@ -55,8 +55,9 @@
 				       		{{! $tb = (App\Jurusan::where('fak_id', $d->id))->get() }}
 			                // ADD TEXTBOX.
 			            	$('#a').remove(); 
-			                $(container).append('<select style="font-size:14px" class="form-control" name="Jurusan" id="a" required="">'+
+			                $(container).append('<select style="font-size:14px" class="form-control" name="jurusan" id="a" required="">'+
 			                	'<option hidden>Pilih Jurusan</option>'+
+			                	'<option>Semua Jurusan</option>'+
 								@foreach($tb as $dt)
 								'<option>{{$dt->nm_jurusan}}</option>'+
 								@endforeach

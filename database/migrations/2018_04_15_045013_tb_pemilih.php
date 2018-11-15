@@ -15,15 +15,14 @@ class TbPemilih extends Migration
     {
         Schema::create('tb_pemilih', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('mhs_id');
+            $table->unsignedInteger('nim');
             $table->unsignedInteger('agenda_id');
             $table->string('ket_vote');
-            $table->rememberToken();
             $table->timestamps();
         });
 
         Schema::table('tb_pemilih', function(Blueprint $kolom){
-            $kolom->foreign('mhs_id')->references('id')->on('tb_mahasiswa')->onDelete('cascade')->onUpdate('cascade');
+            $kolom->foreign('nim')->references('nim')->on('tb_mahasiswa')->onDelete('cascade')->onUpdate('cascade');
             $kolom->foreign('agenda_id')->references('id')->on('tb_agenda')->onDelete('cascade')->onUpdate('cascade');
         });
     }

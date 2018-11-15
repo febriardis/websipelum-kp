@@ -10,7 +10,7 @@ class Auth_mhs extends Authenticatable
     use Notifiable;
     
     protected $table = 'tb_mahasiswa';
-
+    protected $primaryKey = 'nim'; //mengganti primary key default==id
     protected $fillable = [
     	'nim', 'nama', 'jurusan', 'fakultas','password',
     ];

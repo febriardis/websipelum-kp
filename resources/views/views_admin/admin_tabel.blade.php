@@ -66,7 +66,7 @@
 					@endforeach
 				@else
 					@foreach($tbAdmin as $tb)
-						@if($tb->ket==Auth::user()->ket)
+						@if($tb->ket==Auth::user()->ket && $tb->ket2==Auth::user()->ket2)
 							<tr>
 								<td>{{ $no++ }}</td>
 								<td>{{ $tb->nama }}</td>

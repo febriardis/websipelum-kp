@@ -186,7 +186,7 @@
 									</ul>
 								</li>	
 								<li>
-									<a href="/berita acara"><i class="icon-clipboard3"></i><span>Berita Acara</span></a>
+									<a href="/berita acara"><i class="icon-clipboard3"></i><span>Pengajuan Agenda</span></a>
 								</li>							
 								<li>
 									<a href="/tabel agenda"><i class="icon-calendar"></i><span>Agenda</span></a>
@@ -224,7 +224,7 @@
 						<div class="heading-elements">
 							<button type="button" class="btn btn-info daterange-ranges heading-btn text-semibold">
 								<i class="icon-calendar3 position-left"></i> 
-								<span> {{ date('l, d M Y', strtotime(\Carbon\Carbon::now('Asia/Jakarta'))) }}</span>
+								<span> {{ date('l, d F Y', strtotime(\Carbon\Carbon::now('Asia/Jakarta'))) }}</span>
 							</button>
 			           	</div>
 					</div>

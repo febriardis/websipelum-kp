@@ -27,17 +27,20 @@
 					<th>Tanggal Agenda</th>
 					<th>Katerangan</th>
 					<th>Detail</th>
-					<th class="text-center">Actions</th>
+					<th class="text-center">Aksi</th>
 				</tr>
 			</thead>
 			<tbody>
 			{{! $no = 1 }}
 			@foreach($data as $dt)
+			<div style="display: none;">	
 				{{! $cek1 = (App\Admin::find($dt->admin_id))->ket }}
-				{{! $cek2 = (App\Admin::find($dt->admin_id))->ket2 }}
-
-				@if(Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2 || Auth::user()->ket=='Admin HMJ' && Auth::user()->ket2==$dt->kat_fakultas || Auth::user()->ket=='Admin HMJ' && Auth::user()->ket2=='Semua Mahasiswa' || Auth::user()->ket=='Super Admin')
-
+				{{! $cek2 = (App\Admin::find($dt->admin_id))->ket2 }}				
+				<!-- cek idfak jurusan dmna nm_jurusan==ket2admin-->
+				{{! $c1 =(App\Jurusan::where('nm_jurusan', Auth::user()->ket2)->value('fak_id')) }}
+				{{! $c2 = (App\Fakultas::where('nm_fakultas', $dt->kat_fakultas)->value('id')) }}
+			</div>		
+				@if(Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2 || Auth::user()->ket=='Admin HMJ' && Auth::user()->ket2==$dt->kat_fakultas || Auth::user()->ket=='Admin HMJ' && Auth::user()->ket2=='Semua Mahasiswa' || Auth::user()->ket=='Admin HMJ' && $dt->kat_jurusan=='Semua Jurusan' && $c1==$c2 || Auth::user()->ket=='Super Admin')
 				<tr>
 					<td>{{ $no++ }}</td>
 					<td>{{ $dt->nm_agenda }}</td>

@@ -17,7 +17,7 @@ class AdminTableSeeder extends Seeder
             'username'    => 'admin',//str_random(10),
             'password'    => bcrypt('admin1234'),
             'ket'         => 'Super Admin',
-            'ket2'        => 'Super Admin',
+            'ket2'        => '',
             'created_at'	=> \Carbon\Carbon::now('Asia/Jakarta'),
             'updated_at'	=> \Carbon\Carbon::now('Asia/Jakarta')
           ],

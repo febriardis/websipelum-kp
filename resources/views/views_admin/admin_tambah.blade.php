@@ -68,7 +68,7 @@
 				        if($(this).val() == "Super Admin" || $(this).val() == "Admin Sema U" || $(this).val() == "Admin Dema U") {
 			                // ADD TEXTBOX.
 			            	$('#a').remove(); 
-			                $(container).append('<input type=hidden name="ket2" class="form-control" value="Super Admin" id="a"/>');
+			                $(container).append('<input type=hidden name="ket2" class="form-control" value="" id="a"/>');
 			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
 			                $('#main').after(container);
 
@@ -108,7 +108,7 @@
 				</script>
 				@else
 					<input type="hidden" name="ket" value="{{ Auth::user()->ket }}" readonly="">
-					<input type="hidden" name="ket2" value="-" readonly="">
+					<input type="hidden" name="ket2" value="{{ Auth::user()->ket2 }}" readonly="">
 				@endif
 				<div class="text-right">
 					<button type="submit" class="btn btn-primary">Simpan</button>

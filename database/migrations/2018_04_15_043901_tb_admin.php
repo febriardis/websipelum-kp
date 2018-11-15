@@ -19,7 +19,7 @@ class TbAdmin extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('ket');
-            $table->string('ket2');
+            $table->string('ket2')->nullable(true);
             $table->rememberToken();
             $table->timestamps();
         });

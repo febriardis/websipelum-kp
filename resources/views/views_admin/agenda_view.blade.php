@@ -41,10 +41,17 @@
 
 	    <!-- Basic datatable -->
 		<div class="panel panel-flat">
+			{{! $cekAdmin = (\App\Agenda::find($IdAgenda))->admin_id,
+				$cekkat1Admin = (\App\Admin::find($cekAdmin))->ket,
+				$cekkat2Admin = (\App\Admin::find($cekAdmin))->ket2
+			}}
 			<div class="panel-heading">			
 			@if(Auth::user()->ket=='Super Admin')
 			@else
-				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_large1">Tambah</i></button>
+				@if(Auth::user()->id==$cekAdmin || Auth::user()->ket==$cekkat1Admin && Auth::user()->ket==$cekkat1Admin)
+					<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_large1">Tambah</i></button>
+				@else
+				@endif
 			@endif
 			<div style="float: right;">
 				<button type="button" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-print"></i>&nbsp;Cetak</button>

@@ -15,7 +15,7 @@ class TbKandidat extends Migration
     {
         Schema::create('tb_kandidat', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('mhs_id');
+            $table->unsignedInteger('nim'); //$table->unsignedInteger('mhs_id');
             $table->string('nama');
             $table->string('foto');
             $table->string('jurusan');
@@ -23,11 +23,10 @@ class TbKandidat extends Migration
             $table->unsignedInteger('agenda_id');
             $table->text('visi');
             $table->text('misi');
-            $table->rememberToken();
             $table->timestamps();
         });
         Schema::table('tb_kandidat', function(Blueprint $kolom){
-            $kolom->foreign('mhs_id')->references('id')->on('tb_mahasiswa')->onDelete('cascade')->onUpdate('cascade');
+            $kolom->foreign('nim')->references('nim')->on('tb_mahasiswa')->onDelete('cascade')->onUpdate('cascade');
             $kolom->foreign('agenda_id')->references('id')->on('tb_agenda')->onDelete('cascade')->onUpdate('cascade');
         });
     }

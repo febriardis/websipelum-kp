@@ -31,6 +31,38 @@ class KandidatController extends Controller
         ->with('pesanNyalon','berhasil mendaftar');
     }
 
+    // show kandidat detail in admin views
+    function viewKandidat($nim, $nmAgenda){
+        $tb = Kandidat::where('nim', $nim)->first();
+        return view('views_admin.kandidat_detail')
+        ->with('nmAgenda', $nmAgenda)
+        ->with('tbMhs', $tb);
+    }
+
+    function verifKandidat(Request $req, $id, $nmAgenda){
+        $tb = Kandidat::find($id);
+        $tb->keterangan = 'Diterima';
+        $tb->save();
+        return redirect()->action('AgendaController@agendaview', ['nmAgenda' => $nmAgenda])
+        ->with('pesanVerif', 'Data berhasil disimpan'); //return ke agenda view
+    }
+
+    function tolakKandidat($id, $nmAgenda){
+        $tb = Kandidat::find($id);
+        $tb->keterangan = 'Pendaftaran Tidak Diterima';
+        $tb->save();
+        return redirect()->action('AgendaController@agendaview', ['nmAgenda' => $nmAgenda])
+        ->with('pesanVerif', 'Data berhasil disimpan');  //return ke agenda view
+    }
+    // end show kandidat detail in admin views
+
+    function delete($id, $idAgenda) {
+        Kandidat::find($id)->delete();
+
+        return redirect()->action('AgendaController@agendaview', ['id' => $idAgenda])
+        ->with('pesan', 'Data berhasil dihapus');
+    }
+
 
     // function show(){
     // 	$tb = Kandidat::all();
@@ -203,10 +235,10 @@ class KandidatController extends Controller
         // }
     }
 
-    function delete($id, $agendaid) {
-        Kandidat::find($id)->delete();
+    // function delete($id, $agendaid) {
+    //     Kandidat::find($id)->delete();
 
-        return redirect()->action('AgendaController@agendaview', ['id' => $agendaid])
-        ->with('pesan', 'Data berhasil dihapus');
-    }
+    //     return redirect()->action('AgendaController@agendaview', ['id' => $agendaid])
+    //     ->with('pesan', 'Data berhasil dihapus');
+    // }
 }

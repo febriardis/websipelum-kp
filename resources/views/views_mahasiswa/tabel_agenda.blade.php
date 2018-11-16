@@ -42,11 +42,11 @@
               </div>
               @if(Auth::user()->nim==$cekNim)
                 @if($cekKet=='Menunggu Verifikasi')
-                  <span class="badge badge-info">Menunggu Verifikasi</span>
-                @elseif($cekKet=='Terdaftar')
-                  <span class="badge badge-success">Terdaftar</span>
+                  <span class="badge badge-info">{{$cekKet}}</span>
+                @elseif($cekKet=='Diterima')
+                  <span class="badge badge-success">{{$cekKet}}</span>
                 @else
-                  <span class="badge badge-danger">Pendaftaran Tidak Diterima</span>
+                  <span class="badge badge-danger">{{$cekKet}}</span>
                 @endif
               @else
                 <span class="badge badge-secondary">Belum Terdaftar</span>

@@ -57,9 +57,10 @@
 						@endif
 					</td>
 					<td>
-						<a href="/detail agenda/{{ $dt->id }}"><i class="icon-eye"></i> Lihat</a>
+						<a href="/detail agenda/{{$dt->nm_agenda}}"><i class="icon-eye"></i> Lihat</a>
 					</td>
-					<td class="text-center"> 
+					<td class="text-center"> 	
+					@if(Auth::user()->ket=='Super Admin' || Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2)
 						<ul class="icons-list">
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -80,6 +81,7 @@
 								</ul>
 							</li>
 						</ul>
+					@endif
 					</td>
 				</tr>
 				@endif

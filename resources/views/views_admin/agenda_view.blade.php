@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-		<!-- /////////////////////////Header////////////////////////////////////////// -->
+		<!-- ================Header================ -->
 		<div class="page-header-content" style="border-bottom: 1px solid #cccccc">
 			<div class="page-title">
 				<p>Tanggal Agenda : <b>{{ date('l, d M Y', strtotime((App\Agenda::find($IdAgenda))->tgl_agenda)) }}</b></p>
@@ -16,12 +16,12 @@
 				<h4><b>{{ (App\Agenda::find($IdAgenda))->sistem_vote }}</b></h4>
 			</div>
 		</div>
-		<!-- /////////////////////////Header////////////////////////////////////////// -->
+		<!-- /================Header================ -->
 		<br>
 		<!-- Pricing table -->
 		<div class="breadcrumb-line breadcrumb-line-component">
 			<ul class="breadcrumb">
-				<li><a href=""><i class="glyphicon glyphicon-forward"></i></a> Kandidat</li>
+				<li><i class="glyphicon glyphicon-forward"></i>&nbsp;Kandidat</li>
 			</ul>
 		</div>
 
@@ -46,87 +46,33 @@
 				$cekkat2Admin = (\App\Admin::find($cekAdmin))->ket2
 			}}
 			<div class="panel-heading">			
-			@if(Auth::user()->ket=='Super Admin')
-			@else
-				@if(Auth::user()->id==$cekAdmin || Auth::user()->ket==$cekkat1Admin && Auth::user()->ket==$cekkat1Admin)
-					<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_large1">Tambah</i></button>
+				@if(Auth::user()->ket=='Super Admin')
 				@else
+					@if(Auth::user()->id==$cekAdmin || Auth::user()->ket==$cekkat1Admin && Auth::user()->ket2==$cekkat2Admin)
+						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_large1">Tambah</button>
+					@else
+					@endif
 				@endif
-			@endif
-			<div style="float: right;">
-				<button type="button" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-print"></i>&nbsp;Cetak</button>
-			</div>
-			</div>
-			<!-- Large modal -->
-			<div id="modal_large1" class="modal fade">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h5 class="modal-title">Form Penambahan Calon</h5>
-						</div>
-						
-						<form action="/tambah kandidat" method="POST" class="form-horizontal" enctype="multipart/form-data">
-						<div class="modal-body">	
-								{{ csrf_field() }}
-								<div class="panel panel-flat">										
-									<div class="panel-body">
-										<div class="form-group">
-											<label class="col-lg-3 control-label">NIM</label>
-											<div class="col-lg-9">
-												<input type="nummber" name="nim" class="form-control" required="" placeholder="1234567890">
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-lg-3 control-label">Foto</label>
-											<div class="col-lg-9">
-												<input type="file" class="file-styled" name="foto" required="" accept="image/*">
-												<span class="help-block">Accepted formats: png, jpg. Max file size 2Mb</span>
-											</div>
-										</div>
-								
-										<input type="hidden" name="agenda_id" value="{{$IdAgenda}}">
-
-										<div class="form-group">
-											<label class="col-lg-3 control-label">Visi</label>
-											<div class="col-lg-9">
-												<textarea class="form-control" name="visi" required="" placeholder="Masukan visi calon" rows="5"></textarea>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-lg-3 control-label">Misi</label>
-											<div class="col-lg-9">
-												<textarea class="form-control" name="misi" required="" placeholder="Masukan misi calon" rows="5"></textarea>
-											</div>
-										</div>
-
-									</div>
-								</div>
-							</div>
-
-							<div class="modal-footer">
-								<button type="submit" class="btn btn-primary">Simpan</button>
-								<button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-							</div>
-						</form>
-					</div>
+				<div style="float: right;margin-bottom: 25px">
+					<button type="button" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-print"></i>&nbsp;Cetak</button>
 				</div>
-			</div>
-			<!-- /large modal -->
+			</div>	
 
+			@if(Session::has('pesanVerif'))
+				<div class="alert alert-info">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					{{ Session::get('pesanVerif') }} !
+				</div>
+			@endif
 			<table class="table datatable-basic">
 				<thead>
 					<tr>
 						<th>No</th>
+						<th>Foto</th>
 						<th>NIM</th>
 						<th>Nama</th>
-						<th>Foto</th>
 						<th>Jurusan</th>
-						<th>Angkatan</th>
-						<th>Visi</th>
-						<th>Misi</th>
+						<th>Keterangan</th>
 						<th class="text-center">Actions</th>
 					</tr>
 				</thead>
@@ -135,14 +81,23 @@
 					@foreach($tbK as $dt)
 					<tr>
 						<td>{{$no++}}</td>
+						<td><img src="{{ url('uploads/fotomhs/'.$dt->foto) }}" alt="image not found" width="90" height="100"> </td>
 						<td>{{$dt->nim}}</td>
 						<td>{{$dt->nama}}</td>
-						<td><img src="{{ url('uploads/fotomhs/'.$dt->foto) }}" alt="image not found" style="width: 90px; float: left; height: 100px"> </td>
-						<td>{{$dt->jurusan}}</td>
-						<td>{{$dt->angkatan}}</td>
-						<td>{{$dt->visi}}</td>
-						<td>{!!$dt->misi!!}</td>
+						<td>{{$dt->jurusan}}&nbsp;-&nbsp;{{$dt->angkatan}}</td>
+						<td>
+			 				@if($dt->keterangan=='Menunggu Verifikasi')
+			                  <span class="badge badge-info">{{$dt->keterangan}}</span>
+			                @elseif($dt->keterangan=='Diterima')
+			                  <span class="badge badge-success">{{$dt->keterangan}}</span>
+			                @else
+			                  <span class="badge badge-danger">{{$dt->keterangan}}</span>
+			                @endif
+						</td>
 						<td class="text-center">
+						@if(Auth::user()->ket=='Super Admin')
+						@else
+							@if(Auth::user()->id==$cekAdmin || Auth::user()->ket==$cekkat1Admin && Auth::user()->ket2==$cekkat2Admin)			
 							<ul class="icons-list">
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -150,7 +105,8 @@
 									</a>
 
 									<ul class="dropdown-menu dropdown-menu-right">
-										<li><a href="/edit balon/{{ $dt->id }}"><i class="icon-compose"></i> Edit Data</a></li>
+										<li><a href="/detail kandidat/{{$dt->nim}}/{{(App\Agenda::find($IdAgenda))->nm_agenda}}"><i class="glyphicon glyphicon-ok-circle"></i> Verifikasi Data</a></li>
+										<li><a href=""><i class="icon-compose"></i> Edit Data</a></li>
 										<script>
 										  	function ConfirmDelete() {
 										  		var x = confirm("Yakin Akan Menghapus Data?");
@@ -160,10 +116,13 @@
 										    		return false;
 										  	}
 										</script>
-										<li><a href="/hapus balon/{{ $dt->id }}/{{ $IdAgenda }}" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a></li>
+										<li><a href="/hapus kandidat/{{ $dt->id }}/{{ $IdAgenda }}" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a></li>
 									</ul>
 								</li>
 							</ul>
+							@else
+					@endif
+				@endif
 						</td>
 					</tr>
 					@endforeach
@@ -172,12 +131,12 @@
 		</div>
 		<!-- /basic datatable --> 
 
-		<!-- ////////////////////////////Daftar Pemilih Tetap/////////////////////////// -->
+		<!-- /////////////////Daftar Pemilih Tetap///////////////// -->
 
 		<!-- Pricing table -->
 		<div class="breadcrumb-line breadcrumb-line-component">
 			<ul class="breadcrumb">
-				<li><a href=""><i class="glyphicon glyphicon-forward"></i></a> Daftar Pemilih Tetap</li>
+				<li><i class="glyphicon glyphicon-forward"></i>&nbsp;Daftar Pemilih Tetap</li>
 			</ul>
 		</div>
 
@@ -284,9 +243,8 @@
 				<thead>
 					<tr>
 						<th>No</th>
+						<th>NIM</th>
 						<th>Nama</th>
-						<th>Username</th>
-						<th>Password</th>
 						<th>Keterangan</th>
 						<th class="text-center">Actions</th>
 					</tr>
@@ -296,9 +254,8 @@
 					@foreach($tbP as $dt)
 					<tr>
 						<td>{{$no++}}</td>
+						<td></td>
 						<td>{{$dt->nama}}</td>
-						<td>{{$dt->username}}</td>
-						<td>{{ $dt->passwordshow}}</td>
 						<td>
 							@if($dt->vote = 'Belum Memilih')
 							<span class="label label-info">{{ $dt->ket_vote }}</span>

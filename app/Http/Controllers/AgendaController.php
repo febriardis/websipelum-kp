@@ -18,10 +18,13 @@ class AgendaController extends Controller
         ->with('tb', $tb);
     }
     
-    function agendaview($id){
-        $cekJur = Agenda::find($id)->kat_jurusan;
-        $cekFak = Agenda::find($id)->kat_fakultas;
-        $cekMet = Agenda::find($id)->sistem_vote;
+    function agendaview($nmAgenda){
+        $idAgenda = Agenda::where('nm_agenda', $nmAgenda)->value('id');
+        $cekJur = Agenda::where('nm_agenda', $nmAgenda)->value('kat_jurusan');
+        $cekFak = Agenda::where('nm_agenda', $nmAgenda)->value('kat_fakultas');
+        $cekMet = Agenda::where('nm_agenda', $nmAgenda)->value('sistem_vote');
+        // $cekFak = Agenda::find($id)->kat_fakultas;
+        // $cekMet = Agenda::find($id)->sistem_vote;
         
         if ($cekFak=='Semua Mahasiswa') {
             if ($cekMet=='Pemilu Raya') {
@@ -47,14 +50,14 @@ class AgendaController extends Controller
             }
         }
 
-        $tbKandidat = Kandidat::where('agenda_id', $id)->get();
-        $tbPemilih = Pemilih::where('agenda_id', $id)->get();
+        $tbKandidat = Kandidat::where('agenda_id', $idAgenda)->get();
+        $tbPemilih = Pemilih::where('agenda_id', $idAgenda)->get();
         
         //$encrypted = \Crypt::encrypt('secret');
         //$decrypted = \Crypt::decrypt($encrypted);
 
         return view('views_admin.agenda_view')
-        ->with('IdAgenda', $id)
+        ->with('IdAgenda', $idAgenda)
         ->with('tbMhs', $tbMahasiswa)
         ->with('tbP', $tbPemilih)
         ->with('tbK', $tbKandidat);

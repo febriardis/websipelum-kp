@@ -281,9 +281,11 @@
 				    	<div class="dropdown-menu dropdown-menu-right">
 				    		<div class="text-center">
 				    			<img src="/uploads/fotomhs/{{Auth::user()->foto}}" width="80" height="80" alt="image not found" style="border-radius: 100%;border:1px solid #cccccc;margin: 10px">
+				    		</div>				    	
+					    	<div style="width: 155px;margin: 0px 15px">
+						    	<div>Nama&nbsp;:<br><b>{{ Auth::user()->nama }}</b></div>
+						    	<div>Jurusan/Prodi&nbsp;:<br><b>{{ Auth::user()->jurusan }}</b></div>
 				    		</div>
-					    	<a class="dropdown-item drop-me" href="javascript:void(0)">Nama&nbsp;:<br><b>{{ Auth::user()->nama }}</b></a>
-					    	<a class="dropdown-item drop-me" href="javascript:void(0)">Jurusan&nbsp;:<br><b>{{ Auth::user()->jurusan }}</b></a>
 					    	<hr>
 					    	<div class="text-center">
 						    	<a class="btn btn-danger btn-sm" href="/keluar"><i class="fa fa-sign-out"></i>Keluar</a>

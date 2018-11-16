@@ -20,7 +20,7 @@ Route::post('/login', 'LoginController@login_mhs');
 Route::post('/login admin', 'LoginController@login_admin');
 Route::get('/keluar', 'LoginController@keluar');
 
-// ----------------------------------------MAHASISWA------------------------------------------
+// ------------------------------MAHASISWA------------------------------------
 Route::get('/beranda', function(){return view('views_mahasiswa.beranda');})->middleware('auth:mahasiswa');
 Route::get('/pemilihan', function(){return view('views_mahasiswa.vote');})->middleware('auth:mahasiswa');
 Route::get('/hitung cepat', function(){return view('views_mahasiswa.quick_count');})->middleware('auth:mahasiswa');
@@ -49,10 +49,11 @@ Route::post('/tambah agenda/{id}', 'AgendaController@insert');
 Route::get('/edit agenda/{id}', 'AgendaController@edit')->middleware('auth:admin');
 Route::post('/edit agenda/{id}', 'AgendaController@update');
 Route::get('/hapus agenda/{id}', 'AgendaController@delete')->middleware('auth:admin');
-
-Route::get('/detail agenda/{id}', 'AgendaController@agendaview')->middleware('auth:admin');
 Route::get('/tabel agenda', 'AgendaController@show')->middleware('auth:admin');
-
+Route::get('/detail agenda/{nmagenda}', 'AgendaController@agendaview')->middleware('auth:admin');
+Route::get('/detail kandidat/{nim}/{nmagenda}', 'KandidatController@viewKandidat')->middleware('auth:admin');
+Route::post('/terima kandidat/{id}/{nmagenda}', 'KandidatController@verifKandidat')->middleware('auth:admin');
+Route::get('/tolak kandidat/{id}/{nmagenda}', 'KandidatController@tolakKandidat')->middleware('auth:admin');
 
 // ==================================ADMIN-QUICKCOUNT==================================
 Route::get('/data quick count', function () {return view('views_admin.quickcount_tabel');})->middleware('auth:admin');
@@ -62,10 +63,11 @@ Route::get('/quick count', function () {return view('views_admin.quickcount_view
 // Route::get('/tabel balon', 'KandidatController@show')->middleware('auth:admin');
 // Route::get('/tambah kandidat', 'KandidatController@viewInsert')->middleware('auth:admin');
 Route::post('/daftar kandidat/{idAgenda}', 'KandidatController@insert');
+Route::get('/hapus kandidat/{id}/{IdAgenda}', 'KandidatController@delete')->middleware('auth:admin');
 
 Route::get('/edit balon/{id}', 'KandidatController@edit')->middleware('auth:admin');
 Route::post('/edit balon/{id}', 'KandidatController@update');
-Route::get('/hapus balon/{id}/{IdAgenda}', 'KandidatController@delete')->middleware('auth:admin');
+
 
 
 

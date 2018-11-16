@@ -187,17 +187,18 @@
 										<li><a href="/tabel admin">Data Admin</a></li>
 									</ul>
 								</li>	
+								<li>
+									<a href="#"><i class="glyphicon glyphicon-user"></i> <span>Konten Berita</span></a>
+								</li>	
 								@endif
-
+								<li>
+									<a href=""><i class="glyphicon glyphicon-th-large"></i> <span>Organisasi</span></a>
+								</li>
 								<li>
 									<a href="/berita acara"><i class="icon-clipboard3"></i><span>Pengajuan Agenda</span></a>
 								</li>							
 								<li>
 									<a href="/tabel agenda"><i class="icon-calendar"></i><span>Agenda</span></a>
-									<!-- <ul>
-										<li><a href="/tambah agenda">Tambah Agenda</a></li>
-										<li><a href="/tabel agenda">Data Agenda</a></li>
-									</ul> -->
 								</li>
 								<li>
 									<a href="/data quick count"><i class="icon-stats-bars2"></i> <span>Quick Count</span></a>
@@ -213,8 +214,6 @@
 				</div>
 			</div>
 			<!-- /main sidebar -->	
-
-
 
 			<!-- Main content -->
 			<div class="content-wrapper">

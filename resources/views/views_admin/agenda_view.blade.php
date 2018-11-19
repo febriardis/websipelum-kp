@@ -116,7 +116,7 @@
 										    		return false;
 										  	}
 										</script>
-										<li><a href="/hapus kandidat/{{ $dt->id }}/{{ $IdAgenda }}" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a></li>
+										<li><a href="/hapus kandidat/{{ $dt->id }}/{{(App\Agenda::find($IdAgenda))->nm_agenda}}" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a></li>
 									</ul>
 								</li>
 							</ul>

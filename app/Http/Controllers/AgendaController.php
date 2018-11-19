@@ -70,21 +70,28 @@ class AgendaController extends Controller
     }
 
     function insert(Request $req, $idAdmin){
-        $tb = new Agenda;
-        $tb->admin_id = $idAdmin;
-        $tb->nm_agenda = $req->nm_agenda;
-        $tb->sistem_vote = $req->sistem_pem;
-        $tb->kat_fakultas   = $req->fakultas;
-        $tb->kat_jurusan   = $req->jurusan;
-        $tb->tgl_agenda= $req->tgl_agenda;
-        $tb->save();
+        $cek = Agenda::where('tgl_agenda', $req->tgl_agenda)->get();
 
-        $tb_berita = Berita_acara::find($req->id_bacara);
-        $tb_berita->ket = 'sudah diverifikasi';
-        $tb_berita->save();
+        if (count($cek)==0) {
+            $tb = new Agenda;
+            $tb->admin_id = $idAdmin;
+            $tb->nm_agenda = $req->nm_agenda;
+            $tb->sistem_vote = $req->sistem_pem;
+            $tb->kat_fakultas   = $req->fakultas;
+            $tb->kat_jurusan   = $req->jurusan;
+            $tb->tgl_agenda= $req->tgl_agenda;
+            $tb->save();
 
-    	return redirect('/tabel agenda')
-        ->with('pesan','Agenda berhasil dibuat');
+            $tb_berita = Berita_acara::find($req->id_bacara);
+            $tb_berita->ket = 'sudah diverifikasi';
+            $tb_berita->save();
+
+            return redirect('/tabel agenda')
+            ->with('pesan','Agenda berhasil dibuat');
+        }else{
+            return redirect()->action('AgendaController@verif_view', ['id' => $req->id_bacara])
+            ->with('pesan','Tanggal agenda sudah ada');
+        }
     }
 
     function edit($id){

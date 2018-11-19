@@ -10,6 +10,9 @@ class Jurusan extends Model
 	protected $fillable = ['fak_id', 'nm_jurusan'];
 
     function FKJurusan(){
-        return $this->belongsTo(Jurusan::class);
+        return $this->belongsTo(Fakultas::class);
     }
+   	function PKJurusan(){
+		return $this->hasMany(TbOrganisasi::class);
+	}
 }

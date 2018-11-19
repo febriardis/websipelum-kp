@@ -12,4 +12,7 @@ class Fakultas extends Model
 	function PKFakultas(){
 		return $this->hasMany(Jurusan::class);
 	}
+	function PKFakultas2(){
+		return $this->hasMany(TbOrganisasi::class);
+	}
 }

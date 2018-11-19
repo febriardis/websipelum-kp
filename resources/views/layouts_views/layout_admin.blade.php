@@ -6,8 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Admin Sipelum</title>
 
-  	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>	
-	<script type="text/javascript" src="chartjs/Chart.bundle.js"></script>
+	<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>	
+	<script type="text/javascript" src="/chartjs/Chart.bundle.js"></script>
 
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -188,11 +188,11 @@
 									</ul>
 								</li>	
 								<li>
-									<a href="#"><i class="glyphicon glyphicon-user"></i> <span>Konten Berita</span></a>
+									<a href="#"><i class="icon-newspaper"></i> <span>Konten Berita</span></a>
 								</li>	
 								@endif
 								<li>
-									<a href=""><i class="glyphicon glyphicon-th-large"></i> <span>Organisasi</span></a>
+									<a href="/organisasi/{{Auth::user()->ket}}/{{Auth::user()->ket2}}"><i class="glyphicon glyphicon-th-large"></i> <span>Organisasi</span></a>
 								</li>
 								<li>
 									<a href="/berita acara"><i class="icon-clipboard3"></i><span>Pengajuan Agenda</span></a>

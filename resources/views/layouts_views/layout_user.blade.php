@@ -23,7 +23,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0px;">
 		<div class="container-fluid">
 			<div class="navbar-brand">
-				<img src="assets/images/icon.png" style="width: 75%; height: 35px; margin-top: -10px" alt="">
+				<img src="/assets/images/icon.png" style="width: 75%; height: 35px; margin-top: -10px" alt="">
 			</div>
 	  		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">	    
 	  			<span class="navbar-toggler-icon"></span>
@@ -52,27 +52,19 @@
 			 				<div class="dropdown" style="width: 230px">
 			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Sema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
 							  	<div class="dropdown-menu" style="background-color:rgba(0,0,0,0.9);">
-							      	<a class="dropdown-item" href="/org">Ushuludin</a>
-							      	<a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
-							      	<a class="dropdown-item" href="#">Syariah dan Hukum</a>
-							      	<a class="dropdown-item" href="#">Dakwah dan Komunikasi</a>
-							      	<a class="dropdown-item" href="#">Adab dan Humaniora</a>
-							      	<a class="dropdown-item" href="#">Psikologi</a>
-							      	<a class="dropdown-item" href="#">Saintek dan Teknologi</a>
-							      	<a class="dropdown-item" href="#">Ilmu Sosial dan Ilmu Politik</a>
+							      	{{! $tbFak = (App\Fakultas::all()) }}
+							      	@foreach($tbFak as $d)
+							      		<a class="dropdown-item" href="/org/Sema F/{{$d->nm_fakultas}}">{{$d->nm_fakultas}}</a>
+							      	@endforeach
 							  	</div>
 							</div>
 			 				<div class="dropdown" style="width: 230px">
 			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Dema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
 							  	<div class="dropdown-menu" style="background-color:rgba(0,0,0,0.9);">
-							      	<a class="dropdown-item" href="/org">Ushuludin</a>
-							      	<a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
-							      	<a class="dropdown-item" href="#">Syariah dan Hukum</a>
-							      	<a class="dropdown-item" href="#">Dakwah dan Komunikasi</a>
-							      	<a class="dropdown-item" href="#">Adab dan Humaniora</a>
-							      	<a class="dropdown-item" href="#">Psikologi</a>
-							      	<a class="dropdown-item" href="#">Saintek dan Teknologi</a>
-							      	<a class="dropdown-item" href="#">Ilmu Sosial dan Ilmu Politik</a>
+							      	{{! $tbFak = (App\Fakultas::all()) }}
+							      	@foreach($tbFak as $d)
+							      		<a class="dropdown-item" href="/org/Dema F/{{$d->nm_fakultas}}">{{$d->nm_fakultas}}</a>
+							      	@endforeach
 							  	</div>
 							</div>
 					      	<hr style="border: 0.5px solid #cccccc">
@@ -175,27 +167,19 @@
 			 				<div class="dropdown" style="width: 230px">
 			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Sema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
 							  	<div class="dropdown-menu" style="background-color:rgba(0,0,0,0.9);">
-							      	<a class="dropdown-item" href="/organisasi">Ushuludin</a>
-							      	<a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
-							      	<a class="dropdown-item" href="#">Syariah dan Hukum</a>
-							      	<a class="dropdown-item" href="#">Dakwah dan Komunikasi</a>
-							      	<a class="dropdown-item" href="#">Adab dan Humaniora</a>
-							      	<a class="dropdown-item" href="#">Psikologi</a>
-							      	<a class="dropdown-item" href="#">Saintek dan Teknologi</a>
-							      	<a class="dropdown-item" href="#">Ilmu Sosial dan Ilmu Politik</a>
+							      	{{! $tbFak = (App\Fakultas::all()) }}
+							      	@foreach($tbFak as $d)
+							      		<a class="dropdown-item" href="/organisasi/Sema F/{{$d->nm_fakultas}}">{{$d->nm_fakultas}}</a>
+							      	@endforeach
 							  	</div>
 							</div>
 			 				<div class="dropdown" style="width: 230px">
 			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Dema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
 							  	<div class="dropdown-menu" style="background-color:rgba(0,0,0,0.9);">
-							      	<a class="dropdown-item" href="/organisasi">Ushuludin</a>
-							      	<a class="dropdown-item" href="#">Tarbiyah dan Hukum</a>
-							      	<a class="dropdown-item" href="#">Syariah dan Hukum</a>
-							      	<a class="dropdown-item" href="#">Dakwah dan Komunikasi</a>
-							      	<a class="dropdown-item" href="#">Adab dan Humaniora</a>
-							      	<a class="dropdown-item" href="#">Psikologi</a>
-							      	<a class="dropdown-item" href="#">Saintek dan Teknologi</a>
-							      	<a class="dropdown-item" href="#">Ilmu Sosial dan Ilmu Politik</a>
+							      	{{! $tbFak = (App\Fakultas::all()) }}
+							      	@foreach($tbFak as $d)
+							      		<a class="dropdown-item" href="/organisasi/Dema F/{{$d->nm_fakultas}}">{{$d->nm_fakultas}}</a>
+							      	@endforeach
 							  	</div>
 							</div>
 					      	<hr style="border: 0.5px solid #cccccc">

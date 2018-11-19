@@ -12,7 +12,6 @@
 			<div class="panel-heading">
 				<h5 class="panel-title">Detail Kandidat</h5>
 			</div>
-
 			<div class="panel-body">
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Foto</label>

@@ -10,6 +10,7 @@
 		</div>
 		<form action="/daftar kandidat/{{$tb->id}}" method="POST" enctype="multipart/form-data">
 			{{csrf_field()}}
+			<span class="text-danger">{{ $errors->first('foto')}}</span> 
 			<div class="form-group">
 				<div class="row">
 					<label class="control-label col-sm-4">NIM</label>
@@ -91,7 +92,7 @@
 			</div>
 			<div class="right">
 				<input type="submit" value="Daftar" class="btn btn-primary">
-				<a href="/daftar calon" class="btn btn-danger">Batal</a>
+				<a href="{{URL::previous()}}" class="btn btn-danger">Batal</a>
 			</div>
 
 			<div class="clear"></div>

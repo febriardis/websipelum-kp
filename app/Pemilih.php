@@ -8,11 +8,7 @@ class Pemilih extends Model
 {
     protected $table = 'tb_pemilih';
     protected $fillable = [
-        'nim','nama','agenda_id','username', 'password', 'passwordshow','ket_vote',
-    ];
-
-    protected $hidden = [
-        'password', 'remember_token',
+        'nim','agenda_id','ket_vote',
     ];
 
     function PKPemilihA(){

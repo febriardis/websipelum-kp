@@ -37,7 +37,7 @@
 						<span class="label label-info">Aktif</span>
 					</td>
 					<td>
-						<a href="#"><i class="icon-eye"></i>&nbsp;Lihat</a>
+						<a href=""><i class="icon-eye"></i>&nbsp;Lihat</a>
 					</td>
 				</tr>
 				@endforeach

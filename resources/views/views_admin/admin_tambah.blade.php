@@ -49,11 +49,11 @@
 						<select class="form-control" style="font-size: 14px" id="pil_ket" name="ket" required="">
 							<option hidden="">Pilih Keterangan Admin</option>
 							<option value="Super Admin">Super Admin</option>
-							<option value="Admin Sema U">Admin Sema U</option>
-							<option value="Admin Dema U">Admin Dema U</option>
-							<option value="Admin Sema F">Admin Sema F</option>
-							<option value="Admin Dema F">Admin Dema F</option>
-							<option value="Admin HMJ">Admin HMJ</option>
+							<option value="Sema U">Admin Sema U</option>
+							<option value="Dema U">Admin Dema U</option>
+							<option value="Sema F">Admin Sema F</option>
+							<option value="Dema F">Admin Dema F</option>
+							<option value="HMJ">Admin HMJ</option>
 						</select>
 					</div>
 				</div>
@@ -65,14 +65,14 @@
 			            {{! $cek = (\App\Fakultas::all())}}
 			        	var container = document.createElement("div");
 			        	container.className="col-lg-4";
-				        if($(this).val() == "Super Admin" || $(this).val() == "Admin Sema U" || $(this).val() == "Admin Dema U") {
+				        if($(this).val() == "Super Admin" || $(this).val() == "Sema U" || $(this).val() == "Dema U") {
 			                // ADD TEXTBOX.
 			            	$('#a').remove(); 
 			                $(container).append('<input type=hidden name="ket2" class="form-control" value="" id="a"/>');
 			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
 			                $('#main').after(container);
 
-			            }else if ($(this).val() == "Admin Sema F" || $(this).val() == "Admin Dema F"){
+			            }else if ($(this).val() == "Sema F" || $(this).val() == "Dema F"){
 			                // ADD TEXTBOX.
 			            	$('#a').remove(); 
 			                $(container).append('<select style="font-size:14px" class="form-control" name="ket2" id="a" required="">'+
@@ -85,7 +85,7 @@
 			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
 			                $('#main').after(container);
 
-			            }else if ($(this).val() == "Admin HMJ"){
+			            }else if ($(this).val() == "HMJ"){
 			                // ADD TEXTBOX.
 			            	$('#a').remove(); 
 			                $(container).append('<select style="font-size:14px" class="form-control" name="ket2" id="a" required="">'+

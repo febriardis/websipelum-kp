@@ -17,6 +17,11 @@ class KandidatController extends Controller
 
     function insert(Request $req, $idAgenda){
         $tb              = new Kandidat;
+        $this->validate($req, [
+            //'nama'     => 'required|string|max:255',
+            //'username' => 'required|string|min:6|max:255',
+            'foto'     => 'required'
+        ]);
         $tb->nim         = $req->nim;
         $tb->nama        = $req->nama;
         $tb->foto        = $req->foto;
@@ -25,6 +30,7 @@ class KandidatController extends Controller
         $tb->agenda_id   = $idAgenda;
         $tb->visi        = $req->visi;
         $tb->misi        = $req->misi;
+        $tb->keterangan  = 'Menunggu Verifikasi';
         $tb->save();
 
         return redirect('/daftar calon')
@@ -33,7 +39,8 @@ class KandidatController extends Controller
 
     // show kandidat detail in admin views
     function viewKandidat($nim, $nmAgenda){
-        $tb = Kandidat::where('nim', $nim)->first();
+        $A = Agenda::where('nm_agenda', $nmAgenda)->value('id');
+        $tb = Kandidat::where([['nim', $nim],['agenda_id', $A]])->get()->first(); //tambah kondisi where agenda_id
         return view('views_admin.kandidat_detail')
         ->with('nmAgenda', $nmAgenda)
         ->with('tbMhs', $tb);
@@ -56,13 +63,19 @@ class KandidatController extends Controller
     }
     // end show kandidat detail in admin views
 
-    function delete($id, $idAgenda) {
+    function delete($id, $nmAgenda) { //hapus kandidat oleh admin
         Kandidat::find($id)->delete();
 
-        return redirect()->action('AgendaController@agendaview', ['id' => $idAgenda])
+        return redirect()->action('AgendaController@agendaview', ['id' => $nmAgenda])
         ->with('pesan', 'Data berhasil dihapus');
     }
 
+    function batalDaftar($nim, $idAgenda) { //hapus kandidat oleh mhs/pembatalan
+        Kandidat::where('nim',$nim)->delete();
+
+        return redirect('/daftar calon')
+        ->with('pesan', 'Data berhasil dihapus');
+    }
 
     // function show(){
     // 	$tb = Kandidat::all();

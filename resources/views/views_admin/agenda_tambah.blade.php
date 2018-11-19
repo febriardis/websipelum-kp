@@ -5,6 +5,12 @@
 @endsection
 
 @section('content')
+	@if(Session::has('pesan'))
+		<div class="alert alert-danger">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			{{ Session::get('pesan') }} !
+		</div>
+	@endif
 	<!-- Basic layout-->
 	<form action="/tambah agenda/{{$tb->admin_id}}" method="POST" class="form-horizontal">
 		{{ csrf_field() }}

@@ -6,27 +6,26 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Mahasiswa;
 use App\Agenda;
-use App\Tps;
 use App\Pemilih;
 use \Crypt;
 
 class PemilihController extends Controller
 {
-    function show() {
-        $tb = Pemilih::all();
+    // function show() {
+    //     $tb = Pemilih::all();
 
-        return view('views_admin.pemilih_tabel')
-        ->with('data', $tb);
-    }
+    //     return view('views_admin.pemilih_tabel')
+    //     ->with('data', $tb);
+    // }
 
-    function viewInsert(){
-        $tb1 = Agenda::all();
-        $tb2 = Tps::all();
+    // function viewInsert(){
+    //     $tb1 = Agenda::all();
+    //     $tb2 = Tps::all();
 
-        return view('views_admin.pemilih_tambah')
-        ->with('tps', $tb2)
-        ->with('agenda', $tb1);
-    }
+    //     return view('views_admin.pemilih_tambah')
+    //     ->with('tps', $tb2)
+    //     ->with('agenda', $tb1);
+    // }
 
     function insert(Request $req){
         $no = 1;
@@ -88,12 +87,12 @@ class PemilihController extends Controller
     //     }   
     // }
 
-    function delete($id) {
-        Pemilih::find($id)->delete();
+    // function delete($id) {
+    //     Pemilih::find($id)->delete();
 
-        return redirect('/tabel pemilih')
-        ->with('pesanP', 'Data berhasil dihapus');
-    }
+    //     return redirect('/tabel pemilih')
+    //     ->with('pesanP', 'Data berhasil dihapus');
+    // }
 
     function reset($IdAgenda) {
         Pemilih::where('agenda_id', $IdAgenda)->delete();

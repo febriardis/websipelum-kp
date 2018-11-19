@@ -21,26 +21,19 @@
           </tr>
         </thead>
         <tbody>
-          {{! $n=1 }}
-          {{! $t1 = (App\Agenda::pluck('kat_jurusan')) }}
-          {{! $t2 = (App\Agenda::pluck('kat_fakultas')) }}
-
-          <!-- {{! $t1 = (App\Agenda::where('kat_jurusan', Auth::user()->jurusan)->get())}} 
-          {{! $t2 = (App\Agenda::where('kat_fakultas', Auth::user()->fakultas)->get())}} 
-           --><!-- where katjur==jurmhs or katfak==fakmhs -->
-          <!-- if(agenda_jurusan == mahasiswa_jursan) {} -->
-          
-          @foreach($tbAgenda as $dt)
+        @foreach($tbAgenda as $dt)
           @if(Auth::user()->jurusan== $dt->kat_jurusan && Auth::user()->fakultas==$dt->kat_fakultas || $dt->kat_jurusan=='Semua Jurusan' && Auth::user()->fakultas==$dt->kat_fakultas || $dt->kat_fakultas=='Semua Mahasiswa')
           <tr>
             <td>{{ $dt->nm_agenda }}</td>
-            <td>{{date('d M Y' ,strtotime($dt->tgl_agenda))}}</td>
+            <td>{{date('d M Y' ,strtotime($dt->tgl_agenda))}}</td>        
             <td>
               <div style="display: none;">
-              {{!$cekNim = (App\Kandidat::where('agenda_id',$dt->id))->value('nim')}}
-              {{!$cekKet = (App\Kandidat::where('agenda_id',$dt->id))->value('keterangan')}}
+                {{! $cekNim = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('nim')}}
               </div>
-              @if(Auth::user()->nim==$cekNim)
+              @if($cekNim==Auth::user()->nim)
+                <div style="display: none;">
+                  {{!$cekKet = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('keterangan')}} 
+                </div>    
                 @if($cekKet=='Menunggu Verifikasi')
                   <span class="badge badge-info">{{$cekKet}}</span>
                 @elseif($cekKet=='Diterima')
@@ -53,16 +46,26 @@
               @endif
             </td>
             <td>
-              @if(Auth::user()->nim==$cekNim)
-                <a href="" class="btn btn-secondary btn-sm text-white"><i class='fas fa-edit'></i>&nbsp;Edit</a>
-                <a href="" class="btn btn-danger btn-sm text-white"><i class='far fa-times-circle'></i>&nbsp;Batal</a>
+              <div style="display: none;">
+                {{!$cekNIM = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('nim')}}
+              </div>
+              @if(date('Y-m-d') > $dt->tgl_agenda)
+                <span class="badge badge-success">Selesai</span>
+              @elseif(date('Y-m-d') == $dt->tgl_agenda)
+                <span class="badge badge-danger">Sedang Berlangsung</span>
+              <!--kondisi jika tanggal belum lewat -->
               @else
-                <a href="/form pendaftaran/{{ $dt->nm_agenda }}" class="btn btn-primary btn-sm text-white"><i class='far fa-envelope'></i>&nbsp;Daftar</a>
+                @if($cekNIM==Auth::user()->nim)
+                  <a href="" class="btn btn-secondary btn-sm text-white"><i class='fas fa-edit'></i>&nbsp;Edit</a>
+                  <a href="" class="btn btn-danger btn-sm text-white"><i class='far fa-times-circle'></i>&nbsp;Batal</a>
+                @else
+                  <a href="/form pendaftaran/{{ $dt->nm_agenda }}" class="btn btn-primary btn-sm text-white"><i class='far fa-envelope'></i>&nbsp;Daftar</a>
+                @endif
               @endif
             </td>
           </tr>
           @endif
-          @endforeach
+        @endforeach
         </tbody>
       </table>
     </div>

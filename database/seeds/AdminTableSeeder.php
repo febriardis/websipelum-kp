@@ -26,8 +26,17 @@ class AdminTableSeeder extends Seeder
             'nama'        => 'Wildan Adzani',
             'username'    => 'wildanadmin',//str_random(10),
             'password'    => bcrypt('wildan1234'),
-            'ket'         => 'Admin Dema F',
+            'ket'         => 'Dema F',
             'ket2'        => 'Sains dan Teknologi',
+            'created_at'  => \Carbon\Carbon::now('Asia/Jakarta'),
+            'updated_at'  => \Carbon\Carbon::now('Asia/Jakarta')
+          ],
+          [
+            'nama'        => 'Pirman Abdurohman',
+            'username'    => 'pimen',//str_random(10),
+            'password'    => bcrypt('pimen1234'),
+            'ket'         => 'HMJ',
+            'ket2'        => 'Teknik Informatika',
             'created_at'  => \Carbon\Carbon::now('Asia/Jakarta'),
             'updated_at'  => \Carbon\Carbon::now('Asia/Jakarta')
           ],

@@ -5,10 +5,10 @@
   <div class="content">
     <div style="margin: 20px; min-height: 450px">
       <h3>List Agenda </h3>
-        @if(Session::has('pesanNyalon'))
+        @if(Session::has('pesanKan'))
         <div class="alert alert-info">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          {{ Session::get('pesanNyalon') }} !
+          {{ Session::get('pesanKan') }} !
         </div>
         @endif
       <table class="table" style="text-transform: capitalize;">
@@ -56,10 +56,16 @@
               <!--kondisi jika tanggal belum lewat -->
               @else
                 @if($cekNIM==Auth::user()->nim)
-                  <a href="" class="btn btn-secondary btn-sm text-white"><i class='fas fa-edit'></i>&nbsp;Edit</a>
-                  <a href="" class="btn btn-danger btn-sm text-white"><i class='far fa-times-circle'></i>&nbsp;Batal</a>
+                  <div style="display: none;">
+                    {{!$cekKet = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('keterangan')}} 
+                  </div>  
+                  @if($cekKet=='Pendaftaran Tidak Diterima')
+                    <a href="" class="btn btn-secondary btn-sm text-white"><i class='fas fa-edit'></i>&nbsp;Perbaikan</a>
+                  @else
+                    <a href="/batal daftar/{{Auth::user()->nim}}/{{$dt->id}}" onclick="return ConfirmDelete()" class="btn btn-danger btn-sm text-white"><i class='far fa-times-circle'></i>&nbsp;Batal</a>
+                  @endif
                 @else
-                  <a href="/form pendaftaran/{{ $dt->nm_agenda }}" class="btn btn-primary btn-sm text-white"><i class='far fa-envelope'></i>&nbsp;Daftar</a>
+                  <a href="/form pendaftaran/{{ \Crypt::encrypt($dt->id) }}" class="btn btn-primary btn-sm text-white"><i class='far fa-envelope'></i>&nbsp;Daftar</a>
                 @endif
               @endif
             </td>
@@ -71,4 +77,13 @@
     </div>
   </div>
 <!-- /content -->
+    <script>
+        function ConfirmDelete() {
+          var x = confirm("Yakin Akan Membatalkan?");
+          if (x)
+            return true;
+          else
+            return false;}
+    </script> 
+
 @endsection

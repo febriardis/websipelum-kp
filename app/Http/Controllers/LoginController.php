@@ -11,12 +11,12 @@ class LoginController extends Controller
     function login_mhs(Request $req) {
     	if (Auth::guard('mahasiswa')->attempt([
     		'nim' => $req->nim,
-    		'password' => $req->password ])) 
-        {
+    		'password' => $req->password 
+        ])) {
     		return redirect('/beranda');
     	}else{
     		return redirect('/')
-            ->with('pesan','nim dan Password Salah');
+            ->with('pesan','Nim atau Password Salah');
     	}
     }
 

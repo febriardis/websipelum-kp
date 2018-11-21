@@ -5,15 +5,16 @@
 <div class="content" style="min-height: 450px">
   <div class="head-content" style="margin: 20px 0px">
     
-    <h3>{{ $id_fak }}{{ $id_jur }}hh</h3>
+    <h3>{{ $ket }}<br>{{ $ket2 }}hh</h3>
 
     {{ $cekFak = App\Fakultas::where('nm_fakultas',$ket2)->value('id'),
        $cekJur = App\Jurusan::where('nm_jurusan',$ket2)->value('id') }}
 
-    {{ $cekOrg = App\TbOrganisasi::where(function ($q) use($cekFak, $cekJur, $ket){
-      $q->where([['fak_id','=', $cekFak], ['ket_organisasi','=', $ket]])
-      ->orWhere([['jur_id','=', $cekJur], ['ket_organisasi','=', $ket]]);
-    })->get() }}
+    fakultas
+    {{ $cekOrg = App\TbOrganisasi::where([['fak_id','=', $cekFak], ['ket_organisasi','=', $ket]])->get() }}<br>
+
+    jurusan
+    {{ $cekOrg = App\TbOrganisasi::where([['jur_id','=', $cekJur], ['ket_organisasi','=', $ket]])->get() }}
 
     @if(count($cekOrg)!=0)
       <h3>Ada</h3>

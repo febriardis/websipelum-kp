@@ -126,7 +126,7 @@
 				<ul class="nav navbar-nav">
 					<li class="dropdown dropdown-user">
 						<a class="dropdown-toggle" data-toggle="dropdown">
-							<span style="text-transform: capitalize;"><i class="glyphicon glyphicon-user"></i>&nbsp;{{ Auth::user()->nama }}&nbsp;|&nbsp;{{ Auth::user()->ket }}. {{ Auth::user()->ket2 }} </span>
+							<span style="text-transform: capitalize;"><i class="glyphicon glyphicon-user"></i>&nbsp;{{ Auth::user()->nama }}&nbsp;|&nbsp;Admin&nbsp;{{ Auth::user()->ket }}. {{ Auth::user()->ket2 }} </span>
 							<i class="caret"></i>
 						</a>
 
@@ -178,7 +178,6 @@
 								<!-- Main -->
 								<li class="navigation-header"><span>Main Menu</span> <i class="icon-menu" title="Main Menu"></i></li>
 								<li><a href="/dashboard"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
-
 								@if(Auth::user()->ket=='Super Admin')
 								<li>
 									<a href="#"><i class="glyphicon glyphicon-user"></i> <span>Admin</span></a>
@@ -191,9 +190,12 @@
 									<a href="#"><i class="icon-newspaper"></i> <span>Konten Berita</span></a>
 								</li>	
 								@endif
+
+								@if(Auth::user()->ket!='Super Admin')
 								<li>
 									<a href="/organisasi/{{Auth::user()->ket}}/{{Auth::user()->ket2}}"><i class="glyphicon glyphicon-th-large"></i> <span>Organisasi</span></a>
 								</li>
+								@endif
 								<li>
 									<a href="/berita acara"><i class="icon-clipboard3"></i><span>Pengajuan Agenda</span></a>
 								</li>							
@@ -240,7 +242,7 @@
 					@yield('content')
 					<!-- Footer -->
 					<div class="footer text-muted">
-						&copy; 2018. <a href="" target="_blank">PTIPD UIN Sunan Gunung Djati Bandung</a>
+						&copy; 2018. <a href="http://ptipd.uinsgd.ac.id/" target="_blank">PTIPD UIN Sunan Gunung Djati Bandung</a>
 					</div>
 					<!-- /footer -->
 				</div>

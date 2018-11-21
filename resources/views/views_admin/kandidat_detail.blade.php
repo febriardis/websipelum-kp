@@ -6,7 +6,8 @@
 
 @section('content')
 
-<form action="/terima kandidat/{{$tbMhs->id}}/{{$nmAgenda}}" method="POST" class="form-horizontal">
+<div class="content">
+	<form action="/terima kandidat/{{$tbMhs->id}}/{{$idAgenda}}" method="POST" class="form-horizontal">
 		{{ csrf_field() }}
 		<div class="panel panel-flat">
 			<div class="panel-heading">
@@ -58,11 +59,20 @@
 				</div>
 				<div class="text-right">
 				<a href="{{ URL::previous() }}" class="btn btn-default"><i class="icon-undo2"></i>&nbsp;Kembali</a>
+					<div style="display: none;">
+					{{! $cekAdmin = (\App\Agenda::find($idAgenda))->admin_id,
+						$cekkat1Admin = (\App\Admin::find($cekAdmin))->ket,
+						$cekkat2Admin = (\App\Admin::find($cekAdmin))->ket2
+					}}
+					</div>
+					@if(Auth::user()->id==$cekAdmin || Auth::user()->ket==$cekkat1Admin && Auth::user()->ket2==$cekkat2Admin)
 					<button type="submit" class="btn btn-primary">Terima</button>
-					<a href="/tolak kandidat/{{$tbMhs->id}}/{{$nmAgenda}}" class="btn btn-danger">Tolak</a>
+					<a href="/tolak kandidat/{{$tbMhs->id}}/{{$idAgenda}}" class="btn btn-danger">Tolak</a>
+					@endif
 				</div>
 			</div>
 		</div>
 	</form>
 	<!-- /basic layout -->
+</div>
 @endsection

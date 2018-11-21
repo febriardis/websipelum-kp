@@ -1,7 +1,7 @@
 @extends('layouts_views.layout_admin')
 
 @section('link')
-	<li class="active">Upload Berita Acara</li>
+	<li class="active">Pengajuan Agenda</li>
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
 		{{ csrf_field() }}
 		<div class="panel panel-flat">
 			<div class="panel-heading">
-				<h5 class="panel-title">Upload Berita Acara</h5>
+				<h5 class="panel-title">Pengajuan Agenda</h5>
 			</div>
 
 			<input type="hidden" name="admin_id" value="{{ Auth::user()->id }}">

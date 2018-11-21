@@ -192,8 +192,15 @@ a.closeNav:hover {
 .list-content-info {
 	padding: 2px; 
 	margin: 10px 0px; 
-	background:  #4d4d4d; 
+	background: #4d4d4d; 
 	color: #ffffff
+}
+
+.list-content-berita {
+	padding: 2px; 
+	margin-bottom: 20px; 
+	background: #73e600; 
+	color: #ffffff;
 }
 
 .content-vote {

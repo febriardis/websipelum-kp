@@ -21,7 +21,15 @@ class AdminTableSeeder extends Seeder
             'created_at'	=> \Carbon\Carbon::now('Asia/Jakarta'),
             'updated_at'	=> \Carbon\Carbon::now('Asia/Jakarta')
           ],
-          
+          [
+            'nama'        => 'Fhadli Zhilal',
+            'username'    => 'fhadli',//str_random(10),
+            'password'    => bcrypt('fhadli1234'),
+            'ket'         => 'Sema U',
+            'ket2'        => '',
+            'created_at'  => \Carbon\Carbon::now('Asia/Jakarta'),
+            'updated_at'  => \Carbon\Carbon::now('Asia/Jakarta')
+          ],          
           [
             'nama'        => 'Wildan Adzani',
             'username'    => 'wildanadmin',//str_random(10),

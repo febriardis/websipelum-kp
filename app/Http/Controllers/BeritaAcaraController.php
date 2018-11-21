@@ -8,11 +8,12 @@ use App\Berita_acara;
 class BeritaAcaraController extends Controller {
     function show()
     {
-    	$tb = Berita_acara::all();
+    	$tb = Berita_acara::orderBy('created_at', 'DESC')->get();
     	return view('views_admin.beritaacara_tabel')
     	->with('tb', $tb);
     }
-
+    
+    // function Admin!=SuperAdmin
     function insert(Request $req, $AdminId)
     {
     	$tb = new Berita_acara;
@@ -44,10 +45,20 @@ class BeritaAcaraController extends Controller {
     	# code...
     }
 
-    function delete($id)
-    {
+    function delete($id) {
     	Berita_acara::find($id)->delete();
     	return redirect('/berita acara')
     	->with('pesan', 'Data berhasil dihapus');
-    }
+    } 
+    // function Admin!=SuperAdmin
+
+
+    function tolakAcara($id) {
+        $tb = Berita_acara::find($id);
+        $tb->ket = 'acara ditolak';
+        $tb->save();
+        
+        return redirect('/berita acara')
+        ->with('pesan', 'Data berhasil disimpan');
+    } 
 }

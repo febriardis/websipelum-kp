@@ -11,44 +11,38 @@ use \Crypt;
 
 class PemilihController extends Controller
 {
-    // function show() {
-    //     $tb = Pemilih::all();
-
-    //     return view('views_admin.pemilih_tabel')
-    //     ->with('data', $tb);
-    // }
-
-    // function viewInsert(){
-    //     $tb1 = Agenda::all();
-    //     $tb2 = Tps::all();
-
-    //     return view('views_admin.pemilih_tambah')
-    //     ->with('tps', $tb2)
-    //     ->with('agenda', $tb1);
-    // }
-
-    function insert(Request $req){
+    function insert(Request $req, $idAgenda){
         $no = 1;
-
         for($i=1; $i<=$req->jumArr; $i++) {
-            $char  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-            $pin   = mt_rand(1000,103912) . $char[rand(0, strlen($char) - 1)] . $char[rand(0, strlen($char) - 1)] . $char[rand(0, strlen($char) - 1)] . $char[rand(0, strlen($char) - 1)];
-            $pwd_rand  = str_shuffle($pin);
-            $tb             = new Pemilih;
-            $tb->nim        = $req->nim[$i];
-            $tb->nama       = $req->nama[$i];
-            $tb->agenda_id  = $req->agenda_id[$i];
-            $tb->username   = $req->nim[$i];
-            $tb->password   = Hash::make($pwd_rand);//\Crypt::encrypt($pwd_rand);
-            $tb->passwordshow   = $pwd_rand;
-            $tb->ket_vote   = 'belum memilih';
-            $tb->save();        
+            $cekMhs = Pemilih::where([['nim', $req->nim[$i]],['agenda_id', $req->agenda_id[$i]]])->get();
+
+            if (count($cekMhs)==0) {
+                $tb             = new Pemilih;
+                $tb->nim        = $req->nim[$i];
+                $tb->agenda_id  = $req->agenda_id[$i];
+                $tb->ket_vote   = \Crypt::encrypt('belum memilih');
+                $tb->save();        
+            } 
         }
 
-        return redirect()->action('AgendaController@agendaview', ['id' => $req->agenda_id[1]]) //
+        return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($idAgenda)]) //
         ->with('pesanP', 'Data berhasil disimpan');  
 
     }
+
+    function delete($id, $idAgenda) {
+        Pemilih::find($id)->delete();
+
+        return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($idAgenda)]) //
+        ->with('pesanP', 'Data berhasil dihapus');
+    }
+
+    // function reset($IdAgenda) {
+    //     Pemilih::where('agenda_id', $IdAgenda)->delete();
+
+    //     return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($IdAgenda)]) //
+    //     ->with('pesanP', 'Data berhasil dihapus');
+    // }
 
     // function insert(Request $req){
     //     $cekMhs  = Mahasiswa::where('nim',$req->nim)->where('nama', $req->nama)->get();
@@ -87,17 +81,5 @@ class PemilihController extends Controller
     //     }   
     // }
 
-    // function delete($id) {
-    //     Pemilih::find($id)->delete();
 
-    //     return redirect('/tabel pemilih')
-    //     ->with('pesanP', 'Data berhasil dihapus');
-    // }
-
-    function reset($IdAgenda) {
-        Pemilih::where('agenda_id', $IdAgenda)->delete();
-
-        return redirect()->action('AgendaController@agendaview', ['id' => $IdAgenda]) //
-        ->with('pesanP', 'Data berhasil dihapus');
-    }
 }

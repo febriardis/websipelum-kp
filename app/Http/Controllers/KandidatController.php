@@ -9,14 +9,17 @@ use App\Agenda;
 
 class KandidatController extends Controller
 {
-    function daftar($nmAgenda){
-        $tb = Agenda::where('nm_agenda',$nmAgenda)->first();
+    function daftar($idAgenda){
+        $id = \Crypt::decrypt($idAgenda);
+        $tb = Agenda::find($id);
+        
         return view('views_mahasiswa.form_daftar_calon')
+        ->with('id', $id)
         ->with('tb', $tb);
     }
 
     function insert(Request $req, $idAgenda){
-        $tb              = new Kandidat;
+        $tb = new Kandidat;
         $this->validate($req, [
             //'nama'     => 'required|string|max:255',
             //'username' => 'required|string|min:6|max:255',
@@ -34,47 +37,50 @@ class KandidatController extends Controller
         $tb->save();
 
         return redirect('/daftar calon')
-        ->with('pesanNyalon','berhasil mendaftar');
+        ->with('pesanKan','berhasil mendaftar');
     }
 
     // show kandidat detail in admin views
-    function viewKandidat($nim, $nmAgenda){
-        $A = Agenda::where('nm_agenda', $nmAgenda)->value('id');
-        $tb = Kandidat::where([['nim', $nim],['agenda_id', $A]])->get()->first(); //tambah kondisi where agenda_id
+    function viewKandidat($nim, $idAgenda){
+        //$A = Agenda::where('nm_agenda', $nmAgenda)->value('id');
+        $idA = \Crypt::decrypt($idAgenda);
+        $tb  = Kandidat::where([['nim', $nim],['agenda_id', $idA]])->get()->first(); //tambah kondisi where agenda_id
+        
         return view('views_admin.kandidat_detail')
-        ->with('nmAgenda', $nmAgenda)
+        //->with('nmAgenda', $nmAgenda)
+        ->with('idAgenda', $idA)
         ->with('tbMhs', $tb);
     }
 
-    function verifKandidat(Request $req, $id, $nmAgenda){
+    function verifKandidat(Request $req, $id, $idAgenda){
         $tb = Kandidat::find($id);
         $tb->keterangan = 'Diterima';
         $tb->save();
-        return redirect()->action('AgendaController@agendaview', ['nmAgenda' => $nmAgenda])
+        return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($idAgenda)])
         ->with('pesanVerif', 'Data berhasil disimpan'); //return ke agenda view
     }
 
-    function tolakKandidat($id, $nmAgenda){
+    function tolakKandidat($id, $idAgenda){
         $tb = Kandidat::find($id);
         $tb->keterangan = 'Pendaftaran Tidak Diterima';
         $tb->save();
-        return redirect()->action('AgendaController@agendaview', ['nmAgenda' => $nmAgenda])
+        return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($idAgenda)])
         ->with('pesanVerif', 'Data berhasil disimpan');  //return ke agenda view
     }
     // end show kandidat detail in admin views
 
-    function delete($id, $nmAgenda) { //hapus kandidat oleh admin
+    function delete($id, $idAgenda) { //hapus kandidat oleh admin
         Kandidat::find($id)->delete();
 
-        return redirect()->action('AgendaController@agendaview', ['id' => $nmAgenda])
+        return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($idAgenda)])
         ->with('pesan', 'Data berhasil dihapus');
     }
 
     function batalDaftar($nim, $idAgenda) { //hapus kandidat oleh mhs/pembatalan
-        Kandidat::where('nim',$nim)->delete();
+        Kandidat::where([['nim',$nim],['agenda_id',$idAgenda]])->delete(); //tambahkan where agenda id
 
         return redirect('/daftar calon')
-        ->with('pesan', 'Data berhasil dihapus');
+        ->with('pesanKan', 'Pendaftaran berhasil dibatalkan');
     }
 
     // function show(){

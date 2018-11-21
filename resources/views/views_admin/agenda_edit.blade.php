@@ -15,34 +15,27 @@
 
 			<div class="panel-body">
 				<div class="form-group">
-					<label class="col-lg-3 control-label">Name Agenda</label>
+					<label class="col-lg-3 control-label">Nama Agenda</label>
 					<div class="col-lg-9">
 						<input type="text" class="form-control" name="nm_agenda" value="{{ $data->nm_agenda }}" required="" placeholder="Masukan nama agenda">
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-lg-3 control-label">Kategori Jurusan</label>
+					<label class="col-lg-3 control-label">Sistem Pemilihan</label>
 					<div class="col-lg-9">
-						<select class="select" name="jurusan" required="" data-placeholder="Pilih Jurusan">
-							<option>{{ $data->jurusan }}</option>
-							<option>Semua Jurusan</option>
-							<optgroup label="Fak. Sains dan Teknologi">
-								<option>Teknik Informatika</option>
-								<option>Teknik Elektro</option>
-							</optgroup>
-							<optgroup label="Fak. Tarbiyah dan Dakwah">
-								<option>Pendidikan Matematika</option>
-								<option>Pendidikan Agama Islam</option>
-							</optgroup>
-							<optgroup label="Fak. Ilmu Sosial & Ilmu Politik">
-								<option>Manajemen</option>
-								<option>Administrasi Negara</option>
-								<option>Sosiologi</option>
-							</optgroup>
+						<select class="select" name="sistem_pem" required="" data-placeholder="{{$data->sistem_vote}}">
+							@if($data->sistem_vote=='Pemilu Raya')
+								<option>{{$data->sistem_vote}}</option>
+								<option>Delegasi</option>
+							@else
+								<option>{{$data->sistem_vote}}</option>
+								<option>Pemilu Raya</option>
+							@endif
 						</select>
 					</div>
 				</div>
+
 
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Tanggal Agenda</label>
@@ -56,7 +49,7 @@
 
 				<div class="text-right">
 					<button type="submit" class="btn btn-primary">Simpan</button>
-					<a href="/tabel agenda" class="btn btn-danger">Batal</a>
+					<a href="{{ URL::previous() }}" class="btn btn-danger">Batal</a>
 				</div>
 			</div>
 		</div>

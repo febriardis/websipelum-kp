@@ -57,7 +57,7 @@
 						@endif
 					</td>
 					<td>
-						<a href="/detail agenda/{{$dt->nm_agenda}}"><i class="icon-eye"></i> Lihat</a>
+						<a href="/detail agenda/{{\Crypt::encrypt($dt->id) }}"><i class="icon-eye"></i> Lihat</a>
 					</td>
 					<td class="text-center"> 	
 					@if(Auth::user()->ket=='Super Admin' || Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2)
@@ -67,7 +67,7 @@
 									<i class="icon-menu9"></i>
 								</a>
 								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a href="/edit agenda/{{ $dt->id }}"><i class="icon-compose"></i> Edit Data</a></li>
+									<li><a href="/edit agenda/{{\Crypt::encrypt($dt->id) }}"><i class="icon-compose"></i> Edit Data</a></li>
 									<script>
 									  	function ConfirmDelete() {
 									  		var x = confirm("Yakin Akan Menghapus Data?");

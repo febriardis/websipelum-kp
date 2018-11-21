@@ -45,14 +45,16 @@
 					<td>{{$no++}}</td>
 					<td>{{$dt->nm_agenda}}</td>
 					<td>{{$dt->sistem_vote}}</td>
-					<td><a href="{{ url('uploads/surat/'.$dt->file) }}">file_{{$d++}}</a>
+					<td><a href="{{ url('uploads/surat/'.$dt->file) }}" target="_blank">file_{{$d++}}</a>
 					</td>
 					<td>
 						{{ date('d F Y', strtotime($dt->created_at)) }}
-						<p><b>Dibuat&nbsp;oleh&nbsp;:&nbsp;</b>{{(\App\Admin::find($dt->admin_id))->ket}}.{{(\App\Admin::find($dt->admin_id))->ket2}}</p>
+						<p><b>Dibuat&nbsp;oleh&nbsp;:&nbsp;</b>Admin&nbsp;{{(\App\Admin::find($dt->admin_id))->ket}}.{{(\App\Admin::find($dt->admin_id))->ket2}}</p>
 					</td>
 					<td>
 						@if($dt->ket=='belum diverifikasi')
+							<span class="badge badge-warning">{{$dt->ket}}</span>
+						@elseif($dt->ket=='acara ditolak')
 							<span class="badge badge-danger">{{$dt->ket}}</span>
 						@else
 							<span class="badge badge-info">{{$dt->ket}}</span>
@@ -61,8 +63,8 @@
 					@if(Auth::user()->ket=='Super Admin')
 					<td width="270">
 						@if($dt->ket=='belum diverifikasi')
-							<a href="/verifikasi/{{$dt->id}}" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-share"></i>&nbsp;Buat Agenda</a>
-							<a href="" class="btn btn-danger btn-xs" onclick="return ConfirmTolak()"><i class="glyphicon glyphicon-share"></i>&nbsp;Tolak Agenda</a>
+							<a href="/verifikasi/{{\Crypt::encrypt($dt->id)}}" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-share"></i>&nbsp;Buat Agenda</a>
+							<a href="/tolak/{{$dt->id}}" class="btn btn-danger btn-xs" onclick="return ConfirmTolak()"><i class="glyphicon glyphicon-share"></i>&nbsp;Tolak Agenda</a>
 						@else
 						@endif
 					</td>

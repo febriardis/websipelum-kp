@@ -45,7 +45,7 @@
 	<!-- Content -->
 	<div class="content" style="margin-top: 50px;">
 		<div class="content-info">
-			<div class="list-content-info" style="padding: 2px; margin-bottom: 20px; background: #73e600; color: #ffffff">
+			<div class="list-content-berita">
 				<h5 style="margin: 8px">Berita Terbaru</h5>
 			</div>
 			<div class="content-info-item" style="margin: 20px 0px">
@@ -80,7 +80,7 @@
 
 		<div class="content-sidebar">
 			<div class="content-agenda">
-				<div class="list-content-info" style="padding: 2px; background: #73e600; color: #ffffff">
+				<div class="list-content-berita">
 					<h5 style="margin: 8px">Agenda</h5>
 				</div>
 				<ul style="margin: 20px 0px">
@@ -93,7 +93,7 @@
 				</ul>
 			</div>
 			<div class="content-count">
-				<div class="list-content-info" style="padding: 2px; background: #73e600; color: #ffffff">
+				<div class="list-content-berita">
 					<h5 style="margin: 8px">Suara Masuk</h5>
 				</div>
 				<ul style="margin: 20px 0px">

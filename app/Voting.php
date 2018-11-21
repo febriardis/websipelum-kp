@@ -7,14 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Voting extends Model
 {
     protected $table = 'tb_voting';
-    protected $table = ['agenda_id','nourut_id', 'jumlah'];
-
-	function FKVotingA(){
-		return $this->belongsTo(Admin::class);
-	}
+    protected $fillable = ['agenda_id','kandidat_id', 'jumlah'];
 
     function FKVoting1() {
-    	return $this->belongsTo(Nourut::class);
+    	return $this->belongsTo(Kandidat::class);
     }
     function FKVoting2() {
     	return $this->belongsTo(Agenda::class);

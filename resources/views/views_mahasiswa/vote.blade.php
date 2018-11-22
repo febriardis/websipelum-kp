@@ -22,6 +22,12 @@
             <p>{{ \Carbon\Carbon::now('Asia/Jakarta')->format('l, d F Y')  }}</p>
             <div class="clear"></div>
           </div>
+          @if(Session::has('pesanVote'))
+          <div class="alert alert-info">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{ Session::get('pesanVote') }} !
+          </div>
+          @endif
           <!-- /list-content -->
 
           <!-- jika mahasiswa sudah memilih hilangkan button vote -->
@@ -38,16 +44,23 @@
               </div>     
               <div class="caption text-center" style="margin: 15px 0px 0px 0px;">
                 <h6 style="margin: 0px">{{$tb->nama}}</h6>
-                <small class="text-info"><i class="fa fa-thumbs-o-up"></i> 5 Votes</small>
-                <div class="button-vote">
-                  <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_view{{ $tb->id }}"><i class="fa fa-eye"></i> View</button>
+                <small class="text-info"><i class="fa fa-thumbs-o-up"></i> 
+                  <div style="display: none;">
+                    {{! $nilVote = \App\Voting::where([['agenda_id',$tbA->id],['kandidat_id', $tb->id]])->value('jumlah') }}
+                  </div>
+                  {{ \Crypt::decrypt($nilVote) }}&nbsp;Votes
+                </small>
+                <div class="button-vote">    
                   {{! $cekKetVote = App\Pemilih::where([['nim', Auth::user()->nim],['agenda_id', $tbA->id]])->value('ket_vote') }}
                   {{! $cek = \Crypt::decrypt($cekKetVote) }}
                   @if($cek=='belum memilih')
+                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_view{{ $tb->id }}"><i class="fa fa-eye"></i>&nbsp;View</button>
                     <form action="/vote/{{$tbA->id}}/{{$tb->id}}/{{$idPemilih}}" method="POST">
                       {{csrf_field()}}
                       <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-thumbs-o-up"></i> Vote</button>
                     </form>
+                  @else
+                    <a href="javascript::void(0)" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_view{{ $tb->id }}"><i class="fa fa-eye"></i>&nbsp;View</a>
                   @endif
                   <div class="clear"></div>
                 </div>
@@ -83,7 +96,7 @@
                       </div>
                       <div>
                         <h6><b>Misi</b></h6>
-                        {!! $tb->visi !!}
+                        {!! $tb->misi !!}
                       </div>
                     </div>
                   </div>   

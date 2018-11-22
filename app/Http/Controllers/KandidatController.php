@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Mahasiswa;
 use App\Kandidat;
 use App\Agenda;
+use App\Voting;
 
 class KandidatController extends Controller
 {
@@ -19,23 +20,27 @@ class KandidatController extends Controller
     }
 
     function insert(Request $req, $idAgenda){
-        $tb = new Kandidat;
         $this->validate($req, [
             //'nama'     => 'required|string|max:255',
             //'username' => 'required|string|min:6|max:255',
             'foto'     => 'required'
         ]);
-        $tb->nim         = $req->nim;
-        $tb->nama        = $req->nama;
-        $tb->foto        = $req->foto;
-        $tb->jurusan     = $req->jurusan;
-        $tb->angkatan    = $req->th_angkatan;
-        $tb->agenda_id   = $idAgenda;
-        $tb->visi        = $req->visi;
-        $tb->misi        = $req->misi;
-        $tb->keterangan  = 'Menunggu Verifikasi';
-        $tb->save();
-
+        $cek = Kandidat::where([['nim', $req->nim],['agenda_id', $idAgenda]])->get();
+        if (count($cek)==0) {
+            $tb = new Kandidat;
+            //tambahkan jika nim sudah ada tidak dapat daftar
+            $tb->nim         = $req->nim;
+            $tb->nama        = $req->nama;
+            $tb->foto        = $req->foto;
+            $tb->jurusan     = $req->jurusan;
+            $tb->angkatan    = $req->th_angkatan;
+            $tb->agenda_id   = $idAgenda;
+            $tb->visi        = $req->visi;
+            $tb->misi        = $req->misi;
+            $tb->keterangan  = 'Menunggu Verifikasi';
+            $tb->save();
+        }
+        
         return redirect('/daftar calon')
         ->with('pesanKan','berhasil mendaftar');
     }
@@ -56,6 +61,13 @@ class KandidatController extends Controller
         $tb = Kandidat::find($id);
         $tb->keterangan = 'Diterima';
         $tb->save();
+
+        $tbV = new Voting;
+        $tbV->agenda_id    = $idAgenda;
+        $tbV->kandidat_id  = $id;
+        $tbV->jumlah       = \Crypt::encrypt(0);
+        $tbV->save();
+
         return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($idAgenda)])
         ->with('pesanVerif', 'Data berhasil disimpan'); //return ke agenda view
     }
@@ -64,6 +76,9 @@ class KandidatController extends Controller
         $tb = Kandidat::find($id);
         $tb->keterangan = 'Pendaftaran Tidak Diterima';
         $tb->save();
+        //hapus tabel voting
+        Voting::where([['agenda_id',$idAgenda],['kandidat_id',$id]])->delete();
+
         return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($idAgenda)])
         ->with('pesanVerif', 'Data berhasil disimpan');  //return ke agenda view
     }

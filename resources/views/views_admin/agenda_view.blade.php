@@ -189,19 +189,20 @@
 							<td>{{$dt->nim}}</td>
 							<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('nama')}}</td>
 							<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('jurusan')}}</td>
+							{{! $cek = \Crypt::decrypt($dt->ket_vote)}}
+							@if($cek == 'belum memilih')
 							<td>
-								{{! $cek = \Crypt::decrypt($dt->ket_vote)}}
-								@if($cek = 'belum bemilih')
-									<span class="label label-info">{{ $cek }}</span>
-								@else
-									<span class="label label-success">{{ $cek }}</span>
-								@endif
+								<span class="label label-info">{{ $cek }}</span>
 							</td>
 							<td class="text-center">
-								@if(Auth::user()->ket!='Super Admin')
-									<a href="/hapus pemilih/{{ $dt->id }}/{{ $IdAgenda }}" class="btn btn-sm btn-danger" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a>	
-								@endif											
+								<a href="/hapus pemilih/{{ $dt->id }}/{{ $IdAgenda }}" class="btn btn-sm btn-danger" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a>
 							</td>
+							@else
+								<td>
+									<span class="label label-success">{{ $cek }}</span>
+								</td>
+								<td class="text-center"></td>
+							@endif
 						</tr>
 						@endforeach
 					
@@ -214,17 +215,20 @@
 							<td>{{$dt->nim}}</td>
 							<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('nama')}}</td>
 							<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('jurusan')}}</td>
+							{{! $cek = \Crypt::decrypt($dt->ket_vote)}}
+							@if($cek == 'belum memilih')
 							<td>
-								{{! $cek = \Crypt::decrypt($dt->ket_vote)}}
-								@if($cek = 'belum bemilih')
-									<span class="label label-info">{{ $cek }}</span>
-								@else
-									<span class="label label-success">{{ $cek }}</span>
-								@endif
+								<span class="label label-info">{{ $cek }}</span>
 							</td>
 							<td class="text-center">
 								<a href="/hapus pemilih/{{ $dt->id }}/{{ $IdAgenda }}" class="btn btn-sm btn-danger" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a>
 							</td>
+							@else
+								<td>
+									<span class="label label-success">{{ $cek }}</span>
+								</td>
+								<td class="text-center"></td>
+							@endif
 						</tr>
 						@endif
 						@endforeach
@@ -232,22 +236,25 @@
 						@foreach($tbP as $dt)
 						{{! $cekJur = \App\Mahasiswa::where('nim', $dt->nim)->value('jurusan') }}
 						@if($cekJur == Auth::user()->ket2)
-							<tr>
+						<tr>
 							<td>{{$no++}}</td>
 							<td>{{$dt->nim}}</td>
 							<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('nama')}}</td>
-							<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('jurusan')}}</td>
+							<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('jurusan')}}</td>							
+							{{! $cek = \Crypt::decrypt($dt->ket_vote) }}
+							@if($cek == 'belum memilih')
 							<td>
-								{{! $cek = \Crypt::decrypt($dt->ket_vote)}}
-								@if($cek = 'belum bemilih')
-									<span class="label label-info">{{ $cek }}</span>
-								@else
-									<span class="label label-success">{{ $cek }}</span>
-								@endif
+								<span class="label label-info">{{ $cek }}</span>
 							</td>
 							<td class="text-center">
 								<a href="/hapus pemilih/{{ $dt->id }}/{{ $IdAgenda }}" class="btn btn-sm btn-danger" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a>
 							</td>
+							@else
+								<td>
+									<span class="label label-success">{{ $cek }}</span>
+								</td>
+								<td class="text-center"></td>
+							@endif
 						</tr>
 						@endif
 						@endforeach

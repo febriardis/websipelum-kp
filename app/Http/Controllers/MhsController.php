@@ -8,7 +8,7 @@ use App\Agenda;
 
 class MhsController extends Controller
 {
-    function show(){
+    function show(){ //show table mahasiswa
     	$tb = Mahasiswa::all();
 
     	return view('views_admin.tabel_mahasiswa')

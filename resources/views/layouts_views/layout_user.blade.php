@@ -272,7 +272,7 @@
 				    		</div>
 					    	<hr>
 					    	<div class="text-center">
-						    	<a class="btn btn-danger btn-sm" href="/keluar"><i class="fa fa-sign-out"></i>Keluar</a>
+						    	<a class="btn btn-danger btn-sm" href="/keluar"><i class="fa fa-sign-out"></i>&nbsp;Keluar</a>
 					    	</div>
 					    </div>
 			  		</li>

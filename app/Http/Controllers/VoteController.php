@@ -18,18 +18,19 @@ class VoteController extends Controller
     }
 
     function vote(Request $req, $idAgenda, $idKandidat, $idPemilih) {
-    	$tb = new Voting;
-    	$tb->agenda_id	  = $idAgenda;
-    	$tb->kandidat_id  = $idKandidat;
-    	$tb->jumlah		  = \Crypt::encrypt(1);
-    	$tb->save();
+        $tbPemilih           = Pemilih::find($idPemilih);
+        $tbPemilih->ket_vote = \Crypt::encrypt('sudah memilih');
+        $tbPemilih->save();
 
-    	$tbPemilih 			 = Pemilih::find($idPemilih);
-    	$tbPemilih->ket_vote = \Crypt::encrypt('sudah memilih');
-    	$tbPemilih->save();
+        $nilTb = Voting::where([['agenda_id',$idAgenda],['kandidat_id',$idKandidat]])->value('jumlah'); //nilai di tabel database 
+        $nilT = \Crypt::decrypt($nilTb); 
+        $nil = $nilT+1;      
+        $tbVote = Voting::where([['agenda_id',$idAgenda],['kandidat_id',$idKandidat]])->first(); 
+        $tbVote->jumlah = \Crypt::encrypt($nil); 
+        $tbVote->save();
+        //return \Crypt::decrypt($tbVote->jumlah);
 
-    	//ganti keterangan voting di tb_pemilih
-
-    	return redirect('/pemilihan');
+    	return redirect('/pemilihan')
+        ->with('pesanVote','berhasil memilih');
     }
 }

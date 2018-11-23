@@ -2,6 +2,7 @@
 
 @section('content')
   <!-- content -->
+  {{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}
   <div class="content">
     <div style="margin: 20px; min-height: 450px">
       <h3>List Agenda </h3>
@@ -49,9 +50,9 @@
               <div style="display: none;">
                 {{!$cekNIM = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('nim')}}
               </div>
-              @if(date('Y-m-d') > $dt->tgl_agenda)
+              @if($cekTgl > $dt->tgl_agenda)
                 <span class="badge badge-success">Selesai</span>
-              @elseif(date('Y-m-d') == $dt->tgl_agenda)
+              @elseif($cekTgl == $dt->tgl_agenda)
                 <span class="badge badge-danger">Sedang Berlangsung</span>
               <!--kondisi jika tanggal belum lewat -->
               @else

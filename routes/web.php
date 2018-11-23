@@ -59,6 +59,9 @@ Route::post('/terima kandidat/{id}/{IdAgenda}', 'KandidatController@verifKandida
 Route::get('/tolak kandidat/{id}/{Idagenda}', 'KandidatController@tolakKandidat')->middleware('auth:admin');
 
 // ==================================ADMIN-KANDIDAT==================================
+Route::get('/tambah kandidat/{idAgenda}', 'KandidatController@ViewTambah')->middleware('auth:admin');
+Route::post('/tambah kandidat/{idAgenda}', 'KandidatController@insertK');
+
 Route::post('/daftar kandidat/{idAgenda}', 'KandidatController@insert');
 Route::get('/hapus kandidat/{id}/{idAgenda}', 'KandidatController@delete')->middleware('auth:admin');
 
@@ -88,10 +91,10 @@ Route::get('/quick count', function () {return view('views_admin.quickcount_view
 Route::get('/tabel mahasiswa', 'MhsController@show')->middleware('auth:admin');
 
 
-
 // ==================================VOTE==================================
-Route::post('/vote/{Idagenda}/{IdKandidat}/{IdPemilih}', 'VoteController@vote')->middleware('auth:mahasiswa');
-
+Route::group(['middleware' => 'throttle:1'], function () {
+	Route::post('/vote/{Idagenda}/{IdKandidat}/{IdPemilih}', 'VoteController@vote')->middleware('auth:mahasiswa');
+});
 
 //////////////////////////////////AGENDADETAIL////////////////////////////////////////////////
 // Route::get('/detail agenda/{id}', 'AgendaDetailController@agendaview')->middleware('auth:admin');

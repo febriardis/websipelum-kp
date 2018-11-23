@@ -51,10 +51,26 @@
 			<div class="content-info-item" style="margin: 20px 0px">
 				<h4><a href="" class="link-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h4>
 				<p class="text-muted">posted {{date('M d, Y')}}</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas vitae scel<span id="dots">...</span><span id="more" style="display: none;">erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta.</span></p>
+				<button onclick="myFunction()" class="btn btn-info btn-sm" id="myBtn">Read more</button>
+
+				<script>
+					function myFunction() {
+					  var dots = document.getElementById("dots");
+					  var moreText = document.getElementById("more");
+					  var btnText = document.getElementById("myBtn");
+
+					  if (dots.style.display === "none") {
+					    dots.style.display = "inline";
+					    btnText.innerHTML = "Read more"; 
+					    moreText.style.display = "none";
+					  } else {
+					    dots.style.display = "none";
+					    btnText.innerHTML = "Read less"; 
+					    moreText.style.display = "inline";
+					  }
+					}
+				</script>
 			</div>
 			<hr style="border: 1px solid #e6e6e6">
 			<div class="content-info-item">

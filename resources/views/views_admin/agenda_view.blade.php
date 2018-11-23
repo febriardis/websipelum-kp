@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+		{{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}
+		{{! $tgl_agenda = (App\Agenda::find($IdAgenda))->tgl_agenda }}
 		<!-- ================Header================ -->
 		<div class="page-header-content" style="border-bottom: 1px solid #cccccc">
 			<div class="page-title">
@@ -32,10 +34,10 @@
 			</ul>
 		</div>
 
-		@if(Session::has('pesan'))
+		@if(Session::has('pesanK'))
 			<div class="alert alert-info">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				{{ Session::get('pesan') }} !
+				{{ Session::get('pesanK') }} !
 			</div>
 		@endif
 
@@ -58,7 +60,10 @@
 				@if(Auth::user()->ket=='Super Admin')
 				@else
 					@if(Auth::user()->id==$cekAdmin || Auth::user()->ket==$cekkat1Admin && Auth::user()->ket2==$cekkat2Admin)
-						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_large1">Tambah</button>
+						@if($cekTgl < $tgl_agenda)
+							<a href="/tambah kandidat/{{\Crypt::encrypt($IdAgenda)}}" class="btn btn-primary btn-sm">Tambah</a>
+						@elseif($cekTgl >= $tgl_agenda)
+						@endif
 					@else
 					@endif
 				@endif
@@ -158,7 +163,10 @@
 					
 				@else
 					<!-- memanggil modal mahasiswa -->
-					<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal_large">Import Data</i></button>
+					@if($cekTgl < $tgl_agenda)
+						<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal_large">Import Data</i></button>
+					@elseif($cekTgl >= $tgl_agenda)
+					@endif
 					<!-- 
 						<a href="/reset pemilih/{{$IdAgenda}}/{{(App\Agenda::find($IdAgenda))->nm_agenda}}" onclick="return ConfirmDelete()" class="btn btn-default btn-sm">Reset Data</a>
 					 -->

@@ -42,7 +42,6 @@ class AgendaController extends Controller
 
     function insert(Request $req, $idAdmin){
         $cek = Agenda::where('tgl_agenda', $req->tgl_agenda)->get();
-
         if (count($cek)==0) {
             $tb = new Agenda;
             $tb->admin_id = $idAdmin;
@@ -73,15 +72,21 @@ class AgendaController extends Controller
         ->with('data', $tb);
     }
 
-    function update(Request $req, $id) {
-        $tb = Agenda::find($id);
-        $tb->nm_agenda = $req->nm_agenda;
-        $tb->sistem_vote = $req->sistem_pem;
-        $tb->tgl_agenda= $req->tgl_agenda;
-        $tb->save();
-
-        return redirect('/tabel agenda')
-        ->with('pesan', 'Data berhasil diupdate');
+    function update(Request $req, $id) {    
+        $cek = Agenda::where('tgl_agenda', $req->tgl_agenda)->get();
+        if (count($cek)==0) {   
+            $tb = Agenda::find($id);
+            $tb->nm_agenda = $req->nm_agenda;
+            $tb->sistem_vote = $req->sistem_pem;
+            $tb->tgl_agenda= $req->tgl_agenda;
+            $tb->save();
+        
+            return redirect('/tabel agenda')
+            ->with('pesanA', 'Data berhasil diupdate');
+        }else{
+            return redirect()->action('AgendaController@edit', ['id' => \Crypt::encrypt($id)])
+            ->with('pesanErr','Tanggal agenda sudah ada');      
+        }
     }
 
     function delete($id) {

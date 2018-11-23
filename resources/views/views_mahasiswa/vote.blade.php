@@ -1,9 +1,11 @@
 @extends('layouts_views.layout_user')
 
 @section('content')
-  {{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'), 
-      $cek  = (App\Agenda::where('tgl_agenda', $cekTgl))->value('tgl_agenda')
-  }}
+  <div style="display: none;">
+    {{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'), 
+        $cek  = (App\Agenda::where('tgl_agenda', $cekTgl))->value('tgl_agenda')
+    }}
+  </div>
   <!-- tambah keterangan jika jam sudah jam 8.00 -->
   <!-- content -->
   <div class="content" style="min-height: 450px">
@@ -29,7 +31,7 @@
           </div>
           @endif
           <!-- /list-content -->
-
+          
           <!-- jika mahasiswa sudah memilih hilangkan button vote -->
           <!-- content-vote -->
           {{! $n=1 }}
@@ -53,8 +55,11 @@
                 <div class="button-vote">    
                   {{! $cekKetVote = App\Pemilih::where([['nim', Auth::user()->nim],['agenda_id', $tbA->id]])->value('ket_vote') }}
                   {{! $cek = \Crypt::decrypt($cekKetVote) }}
+                  
                   @if($cek=='belum memilih')
                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_view{{ $tb->id }}"><i class="fa fa-eye"></i>&nbsp;View</button>
+                  
+                    <!-- tambahkan enkripsi -->
                     <form action="/vote/{{$tbA->id}}/{{$tb->id}}/{{$idPemilih}}" method="POST">
                       {{csrf_field()}}
                       <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-thumbs-o-up"></i> Vote</button>
@@ -84,7 +89,12 @@
                       <img src="/uploads/fotomhs/{{$tb->foto}}" style="width: 125px; float: left; height: 140px;" alt="">
                       <div style="float: left;margin: 20px">
                         <h6 style="margin: 0px">{{$tb->nama}}</h6>
-                        <small class="text-info"><i class="fa fa-thumbs-o-up"></i> 5 Votes</small> 
+                        <small class="text-info"><i class="fa fa-thumbs-o-up"></i>
+                        <div style="display: none;">
+                          {{! $nilVote = \App\Voting::where([['agenda_id',$tbA->id],['kandidat_id', $tb->id]])->value('jumlah') }}
+                        </div>
+                        {{ \Crypt::decrypt($nilVote) }}&nbsp;Votes
+                        </small> 
                       </div>
                       <div class="clear"></div>
                     </div> 
@@ -104,8 +114,10 @@
                   <div class="modal-footer">
                   {{! $cek = \Crypt::decrypt($cekKetVote) }}
                   @if($cek=='belum memilih')
-                    <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-thumbs-o-up"></i> Vote</button>
-                    <div class="clear"></div>
+                    <form action="/vote/{{$tbA->id}}/{{$tb->id}}/{{$idPemilih}}" method="POST">
+                      {{csrf_field()}}
+                      <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-thumbs-o-up"></i> Vote</button>
+                    </form>
                   @endif
                   </div>    
                 </div>
@@ -143,4 +155,11 @@
     @endif
   </div>
 <!-- /content -->
+
+
+  <script type="text/javascript">
+    function hilangkan() {
+      document.getElementById('btnVote').style.display='none';
+    }
+  </script>
 @endsection

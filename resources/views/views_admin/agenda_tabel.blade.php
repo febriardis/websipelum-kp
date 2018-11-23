@@ -5,10 +5,11 @@
 @endsection
 
 @section('content')
-	@if(Session::has('pesan'))
+  	{{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}
+	@if(Session::has('pesanA'))
 	<div class="alert alert-info">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		{{ Session::get('pesan') }} !
+		{{ Session::get('pesanA') }} !
 	</div>
 	@endif
 	<!-- Basic datatable -->
@@ -48,11 +49,11 @@
 					<td>{{ $dt->kat_jurusan }} <b>({{$dt->kat_fakultas}})</b></td>
 					<td>{{ date('d M Y', strtotime($dt->tgl_agenda)) }}</td>
 					<td>
-						@if(date('Y-m-d') < $dt->tgl_agenda)
+						@if($cekTgl < $dt->tgl_agenda)
 							<span class="label label-info">Menunggu Tanggal Agenda</span>
-						@elseif(date('Y-m-d') > $dt->tgl_agenda)
+						@elseif($cekTgl > $dt->tgl_agenda)
 							<span class="label label-success">Selesai</span>
-						@elseif(date('Y-m-d') == $dt->tgl_agenda)
+						@elseif($cekTgl == $dt->tgl_agenda)
 							<span class="label label-danger">Sedang Berlangsung</span>
 						@endif
 					</td>

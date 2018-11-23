@@ -10,7 +10,8 @@ use App\Voting;
 
 class KandidatController extends Controller
 {
-    function daftar($idAgenda){
+    // ----------------function views mahasiswa------------------
+    function daftar($idAgenda){ //form daftar mahasiswa
         $id = \Crypt::decrypt($idAgenda);
         $tb = Agenda::find($id);
         
@@ -19,7 +20,7 @@ class KandidatController extends Controller
         ->with('tb', $tb);
     }
 
-    function insert(Request $req, $idAgenda){
+    function insert(Request $req, $idAgenda){ //insert oleh mahasiswa
         $this->validate($req, [
             //'nama'     => 'required|string|max:255',
             //'username' => 'required|string|min:6|max:255',
@@ -45,6 +46,49 @@ class KandidatController extends Controller
         ->with('pesanKan','berhasil mendaftar');
     }
 
+    function batalDaftar($nim, $idAgenda) { //hapus kandidat oleh mhs/pembatalan
+        Kandidat::where([['nim',$nim],['agenda_id',$idAgenda]])->delete(); //tambahkan where agenda id
+
+        return redirect('/daftar calon')
+        ->with('pesanKan', 'Pendaftaran berhasil dibatalkan');
+    }
+
+    // ----------------function views admin------------------
+
+    function ViewTambah($idAgenda){     
+        $id = \Crypt::decrypt($idAgenda);
+        $tb = Agenda::find($id);
+
+        return view('views_admin.kandidat_tambah')
+        ->with('tb', $tb);
+    }
+
+    function insertK(Request $req, $idAgenda){ //insert oleh admin
+        // $cekMhs = Mahasiswa::where('nim',$req->nim)->get();
+        // $cekJurAg  = Agenda::find($idAgenda)->kat_jurusan; //cek kategori jurusan agenda 
+        // $cekFakAg  = Agenda::find($idAgenda)->kat_fakultas; //cek kategori jurusan agenda 
+
+        // //----------------------------------------------------------------- 
+        // $cekMhs1 = Mahasiswa::where('nim',$req->nim)->get();
+        // $cekMhs2 = Mahasiswa::where([['nim',$req->nim],['fakultas', $cekFakAg]])->get();
+        // $cekMhs3 = Mahasiswa::where([['nim',$req->nim],['jurusan', $cekJurAg]])->get();
+        
+        $cekMhs = Mahasiswa::where('nim',$req->nim)->get();
+        $cek = Kandidat::where([['nim', $req->nim],['agenda_id', $idAgenda]])->get();
+            
+        if (count($cekMhs)!=0) {
+            if (count($cek)==0) {
+                
+                
+
+            }else {
+                return "nim sudah terdaftar";
+            }
+        }else{
+            return "nim tidak ditemukan";
+        }
+    }
+
     // show kandidat detail in admin views
     function viewKandidat($nim, $idAgenda){
         //$A = Agenda::where('nm_agenda', $nmAgenda)->value('id');
@@ -52,7 +96,6 @@ class KandidatController extends Controller
         $tb  = Kandidat::where([['nim', $nim],['agenda_id', $idA]])->get()->first(); //tambah kondisi where agenda_id
         
         return view('views_admin.kandidat_detail')
-        //->with('nmAgenda', $nmAgenda)
         ->with('idAgenda', $idA)
         ->with('tbMhs', $tb);
     }
@@ -91,26 +134,8 @@ class KandidatController extends Controller
         ->with('pesan', 'Data berhasil dihapus');
     }
 
-    function batalDaftar($nim, $idAgenda) { //hapus kandidat oleh mhs/pembatalan
-        Kandidat::where([['nim',$nim],['agenda_id',$idAgenda]])->delete(); //tambahkan where agenda id
 
-        return redirect('/daftar calon')
-        ->with('pesanKan', 'Pendaftaran berhasil dibatalkan');
-    }
 
-    // function show(){
-    // 	$tb = Kandidat::all();
-
-    // 	return view('views_admin.Kandidat_tabel')
-    // 	->with('data', $tb);
-    // }
-
-    // function viewInsert(){
-    // 	$tbAgenda = Agenda::all();
-
-    // 	return view('views_admin.Kandidat_tambah')
-    // 	->with('agenda', $tbAgenda);
-    // }
     // function insert(Request $req) {
     //     // $this->validate($req, [
     //     //      'nim'     => 'required|integer|min:10|max:10',
@@ -269,10 +294,4 @@ class KandidatController extends Controller
         // }
     }
 
-    // function delete($id, $agendaid) {
-    //     Kandidat::find($id)->delete();
-
-    //     return redirect()->action('AgendaController@agendaview', ['id' => $agendaid])
-    //     ->with('pesan', 'Data berhasil dihapus');
-    // }
 }

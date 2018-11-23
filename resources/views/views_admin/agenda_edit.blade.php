@@ -12,7 +12,12 @@
 			<div class="panel-heading">
 				<h5 class="panel-title">Form Perubahan Agenda</h5>
 			</div>
-
+			@if(Session::has('pesanErr'))
+			<div class="alert alert-danger">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				{{ Session::get('pesanErr') }} !
+			</div>
+			@endif
 			<div class="panel-body">
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Nama Agenda</label>

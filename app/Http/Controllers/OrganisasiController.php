@@ -9,14 +9,19 @@ use App\TbOrganisasi;
 
 class OrganisasiController extends Controller
 {
+	//show in mahasiswa page
 	function showOrganisasi($ket,$ket2){
-		$cekFak = Fakultas::where('nm_fakultas',$ket2)->value('id');
 		$cekJur = Jurusan::where('nm_jurusan',$ket2)->value('id');
-		//$cekOrg = TbOrganisasi::where([['fak_id',$cekFak],['jur_id',$cekJur]])->get();
-		$cekOrg = TbOrganisasi::where(function ($q) use($cekFak, $cekJur, $ket){
-			$q->where([['fak_id','=', $cekFak], ['ket_organisasi','=', $ket]])
-			->orWhere([['jur_id','=', $cekJur], ['ket_organisasi','=', $ket]]);
-		})->get();
+		$cekFak = Fakultas::where('nm_fakultas',$ket2)->value('id');
+	
+		if (count($cekJur)!=0) {
+			$cekOrg = TbOrganisasi::where([['ket_organisasi',$ket],['jur_id',$cekJur]])->get();	
+		}elseif (count($cekFak)!=0) {
+			$cekOrg = TbOrganisasi::where([['ket_organisasi',$ket],['fak_id',$cekFak]])->get();	
+		}
+		else { //else org=demaU atau semaU
+			$cekOrg = TbOrganisasi::where('ket_organisasi',$ket)->get();	
+		}
 
 		return view('views_mahasiswa.organisasi')
 		->with('ket',$ket)
@@ -26,15 +31,32 @@ class OrganisasiController extends Controller
 		->with('tb', $cekOrg);
 	}
 
-	function show($ket,$ket2) {
-		$cekFak = Fakultas::where('nm_fakultas',$ket2)->value('id');
-		$cekJur = Jurusan::where('nm_jurusan',$ket2)->value('id');
-		//$cekOrg = TbOrganisasi::where([['fak_id',$cekFak],['jur_id',$cekJur]])->get();	
-		$cekOrg = TbOrganisasi::where(function ($q) use($cekFak, $cekJur, $ket){
-			$q->where([['ket_organisasi','=', $ket],['fak_id','=', $cekFak]])
-			->orWhere([['ket_organisasi','=', $ket],['jur_id','=', $cekJur]]);
-		})->get();
+	//show in admin page
+	function showOrgU($ket) { //SEMA-U or DEMA-U
+		$cekJur ='';
+		$cekFak ='';
+		$ket2   ='';
+		$cekOrg = TbOrganisasi::where('ket_organisasi',$ket)->get();	
+		
+		return view('views_admin.organisasi_view')
+		->with('ket',$ket)
+		->with('ket2',$ket2)
+		->with('id_fak',$cekFak)
+		->with('id_jur',$cekJur)
+		->with('tb', $cekOrg);
+	}
 
+	function show($ket, $ket2) {
+		//karena ditabelnya null, jadi kalo jur_id=null itu terbaca;
+		$cekJur = Jurusan::where('nm_jurusan',$ket2)->value('id');
+		$cekFak = Fakultas::where('nm_fakultas',$ket2)->value('id');
+	
+		if (count($cekJur)!=0) {
+			$cekOrg = TbOrganisasi::where([['ket_organisasi',$ket],['jur_id',$cekJur]])->get();	
+		}elseif (count($cekFak)!=0) {
+			$cekOrg = TbOrganisasi::where([['ket_organisasi',$ket],['fak_id',$cekFak]])->get();	
+		}
+		
 		return view('views_admin.organisasi_view')
 		->with('ket',$ket)
 		->with('ket2',$ket2)
@@ -53,7 +75,11 @@ class OrganisasiController extends Controller
 		$tb->misi = '';
 		$tb->save();
 
-        return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
+		if($req->ket2!= ''){
+        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
+    	}else{
+        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
+    	}
 	}
 	
 	function updateNama(Request $req, $id) {
@@ -61,7 +87,11 @@ class OrganisasiController extends Controller
 		$tb->nm_organisasi = $req->nmOrg;
 		$tb->save();
 
-        return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
+		if($req->ket2!= ''){
+        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
+    	}else{
+        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
+    	}
 	}
 
 	function updateVisiMisi(Request $req, $id) {
@@ -70,6 +100,10 @@ class OrganisasiController extends Controller
 		$tb->misi = $req->misi;
 		$tb->save();
 
-        return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
+		if($req->ket2!= ''){
+        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
+    	}else{
+        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
+    	}
 	}
 }

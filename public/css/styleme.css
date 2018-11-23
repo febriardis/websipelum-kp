@@ -318,3 +318,20 @@ a.closeNav:hover {
 	color: #ffffff; 
 	padding: 5px 10px;
 }
+
+
+/*---------------------------------------*/
+.list-text-qcl{
+ 	margin: 0px auto;
+	width: 90%;
+}
+
+.list-text-qcl hr{
+	width: 350px; float: left; 
+	border:2px solid #cccccc;
+}
+
+.list-text-qcl h3{
+	float: left;
+	margin: 0px 20px;
+}

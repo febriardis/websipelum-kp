@@ -13,7 +13,7 @@
 
 // #----------------------------------------GUEST-------------------------------------------#
 Route::get('/', function(){return view('views_mahasiswa.beranda');})->middleware('guest');
-Route::get('/hc', function(){return view('views_mahasiswa.quick_count');})->middleware('guest');
+Route::get('/hc', 'VoteController@QuickCountView')->middleware('guest');
 Route::get('/org/{ket}/{ket2}', 'OrganisasiController@showOrganisasi')->middleware('guest');
 Route::get('/admin/login',function(){return view('views_admin.login_form');})->middleware('guest');
 Route::post('/login', 'LoginController@login_mhs');
@@ -24,7 +24,7 @@ Route::get('/keluar', 'LoginController@keluar');
 Route::get('/beranda', function(){return view('views_mahasiswa.beranda');})->middleware('auth:mahasiswa');
 Route::get('/pemilihan', 'VoteController@voteView')->middleware('auth:mahasiswa');
 Route::get('/hitung cepat', 'VoteController@QuickCountView')->middleware('auth:mahasiswa');
-Route::get('/organisasi/{ket}/{ket2}', 'OrganisasiController@showOrganisasi')->middleware('auth:mahasiswa');
+Route::get('/show organisasi/{ket}/{ket2}', 'OrganisasiController@showOrganisasi')->middleware('auth:mahasiswa');
 Route::get('/daftar calon', 'MhsController@ShowTabelAgenda')->middleware('auth:mahasiswa');
 Route::get('/form pendaftaran/{IdAgenda}', 'KandidatController@daftar')->middleware('auth:mahasiswa');
 Route::get('/batal daftar/{nim}/{IdAgenda}', 'KandidatController@batalDaftar')->middleware('auth:mahasiswa'); //pembatalan
@@ -70,10 +70,12 @@ Route::get('/hapus kandidat/{id}/{idAgenda}', 'KandidatController@delete')->midd
 
 
 // ==================================ADMIN-ORGANISASI==================================
+Route::get('/organisasi univ/{ket}', 'OrganisasiController@showOrgU')->middleware('auth:admin');
 Route::get('/organisasi/{ket}/{ket2}', 'OrganisasiController@show')->middleware('auth:admin');
 Route::post('/nmOrganisasi', 'OrganisasiController@insertNama')->middleware('auth:admin');
 Route::post('/UpnmOrganisasi/{id}', 'OrganisasiController@updateNama')->middleware('auth:admin');
 Route::post('/UpVMOrganisasi/{id}', 'OrganisasiController@updateVisiMisi')->middleware('auth:admin');
+
 
 // ==================================ADMIN-PEMILIH==================================
 Route::post('/tambah pemilih/{idAgenda}','PemilihController@insert');

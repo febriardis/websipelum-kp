@@ -47,8 +47,8 @@
 			    		<a href="javascript:void(0)" class="closeNav" onclick="closeNav()">&times;</a>
 			 			<div class="listdrop">
 			 				<h5>Organisasi Mahasiswa</h5>	
-			 				<a class="dropdown-item drop-me" href="/org">Sema Universitas</a>
-			 				<a class="dropdown-item drop-me" href="/org">Dema Universitas</a>
+			 				<a class="dropdown-item drop-me" href="/org/Sema U/Uin bandung">Sema Universitas</a>
+			 				<a class="dropdown-item drop-me" href="/org/Dema U/Uin bandung">Dema Universitas</a>
 			 				<div class="dropdown" style="width: 230px">
 			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Sema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
 							  	<div class="dropdown-menu" style="background-color:rgba(0,0,0,0.9);">
@@ -67,70 +67,60 @@
 							      	@endforeach
 							  	</div>
 							</div>
+
 					      	<hr style="border: 0.5px solid #cccccc">
 			 				<h5>Fak. Tarbiyah dan Keguruan</h5>
-					      	<a class="dropdown-item" href="#">HMJ Manajemen Pendidikan Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Agama Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Bahasa Arab</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Matematika</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Biologi</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Fisika</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Kimia</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Guru MI (PGMI)</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Islam Anak Usia Dini</a>
+			 				{{! $cekJur1 = \App\Jurusan::where('fak_id', 2)->get() }}
+			 				@foreach($cekJur1 as $dt)
+						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 				    	</div>
 				    	<div class="listdrop">	
 				    		<h5>Fak. Syariah dan Hukum</h5>
-					      	<a class="dropdown-item" href="/org">HMJ Hukum Keluarga (Ahwal Al-Syakhsiyah)</a>
-					      	<a class="dropdown-item" href="#">HMJ Hukum Ekonomi Syariah (Muamalah)</a>
-					      	<a class="dropdown-item" href="#">HMJ Hukum Tata Negara (Siyasah)</a>
-					      	<a class="dropdown-item" href="#">HMJ Perbandingan Madzhab dan Hukum</a>
-					      	<a class="dropdown-item" href="#">HMJ Ilmu Hukum</a>
-					      	<a class="dropdown-item" href="#">HMJ Hukum Pidana Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Manajemen Keuangan Syariah</a>
-					      	<a class="dropdown-item" href="#">HMJ Akutansi Syariah</a>
-					      	<a class="dropdown-item" href="#">HMJ Ekonomi Syariah</a>
+			 				{{! $cekJur2 = \App\Jurusan::where('fak_id', 3)->get() }}
+			 				@foreach($cekJur2 as $dt)
+						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 					      	<hr style="border: 0.5px solid #cccccc">
 					      	<h5>Fak. Ilmu Sosial dan Ilmu Politik</h5>
-					      	<a class="dropdown-item" href="/org">HMJ Administrai Publik</a>
-					      	<a class="dropdown-item" href="#">HMJ Manajemen</a>
-					      	<a class="dropdown-item" href="#">HMJ Sosiologi</a>
-					      	<a class="dropdown-item" href="#">HMJ Ilmu Politik</a>
+			 				{{! $cekJur3 = \App\Jurusan::where('fak_id', 8)->get() }}
+			 				@foreach($cekJur3 as $dt)
+						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 				    	</div>
 				    	<div class="listdrop">	
 				    	 	<h5>Fak. Dakwah dan  Komunikasi</h5>
-					      	<a class="dropdown-item" href="/org">HMJ Bimbingan Konseling Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Komunikasi dan Penyiaran Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Manajemen Dakwah</a>
-					      	<a class="dropdown-item" href="#">HMJ Pengembangan Masyarakat Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Ilmu Komunikasi Jurnalistik</a>
-					      	<a class="dropdown-item" href="#">HMJ Ilmu Komunikasi Humas</a>
+			 				{{! $cekJur4 = \App\Jurusan::where('fak_id', 4)->get() }}
+			 				@foreach($cekJur4 as $dt)
+						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 					      	<hr style="border: 0.3px solid #cccccc">
 				    		<h5>Fak. Adab dan Humaniora</h5>
-					      	<a class="dropdown-item" href="/org">HMJ Sejarah dan Peradaban Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Bahasa dan Sastra Arab</a>
-					      	<a class="dropdown-item" href="#">HMJ Sastra Inggris</a>
+			 				{{! $cekJur5 = \App\Jurusan::where('fak_id', 5)->get() }}
+			 				@foreach($cekJur5 as $dt)
+						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 					      	<hr style="border: 0.3px solid #cccccc">
 					      	<h5>Fak. Psikologi</h5>
-					      	<a class="dropdown-item" href="/org">HMJ Psikologi</a>
+			 				{{! $cekJur6 = \App\Jurusan::where('fak_id', 6)->get() }}
+			 				@foreach($cekJur6 as $dt)
+						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 					    </div>
 				    	<div class="listdrop">
 					     	<h5>Fak. Sains dan Teknologi</h5>
-					      	<a class="dropdown-item" href="/org">HMJ Matematika</a>
-					      	<a class="dropdown-item" href="#">HMJ Biologi</a>
-					      	<a class="dropdown-item" href="#">HMJ Fisika</a>
-					      	<a class="dropdown-item" href="#">HMJ Kimia</a>
-					      	<a class="dropdown-item" href="#">HMJ Teknik Informatika</a>
-					      	<a class="dropdown-item" href="#">HMJ Agroteknologi</a>
-					      	<a class="dropdown-item" href="#">HMJ Teknik Elektro</a>
+			 				{{! $cekJur7 = \App\Jurusan::where('fak_id', 7)->get() }}
+			 				@foreach($cekJur7 as $dt)
+						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 					      	<hr style="border: 0.2px solid #cccccc">
 					      	<h5>Fak. Ushuludin</h5>
-					      	<a class="dropdown-item" href="/org">HMJ Aqidah dan Filsafat Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Studi Agama-Agama</a>
-					      	<a class="dropdown-item" href="#">HMJ Ilmu Al-Quran dan Tafsir</a>
-					      	<a class="dropdown-item" href="#">HMJ Tasawuf Psikoterapi</a>
+			 				{{! $cekJur8 = \App\Jurusan::where('fak_id', 1)->get() }}
+			 				@foreach($cekJur8 as $dt)
+						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 				    	</div>
-					</div>
+				  	</div>
 				  	<span class="span">|</span>
 				  	<li class="nav-item">
 				    	<a class="nav-link" href="javascript:void(0)" style="padding: 10px;">Syarat & Ketentuan</a>
@@ -162,14 +152,14 @@
 			    		<a href="javascript:void(0)" class="closeNav" onclick="closeNav()">&times;</a>
 			 			<div class="listdrop">
 			 				<h5>Organisasi Mahasiswa</h5>	
-			 				<a class="dropdown-item drop-me" href="/organisasi">Sema Universitas</a>
-			 				<a class="dropdown-item drop-me" href="/organisasi">Dema Universitas</a>
+			 				<a class="dropdown-item drop-me" href="/show organisasi/Sema U/Uin bandung">Sema Universitas</a>
+			 				<a class="dropdown-item drop-me" href="/show organisasi/Dema U/Uin bandung">Dema Universitas</a>
 			 				<div class="dropdown" style="width: 230px">
 			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Sema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
 							  	<div class="dropdown-menu" style="background-color:rgba(0,0,0,0.9);">
 							      	{{! $tbFak = (App\Fakultas::all()) }}
 							      	@foreach($tbFak as $d)
-							      		<a class="dropdown-item" href="/organisasi/Sema F/{{$d->nm_fakultas}}">{{$d->nm_fakultas}}</a>
+							      		<a class="dropdown-item" href="/show organisasi/Sema F/{{$d->nm_fakultas}}">{{$d->nm_fakultas}}</a>
 							      	@endforeach
 							  	</div>
 							</div>
@@ -178,72 +168,62 @@
 							  	<div class="dropdown-menu" style="background-color:rgba(0,0,0,0.9);">
 							      	{{! $tbFak = (App\Fakultas::all()) }}
 							      	@foreach($tbFak as $d)
-							      		<a class="dropdown-item" href="/organisasi/Dema F/{{$d->nm_fakultas}}">{{$d->nm_fakultas}}</a>
+							      		<a class="dropdown-item" href="/show organisasi/Dema F/{{$d->nm_fakultas}}">{{$d->nm_fakultas}}</a>
 							      	@endforeach
 							  	</div>
 							</div>
+
 					      	<hr style="border: 0.5px solid #cccccc">
 			 				<h5>Fak. Tarbiyah dan Keguruan</h5>
-					      	<a class="dropdown-item" href="#">HMJ Manajemen Pendidikan Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Agama Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Bahasa Arab</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Matematika</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Biologi</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Fisika</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Kimia</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Guru MI (PGMI)</a>
-					      	<a class="dropdown-item" href="#">HMJ Pendidikan Islam Anak Usia Dini</a>
+			 				{{! $cekJur1 = \App\Jurusan::where('fak_id', 2)->get() }}
+			 				@foreach($cekJur1 as $dt)
+						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 				    	</div>
 				    	<div class="listdrop">	
 				    		<h5>Fak. Syariah dan Hukum</h5>
-					      	<a class="dropdown-item" href="/organisasi">HMJ Hukum Keluarga (Ahwal Al-Syakhsiyah)</a>
-					      	<a class="dropdown-item" href="#">HMJ Hukum Ekonomi Syariah (Muamalah)</a>
-					      	<a class="dropdown-item" href="#">HMJ Hukum Tata Negara (Siyasah)</a>
-					      	<a class="dropdown-item" href="#">HMJ Perbandingan Madzhab dan Hukum</a>
-					      	<a class="dropdown-item" href="#">HMJ Ilmu Hukum</a>
-					      	<a class="dropdown-item" href="#">HMJ Hukum Pidana Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Manajemen Keuangan Syariah</a>
-					      	<a class="dropdown-item" href="#">HMJ Akutansi Syariah</a>
-					      	<a class="dropdown-item" href="#">HMJ Ekonomi Syariah</a>
+			 				{{! $cekJur2 = \App\Jurusan::where('fak_id', 3)->get() }}
+			 				@foreach($cekJur2 as $dt)
+						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 					      	<hr style="border: 0.5px solid #cccccc">
 					      	<h5>Fak. Ilmu Sosial dan Ilmu Politik</h5>
-					      	<a class="dropdown-item" href="/organisasi">HMJ Administrai Publik</a>
-					      	<a class="dropdown-item" href="#">HMJ Manajemen</a>
-					      	<a class="dropdown-item" href="#">HMJ Sosiologi</a>
-					      	<a class="dropdown-item" href="#">HMJ Ilmu Politik</a>
+			 				{{! $cekJur3 = \App\Jurusan::where('fak_id', 8)->get() }}
+			 				@foreach($cekJur3 as $dt)
+						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 				    	</div>
 				    	<div class="listdrop">	
 				    	 	<h5>Fak. Dakwah dan  Komunikasi</h5>
-					      	<a class="dropdown-item" href="/organisasi">HMJ Bimbingan Konseling Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Komunikasi dan Penyiaran Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Manajemen Dakwah</a>
-					      	<a class="dropdown-item" href="#">HMJ Pengembangan Masyarakat Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Ilmu Komunikasi Jurnalistik</a>
-					      	<a class="dropdown-item" href="#">HMJ Ilmu Komunikasi Humas</a>
+			 				{{! $cekJur4 = \App\Jurusan::where('fak_id', 4)->get() }}
+			 				@foreach($cekJur4 as $dt)
+						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 					      	<hr style="border: 0.3px solid #cccccc">
 				    		<h5>Fak. Adab dan Humaniora</h5>
-					      	<a class="dropdown-item" href="/organisasi">HMJ Sejarah dan Peradaban Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Bahasa dan Sastra Arab</a>
-					      	<a class="dropdown-item" href="#">HMJ Sastra Inggris</a>
+			 				{{! $cekJur5 = \App\Jurusan::where('fak_id', 5)->get() }}
+			 				@foreach($cekJur5 as $dt)
+						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 					      	<hr style="border: 0.3px solid #cccccc">
 					      	<h5>Fak. Psikologi</h5>
-					      	<a class="dropdown-item" href="/organisasi">HMJ Psikologi</a>
+			 				{{! $cekJur6 = \App\Jurusan::where('fak_id', 6)->get() }}
+			 				@foreach($cekJur6 as $dt)
+						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 					    </div>
 				    	<div class="listdrop">
 					     	<h5>Fak. Sains dan Teknologi</h5>
-					      	<a class="dropdown-item" href="/organisasi">HMJ Matematika</a>
-					      	<a class="dropdown-item" href="#">HMJ Biologi</a>
-					      	<a class="dropdown-item" href="#">HMJ Fisika</a>
-					      	<a class="dropdown-item" href="#">HMJ Kimia</a>
-					      	<a class="dropdown-item" href="#">HMJ Teknik Informatika</a>
-					      	<a class="dropdown-item" href="#">HMJ Agroteknologi</a>
-					      	<a class="dropdown-item" href="#">HMJ Teknik Elektro</a>
+			 				{{! $cekJur7 = \App\Jurusan::where('fak_id', 7)->get() }}
+			 				@foreach($cekJur7 as $dt)
+						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 					      	<hr style="border: 0.2px solid #cccccc">
 					      	<h5>Fak. Ushuludin</h5>
-					      	<a class="dropdown-item" href="/organisasi">HMJ Aqidah dan Filsafat Islam</a>
-					      	<a class="dropdown-item" href="#">HMJ Studi Agama-Agama</a>
-					      	<a class="dropdown-item" href="#">HMJ Ilmu Al-Quran dan Tafsir</a>
-					      	<a class="dropdown-item" href="#">HMJ Tasawuf Psikoterapi</a>
+			 				{{! $cekJur8 = \App\Jurusan::where('fak_id', 1)->get() }}
+			 				@foreach($cekJur8 as $dt)
+						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+			 				@endforeach
 				    	</div>
 					</div>
 				  	<span class="span">|</span>

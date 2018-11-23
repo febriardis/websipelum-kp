@@ -191,7 +191,13 @@
 								</li>	
 								@endif
 
-								@if(Auth::user()->ket!='Super Admin')
+								@if(Auth::user()->ket=='Super Admin')
+								
+								@elseif(Auth::user()->ket=='Sema U' || Auth::user()->ket=='Dema U')
+								<li>
+									<a href="/organisasi univ/{{Auth::user()->ket}}"><i class="glyphicon glyphicon-th-large"></i> <span>Organisasi</span></a>
+								</li>
+								@else
 								<li>
 									<a href="/organisasi/{{Auth::user()->ket}}/{{Auth::user()->ket2}}"><i class="glyphicon glyphicon-th-large"></i> <span>Organisasi</span></a>
 								</li>

@@ -5,128 +5,147 @@
 @endsection
 
 @section('content')
-	<!-- Basic bar chart -->
-	<script type="text/javascript">
-        Chart.defaults.global.tooltips.custom = function(tooltip) {
+  <div style="display: none;">
+    {{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}
 
-        // Tooltip Element
-      var tooltipEl = $('#chartjs-tooltip');
+    {{! $tglAgenda = \App\Agenda::find($idAgenda)->tgl_agenda }}
 
-      if (!tooltipEl[0]) {
-        $('body').append('<div id="chartjs-tooltip"></div>');
-        tooltipEl = $('#chartjs-tooltip');
-      }
+    <!-- cek jumlah DPT -->
+    {{ $jum_dpt = \App\Pemilih::where('agenda_id', $idAgenda)->count() }}
+    <!-- /cek jumlah DPT -->
 
-      // Hide if no tooltip
-      if (!tooltip.opacity) {
-        tooltipEl.css({
-          opacity: 0
-        });
-        $('.chartjs-wrap canvas')
-          .each(function(index, el) {
-            $(el).css('cursor', 'default');
-          });
-        return;
-      }
+    {{! $tot1=0 }}
+    {{! $tot2=0 }}  
+    
+    <!-- cek total suara -->
+    {{! $tot=0  }}
+    @foreach($tbVoting as $d)
+      {{! $point = \Crypt::decrypt($d->jumlah) }}
+      {{! $nil_p = $point/$jum_dpt*100 }}
+      {{! $tot+=$nil_p }}
+    @endforeach 
+    <!-- /cek total suara --> 
+  </div>
 
-      $(this._chart.canvas).css('cursor', 'pointer');
+  <!-- jika total sudah seratus atau tanggal agenda seudah lewat maka tampilkan resultsnya -->
+  
+  <div class="content" style="min-height: 450px; margin-bottom: 60px">
+    
+    <div style="padding: 0px 20px; background-color: #ffffff; border-radius: 5px">
+      <h1 class="fontArial capitalize" style="float: left;margin-top: 8px; padding: 0px 10px; background-color: #f2f2f2;">{{\App\Agenda::find($idAgenda)->nm_agenda }}</h1>
+      
+      <h4 style="float: right; margin-top: 14px; padding: 0px 5px; background-color: #f2f2f2;">{{ date( 'l, d F Y', strtotime(\App\Agenda::find($idAgenda)->tgl_agenda)) }}</h4>
+      <div class="clear"></div>
+    </div>
+    
+    <div class="content-quickcount">
+      @if($tot!=100 && $tglAgenda == $cekTgl)
+        <meta http-equiv="refresh" content="30"/>
+          <!-- border quick count text -->
+          <div class="list-text-qc">
+            <hr><h3>Quick Count</h3><hr>
+            <div class="clear"></div>
+          </div>
+          <!-- /border quick count text -->
 
-      // Set caret Position
-      tooltipEl.removeClass('above below no-transform');
-      if (tooltip.yAlign) {
-        tooltipEl.addClass(tooltip.yAlign);
-      } else {
-        tooltipEl.addClass('no-transform');
-      }
-
-      // Set Text
-      if (tooltip.body) {
-        var innerHtml = [
-          (tooltip.beforeTitle || []).join('\n'), (tooltip.title || []).join('\n'), (tooltip.afterTitle || []).join('\n'), (tooltip.beforeBody || []).join('\n'), (tooltip.body || []).join('\n'), (tooltip.afterBody || []).join('\n'), (tooltip.beforeFooter || [])
-          .join('\n'), (tooltip.footer || []).join('\n'), (tooltip.afterFooter || []).join('\n')
-        ];
-        tooltipEl.html(innerHtml.join('\n'));
-      }
-
-      // Find Y Location on page
-      var top = 0;
-      if (tooltip.yAlign) {
-        if (tooltip.yAlign == 'above') {
-          top = tooltip.y - tooltip.caretHeight - tooltip.caretPadding;
-        } else {
-          top = tooltip.y + tooltip.caretHeight + tooltip.caretPadding;
-        }
-      }
-
-      var position = $(this._chart.canvas)[0].getBoundingClientRect();
-
-      // Display, position, and set styles for font
-      tooltipEl.css({
-        opacity: 1,
-        width: tooltip.width ? (tooltip.width + 'px') : 'auto',
-        left: position.left + tooltip.x + 'px',
-        top: position.top + top + 'px',
-        fontFamily: tooltip._fontFamily,
-        fontSize: tooltip.fontSize,
-        fontStyle: tooltip._fontStyle,
-        padding: tooltip.yPadding + 'px ' + tooltip.xPadding + 'px',
-      });
-    };
-
-    var config = {
-        // Add legends
-        legend: {
-            data: [
-                'Version 1.7 - 2k data','Version 1.7 - 2w data','Version 1.7 - 20w data','',
-                'Version 2.0 - 2k data','Version 2.0 - 2w data','Version 2.0 - 20w data'
-            ]
-        },
-
-        type: 'pie',
-        data: {
-            datasets: [{
-                data: [300, 50, 100, 40,],
-                backgroundColor: [
-                    "#F7464A",
-                    "#46BFBD",
-                    "#FDB45C",
-                    "#949FB1",
-                ],
-            }],
-
-            labels: [
-                "Red",
-                "Green",
-                "Yellow",
-                "Grey",
-            ]
-        },
-        options: {
-            responsive: true,
-            legend: {
-                display: false
-            },
-            tooltips: {
-                enabled: false,
-            }
-        }
-    };
-
-    window.onload = function() {
-        var ctx = document.getElementById("chart-area").getContext("2d");
-        window.myPie = new Chart(ctx, config);
-    };
-    </script>
-
-    <div class="panel panel-flat">
-		<div class="panel-body">          
-            <div class="panel-heading">
-                <h5 class="panel-title">Quick Count</h5>
+          <div class="content-counting">
+            @foreach($tbVoting as $dt)
+            <div style="display: none;">
+              {{! $tb = \App\Kandidat::find($dt->kandidat_id) }}
+              {{! $point = \Crypt::decrypt($dt->jumlah) }}
             </div>
-            <div id="canvas-holder" style="width: 300px;">
-                <canvas id="chart-area" width="300" height="300" />
+            <div class="panel-count">
+              <div class="head-panel-count">
+                <img src="/uploads/fotomhs/{{$tb->foto}}" style="" width="100%" height="100%">
+                <div class="bg-text-count">
+                  <div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
+                  <h1 style="margin-top: 10px; font-size: 30px">{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
+                  <h2 class="fontArial" style="margin-top: -10px"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
+                </div>
+              </div>
+              <div class="foot-panel-count">
+                <div class="foot-count">
+                  <h4 class="capitalize">{{$tb->nama}}</h4>
+                </div>
+              </div>
             </div>
-		</div>
-	</div>
-	<!-- /basic bar chart -->
+            <div style="display: none;">
+              {{! $tot1+=$nil_p }}
+              {{! $tot2+=$point }}
+            </div>
+            @endforeach
+            <div class="clear"></div>
+          </div>
+
+          <div class="progress" style="height: 50px">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:{{number_format($tot1)}}%"><h1 style="margin-top: 5px">Suara Masuk : {{number_format($tot1)}}<span style="font-size: 22px">%</span> / {{$tot2}}</h1></div>
+          </div>
+        @else
+          <!-- border quick count text -->
+          <div class="list-text-qcl">
+            <hr><h3>Quick Count Results</h3><hr>
+            <div class="clear"></div>
+          </div>
+          <!-- /border quick count text -->
+
+          <div style="display: none;">
+            {{! $c = \App\Voting::where('agenda_id', $idAgenda)->max('jumlah') }}
+            {{! $large = \Crypt::decrypt($c) }}
+          </div>
+          <div class="content-counting">
+            @foreach($tbVoting as $dt)        
+            <div style="display: none;">
+              {{! $tb = \App\Kandidat::find($dt->kandidat_id) }}
+              {{! $point = \Crypt::decrypt($dt->jumlah) }}
+            </div>
+            @if($point == $large)
+              <div class="panel-count">
+                <div class="head-panel-count">
+                  <img src="/uploads/fotomhs/{{$tb->foto}}" style="" width="100%" height="100%">
+                  <div class="bg-text-count">
+                    <div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
+                    <h1 style="margin-top: 10px; font-size: 30px">{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
+                    <h2 class="fontArial" style="margin-top: -10px"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
+                  </div>
+                </div>
+                <div class="foot-panel-count">
+                  <div class="foot-count">
+                    <h4 class="capitalize">{{$tb->nama}}</h4>
+                  </div>
+                </div>
+              </div>
+            @else
+              <div class="panel-count" style="margin-top: 50px">
+                <div class="head-panel-count">
+                  <img src="/uploads/fotomhs/{{$tb->foto}}" style="" width="100%" height="100%">
+                  <div class="bg-text-count">
+                    <div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
+                    <h1 style="margin-top: 10px; font-size: 30px">{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
+                    <h2 class="fontArial" style="margin-top: -10px"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
+                  </div>
+                </div>
+                <div class="foot-panel-count">
+                  <div class="foot-count">
+                    <h4 class="capitalize">{{$tb->nama}}</h4>
+                  </div>
+                </div>
+              </div>
+            @endif
+
+
+            <div style="display: none;">
+              {{! $tot1+=$nil_p }}
+              {{! $tot2+=$point }}
+            </div>
+            
+            @endforeach
+            <div class="clear"></div>
+          </div>
+
+          <div class="progress" style="height: 50px">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:{{number_format($tot1)}}%"><h1 style="margin-top: 5px">Total Suara Masuk : {{number_format($tot1)}}<span style="font-size: 22px">%</span> / {{$tot2}}</h1></div>
+          </div>
+        @endif
+    </div>
+  </div>
 @endsection

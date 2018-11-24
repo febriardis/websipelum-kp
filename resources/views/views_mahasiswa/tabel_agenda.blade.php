@@ -61,7 +61,8 @@
                     {{!$cekKet = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('keterangan')}} 
                   </div>  
                   @if($cekKet=='Pendaftaran Tidak Diterima')
-                    <a href="" class="btn btn-secondary btn-sm text-white"><i class='fas fa-edit'></i>&nbsp;Perbaikan</a>
+                    <!-- <a href="" class="btn btn-secondary btn-sm text-white"><i class='fas fa-edit'></i>&nbsp;Perbaikan</a> -->
+                    <a href="javascript::void(0)">no actions</a>
                   @else
                     <a href="/batal daftar/{{Auth::user()->nim}}/{{$dt->id}}" onclick="return ConfirmDelete()" class="btn btn-danger btn-sm text-white"><i class='far fa-times-circle'></i>&nbsp;Batal</a>
                   @endif

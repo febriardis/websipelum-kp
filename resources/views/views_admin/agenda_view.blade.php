@@ -114,22 +114,25 @@
 							<a href="/detail kandidat/{{$dt->nim}}/{{\Crypt::encrypt($IdAgenda) }}"><i class="icon-eye"></i> Lihat</a>
 						</td>
 						<td class="text-center">
-						@if(Auth::user()->ket=='Super Admin')
-						@else
-							@if(Auth::user()->id==$cekAdmin || Auth::user()->ket==$cekkat1Admin && Auth::user()->ket2==$cekkat2Admin)<ul class="icons-list">
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-										<i class="icon-menu9"></i>
-									</a>
 
-									<ul class="dropdown-menu dropdown-menu-right">
-										<li><a href="/detail kandidat/{{$dt->nim}}/{{\Crypt::encrypt($IdAgenda)}}"><i class="glyphicon glyphicon-ok-circle"></i> Verifikasi Data</a></li>
-										
-										<li><a href="/hapus kandidat/{{ $dt->id }}/{{ $IdAgenda }}" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a></li>
-									</ul>
-								</li>
-							</ul>
+						@if($cekTgl < $tgl_agenda)					
+							@if(Auth::user()->ket=='Super Admin')
 							@else
+								@if(Auth::user()->id==$cekAdmin || Auth::user()->ket==$cekkat1Admin && Auth::user()->ket2==$cekkat2Admin)<ul class="icons-list">
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											<i class="icon-menu9"></i>
+										</a>
+
+										<ul class="dropdown-menu dropdown-menu-right">
+											<li><a href="/detail kandidat/{{$dt->nim}}/{{\Crypt::encrypt($IdAgenda)}}"><i class="glyphicon glyphicon-ok-circle"></i> Verifikasi Data</a></li>
+											
+											<li><a href="/hapus kandidat/{{ $dt->id }}/{{ $IdAgenda }}" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a></li>
+										</ul>
+									</li>
+								</ul>
+								@else
+								@endif
 							@endif
 						@endif
 						</td>

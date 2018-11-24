@@ -3,37 +3,31 @@
 @section('content')
   	<div style="display: none;">
   	{{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'), 
-    	$cek  = (App\Agenda::where('tgl_agenda', $cekTgl))->value('tgl_agenda'),
-    	$tbA=(App\Agenda::where('tgl_agenda', $cekTgl))->first() }}
-		
-		<!-- cek jumlah DPT -->
-  		{{! $cekJumP=\App\Pemilih::where('agenda_id', $tbA->id)->get() }}
-		{{! $jum_dpt=0 }}
-		@foreach($cekJumP as $cek)
-			{{!$jum_dpt++}}
-		@endforeach
-		{{! $tot1=0 }}
-		{{! $tot2=0 }}	
-		<!-- /cek jumlah DPT -->
-
-		<!-- cek total suara -->
-		{{! $tot=0  }}
-		{{! $tbVote=\App\Voting::where('agenda_id', $tbA->id)->get() }}
-		@foreach($tbVote as $dt)
-			{{! $point = \Crypt::decrypt($dt->jumlah) }}
-			{{! $nil_p = $point/$jum_dpt*100 }}
-			{{! $tot+=$nil_p }}
-		@endforeach	
-		<!-- /cek total suara -->			
+    	$cek  = (App\Agenda::where('tgl_agenda', $cekTgl))->value('tgl_agenda') }}		
 	</div>
 
 	<!-- Content -->	
 	<div class="content" style="min-height: 450px; margin-bottom: 60px">
 		<div class="content-quickcount">
-  			<div style="display: none;">
-      			{{! $tbA=(App\Agenda::where('tgl_agenda', $cekTgl))->first() }} 
-      		</div>
     		@if(count($cek)!=0)
+    		  	<div style="display: none;">
+      				{{! $tbA=(App\Agenda::where('tgl_agenda', $cekTgl))->first() }} 
+
+  					{{! $jum_dpt=\App\Pemilih::where('agenda_id', $tbA->id)->count() }}
+      				{{! $tot1=0 }}
+					{{! $tot2=0 }}	
+					
+					<!-- cek total suara -->
+					{{! $tot=0  }}
+					{{! $tbVote=\App\Voting::where('agenda_id', $tbA->id)->get() }}
+					@foreach($tbVote as $dt)
+						{{! $point = \Crypt::decrypt($dt->jumlah) }}
+						{{! $nil_p = $point/$jum_dpt*100 }}
+						{{! $tot+=$nil_p }}
+					@endforeach	
+					<!-- /cek total suara -->	
+      			</div>
+			
 				<div class="list-content-info capitalize">
 					<h5>hitung&nbsp;cepat&nbsp;-&nbsp;{{ $tbA->nm_agenda }} </h5>
 					<p>Update : {{ \Carbon\Carbon::now('Asia/Jakarta')->format('l, d F Y | H:i')  }}</p>
@@ -61,7 +55,7 @@
 						<div class="panel-count">
 							<div class="head-panel-count">
 								<img src="/uploads/fotomhs/{{$tb->foto}}" style="" width="100%" height="100%">
-								<div class="bg-text-count">
+								<div class="bg-text-count">				
 									<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
 									<h1>{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
 									<div class="clear"></div>
@@ -94,8 +88,10 @@
 					<!-- /border quick count text -->
 
 					<div style="display: none;">
-						{{! $tbVoting=\App\Voting::orderBy('jumlah', 'DESC')->where('agenda_id', $tbA->id)->get() }}
-						{{!$n=0}}
+						{{! $tbVoting=\App\Voting::where('agenda_id', $tbA->id)->get() }}
+						
+						{{! $c = \App\Voting::where('agenda_id', $tbA->id)->max('jumlah') }}
+						{{! $large = \Crypt::decrypt($c) }}
 					</div>
 					<div class="content-counting">
 						@foreach($tbVoting as $dt)				
@@ -103,23 +99,43 @@
 							{{! $tb = \App\Kandidat::find($dt->kandidat_id) }}
 							{{! $point = \Crypt::decrypt($dt->jumlah) }}
 						</div>
-						
-						<div class="panel-count">
-							<div class="head-panel-count">
-								<img src="/uploads/fotomhs/{{$tb->foto}}" style="" width="100%" height="100%">
-								<div class="bg-text-count">
-									<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
-									<h1>{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
-									<div class="clear"></div>
-									<h2 class="fontArial"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
+						@if($point == $large)
+							<div class="panel-count">
+								<div class="head-panel-count">
+									<img src="/uploads/fotomhs/{{$tb->foto}}" style="" width="100%" height="100%">
+									<div class="bg-text-count">
+										<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
+										<h1>{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
+										<div class="clear"></div>
+										<h2 class="fontArial"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
+									</div>
+								</div>
+								<div class="foot-panel-count">
+									<div class="foot-count">
+										<h4 class="capitalize">{{$tb->nama}}</h4>
+									</div>
 								</div>
 							</div>
-							<div class="foot-panel-count">
-								<div class="foot-count">
-									<h4 class="capitalize">{{$tb->nama}}</h4>
+						@else
+							<div class="panel-count" style="margin-top: 50px">
+								<div class="head-panel-count">
+									<img src="/uploads/fotomhs/{{$tb->foto}}" style="" width="100%" height="100%">
+									<div class="bg-text-count">
+										<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
+										<h1>{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
+										<div class="clear"></div>
+										<h2 class="fontArial"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
+									</div>
+								</div>
+								<div class="foot-panel-count">
+									<div class="foot-count">
+										<h4 class="capitalize">{{$tb->nama}}</h4>
+									</div>
 								</div>
 							</div>
-						</div>
+						@endif
+
+
 						<div style="display: none;">
 							{{! $tot1+=$nil_p }}
 							{{! $tot2+=$point }}

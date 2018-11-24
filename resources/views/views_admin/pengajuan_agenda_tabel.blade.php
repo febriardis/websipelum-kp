@@ -17,7 +17,7 @@
 			<h5 class="panel-title">Pengajuan Agenda</h5><hr>
 			@if(Auth::user()->ket=='Super Admin')
 			@else
-				<a href="/upload berita acara" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-upload"></i>&nbsp;Upload</a>
+				<a href="/upload pengajuan agenda" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-upload"></i>&nbsp;Pengajuan</a>
 			@endif
 		</div>
 
@@ -66,6 +66,7 @@
 							<a href="/verifikasi/{{\Crypt::encrypt($dt->id)}}" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-share"></i>&nbsp;Buat Agenda</a>
 							<a href="/tolak/{{$dt->id}}" class="btn btn-danger btn-xs" onclick="return ConfirmTolak()"><i class="glyphicon glyphicon-share"></i>&nbsp;Tolak Agenda</a>
 						@else
+							<a href="javascript::void(0)">no actions</a>
 						@endif
 					</td>
 					@else
@@ -77,7 +78,7 @@
 									<i class="icon-menu9"></i>
 								</a>
 								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a href=""><i class="icon-compose"></i>&nbsp;Edit</a></li>
+									<li><a href="/edit pengajuan agenda/{{\Crypt::encrypt($dt->id)}}"><i class="icon-compose"></i>&nbsp;Edit</a></li>
 									<script>
 									  	function ConfirmDelete() {
 									  		var x = confirm("Yakin Akan Menghapus Data?");
@@ -92,6 +93,7 @@
 							</li>
 						</ul>
 						@else
+							<a href="javascript::void(0)">no actions</a>
 						@endif
 					</td>
 					@endif	

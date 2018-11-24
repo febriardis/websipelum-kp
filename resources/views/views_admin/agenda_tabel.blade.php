@@ -61,27 +61,33 @@
 						<a href="/detail agenda/{{\Crypt::encrypt($dt->id) }}"><i class="icon-eye"></i> Lihat</a>
 					</td>
 					<td class="text-center"> 	
-					@if(Auth::user()->ket=='Super Admin' || Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2)
-						<ul class="icons-list">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<i class="icon-menu9"></i>
-								</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a href="/edit agenda/{{\Crypt::encrypt($dt->id) }}"><i class="icon-compose"></i> Edit Data</a></li>
-									<script>
-									  	function ConfirmDelete() {
-									  		var x = confirm("Yakin Akan Menghapus Data?");
-									  		if (x)
-									    		return true;
-									  		else
-									    		return false;
-									  	}
-									</script>
-									<li><a href="/hapus agenda/{{ $dt->id }}" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a></li>
-								</ul>
-							</li>
-						</ul>
+					@if($cekTgl < $dt->tgl_agenda)	
+						@if(Auth::user()->ket=='Super Admin' || Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2)
+							<ul class="icons-list">
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+										<i class="icon-menu9"></i>
+									</a>
+									<ul class="dropdown-menu dropdown-menu-right">
+										<li><a href="/edit agenda/{{\Crypt::encrypt($dt->id) }}"><i class="icon-compose"></i> Edit Data</a></li>
+										<script>
+										  	function ConfirmDelete() {
+										  		var x = confirm("Yakin Akan Menghapus Data?");
+										  		if (x)
+										    		return true;
+										  		else
+										    		return false;
+										  	}
+										</script>
+										<li><a href="/hapus agenda/{{ $dt->id }}" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a></li>
+									</ul>
+								</li>
+							</ul>
+						@else
+							<a href="javascript::void(0)">no actions</a>
+						@endif
+					@else
+						<a href="javascript::void(0)">no actions</a>
 					@endif
 					</td>
 				</tr>

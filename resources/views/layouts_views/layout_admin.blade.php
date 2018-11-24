@@ -6,8 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Admin Sipelum</title>
 
+	<link rel="stylesheet" type="text/css" href="/css/styleAdmin.css">
+
 	<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>	
-	<script type="text/javascript" src="/chartjs/Chart.bundle.js"></script>
 
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -203,7 +204,7 @@
 								</li>
 								@endif
 								<li>
-									<a href="/berita acara"><i class="icon-clipboard3"></i><span>Pengajuan Agenda</span></a>
+									<a href="/pengajuan agenda"><i class="icon-clipboard3"></i><span>Pengajuan Agenda</span></a>
 								</li>							
 								<li>
 									<a href="/tabel agenda"><i class="icon-calendar"></i><span>Agenda</span></a>

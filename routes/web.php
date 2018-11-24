@@ -33,11 +33,13 @@ Route::get('/batal daftar/{nim}/{IdAgenda}', 'KandidatController@batalDaftar')->
 Route::get('/dashboard', function () {return view('views_admin.dashboard_admin');})->middleware('auth:admin');
 
 // ================================ADMIN-BERITA-ACARA==============================
-Route::get('/berita acara','BeritaAcaraController@show')->middleware('auth:admin');
-Route::get('/upload berita acara',function(){return view('views_admin.beritaacara_form');})->middleware('auth:admin');
-Route::post('/upload berita/{id}','BeritaAcaraController@insert')->middleware('auth:admin');
-Route::get('/cancel/{id}','BeritaAcaraController@delete')->middleware('auth:admin'); // oleh admin!=superadmin
-Route::get('/tolak/{id}','BeritaAcaraController@tolakAcara')->middleware('auth:admin'); // oleh admin!=superadmin
+Route::get('/pengajuan agenda','PengAgendaController@show')->middleware('auth:admin');
+Route::get('/upload pengajuan agenda',function(){return view('views_admin.pengajuan_agenda_form');})->middleware('auth:admin');
+Route::post('/upload ajuan/{id}','PengAgendaController@insert')->middleware('auth:admin');
+Route::get('/edit pengajuan agenda/{id}','PengAgendaController@edit')->middleware('auth:admin');
+Route::post('/edit ajuan/{id}','PengAgendaController@update')->middleware('auth:admin');
+Route::get('/cancel/{id}','PengAgendaController@delete')->middleware('auth:admin'); // oleh admin!=superadmin
+Route::get('/tolak/{id}','PengAgendaController@tolakAcara')->middleware('auth:admin'); // oleh admin!=superadmin
 
 // ================================ADMIN-KELOLA-ADMIN==================================
 Route::get('/tabel admin','AdminController@show')->middleware('auth:admin');
@@ -84,9 +86,8 @@ Route::get('/hapus pemilih/{id}/{idAgenda}', 'PemilihController@delete')->middle
 // Route::get('/reset pemilih/{IdAgenda}', 'PemilihController@reset')->middleware('auth:admin');
 
 // ==================================ADMIN-QUICKCOUNT==================================
-Route::get('/data quick count', function () {return view('views_admin.quickcount_tabel');})->middleware('auth:admin');
-Route::get('/quick count', function () {return view('views_admin.quickcount_view');})->middleware('auth:admin');
-
+Route::get('/data quick count', 'VoteController@tableQuickCount')->middleware('auth:admin');
+Route::get('/detail quick count/{idAgenda}', 'VoteController@viewQuickCount')->middleware('auth:admin');
 
 
 // =============================ADMIN-SHOW-MAHASISWA================================

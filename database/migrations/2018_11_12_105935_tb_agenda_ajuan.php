@@ -13,7 +13,7 @@ class TbBeritaacara extends Migration
      */
     public function up()
     {
-        Schema::create('tb_beritaacara', function (Blueprint $table) {
+        Schema::create('tb_agenda_ajuan', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('admin_id');
             $table->string('nm_agenda');
@@ -23,7 +23,7 @@ class TbBeritaacara extends Migration
             $table->timestamps();
         });
 
-        Schema::table('tb_beritaacara',function (Blueprint $kolom) {
+        Schema::table('tb_agenda_ajuan',function (Blueprint $kolom) {
             $kolom->foreign('admin_id')->references('id')->on('tb_admin')->onDelete('cascade')->onUpdate('cascade');
         });
     }
@@ -35,6 +35,6 @@ class TbBeritaacara extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_beritaacara');
+        Schema::dropIfExists('tb_agenda_ajuan');
     }
 }

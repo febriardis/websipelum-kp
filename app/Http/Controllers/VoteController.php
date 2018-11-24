@@ -3,11 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Agenda;
 use App\Pemilih;
 use App\Voting;
 
 class VoteController extends Controller 
 {
+    // function admin
+    function tableQuickCount(){
+        $tb = Agenda::all();
+
+        return view('views_admin.quickcount_tabel')
+        ->with('tbAgenda', $tb);
+    }
+
+    function viewQuickCount($idAgenda){
+        $id = \Crypt::decrypt($idAgenda);
+        $tb = Voting::where('agenda_id', $id)->get();
+
+        return view('views_admin.quickcount_view')
+        ->with('idAgenda', $id)
+        ->with('tbVoting', $tb);
+    }
+    // /function admin
+
     function QuickCountView() {
         return view('views_mahasiswa.quick_count');
     }
@@ -28,12 +47,8 @@ class VoteController extends Controller
         $tbVote = Voting::where([['agenda_id',$idAgenda],['kandidat_id',$idKandidat]])->first(); 
         $tbVote->jumlah = \Crypt::encrypt($nil); 
         $tbVote->save();
-        //return \Crypt::decrypt($tbVote->jumlah);
 
     	return redirect('/pemilihan')
         ->with('pesanVote','berhasil memilih');
-
-
-        //buuug ketika button vote diklik banyak bisa kesimpan banyak
     }
 }

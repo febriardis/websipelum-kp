@@ -8,6 +8,12 @@
 			<h4 class="panel-title" style="text-transform: capitalize;">Pendaftaran Bakal Calon Ketua <br> Agenda {{ $tb->nm_agenda }}</h4>
 			<hr>
 		</div>
+		@if(Session::has('pesanEr'))
+			<div class="alert alert-danger">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				{{ Session::get('pesanEr') }} !
+			</div>
+		@endif
 		<div class="panel-body">
 			<form action="/tambah kandidat/{{$tb->id}}" method="POST" enctype="multipart/form-data">
 			{{csrf_field()}}

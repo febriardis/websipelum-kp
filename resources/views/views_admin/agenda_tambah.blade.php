@@ -93,7 +93,7 @@
 
 				<div class="text-right">
 					<button type="submit" class="btn btn-primary">Terbitkan</button>
-					<a href="/berita acara" class="btn btn-danger">Batal</a>
+					<a href="{{URL::previous()}}" class="btn btn-danger">Batal</a>
 				</div>
 			</div>
 		</div>

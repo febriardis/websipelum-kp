@@ -35,7 +35,7 @@ class AgendaController extends Controller
     }
 
     function show(){ //function agenda_tabel
-    	$table = Agenda::all(); 
+    	$table = Agenda::orderBy('created_at', 'ASC')->get(); 
     	return view('views_admin.agenda_tabel')
     	->with("data", $table);
     }

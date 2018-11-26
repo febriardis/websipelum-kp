@@ -64,7 +64,7 @@
 						</div>
 						<!-- /cek total suara -->	
 						<div class="progress">
-					    	<div class="progress-bar progress-bar-striped progress-bar-animated" style="width:{{number_format($tot)}}%">{{number_format($tot)}}%</div>
+					    	<div class="progress-bar progress-bar-striped active" style="width:{{number_format($tot)}}%">{{number_format($tot)}}%</div>
 					  	</div>
 					</td>
 					<td>

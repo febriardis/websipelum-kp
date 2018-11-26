@@ -117,7 +117,7 @@
 								</div>
 							</div>
 						@else
-							<div class="panel-count" style="margin-top: 50px">
+							<div class="panel-count"> <!-- style="margin-top: 50px" -->
 								<div class="head-panel-count">
 									<img src="/uploads/fotomhs/{{$tb->foto}}" style="" width="100%" height="100%">
 									<div class="bg-text-count">
@@ -134,7 +134,6 @@
 								</div>
 							</div>
 						@endif
-
 
 						<div style="display: none;">
 							{{! $tot1+=$nil_p }}

@@ -5,7 +5,7 @@
   {{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}
   <div class="content">
     <div style="margin: 20px; min-height: 450px">
-      <h3>List Agenda </h3>
+      <h3>Agenda Terkait</h3>
         @if(Session::has('pesanKan'))
         <div class="alert alert-info">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

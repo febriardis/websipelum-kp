@@ -4,15 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TbOrganisasi extends Model
+class Organisasi extends Model
 {
 	protected $table = 'tb_org';
 	protected $fillable = ['fak_id','jur_id','ket_organisasi','nm_organisasi','visi','misi'];
     
-    function FKTbOrganisasi1(){
+    function FKOrganisasi1(){
         return $this->belongsTo(Fakultas::class);
     }
-    function FKTbOrganisasi2(){
+    function FKOrganisasi2(){
         return $this->belongsTo(Jurusan::class);
+    }
+
+    function PKOrganisasi(){
+    	return $this->hasMany(JabatanUmum::class);
     }
 }

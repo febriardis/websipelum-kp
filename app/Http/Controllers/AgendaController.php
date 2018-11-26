@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Berita_acara;
+use App\AgendaAjuan;
 use App\Agenda;
 use App\Mahasiswa;
 use App\Kandidat;
@@ -14,7 +14,7 @@ class AgendaController extends Controller
 {   
     function verif_view($id){
         $i = \Crypt::decrypt($id);
-        $tb = Berita_acara::find($i);
+        $tb = AgendaAjuan::find($i);
         return view('views_admin.agenda_tambah')
         ->with('tb', $tb);
     }
@@ -52,7 +52,7 @@ class AgendaController extends Controller
             $tb->tgl_agenda= $req->tgl_agenda;
             $tb->save();
 
-            $tb_berita = Berita_acara::find($req->id_bacara);
+            $tb_berita = AgendaAjuan::find($req->id_bacara);
             $tb_berita->ket = 'sudah diverifikasi';
             $tb_berita->save();
 

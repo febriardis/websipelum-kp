@@ -49,7 +49,7 @@ Route::get('/hapus admin/{id}', 'AdminController@delete');
 
 // ==================================ADMIN-AGENDA`==================================
 Route::get('/verifikasi/{id}','AgendaController@verif_view')->middleware('auth:admin');
-Route::post('/tambah agenda/{id}', 'AgendaController@insert');
+Route::post('/tambah agenda/{idAdmin}', 'AgendaController@insert');
 Route::get('/edit agenda/{id}', 'AgendaController@edit')->middleware('auth:admin');
 Route::post('/edit agenda/{id}', 'AgendaController@update');
 Route::get('/hapus agenda/{id}', 'AgendaController@delete')->middleware('auth:admin');
@@ -77,6 +77,9 @@ Route::get('/organisasi/{ket}/{ket2}', 'OrganisasiController@show')->middleware(
 Route::post('/nmOrganisasi', 'OrganisasiController@insertNama')->middleware('auth:admin');
 Route::post('/UpnmOrganisasi/{id}', 'OrganisasiController@updateNama')->middleware('auth:admin');
 Route::post('/UpVMOrganisasi/{id}', 'OrganisasiController@updateVisiMisi')->middleware('auth:admin');
+Route::post('/insert jabtum/{idOrg}', 'OrganisasiController@insertJabtum')->middleware('auth:admin');
+Route::post('/update jabtum/{id}', 'OrganisasiController@updateJabtum')->middleware('auth:admin');
+Route::get('/delete jabtum/{id}/{ket}/{ket2}', 'OrganisasiController@deleteJabtum')->middleware('auth:admin');
 
 
 // ==================================ADMIN-PEMILIH==================================

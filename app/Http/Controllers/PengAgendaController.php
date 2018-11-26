@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+//use App\Http\Requests\ErrorFormRequest;
 use App\AgendaAjuan;
+use App\Rules\DocType;
 
 class PengAgendaController extends Controller {
     function show()
@@ -16,7 +18,12 @@ class PengAgendaController extends Controller {
     // function Admin!=SuperAdmin
     function insert(Request $req, $AdminId)
     {
-    	$tb = new AgendaAjuan;
+        $this->validate($req, [
+            'file' => 'required|max:10000|mimes:doc,docx,pdf' //new DocType() //
+            ]
+        );
+    	
+        $tb = new AgendaAjuan;
     	$tb->admin_id = $AdminId;
     	$tb->nm_agenda = $req->nm_agenda;
     	$tb->sistem_vote = $req->sistem_pem;
@@ -45,7 +52,11 @@ class PengAgendaController extends Controller {
 
 
     function update(Request $req, $id)
-    {
+    {       
+        $this->validate($req, [
+            'file' => 'max:20000|mimes:doc,docx,pdf' //new DocType() //
+            ]
+        );
         $tb = AgendaAjuan::find($id);
         $tb->nm_agenda   = $req->nm_agenda;
         $tb->sistem_vote = $req->sistem_pem;
@@ -74,7 +85,7 @@ class PengAgendaController extends Controller {
 
     function tolakAcara($id) {
         $tb = AgendaAjuan::find($id);
-        $tb->ket = 'acara ditolak';
+        $tb->ket = 'agenda ditolak';
         $tb->save();
         
         return redirect('/pengajuan agenda')

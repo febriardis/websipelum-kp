@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Jurusan;
 use App\Fakultas;
-use App\TbOrganisasi;
+use App\Organisasi;
+use App\JabatanUmum;
 
 class OrganisasiController extends Controller
 {
@@ -15,12 +16,12 @@ class OrganisasiController extends Controller
 		$cekFak = Fakultas::where('nm_fakultas',$ket2)->value('id');
 	
 		if (count($cekJur)!=0) {
-			$cekOrg = TbOrganisasi::where([['ket_organisasi',$ket],['jur_id',$cekJur]])->get();	
+			$cekOrg = Organisasi::where([['ket_organisasi',$ket],['jur_id',$cekJur]])->get();	
 		}elseif (count($cekFak)!=0) {
-			$cekOrg = TbOrganisasi::where([['ket_organisasi',$ket],['fak_id',$cekFak]])->get();	
+			$cekOrg = Organisasi::where([['ket_organisasi',$ket],['fak_id',$cekFak]])->get();	
 		}
 		else { //else org=demaU atau semaU
-			$cekOrg = TbOrganisasi::where('ket_organisasi',$ket)->get();	
+			$cekOrg = Organisasi::where('ket_organisasi',$ket)->get();	
 		}
 
 		return view('views_mahasiswa.organisasi')
@@ -30,13 +31,14 @@ class OrganisasiController extends Controller
 		->with('id_jur',$cekJur)
 		->with('tb', $cekOrg);
 	}
+	// -/show in mahasiswa page
 
 	//show in admin page
 	function showOrgU($ket) { //SEMA-U or DEMA-U
 		$cekJur ='';
 		$cekFak ='';
 		$ket2   ='';
-		$cekOrg = TbOrganisasi::where('ket_organisasi',$ket)->get();	
+		$cekOrg = Organisasi::where('ket_organisasi',$ket)->get();	
 		
 		return view('views_admin.organisasi_view')
 		->with('ket',$ket)
@@ -47,14 +49,13 @@ class OrganisasiController extends Controller
 	}
 
 	function show($ket, $ket2) {
-		//karena ditabelnya null, jadi kalo jur_id=null itu terbaca;
 		$cekJur = Jurusan::where('nm_jurusan',$ket2)->value('id');
 		$cekFak = Fakultas::where('nm_fakultas',$ket2)->value('id');
 	
 		if (count($cekJur)!=0) {
-			$cekOrg = TbOrganisasi::where([['ket_organisasi',$ket],['jur_id',$cekJur]])->get();	
+			$cekOrg = Organisasi::where([['ket_organisasi',$ket],['jur_id',$cekJur]])->get();	
 		}elseif (count($cekFak)!=0) {
-			$cekOrg = TbOrganisasi::where([['ket_organisasi',$ket],['fak_id',$cekFak]])->get();	
+			$cekOrg = Organisasi::where([['ket_organisasi',$ket],['fak_id',$cekFak]])->get();	
 		}
 		
 		return view('views_admin.organisasi_view')
@@ -66,7 +67,7 @@ class OrganisasiController extends Controller
 	}
 
 	function insertNama(Request $req) {
-		$tb = new TbOrganisasi;
+		$tb = new Organisasi;
 		$tb->fak_id = $req->idFak;
 		$tb->jur_id = $req->idJur;
 		$tb->nm_organisasi = $req->nmOrg;
@@ -83,7 +84,7 @@ class OrganisasiController extends Controller
 	}
 	
 	function updateNama(Request $req, $id) {
-		$tb = TbOrganisasi::find($id);
+		$tb = Organisasi::find($id);
 		$tb->nm_organisasi = $req->nmOrg;
 		$tb->save();
 
@@ -95,7 +96,7 @@ class OrganisasiController extends Controller
 	}
 
 	function updateVisiMisi(Request $req, $id) {
-		$tb = TbOrganisasi::find($id);
+		$tb = Organisasi::find($id);
 		$tb->visi = $req->visi;
 		$tb->misi = $req->misi;
 		$tb->save();
@@ -104,6 +105,43 @@ class OrganisasiController extends Controller
         	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
     	}else{
         	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
+    	}
+	}
+
+	function insertJabtum(Request $req, $id) {
+		$tb             = new JabatanUmum;
+		$tb->org_id     = $id;
+		$tb->nm_jabatan = $req->nm_jabatan;
+		$tb->nm_penjabat= $req->nm_penjabat;
+		$tb->save();
+
+		if($req->ket2!= ''){
+        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
+    	}else{
+        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
+    	}
+	}
+
+	function updateJabtum(Request $req, $id) {
+		$tb             = JabatanUmum::find($id);
+		$tb->nm_jabatan = $req->nm_jabatan;
+		$tb->nm_penjabat= $req->nm_penjabat;
+		$tb->save();
+
+		if($req->ket2!= ''){
+        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
+    	}else{
+        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
+    	}
+	}
+
+	function deleteJabtum($id, $ket, $ket2) {
+		JabatanUmum::find($id)->delete();
+
+		if($ket2!= ''){
+        	return redirect()->action('OrganisasiController@show', ['ket' => $ket, 'ket2' => $ket2]);
+    	}else{
+        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $ket]);
     	}
 	}
 }

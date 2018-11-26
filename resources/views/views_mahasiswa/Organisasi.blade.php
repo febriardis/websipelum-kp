@@ -50,29 +50,37 @@
 
     <!-- struktur organisasi -->
     <div id="menu1" class="container tab-pane fade"><br>
+    @if(count($tb)!=0) <!-- cek tb_agenda -->
+      <div style="display: none;">
+        {{ !$tbJ = \App\JabatanUmum::where('org_id', $tb->first()->id)->get() }}
+      </div>
+      @if(count($tbJ)!=0)
       <div class="content-s" style="border: 1px ">
         <div class="text-center" style="margin: 20px;">
           <hr><h4>Struktur Organisasi</h4><hr>
+          <!-- struktur umum -->
           <div class="item-SO">
-            <b>Ketua Umum</b> <p>Yanto<p>
-            <b>Sekretaris Umum</b> <p>Subhan</p>
-            <b>Bendahara Umum</b> <p>Harist</p>
+            @foreach($tbJ as $d)
+            <div>
+              <b>{{$d->nm_jabatan}}</b> <p>{{$d->nm_penjabat}}<p>
+            </div>
+            @endforeach
           </div>
-        </div>
+          <!-- struktur umum -->
 
-        <table>
-          <thead>
-            <th>
-              <td></td>
-            </th>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+          <!-- struktur bidang+penjabat -->
+          <div>
+            
+          </div>
+          <!-- struktur bidang+penjabat -->
+        </div>
       </div>
+      @else
+        <h5 class="text-muted">Content Not Found!!</h5>
+      @endif
+    @else
+        <h5 class="text-muted">Content Not Found!!</h5>
+    @endif
     </div>
     <!-- /struktur organisasi -->
   </div>

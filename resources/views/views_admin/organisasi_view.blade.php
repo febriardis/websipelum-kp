@@ -19,8 +19,7 @@
         </div>  
       </form>
     @else
-      <!-- jika tb_org kosong maka jalankan -->
-      <!-- form buat nama organisasi -->
+      <!-- form create nama organisasi -->
       <form action="/nmOrganisasi" method="POST"> <!-- set nama organisasi -->
         {{ csrf_field() }}
         <input type="hidden" name="ket" value="{{$ket}}">
@@ -34,7 +33,8 @@
           </div>
           <input type="submit" class="btn btn-info btn-sm col-lg-1" value="set">
         </div>  
-      </form> 
+      </form>
+    <!-- form create nama organisasi --> 
     @endif
   </div>
 
@@ -68,7 +68,74 @@
 
       <!-- tab 2 input content struktur organisasi -->
       <div class="tab-pane" id="highlighted-justified-tab2">
-        Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid laeggin.
+        <div class="container-fluid">
+          <h3>Jabatan Umum</h3>
+          <a href="javascript:void(0)" class="btn btn-sm btn-default" onclick="showJabtumForm()"><i class="glyphicon glyphicon-pencil"></i> Tambah</a>
+          <!-- panel form add jabtum -->
+          <div class="panel panel-flat" id="jabtum" style="padding: 10px; display: none; width: 500px">
+            <div>
+              <a href="javascript:void(0)" style="float: right;" onclick="closeJabtumForm()"><i class="glyphicon glyphicon-remove"></i></a>
+              <div class="clear"></div>
+            </div>
+
+            <form action="/insert jabtum/{{$tb->first()->id}}" method="POST">
+              {{csrf_field()}}
+              <input type="hidden" name="ket" value="{{$ket}}">
+              <input type="hidden" name="ket2" value="{{$ket2}}">
+              <div class="row">
+                <div class="col-sm-5">
+                  <label>Jabatan :</label>
+                  <input type="text" name="nm_jabatan" placeholder="nama jabatan" class="form-control">
+                </div>
+                <div class="col-sm-7">
+                  <label>Penjabat :</label>
+                  <input type="text" name="nm_penjabat" placeholder="nama penjabat" class="form-control">
+                </div>
+                <div class="right" style="margin:10px 10px 0px 0px">
+                  <input type="submit" value="Tambahkan" class="btn btn-info btn-sm">
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- panel form add jabtum -->
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Jabatan</th>
+                <th>Nama Penjabat</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+            <div style="display: none;">
+              {{!$tbJ = \App\JabatanUmum::where('org_id', $tb->first()->id)->get()}}
+              {{!$i=1}}
+            </div>
+            @foreach($tbJ as $d)
+            <form action="/update jabtum/{{$d->id}}" method="POST">
+              {{csrf_field()}}
+              <input type="hidden" name="ket" value="{{$ket}}">
+              <input type="hidden" name="ket2" value="{{$ket2}}">
+              <tr>
+                <td>{{$i++}}</td>
+                <td width="200">
+                  <input type="text" name="nm_jabatan" value="{{$d->nm_jabatan}}" placeholder="nama jabatan" class="form-control">
+                </td>
+                <td width="300">
+                  <input type="text" name="nm_penjabat" value="{{$d->nm_penjabat}}" placeholder="nama penjabat" class="form-control">
+                </td>
+                <td>
+                  <button type="submit" class="btn btn-sm btn-info"><i class="icon-pencil7"></i> Perbaharui</button>
+                  <a href="/delete jabtum/{{$d->id}}/{{$ket}}/{{$ket2}}" onclick="ConfirmDelete()" class="btn btn-sm btn-danger"><i class="icon-trash"></i> Hapus</a>
+                </td>
+              </tr>
+            </form>
+            @endforeach
+            </tbody>
+          </table>
+        </div>
       </div>
       <!-- tab 2 input content struktur organisasi -->
     </div>
@@ -77,6 +144,22 @@
     @endif
   </div>
   
+  <script type="text/javascript">
+    function showJabtumForm() {
+      document.getElementById("jabtum").style.display="block";
+    }
+    function closeJabtumForm() {
+      document.getElementById("jabtum").style.display="none";
+    }
+    function ConfirmDelete() {
+      var x = confirm("Yakin Akan Menghapus Data?");
+      if (x)
+        return true;
+      else
+        return false;
+    }
+  </script>
+
 </div>
 <!-- /Content -->
 @endsection

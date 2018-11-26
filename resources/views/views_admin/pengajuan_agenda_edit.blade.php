@@ -16,7 +16,7 @@
 				<div class="form-group">			
 					<label class="col-lg-3 control-label">Nama Agenda</label>
 					<div class="col-lg-9">
-						<input type="text" class="form-control" name="nm_agenda" required="" value="{{$tb->nm_agenda}}" placeholder="Masukan nama agenda">
+						<input type="text" class="form-control" readonly="" name="nm_agenda" required="" value="{{$tb->nm_agenda}}" placeholder="Masukan nama agenda">
 					</div>
 				</div>
 				<div class="form-group">
@@ -37,7 +37,7 @@
 				<div class="form-group">
 					<label class="col-lg-3 control-label">File Berkas</label>
 					<div class="col-lg-9">
-						<input type="file" name="file" value="{{$tb->file}}" class="form-control">
+						<input type="file" name="file" accept=".doc, .docx, .pdf" value="{{$tb->file}}" class="form-control">
 						<label class="text-muted">*abaikan jika tidak diganti</label>
 					</div>
 				</div>

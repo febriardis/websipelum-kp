@@ -54,21 +54,34 @@
 					<td>
 						@if($dt->ket=='belum diverifikasi')
 							<span class="badge badge-warning">{{$dt->ket}}</span>
-						@elseif($dt->ket=='acara ditolak')
+						@elseif($dt->ket=='agenda ditolak')
 							<span class="badge badge-danger">{{$dt->ket}}</span>
 						@else
 							<span class="badge badge-info">{{$dt->ket}}</span>
 						@endif
 					</td>
 					@if(Auth::user()->ket=='Super Admin')
-					<td width="270">
 						@if($dt->ket=='belum diverifikasi')
+						<td width="270">
 							<a href="/verifikasi/{{\Crypt::encrypt($dt->id)}}" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-share"></i>&nbsp;Buat Agenda</a>
 							<a href="/tolak/{{$dt->id}}" class="btn btn-danger btn-xs" onclick="return ConfirmTolak()"><i class="glyphicon glyphicon-share"></i>&nbsp;Tolak Agenda</a>
+						</td>
+						@elseif($dt->ket=='agenda ditolak')
+						<td>
+							<script>
+							  	function ConfirmDelete() {
+							  		var x = confirm("Yakin Akan Menghapus Data?");
+							  		if (x)
+							    		return true;
+							  		else
+							    		return false;
+							  	}
+							</script>
+							<a href="/cancel/{{ $dt->id }}" class="btn btn-danger btn-sm" onclick="return ConfirmDelete()"><i class="icon-close2"></i>&nbsp;Hapus</a>
+						</td>
 						@else
-							<a href="javascript::void(0)">no actions</a>
+						<td><a href="javascript::void(0)">no actions</a></td>
 						@endif
-					</td>
 					@else
 					<td class="text-center">
 						@if($dt->ket=='belum diverifikasi') 

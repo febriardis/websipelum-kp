@@ -77,10 +77,10 @@
             <div class="clear"></div>
           </div>
 
-          <div class="progress" style="height: 50px">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:{{number_format($tot1)}}%"><h1 style="margin-top: 5px">Suara Masuk : {{number_format($tot1)}}<span style="font-size: 22px">%</span> / {{$tot2}}</h1></div>
+          <div class="progress" style="height: 40px">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:{{number_format($tot1)}}%"><h2 style="margin-top: 3px">Suara Masuk : {{number_format($tot1)}}<span style="font-size: 22px">%</span> / {{$tot2}}</h2></div>
           </div>
-        @else
+      @else
           <!-- border quick count text -->
           <div class="list-text-qcl">
             <hr><h3>Quick Count Results</h3><hr>
@@ -92,6 +92,7 @@
             {{! $c = \App\Voting::where('agenda_id', $idAgenda)->max('jumlah') }}
             {{! $large = \Crypt::decrypt($c) }}
           </div>
+          
           <div class="content-counting">
             @foreach($tbVoting as $dt)        
             <div style="display: none;">
@@ -115,7 +116,7 @@
                 </div>
               </div>
             @else
-              <div class="panel-count" style="margin-top: 50px">
+              <div class="panel-count"> <!-- style="margin-top: 50px" -->
                 <div class="head-panel-count">
                   <img src="/uploads/fotomhs/{{$tb->foto}}" style="" width="100%" height="100%">
                   <div class="bg-text-count">
@@ -131,21 +132,22 @@
                 </div>
               </div>
             @endif
-
-
             <div style="display: none;">
               {{! $tot1+=$nil_p }}
               {{! $tot2+=$point }}
             </div>
-            
             @endforeach
             <div class="clear"></div>
           </div>
-
-          <div class="progress" style="height: 50px">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:{{number_format($tot1)}}%"><h1 style="margin-top: 5px">Total Suara Masuk : {{number_format($tot1)}}<span style="font-size: 22px">%</span> / {{$tot2}}</h1></div>
+          <hr>
+          <div class="progress" style="height: 40px">
+            <div class="progress-bar progress-bar-striped active" style="width:{{number_format($tot1)}}%"><h2 style="margin-top: 3px">Total Suara Masuk : {{number_format($tot1)}}<span style="font-size: 22px">%</span> / {{$tot2}}</h2></div>
           </div>
-        @endif
+          <br>
+          <div class="progress" style="height: 40px">
+            <div class="progress-bar progress-bar-striped active" style="width:25%"><h2 style="margin-top: 3px">Jumlah Pemilih : {{ $jum_dpt }} </h2></div>
+          </div>
+      @endif
     </div>
   </div>
 @endsection

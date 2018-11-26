@@ -18,7 +18,7 @@
 				<div class="form-group">			
 					<label class="col-lg-3 control-label">Nama Agenda</label>
 					<div class="col-lg-9">
-						<input type="text" class="form-control" name="nm_agenda" required="" placeholder="Masukan nama agenda">
+						<input type="text" class="form-control" name="nm_agenda" readonly="" required= required value="Pemilihan Ketua {{Auth::user()->ket}} {{Auth::user()->ket2}}">
 					</div>
 				</div>
 				<div class="form-group">
@@ -35,12 +35,12 @@
 				<div class="form-group">
 					<label class="col-lg-3 control-label">File Berkas</label>
 					<div class="col-lg-9">
-						<input type="file" name="file" required="" class="form-control" placeholder="Left icon">	
+						<input type="file" name="file" accept=".doc, .docx, .pdf" required="" class="form-control" placeholder="Left icon"><span class="text-danger">{{ $errors->first('file')}}</span> 
 					</div>
 				</div>
 
 				<div class="text-right">
-					<button type="submit" class="btn btn-primary">Simpan</button>
+					<button type="submit" class="btn btn-primary">Ok</button>
 					<a href="{{URL::previous()}}" class="btn btn-danger">Batal</a>
 				</div>
 			</div>

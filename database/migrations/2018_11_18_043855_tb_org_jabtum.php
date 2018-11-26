@@ -15,7 +15,14 @@ class TbOrgJabtum extends Migration
     {
         Schema::create('tb_org_jabtum', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('org_id');
+            $table->string('nm_jabatan');
+            $table->string('nm_penjabat');
             $table->timestamps();
+        });
+
+        Schema::table('tb_org_jabtum',function (Blueprint $kolom) {
+            $kolom->foreign('org_id')->references('id')->on('tb_org')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -117,6 +117,7 @@
 
 						@if($cekTgl < $tgl_agenda)					
 							@if(Auth::user()->ket=='Super Admin')
+								<a href="javascript:void(0)">no actions</a>
 							@else
 								@if(Auth::user()->id==$cekAdmin || Auth::user()->ket==$cekkat1Admin && Auth::user()->ket2==$cekkat2Admin)<ul class="icons-list">
 									<li class="dropdown">
@@ -132,8 +133,11 @@
 									</li>
 								</ul>
 								@else
+								<a href="javascript:void(0)">no actions</a>
 								@endif
 							@endif
+						@else
+							<a href="javascript:void(0)">no actions</a>
 						@endif
 						</td>
 					</tr>
@@ -156,6 +160,12 @@
 			<div class="alert alert-info">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 				{{ Session::get('pesanP') }} !
+			</div>
+		@endif
+		@if(Session::has('pesanE'))
+			<div class="alert alert-info">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				{{ Session::get('pesanE') }} !
 			</div>
 		@endif
 
@@ -183,12 +193,13 @@
 				<table class="table datatable-basic">
 					<thead>
 						<tr>
+							<!-- <th></th> -->
 							<th>No</th>
 							<th>NIM</th>
 							<th>Nama</th>
 							<th>Jurusan</th>
 							<th>Keterangan</th>
-							<th class="text-center">Aksi</th>
+							<th class="text-center">Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -196,6 +207,7 @@
 					@if(Auth::user()->ket=='Super Admin' || Auth::user()->ket=='Sema U' || Auth::user()->ket=='Dema U') 
 						@foreach($tbP as $dt)
 						<tr>
+							<!-- <td><input type="checkbox" class="styled" name="id[]" value="{{ $dt->id }}"> </td> -->
 							<td>{{$no++}}</td>
 							<td>{{$dt->nim}}</td>
 							<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('nama')}}</td>
@@ -212,7 +224,9 @@
 								<td>
 									<span class="label label-success">{{ $cek }}</span>
 								</td>
-								<td class="text-center"></td>
+								<td class="text-center">
+									<a href="javascript:void(0)">no actions</a>
+								</td>
 							@endif
 						</tr>
 						@endforeach
@@ -222,6 +236,7 @@
 						{{! $cekFak = \App\Mahasiswa::where('nim', $dt->nim)->value('fakultas') }}
 						@if($cekFak == Auth::user()->ket2)
 						<tr>
+							<!-- <td><input type="checkbox" class="styled" name="id[]" value="{{ $dt->id }}"> </td> -->
 							<td>{{$no++}}</td>
 							<td>{{$dt->nim}}</td>
 							<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('nama')}}</td>
@@ -238,7 +253,9 @@
 								<td>
 									<span class="label label-success">{{ $cek }}</span>
 								</td>
-								<td class="text-center"></td>
+								<td class="text-center">
+									<a href="javascript:void(0)">no actions</a>
+								</td>
 							@endif
 						</tr>
 						@endif
@@ -248,6 +265,7 @@
 						{{! $cekJur = \App\Mahasiswa::where('nim', $dt->nim)->value('jurusan') }}
 						@if($cekJur == Auth::user()->ket2)
 						<tr>
+							<!-- <td><input type="checkbox" class="styled" name="id[]" value="{{ $dt->id }}"> </td> -->
 							<td>{{$no++}}</td>
 							<td>{{$dt->nim}}</td>
 							<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('nama')}}</td>
@@ -264,12 +282,22 @@
 								<td>
 									<span class="label label-success">{{ $cek }}</span>
 								</td>
-								<td class="text-center"></td>
+								<td class="text-center">
+										<a href="javascript:void(0)">no actions</a>
+								</td>
 							@endif
 						</tr>
 						@endif
 						@endforeach
 					@endif
+<!-- 						<tr bgcolor="#fcfcfc">
+							<td>
+								<input type="checkbox" name="" value="" class="styled">&nbsp;
+								<label>All</label>
+							</td>
+							<td>
+							</td><td></td><td></td><td></td><td></td><td></td>
+						</tr> -->
 					</tbody>
 				</table>
 			<!-- ==================Table Daftar Pemilih Tetap================ -->
@@ -283,51 +311,50 @@
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h5 class="modal-title">Data Mahasiswa</h5>
 						</div>
-
+						
 						<form action="/tambah pemilih/{{ $IdAgenda }}" method="POST">
 							{{ csrf_field() }}
 							<div class="modal-body">
-									<table class="table datatable-basic">
-										<thead>
-											<tr>
-												<th>No</th>
-												<th>NIM</th>
-												<th>Nama</th>
-												<th>Jurusan</th>
-												<th>Fakultas</th>
-												<th>Tahun Angkatan</th>
-												<th class="text-center">Actions</th>
-											</tr>
-										</thead>
-										<tbody>
-											{{! $no=1 }}
-											<div style="display: none;">
-												{{! $jum=0 }}
-												{{! $tbMhs = \App\Mahasiswa::where('jurusan', Auth::user()->ket2)->get() }}
-											</div>
-											@foreach($tbMhs as $dt)
-											<div style="display: none;">{{! $jum++ }}</div>
-											<tr>
-												<td>{{ $n =  $no++ }}</td>
-												<td>
-													<input type="text" style="border:none;" readonly="readonly" name="nim[{{$n}}]" value="{{ $dt->nim }}">
-												</td>
-												<td>
-													{{ $dt->nama }}
-												</td>
-												<input type="hidden" name="agenda_id[{{$n}}]" value="{{ $IdAgenda }}" readonly="">
-												<td>{{ $dt->jurusan }}</td>
-												<td>{{ $dt->fakultas }}</td>
-												<td>{{ $dt->th_angkatan }}</td>
-												<td class="text-center">
-													<input type="checkbox" class="styled" checked="checked"> 
-												</td>
-											</tr>
-											@endforeach
-										</tbody>
-									</table>
+								<table class="table datatable-basic">
+									<thead>
+										<tr>
+											<th></th>
+											<th>NIM</th>
+											<th>Nama</th>
+											<th>Jurusan</th>
+											<th>Fakultas</th>
+											<th>Tahun Angkatan</th>
+										</tr>
+									</thead>
+									<tbody>
+										{{! $no=1 }}
+										<div style="display: none;">
+											{{! $tbMhs = \App\Mahasiswa::where('jurusan', Auth::user()->ket2)->get() }}
+										</div>
+										@foreach($tbMhs as $dt)
+										<tr>
+											{{! $n =  $no++ }}
+											<td>
+												<input type="checkbox" name="nim[]" value="{{ $dt->nim }}"> 
+											</td>
+											<td>{{ $dt->nim }}</td>
+											<td>{{ $dt->nama }}</td>
+											<td>{{ $dt->jurusan }}</td>
+											<td>{{ $dt->fakultas }}</td>
+											<td>{{ $dt->th_angkatan }}</td>
+										</tr>
+										@endforeach
+										<tr bgcolor="#fcfcfc">
+											<td>
+												<input type="checkbox" onclick="checkAllNim(this)" class="styled">&nbsp;
+												<label>All</label>
+											</td>
+											<td>
+											</td><td></td><td></td><td></td><td></td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
-							<input type="hidden" name="jumArr" value="{{$jum}}" readonly="">
 							<div class="modal-footer">
 								<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
 								@if($no==1)
@@ -350,7 +377,16 @@
 		  		if (x)
 		    		return true;
 		  		else
-		    		return false;}
+		    		return false;
+		    }
+											
+			function checkAllNim(source) {
+			  checkboxes = document.getElementsByName('nim[]');
+			  for(var i=0, n=checkboxes.length;i<n;i++) {
+			    checkboxes[i].checked = source.checked;
+			  }
+			}
+
 		</script>	
 
 @endsection

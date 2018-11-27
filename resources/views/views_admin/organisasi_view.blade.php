@@ -69,6 +69,7 @@
       <!-- tab 2 input content struktur organisasi -->
       <div class="tab-pane" id="highlighted-justified-tab2">
         <div class="container-fluid">
+        <!-- jabatan umum -->
           <h3>Jabatan Umum</h3>
           <a href="javascript:void(0)" class="btn btn-sm btn-default" onclick="showJabtumForm()"><i class="glyphicon glyphicon-pencil"></i> Tambah</a>
           <!-- panel form add jabtum -->
@@ -99,6 +100,7 @@
           </div>
           <!-- panel form add jabtum -->
 
+          <!-- tabel jabatan umum -->
           <table class="table table-striped">
             <thead>
               <tr>
@@ -135,7 +137,147 @@
             @endforeach
             </tbody>
           </table>
+          <!-- /tabel jabatan umum -->
+          <!-- /jabatan umum -->
+          <hr>
+          
+          <!-- bidang-bidang -->
+          <h3>Bidang</h3>
+          <a href="javascript:void(0)" class="btn btn-sm btn-default" onclick="showBidangForm()"><i class="glyphicon glyphicon-pencil"></i> Tambah</a>
+          <!-- panel form add bidang -->
+          <div class="panel panel-flat" id="bidang" style="padding: 10px; display: none; width: 500px">
+            <div>
+              <a href="javascript:void(0)" style="float: right;" onclick="closeBidangForm()"><i class="glyphicon glyphicon-remove"></i></a>
+              <div class="clear"></div>
+            </div>
+            <form action="/insert jabtum/{{$tb->first()->id}}" method="POST">
+              {{csrf_field()}}
+              <input type="hidden" name="ket" value="{{$ket}}">
+              <input type="hidden" name="ket2" value="{{$ket2}}">
+              <div class="row">
+                <div class="col-sm-12">
+                  <label>Nama Bidang :</label>
+                  <input type="text" name="nm_bidang" placeholder="nama bidang" class="form-control">
+                </div>
+                <div class="right" style="margin:10px 10px 0px 0px">
+                  <input type="submit" value="Tambahkan" class="btn btn-info btn-sm">
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- panel form add bidang -->
+          <!-- tabel bidang -->
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Bidang</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+            <div style="display: none;">
+              {{!$tbJ = \App\JabatanUmum::where('org_id', $tb->first()->id)->get()}}
+              {{!$i=1}}
+            </div>
+            @foreach($tbJ as $d)
+            <form action="/update jabtum/{{$d->id}}" method="POST">
+              {{csrf_field()}}
+              <input type="hidden" name="ket" value="{{$ket}}">
+              <input type="hidden" name="ket2" value="{{$ket2}}">
+              <tr>
+                <td>{{$i++}}</td>
+                <td width="500">
+                  <input type="text" name="nm_jabatan" value="" placeholder="nama jabatan" class="form-control">
+                </td>
+                <td>
+                  <button type="submit" class="btn btn-sm btn-info"><i class="icon-pencil7"></i> Perbaharui</button>
+                  <a href="/delete jabtum/{{$d->id}}/{{$ket}}/{{$ket2}}" onclick="ConfirmDelete()" class="btn btn-sm btn-danger"><i class="icon-trash"></i> Hapus</a>
+                </td>
+              </tr>
+            </form>
+            @endforeach
+            </tbody>
+          </table>
+          <!-- /tabel bidang -->
+          <!-- /bidang-bidang -->
+          <hr>
+
+          <!-- bidang-bidang -->
+          <h3>Struktur Perbidang</h3>
+          <a href="javascript:void(0)" class="btn btn-sm btn-default" onclick="showStrukBidForm()"><i class="glyphicon glyphicon-pencil"></i> Tambah</a>
+          
+          <!-- panel form add struktur bidang -->
+          <div class="panel panel-flat" id="strukbid" style="padding: 10px; display: none; width: 500px">
+            <div>
+              <a href="javascript:void(0)" style="float: right;" onclick="closeStrukBidForm()"><i class="glyphicon glyphicon-remove"></i></a>
+              <div class="clear"></div>
+            </div>
+
+            <form action="/insert jabtum/{{$tb->first()->id}}" method="POST">
+              {{csrf_field()}}
+              <input type="hidden" name="ket" value="{{$ket}}">
+              <input type="hidden" name="ket2" value="{{$ket2}}">
+              <div class="row">
+                <div class="col-sm-5">
+                  <label>Jabatan :</label>
+                  <input type="text" name="nm_jabatan" placeholder="nama jabatan" class="form-control">
+                </div>
+                <div class="col-sm-7">
+                  <label>Penjabat :</label>
+                  <input type="text" name="nm_penjabat" placeholder="nama penjabat" class="form-control">
+                </div>
+                <div class="right" style="margin:10px 10px 0px 0px">
+                  <input type="submit" value="Tambahkan" class="btn btn-info btn-sm">
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- panel form add jabtum -->
+          
+          <!-- tabel bidang -->
+          <h6>Nama Bidang</h6>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Penjabat</th>
+                <th>Jabatan</th>
+              </tr>
+            </thead>
+            <tbody>
+            <div style="display: none;">
+              {{!$tbJ = \App\JabatanUmum::where('org_id', $tb->first()->id)->get()}}
+              {{!$i=1}}
+            </div>
+            @foreach($tbJ as $d)
+            <form action="/update jabtum/{{$d->id}}" method="POST">
+              {{csrf_field()}}
+              <input type="hidden" name="ket" value="{{$ket}}">
+              <input type="hidden" name="ket2" value="{{$ket2}}">
+              <tr>
+                <td>{{$i++}}</td>
+                <td width="300">
+                  <input type="text" name="nm_jabatan" value="" placeholder="nama penjabat" class="form-control">
+                </td>
+                <td width="200">
+                  <input type="text" name="nm_jabatan" value="" placeholder="nama jabatan" class="form-control">
+                </td>
+                <td>
+                  <button type="submit" class="btn btn-sm btn-info"><i class="icon-pencil7"></i> Perbaharui</button>
+                  <a href="/delete jabtum/{{$d->id}}/{{$ket}}/{{$ket2}}" onclick="ConfirmDelete()" class="btn btn-sm btn-danger"><i class="icon-trash"></i> Hapus</a>
+                </td>
+              </tr>
+            </form>
+            @endforeach
+            </tbody>
+          </table>
+          <!-- /tabel bidang -->
+          <!-- /bidang-bidang -->
+        
+
         </div>
+        <!-- container -->
       </div>
       <!-- tab 2 input content struktur organisasi -->
     </div>
@@ -151,6 +293,21 @@
     function closeJabtumForm() {
       document.getElementById("jabtum").style.display="none";
     }
+
+    function showBidangForm() {
+      document.getElementById("bidang").style.display="block";
+    }
+    function closeBidangForm() {
+      document.getElementById("bidang").style.display="none";
+    }
+
+    function showStrukBidForm() {
+      document.getElementById("strukbid").style.display="block";
+    }
+    function closeStrukBidForm() {
+      document.getElementById("strukbid").style.display="none";
+    }
+
     function ConfirmDelete() {
       var x = confirm("Yakin Akan Menghapus Data?");
       if (x)

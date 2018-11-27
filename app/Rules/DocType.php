@@ -25,11 +25,7 @@ class DocType implements Rule
      */
     public function passes($attribute, $value)
     {
-        $rules = [
-            'file' => 'max:20000|mimes:doc,docx,pdf'
-        ];
 
-        return $rules;
     }
 
     /**

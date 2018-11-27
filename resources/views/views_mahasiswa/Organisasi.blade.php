@@ -61,7 +61,7 @@
           <!-- struktur umum -->
           <div class="item-SO">
             @foreach($tbJ as $d)
-            <div>
+            <div class="capitalize">
               <b>{{$d->nm_jabatan}}</b> <p>{{$d->nm_penjabat}}<p>
             </div>
             @endforeach
@@ -69,9 +69,25 @@
           <!-- struktur umum -->
 
           <!-- struktur bidang+penjabat -->
-          <div>
-            
-          </div>
+          @for($i=0; $i<=8; $i++)
+          <div style="width:336px; margin:5px; float: left;border:1px solid black">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Bidang blabla</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Juhana Nur Hidayat</td>
+                  <td>Ketua Bidang</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>          
+          @endfor
+          <div class="clear"></div>
           <!-- struktur bidang+penjabat -->
         </div>
       </div>

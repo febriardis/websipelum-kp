@@ -12,22 +12,24 @@ use \Crypt;
 class PemilihController extends Controller
 {
     function insert(Request $req, $idAgenda){
-        $no = 1;
-        for($i=1; $i<=$req->jumArr; $i++) {
-            $cekMhs = Pemilih::where([['nim', $req->nim[$i]],['agenda_id', $req->agenda_id[$i]]])->get();
-
-            if (count($cekMhs)==0) {
-                $tb             = new Pemilih;
-                $tb->nim        = $req->nim[$i];
-                $tb->agenda_id  = $req->agenda_id[$i];
-                $tb->ket_vote   = \Crypt::encrypt('belum memilih');
-                $tb->save();        
-            } 
+        $loop = $req->nim;
+        if (count($loop)!=0) {
+            foreach ($loop as $value) {
+                $cekMhs = Pemilih::where([['nim', $value],['agenda_id', $idAgenda]])->get();
+                if (count($cekMhs)==0) {
+                    $tb             = new Pemilih;
+                    $tb->nim        = $value;
+                    $tb->agenda_id  = $idAgenda;
+                    $tb->ket_vote   = \Crypt::encrypt('belum memilih');
+                    $tb->save();
+                }    
+            }
+            return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($idAgenda)]) 
+            ->with('pesanP', 'Data berhasil disimpan');  
+        }else{
+            return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($idAgenda)])
+            ->with('pesanE', 'Data tidak tersimpan');  
         }
-
-        return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($idAgenda)]) //
-        ->with('pesanP', 'Data berhasil disimpan');  
-
     }
 
     function delete($id, $idAgenda) {
@@ -37,12 +39,12 @@ class PemilihController extends Controller
         ->with('pesanP', 'Data berhasil dihapus');
     }
 
-    // function reset($IdAgenda) {
-    //     Pemilih::where('agenda_id', $IdAgenda)->delete();
+    function deleteChecked($IdAgenda) {
+        Pemilih::where('agenda_id', $IdAgenda)->delete();
 
-    //     return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($IdAgenda)]) //
-    //     ->with('pesanP', 'Data berhasil dihapus');
-    // }
+        return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($IdAgenda)]) //
+        ->with('pesanP', 'Data berhasil dihapus');
+    }
 
     // function insert(Request $req){
     //     $cekMhs  = Mahasiswa::where('nim',$req->nim)->where('nama', $req->nama)->get();

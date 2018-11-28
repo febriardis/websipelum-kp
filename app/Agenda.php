@@ -9,7 +9,7 @@ class Agenda extends Model
     protected $table = 'tb_agenda';
 
 	protected $fillable = [
-		'admin_id','nm_agenda', 'sistem_vote','kat_jurusan','kat_fakultas','tgl_agenda',
+		'admin_id','nm_agenda', 'sistem_vote','kat_jurusan','kat_fakultas','tgl_agenda', 'timeA1', 'timeA2', 'StartDaftarK', 'LastDaftarK', 'tgl_filtering'
 	];
 
 	function PKAgendaA(){

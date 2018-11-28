@@ -24,16 +24,23 @@ class PengAgendaController extends Controller {
         );
     	
         $tb = new AgendaAjuan;
-    	$tb->admin_id = $AdminId;
-    	$tb->nm_agenda = $req->nm_agenda;
+    	$tb->admin_id    = $AdminId;
+    	$tb->nm_agenda   = $req->nm_agenda;
     	$tb->sistem_vote = $req->sistem_pem;
-        
+
         $file = $req->file('file');
         $ext  = $file->getClientOriginalExtension();
         $newName = rand(100000,1001238912).".".$ext;
         $file->move('uploads/surat',$newName);
 
         $tb->file       = $newName;
+        // 
+        $tb->kat_jurusan = $req->jurusan;
+        $tb->kat_fakultas= $req->fakultas;
+        $tb->tgl_agenda  = $req->tgl_agenda;
+        $tb->timeA1      = $req->timeA1;
+        $tb->timeA2      = $req->timeA2;
+        
         $tb->ket 		= 'belum diverifikasi'; //agenda sudah ada
         $tb->save();
 
@@ -68,7 +75,14 @@ class PengAgendaController extends Controller {
             $file->move('uploads/surat',$newName);
 
             $tb->file       = $newName;
+        }elseif($req->fakultas!=''){
+            $tb->kat_jurusan = $req->jurusan;
+            $tb->kat_fakultas= $req->fakultas;
         }
+        $tb->tgl_agenda  = $req->tgl_agenda;
+        $tb->timeA1      = $req->timeA1;
+        $tb->timeA2      = $req->timeA2;
+        $tb->ket         = 'belum diverifikasi'; //agenda sudah ada
         $tb->save();
 
     	return redirect('/pengajuan agenda')

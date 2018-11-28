@@ -105,6 +105,8 @@
 								</ul>
 							</li>
 						</ul>
+						@elseif($dt->ket=='agenda ditolak')
+						<a href="/edit pengajuan agenda/{{\Crypt::encrypt($dt->id)}}" class="btn btn-default btn-sm"><i class="icon-compose"></i>&nbsp;Ajukan Ulang</a>
 						@else
 							<a href="javascript::void(0)">no actions</a>
 						@endif

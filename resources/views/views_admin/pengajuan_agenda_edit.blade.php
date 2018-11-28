@@ -42,6 +42,74 @@
 					</div>
 				</div>
 
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Kategori Pemilih</label>
+					<div class="col-lg-5" id="main">
+						<select class="select" id="fakultas" name="fakultas" data-placeholder="Pilih Fakultas">
+							{{! $tbFak = (App\Fakultas::all()) }}
+							<option></option>
+							<option value="Semua Mahasiswa">Semua Mahasiswa UIN SGD Bandung</option>
+						@foreach($tbFak as $dt)
+							<option value="{{$dt->nm_fakultas}}">{{$dt->nm_fakultas}}</option>
+						@endforeach
+						</select>
+						<label class="text-muted">*abaikan jika tidak diganti</label>
+					</div>
+				</div>
+
+				{{! $cekFak = (App\Fakultas::all()) }}
+				<script type="text/javascript">
+				$(document).ready(function() {
+				    $("#fakultas").change(function(){
+				    	// CREATE A "DIV" ELEMENT.
+			        	var container = document.createElement("div");
+			        	container.className="col-lg-4";
+			        	@foreach($cekFak as $d)
+				       	if ($(this).val() == "{{$d->nm_fakultas}}"){
+				       		{{! $tbJur = (App\Jurusan::where('fak_id', $d->id))->get() }}
+			                // ADD TEXTBOX.
+			            	$('#a').remove(); 
+			                $(container).append('<select style="font-size:14px" class="form-control" name="jurusan" id="a">'+
+			                	'<option hidden>Pilih Jurusan</option>'+
+			                	'<option>Semua Jurusan</option>'+
+								@foreach($tbJur as $dt)
+								'<option>{{$dt->nm_jurusan}}</option>'+
+								@endforeach
+			                	'</select>'
+			                );
+			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
+			                $('#main').after(container);
+			            }
+			            @endforeach
+			            else if ($(this).val() == "Semua Mahasiswa"){
+			            	$('#a').remove(); 
+			            }
+				    });
+				});
+				</script>
+
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Waktu Pelaksanan</label>
+					<div class="col-lg-5">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="icon-calendar3"></i></span>
+							<input type="date" name="tgl_agenda" value="{{$tb->tgl_agenda}}" required="" class="form-control" placeholder="Left icon">
+						</div>
+					</div>
+					<div class="col-lg-2">
+						<div class="input-group">
+							<span class="input-group-addon">start</span>
+							<input type="time" name="timeA1" required="" value="{{$tb->timeA1}}" class="form-control">
+						</div>
+					</div>
+					<div class="col-lg-2">
+						<div class="input-group">
+							<span class="input-group-addon">is over</span>
+							<input type="time" name="timeA2" required="" value="{{$tb->timeA2}}" class="form-control">
+						</div>
+					</div>
+				</div>
+
 				<div class="text-right">
 					<button type="submit" class="btn btn-primary">Simpan</button>
 					<a href="{{URL::previous()}}" class="btn btn-danger">Batal</a>

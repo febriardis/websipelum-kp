@@ -50,17 +50,15 @@
 
     <!-- struktur organisasi -->
     <div id="menu1" class="container tab-pane fade"><br>
-    @if(count($tb)!=0) <!-- cek tb_agenda -->
-      <div style="display: none;">
-        {{ !$tbJ = \App\JabatanUmum::where('org_id', $tb->first()->id)->get() }}
-      </div>
-      @if(count($tbJ)!=0)
+    @if(count($tb)!=0) <!-- cek tb_agenda -->  
+      {{ !$tbJabt = \App\OrgJabtum::where('org_id', $tb->first()->id)->get() }}
+      @if(count($tbJabt)!=0)
       <div class="content-s" style="border: 1px ">
         <div class="text-center" style="margin: 20px;">
           <hr><h4>Struktur Organisasi</h4><hr>
           <!-- struktur umum -->
           <div class="item-SO">
-            @foreach($tbJ as $d)
+            @foreach($tbJabt as $d)
             <div class="capitalize">
               <b>{{$d->nm_jabatan}}</b> <p>{{$d->nm_penjabat}}<p>
             </div>
@@ -69,24 +67,32 @@
           <!-- struktur umum -->
 
           <!-- struktur bidang+penjabat -->
-          @for($i=0; $i<=8; $i++)
-          <div style="width:336px; margin:5px; float: left;border:1px solid black">
+          {{ !$tbJabBid = \App\OrgBidang::where('org_id', $tb->first()->id)->get() }}
+          @foreach($tbJabBid as $t)
+          <div style="width:510px; margin:5px; float: left;border:1px solid #cccccc; padding: 5px">
             <table class="table table-sm">
               <thead>
                 <tr>
-                  <th>Bidang blabla</th>
+                  <th>{{$t->nm_bidang}}</th>
                   <th></th>
+                </tr>
+                <tr>
+                  <th>Nama</th>
+                  <th>Jabatan</th>
                 </tr>
               </thead>
               <tbody>
+                {{ !$tbStrukBid = \App\OrgStrukBid::where('bidang_id', $t->id)->get() }}
+                @foreach($tbStrukBid as $i)
                 <tr>
-                  <td>Juhana Nur Hidayat</td>
-                  <td>Ketua Bidang</td>
+                  <td>{{$i->nm_penjabat}}</td>
+                  <td>{{$i->nm_jabatan}}</td>
                 </tr>
+                @endforeach
               </tbody>
             </table>
           </div>          
-          @endfor
+          @endforeach
           <div class="clear"></div>
           <!-- struktur bidang+penjabat -->
         </div>

@@ -21,6 +21,11 @@ class TbAgenda extends Migration
             $table->string('kat_jurusan')->nullable(true);
             $table->string('kat_fakultas');
             $table->date('tgl_agenda');
+            $table->time('timeA1'); //tambahan
+            $table->time('timeA2');//tambahan
+            $table->date('StartDaftarK');//tambahan
+            $table->date('LastDaftarK');//tambahan
+            $table->date('tgl_filtering');//tambahan
             $table->timestamps();
         });
         Schema::table('tb_agenda', function(Blueprint $kolom) {

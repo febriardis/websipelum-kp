@@ -25,7 +25,7 @@
 					<th>Nama Agenda</th>
 					<th>Sistem Pemilihan</th>
 					<th>Kategori Pemilih</th>
-					<th>Tanggal Agenda</th>
+					<th>Waktu Pelaksanaan</th>
 					<th>Katerangan</th>
 					<th>Detail</th>
 					<th class="text-center">Aksi</th>
@@ -47,10 +47,18 @@
 					<td>{{ $dt->nm_agenda }}</td>
 					<td>{{ $dt->sistem_vote }}</td>
 					<td>{{ $dt->kat_jurusan }} <b>({{$dt->kat_fakultas}})</b></td>
-					<td>{{ date('d M Y', strtotime($dt->tgl_agenda)) }}</td>
+					<td>
+						{{ date('d M Y', strtotime($dt->tgl_agenda)) }}<br>
+						<p><b>Pukul:</b><br> {{ date('G:i', strtotime($dt->timeA1))}} - {{ date('G:i', strtotime($dt->timeA2))}}</p>
+					</td>
 					<td>
 						@if($cekTgl < $dt->tgl_agenda)
 							<span class="label label-info">Menunggu Tanggal Agenda</span>
+							@if($cekTgl == $dt->tgl_filtering)
+								<span class="label label-danger">Tahap Penyaringan Kandidat</span>
+							@elseif($cekTgl >= $dt->StartDaftarK && $cekTgl <= $dt->LastDaftarK)
+								<span class="label label-default">Tahap Pendaftaran Kandidat</span>
+							@endif
 						@elseif($cekTgl > $dt->tgl_agenda)
 							<span class="label label-success">Selesai</span>
 						@elseif($cekTgl == $dt->tgl_agenda)

@@ -35,7 +35,74 @@
 				<div class="form-group">
 					<label class="col-lg-3 control-label">File Berkas</label>
 					<div class="col-lg-9">
-						<input type="file" name="file" accept=".doc, .docx, .pdf" required="" class="form-control" placeholder="Left icon"><span class="text-danger">{{ $errors->first('file')}}</span> 
+						<input type="file" name="file" accept=".doc, .docx, .pdf, .txt" required="" class="form-control" placeholder="Left icon"><span class="text-danger">{{ $errors->first('file')}}</span> 
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Kategori Pemilih</label>
+					<div class="col-lg-5" id="main">
+						<select class="select" id="fakultas" name="fakultas" required="" data-placeholder="Pilih Fakultas">
+							{{! $tb = (App\Fakultas::all()) }}
+							<option></option>
+							<option value="Semua Mahasiswa">Semua Mahasiswa UIN SGD Bandung</option>
+						@foreach($tb as $dt)
+							<option value="{{$dt->nm_fakultas}}">{{$dt->nm_fakultas}}</option>
+						@endforeach
+						</select>
+					</div>
+				</div>
+
+				{{! $cekFak = (App\Fakultas::all()) }}
+				<script type="text/javascript">
+				$(document).ready(function() {
+				    $("#fakultas").change(function(){
+				    	// CREATE A "DIV" ELEMENT.
+			        	var container = document.createElement("div");
+			        	container.className="col-lg-4";
+			        	@foreach($cekFak as $d)
+				       	if ($(this).val() == "{{$d->nm_fakultas}}"){
+				       		{{! $tb = (App\Jurusan::where('fak_id', $d->id))->get() }}
+			                // ADD TEXTBOX.
+			            	$('#a').remove(); 
+			                $(container).append('<select style="font-size:14px" class="form-control" name="jurusan" id="a" required="">'+
+			                	'<option hidden>Pilih Jurusan</option>'+
+			                	'<option>Semua Jurusan</option>'+
+								@foreach($tb as $dt)
+								'<option>{{$dt->nm_jurusan}}</option>'+
+								@endforeach
+			                	'</select>'
+			                );
+			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
+			                $('#main').after(container);
+			            }
+			            @endforeach
+			            else if ($(this).val() == "Semua Mahasiswa"){
+			            	$('#a').remove(); 
+			            }
+				    });
+				});
+				</script>
+
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Waktu Pelaksanan</label>
+					<div class="col-lg-5">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="icon-calendar3"></i></span>
+							<input type="date" name="tgl_agenda" required="" class="form-control" placeholder="Left icon">
+						</div>
+					</div>
+					<div class="col-lg-2">
+						<div class="input-group">
+							<span class="input-group-addon">start</span>
+							<input type="time" name="timeA1" required="" class="form-control">
+						</div>
+					</div>
+					<div class="col-lg-2">
+						<div class="input-group">
+							<span class="input-group-addon">is over</span>
+							<input type="time" name="timeA2" required="" class="form-control">
+						</div>
 					</div>
 				</div>
 

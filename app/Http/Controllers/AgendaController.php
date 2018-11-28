@@ -44,12 +44,18 @@ class AgendaController extends Controller
         $cek = Agenda::where('tgl_agenda', $req->tgl_agenda)->get();
         if (count($cek)==0) {
             $tb = new Agenda;
-            $tb->admin_id = $idAdmin;
-            $tb->nm_agenda = $req->nm_agenda;
+            $tb->admin_id    = $idAdmin;
+            $tb->nm_agenda   = $req->nm_agenda;
             $tb->sistem_vote = $req->sistem_pem;
-            $tb->kat_fakultas   = $req->fakultas;
-            $tb->kat_jurusan   = $req->jurusan;
-            $tb->tgl_agenda= $req->tgl_agenda;
+            $tb->kat_fakultas= $req->fakultas;
+            $tb->kat_jurusan = $req->jurusan;
+            $tb->tgl_agenda  = $req->tgl_agenda;
+
+            $tb->timeA1      = $req->timeA1;
+            $tb->timeA2      = $req->timeA2;
+            $tb->StartDaftarK= $req->StartDaftarK;
+            $tb->LastDaftarK = $req->LastDaftarK;
+            $tb->tgl_filtering= $req->tgl_filtering;
             $tb->save();
 
             $tb_berita = AgendaAjuan::find($req->id_bacara);

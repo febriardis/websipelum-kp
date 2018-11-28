@@ -18,7 +18,12 @@ class TbBeritaacara extends Migration
             $table->unsignedInteger('admin_id');
             $table->string('nm_agenda');
             $table->string('sistem_vote');
-            $table->string('file');
+            $table->string('file');            
+            $table->string('kat_jurusan')->nullable(true); //tambahan
+            $table->string('kat_fakultas'); //tambahan
+            $table->date('tgl_agenda'); //tambahan
+            $table->time('timeA1'); //tambahan
+            $table->time('timeA2');//tambahan
             $table->string('ket');
             $table->timestamps();
         });

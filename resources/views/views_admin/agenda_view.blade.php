@@ -7,6 +7,8 @@
 @section('content')
 		{{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}
 		{{! $tgl_agenda = (App\Agenda::find($IdAgenda))->tgl_agenda }}
+		{{! $StartDaftarK = (App\Agenda::find($IdAgenda))->StartDaftarK }}
+		{{! $LastDaftarK = (App\Agenda::find($IdAgenda))->LastDaftarK }}
 		<!-- ================Header================ -->
 		<div class="page-header-content" style="border-bottom: 1px solid #cccccc">
 			<div class="page-title">
@@ -31,6 +33,10 @@
 		<div class="breadcrumb-line breadcrumb-line-component">
 			<ul class="breadcrumb">
 				<li><i class="glyphicon glyphicon-forward"></i>&nbsp;Kandidat</li>
+			</ul>
+			<ul class="breadcrumb right" style="float: right; border: 1px solid #cccccc; padding: 10px 20px">
+				<li><b>Tahap Pendaftaran</b> : {{ date('d M', strtotime($StartDaftarK)) }} - {{ date('d M Y', strtotime($LastDaftarK)) }}</li>
+				<li><b>Tahap Penyaringan</b> : {{ date('d F Y', strtotime((App\Agenda::find($IdAgenda))->tgl_filtering)) }}</li>
 			</ul>
 		</div>
 
@@ -61,7 +67,9 @@
 				@else
 					@if(Auth::user()->id==$cekAdmin || Auth::user()->ket==$cekkat1Admin && Auth::user()->ket2==$cekkat2Admin)
 						@if($cekTgl < $tgl_agenda)
-							<a href="/tambah kandidat/{{\Crypt::encrypt($IdAgenda)}}" class="btn btn-primary btn-sm">Tambah</a>
+							@if($cekTgl >= $StartDaftarK && $cekTgl <= $LastDaftarK)
+								<a href="/tambah kandidat/{{\Crypt::encrypt($IdAgenda)}}" class="btn btn-primary btn-sm">Tambah</a>
+							@endif
 						@elseif($cekTgl >= $tgl_agenda)
 						@endif
 					@else

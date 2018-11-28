@@ -28,7 +28,7 @@
 				</div>
 
 				<div class="form-group">			
-					<label class="col-lg-3   control-label">Sistem Pemilihan</label>
+					<label class="col-lg-3 control-label">Sistem Pemilihan</label>
 					<div class="col-lg-9">
 						<input type="text" class="form-control" readonly="readonly" name="sistem_pem" value="{{$tb->sistem_vote}}">
 					</div>
@@ -36,63 +36,68 @@
 
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Kategori Pemilih</label>
-					<div class="col-lg-5" id="main">
-						<select class="select" id="fakultas" name="fakultas" required="" data-placeholder="Pilih Fakultas">
-							{{! $tb = (App\Fakultas::all()) }}
-							<option></option>
-							<option value="Semua Mahasiswa">Semua Mahasiswa UIN SGD Bandung</option>
-						@foreach($tb as $dt)
-							<option value="{{$dt->nm_fakultas}}">{{$dt->nm_fakultas}}</option>
-						@endforeach
-						</select>
-						</select>
+					<div class="col-lg-5">
+						<input type="text" class="form-control" readonly="readonly" name="fakultas" value="{{$tb->kat_fakultas}}">
+					</div>
+					<div class="col-lg-4">
+						<input type="text" class="form-control" readonly="readonly" name="jurusan" value="{{$tb->kat_jurusan}}">
 					</div>
 				</div>
 
-				{{! $cekFak = (App\Fakultas::all()) }}
-				<script type="text/javascript">
-				$(document).ready(function() {
-				    $("#fakultas").change(function(){
-				    	// CREATE A "DIV" ELEMENT.
-			        	var container = document.createElement("div");
-			        	container.className="col-lg-4";
-			        	@foreach($cekFak as $d)
-				       	if ($(this).val() == "{{$d->nm_fakultas}}"){
-				       		{{! $tb = (App\Jurusan::where('fak_id', $d->id))->get() }}
-			                // ADD TEXTBOX.
-			            	$('#a').remove(); 
-			                $(container).append('<select style="font-size:14px" class="form-control" name="jurusan" id="a" required="">'+
-			                	'<option hidden>Pilih Jurusan</option>'+
-			                	'<option>Semua Jurusan</option>'+
-								@foreach($tb as $dt)
-								'<option>{{$dt->nm_jurusan}}</option>'+
-								@endforeach
-			                	'</select>'
-			                );
-			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
-			                $('#main').after(container);
-			            }
-			            @endforeach
-			            else if ($(this).val() == "Semua Mahasiswa"){
-			            	$('#a').remove(); 
-			            }
-				    });
-				});
-
-				</script>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Waktu Pelaksanan</label>
+					<div class="col-lg-5">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="icon-calendar3"></i></span>
+							<input type="date" name="tgl_agenda" required="" value="{{$tb->tgl_agenda}}" class="form-control" placeholder="Left icon">
+						</div>
+						{{!$cekT = \App\Agenda::where('tgl_agenda', $tb->tgl_agenda)->get()}}
+						@if(count($cekT) != 0)
+							<span class="label label-danger">Tanggal {{date('d', strtotime($tb->tgl_agenda))}} sudah ada agenda</span>
+						@endif
+					</div>
+					<div class="col-lg-2">
+						<div class="input-group">
+							<span class="input-group-addon">start</span>
+							<input type="time" name="timeA1" required="" value="{{$tb->timeA1}}" class="form-control">
+						</div>
+					</div>
+					<div class="col-lg-2">
+						<div class="input-group">
+							<span class="input-group-addon">is over</span>
+							<input type="time" name="timeA2" required="" value="{{$tb->timeA2}}" class="form-control">
+						</div>
+					</div>
+				</div>
 
 				<div class="form-group">
-					<label class="col-lg-3 control-label">Tanggal Agenda</label>
+					<label class="col-lg-3 control-label">Pendaftaran Kandidat</label>
+					<div class="col-lg-5">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="icon-calendar3">&nbsp;start</i></span>
+							<input type="date" name="StartDaftarK" required="" class="form-control" placeholder="Left icon">
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="icon-calendar3">&nbsp;is-over</i></span>
+							<input type="date" name="LastDaftarK" required="" class="form-control" placeholder="Left icon">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Penyaringan Kandidat</label>
 					<div class="col-lg-9">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="icon-calendar3"></i></span>
-							<input type="date" name="tgl_agenda" required="" class="form-control" placeholder="Left icon">
+							<input type="date" name="tgl_filtering" required="" class="form-control" placeholder="Left icon">
 						</div>
 					</div>
 				</div>
 
 				<div class="text-right">
-					<button type="submit" class="btn btn-primary">Terbitkan</button>
+					<button type="submit" class="btn btn-primary">Buat Agenda</button>
 					<a href="{{URL::previous()}}" class="btn btn-danger">Batal</a>
 				</div>
 			</div>

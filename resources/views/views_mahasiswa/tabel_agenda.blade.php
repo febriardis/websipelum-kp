@@ -24,6 +24,7 @@
         <tbody>
         @foreach($tbAgenda as $dt)
           @if(Auth::user()->jurusan== $dt->kat_jurusan && Auth::user()->fakultas==$dt->kat_fakultas || $dt->kat_jurusan=='Semua Jurusan' && Auth::user()->fakultas==$dt->kat_fakultas || $dt->kat_fakultas=='Semua Mahasiswa')
+          
           <tr>
             <td>{{ $dt->nm_agenda }}</td>
             <td>{{date('d M Y' ,strtotime($dt->tgl_agenda))}}</td>        
@@ -31,19 +32,23 @@
               <div style="display: none;">
                 {{! $cekNim = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('nim')}}
               </div>
-              @if($cekNim==Auth::user()->nim)
-                <div style="display: none;">
-                  {{!$cekKet = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('keterangan')}} 
-                </div>    
-                @if($cekKet=='Menunggu Verifikasi')
-                  <span class="badge badge-info">{{$cekKet}}</span>
-                @elseif($cekKet=='Diterima')
-                  <span class="badge badge-success">{{$cekKet}}</span>
+              @if($cekTgl >= $dt->StartDaftarK && $cekTgl <= $dt->LastDaftarK)
+                @if($cekNim==Auth::user()->nim)
+                  <div style="display: none;">
+                    {{!$cekKet = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('keterangan')}} 
+                  </div>    
+                  @if($cekKet=='Menunggu Verifikasi')
+                    <span class="badge badge-info">{{$cekKet}}</span>
+                  @elseif($cekKet=='Diterima')
+                    <span class="badge badge-success">{{$cekKet}}</span>
+                  @else
+                    <span class="badge badge-danger">{{$cekKet}}</span>
+                  @endif
                 @else
-                  <span class="badge badge-danger">{{$cekKet}}</span>
+                  <span class="badge badge-secondary">Belum Terdaftar</span>
                 @endif
               @else
-                <span class="badge badge-secondary">Belum Terdaftar</span>
+                  <span class="badge badge-secondary">Bukan Priode Pendaftaran</span>
               @endif
             </td>
             <td>
@@ -51,7 +56,7 @@
                 {{!$cekNIM = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('nim')}}
               </div>
               @if($cekTgl > $dt->tgl_agenda)
-                <span class="badge badge-success">Selesai</span>
+                <span class="badge badge-success">Agenda Selesai</span>
               @elseif($cekTgl == $dt->tgl_agenda)
                 <span class="badge badge-danger">Sedang Berlangsung</span>
               <!--kondisi jika tanggal belum lewat -->
@@ -61,13 +66,18 @@
                     {{!$cekKet = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('keterangan')}} 
                   </div>  
                   @if($cekKet=='Pendaftaran Tidak Diterima')
-                    <!-- <a href="" class="btn btn-secondary btn-sm text-white"><i class='fas fa-edit'></i>&nbsp;Perbaikan</a> -->
                     <a href="javascript::void(0)">no actions</a>
-                  @else
+                  @elseif($cekKet=='Menunggu Verifikasi')
                     <a href="/batal daftar/{{Auth::user()->nim}}/{{$dt->id}}" onclick="return ConfirmDelete()" class="btn btn-danger btn-sm text-white"><i class='far fa-times-circle'></i>&nbsp;Batal</a>
+                  @else
+                  <a href="javascript::void(0)">no actions</a>
                   @endif
                 @else
+                  @if($cekTgl >= $dt->StartDaftarK && $cekTgl <= $dt->LastDaftarK)
                   <a href="/form pendaftaran/{{ \Crypt::encrypt($dt->id) }}" class="btn btn-primary btn-sm text-white"><i class='far fa-envelope'></i>&nbsp;Daftar</a>
+                  @else
+                  <a href="javascript::void(0)">no actions</a>
+                  @endif
                 @endif
               @endif
             </td>

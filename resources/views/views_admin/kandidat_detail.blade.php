@@ -64,10 +64,16 @@
 						$cekkat1Admin = (\App\Admin::find($cekAdmin))->ket,
 						$cekkat2Admin = (\App\Admin::find($cekAdmin))->ket2
 					}}
+					{{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}
+					{{! $cekTglFilter = (App\Agenda::find($idAgenda))->tgl_filtering }}
 					</div>
 					@if(Auth::user()->id==$cekAdmin || Auth::user()->ket==$cekkat1Admin && Auth::user()->ket2==$cekkat2Admin)
-					<button type="submit" class="btn btn-primary">Terima</button>
-					<a href="/tolak kandidat/{{$tbMhs->id}}/{{$idAgenda}}" class="btn btn-danger">Tolak</a>
+						@if($cekTgl == $cekTglFilter)
+							<button type="submit" class="btn btn-primary">Terima</button>
+							<a href="/tolak kandidat/{{$tbMhs->id}}/{{$idAgenda}}" class="btn btn-danger">Tolak</a>
+						@else
+							<span class="label label-danger">Bukan Priode Penyaringan</span>
+						@endif
 					@endif
 				</div>
 			</div>

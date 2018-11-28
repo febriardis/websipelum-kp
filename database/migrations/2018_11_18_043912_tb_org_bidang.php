@@ -15,7 +15,13 @@ class TbOrgBidang extends Migration
     {
         Schema::create('tb_org_bidang', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('org_id');
+            $table->string('nm_bidang');
             $table->timestamps();
+        });
+
+        Schema::table('tb_org_bidang',function (Blueprint $kolom) {
+            $kolom->foreign('org_id')->references('id')->on('tb_org')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

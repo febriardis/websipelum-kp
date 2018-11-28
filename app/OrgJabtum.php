@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class JabatanUmum extends Model
+class OrgJabtum extends Model
 {
 	protected $table = 'tb_org_jabtum';
 	protected $fillable = ['org_id', 'nm_jabatan', 'nm_penjabat'];
 
-    function FKJabatanUmum(){
+    function FKOrgJabtum(){
     	return $this->belongsTo(Organisasi::class);
     }
 }

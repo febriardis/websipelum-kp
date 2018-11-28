@@ -1,6 +1,0 @@
-1. perancangan sistem
-	usecase
-	skema database
-
-2. mockup
-3. 

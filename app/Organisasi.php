@@ -16,7 +16,10 @@ class Organisasi extends Model
         return $this->belongsTo(Jurusan::class);
     }
 
-    function PKOrganisasi(){
-    	return $this->hasMany(JabatanUmum::class);
+    function PKOrganisasi1(){
+    	return $this->hasMany(OrgJabtum::class);
+    }
+    function PKOrganisasi2(){
+        return $this->hasMany(OrgBidang::class);
     }
 }

@@ -12,14 +12,14 @@ class Mahasiswa extends Model
     	'nim', 'nama', 'jurusan', 'fakultas', 'th_angkatan','foto','password',
     ];
 	
-	function FKAdmin(){
-		return $this->belongsTo(Admin::class);
-	}
+	// function FKAdmin(){
+	// 	return $this->belongsTo(Admin::class);
+	// }
 
-	// function PKMahasiswa1() {
-	// 	return $this->hasMany(Balon::class);
-	// }
-	// function PKMahasiswa2() {
-	// 	return $this->hasMany(Pemilih::class);
-	// }
+	// // function PKMahasiswa1() {
+	// // 	return $this->hasMany(Balon::class);
+	// // }
+	// // function PKMahasiswa2() {
+	// // 	return $this->hasMany(Pemilih::class);
+	// // }
 }

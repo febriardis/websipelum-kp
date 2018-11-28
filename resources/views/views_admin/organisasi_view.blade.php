@@ -86,11 +86,11 @@
               <div class="row">
                 <div class="col-sm-5">
                   <label>Jabatan :</label>
-                  <input type="text" name="nm_jabatan" placeholder="nama jabatan" class="form-control">
+                  <input type="text" name="nm_jabatan" required="" placeholder="nama jabatan" class="form-control">
                 </div>
                 <div class="col-sm-7">
                   <label>Penjabat :</label>
-                  <input type="text" name="nm_penjabat" placeholder="nama penjabat" class="form-control">
+                  <input type="text" name="nm_penjabat" required="" placeholder="nama penjabat" class="form-control">
                 </div>
                 <div class="right" style="margin:10px 10px 0px 0px">
                   <input type="submit" value="Tambahkan" class="btn btn-info btn-sm">
@@ -112,10 +112,10 @@
             </thead>
             <tbody>
             <div style="display: none;">
-              {{!$tbJ = \App\JabatanUmum::where('org_id', $tb->first()->id)->get()}}
+              {{!$tbJabt = \App\OrgJabtum::where('org_id', $tb->first()->id)->get()}}
               {{!$i=1}}
             </div>
-            @foreach($tbJ as $d)
+            @foreach($tbJabt as $d)
             <form action="/update jabtum/{{$d->id}}" method="POST">
               {{csrf_field()}}
               <input type="hidden" name="ket" value="{{$ket}}">
@@ -123,10 +123,10 @@
               <tr>
                 <td>{{$i++}}</td>
                 <td width="200">
-                  <input type="text" name="nm_jabatan" value="{{$d->nm_jabatan}}" placeholder="nama jabatan" class="form-control">
+                  <input type="text" name="nm_jabatan" required="" value="{{$d->nm_jabatan}}" placeholder="nama jabatan" class="form-control">
                 </td>
                 <td width="300">
-                  <input type="text" name="nm_penjabat" value="{{$d->nm_penjabat}}" placeholder="nama penjabat" class="form-control">
+                  <input type="text" name="nm_penjabat" required="" value="{{$d->nm_penjabat}}" placeholder="nama penjabat" class="form-control">
                 </td>
                 <td>
                   <button type="submit" class="btn btn-sm btn-info"><i class="icon-pencil7"></i> Perbaharui</button>
@@ -150,20 +150,21 @@
               <a href="javascript:void(0)" style="float: right;" onclick="closeBidangForm()"><i class="glyphicon glyphicon-remove"></i></a>
               <div class="clear"></div>
             </div>
-            <form action="/insert jabtum/{{$tb->first()->id}}" method="POST">
+            
+            <form action="/insert bidang/{{$tb->first()->id}}" method="POST">
               {{csrf_field()}}
               <input type="hidden" name="ket" value="{{$ket}}">
               <input type="hidden" name="ket2" value="{{$ket2}}">
               <div class="row">
                 <div class="col-sm-12">
                   <label>Nama Bidang :</label>
-                  <input type="text" name="nm_bidang" placeholder="nama bidang" class="form-control">
+                  <input type="text" name="nm_bidang" required="" placeholder="nama bidang" class="form-control">
                 </div>
                 <div class="right" style="margin:10px 10px 0px 0px">
                   <input type="submit" value="Tambahkan" class="btn btn-info btn-sm">
                 </div>
               </div>
-            </form>
+            </form>   
           </div>
           <!-- panel form add bidang -->
           <!-- tabel bidang -->
@@ -177,22 +178,22 @@
             </thead>
             <tbody>
             <div style="display: none;">
-              {{!$tbJ = \App\JabatanUmum::where('org_id', $tb->first()->id)->get()}}
+              {{!$tbBid = \App\OrgBidang::where('org_id', $tb->first()->id)->get()}}
               {{!$i=1}}
             </div>
-            @foreach($tbJ as $d)
-            <form action="/update jabtum/{{$d->id}}" method="POST">
+            @foreach($tbBid as $d)
+            <form action="/update bidang/{{$d->id}}" method="POST">
               {{csrf_field()}}
               <input type="hidden" name="ket" value="{{$ket}}">
               <input type="hidden" name="ket2" value="{{$ket2}}">
               <tr>
                 <td>{{$i++}}</td>
                 <td width="500">
-                  <input type="text" name="nm_jabatan" value="" placeholder="nama jabatan" class="form-control">
+                  <input type="text" name="nm_bidang" required="" value="{{$d->nm_bidang}}" placeholder="nama bidang" class="form-control">
                 </td>
                 <td>
                   <button type="submit" class="btn btn-sm btn-info"><i class="icon-pencil7"></i> Perbaharui</button>
-                  <a href="/delete jabtum/{{$d->id}}/{{$ket}}/{{$ket2}}" onclick="ConfirmDelete()" class="btn btn-sm btn-danger"><i class="icon-trash"></i> Hapus</a>
+                  <a href="/delete bidang/{{$d->id}}/{{$ket}}/{{$ket2}}" onclick="ConfirmDelete()" class="btn btn-sm btn-danger"><i class="icon-trash"></i> Hapus</a>
                 </td>
               </tr>
             </form>
@@ -203,77 +204,101 @@
           <!-- /bidang-bidang -->
           <hr>
 
-          <!-- bidang-bidang -->
-          <h3>Struktur Perbidang</h3>
-          <a href="javascript:void(0)" class="btn btn-sm btn-default" onclick="showStrukBidForm()"><i class="glyphicon glyphicon-pencil"></i> Tambah</a>
+        <!-- struktur bidang -->
+        <h3>Struktur Perbidang</h3>
+        @foreach($tbBid as $d)
+          <h6>{{$d->nm_bidang}}</h6>
+          <a href="javascript:void(0)" class="btn btn-sm btn-default" onclick="showStrukBidForm{{$d->id}}()"><i class="glyphicon glyphicon-pencil"></i> Tambah</a>
           
           <!-- panel form add struktur bidang -->
-          <div class="panel panel-flat" id="strukbid" style="padding: 10px; display: none; width: 500px">
+          <div class="panel panel-flat" id="strukbid{{$d->id}}" style="padding: 10px; display: none; width: 500px">
             <div>
-              <a href="javascript:void(0)" style="float: right;" onclick="closeStrukBidForm()"><i class="glyphicon glyphicon-remove"></i></a>
+              <a href="javascript:void(0)" style="float: right;" onclick="closeStrukBidForm{{$d->id}}()"><i class="glyphicon glyphicon-remove"></i></a>
               <div class="clear"></div>
             </div>
-
-            <form action="/insert jabtum/{{$tb->first()->id}}" method="POST">
+            <form action="/insert strukbid/{{$d->id}}" method="POST">
               {{csrf_field()}}
               <input type="hidden" name="ket" value="{{$ket}}">
               <input type="hidden" name="ket2" value="{{$ket2}}">
               <div class="row">
                 <div class="col-sm-5">
-                  <label>Jabatan :</label>
-                  <input type="text" name="nm_jabatan" placeholder="nama jabatan" class="form-control">
+                  <div class="form-group">
+                    <label>Jabatan :</label>
+                    <input type="text" name="nm_jabatan" required="" placeholder="nama jabatan" class="form-control">
+                  </div>
                 </div>
                 <div class="col-sm-7">
-                  <label>Penjabat :</label>
-                  <input type="text" name="nm_penjabat" placeholder="nama penjabat" class="form-control">
+                  <div class="form-group">
+                    <label>Penjabat :</label>
+                    <input type="text" name="nm_penjabat" required="" placeholder="nama penjabat" class="form-control">
+                  </div>
                 </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Angkatan :</label>
+                    <input type="number" name="angkatan" required="" placeholder="angkatan" class="form-control">
+                  </div>
+                </div>
+
                 <div class="right" style="margin:10px 10px 0px 0px">
                   <input type="submit" value="Tambahkan" class="btn btn-info btn-sm">
                 </div>
               </div>
             </form>
           </div>
-          <!-- panel form add jabtum -->
+          <!-- panel form add struktur bidang -->
           
-          <!-- tabel bidang -->
-          <h6>Nama Bidang</h6>
+          <!-- tabel struktur bidang -->
           <table class="table table-striped">
             <thead>
               <tr>
                 <th>No</th>
                 <th>Nama Penjabat</th>
                 <th>Jabatan</th>
+                <th>Angkatan</th>
               </tr>
             </thead>
             <tbody>
             <div style="display: none;">
-              {{!$tbJ = \App\JabatanUmum::where('org_id', $tb->first()->id)->get()}}
+              {{!$tbB = \App\OrgStrukBid::where('bidang_id', $d->id)->get()}}
               {{!$i=1}}
             </div>
-            @foreach($tbJ as $d)
-            <form action="/update jabtum/{{$d->id}}" method="POST">
+            @foreach($tbB as $t)
+            <form action="/update strukbid/{{$t->id}}" method="POST">
               {{csrf_field()}}
               <input type="hidden" name="ket" value="{{$ket}}">
               <input type="hidden" name="ket2" value="{{$ket2}}">
               <tr>
                 <td>{{$i++}}</td>
                 <td width="300">
-                  <input type="text" name="nm_jabatan" value="" placeholder="nama penjabat" class="form-control">
+                  <input type="text" name="nm_penjabat" value="{{$t->nm_penjabat}}" placeholder="nama penjabat" class="form-control">
                 </td>
                 <td width="200">
-                  <input type="text" name="nm_jabatan" value="" placeholder="nama jabatan" class="form-control">
+                  <input type="text" name="nm_jabatan" value="{{$t->nm_jabatan}}" placeholder="nama jabatan" class="form-control">
+                </td>
+                <td width="200">
+                  <input type="text" name="angkatan" value="{{$t->angkatan}}" placeholder="angkatan" class="form-control">
                 </td>
                 <td>
                   <button type="submit" class="btn btn-sm btn-info"><i class="icon-pencil7"></i> Perbaharui</button>
-                  <a href="/delete jabtum/{{$d->id}}/{{$ket}}/{{$ket2}}" onclick="ConfirmDelete()" class="btn btn-sm btn-danger"><i class="icon-trash"></i> Hapus</a>
+                  <a href="/delete strukbid/{{$t->id}}/{{$ket}}/{{$ket2}}" onclick="ConfirmDelete()" class="btn btn-sm btn-danger"><i class="icon-trash"></i> Hapus</a>
                 </td>
               </tr>
             </form>
             @endforeach
             </tbody>
           </table>
-          <!-- /tabel bidang -->
-          <!-- /bidang-bidang -->
+          <!-- /tabel struktur bidang -->
+          <script type="text/javascript">
+            function showStrukBidForm{{$d->id}}() {
+              document.getElementById("strukbid{{$d->id}}").style.display="block";
+            }
+            function closeStrukBidForm{{$d->id}}() {
+              document.getElementById("strukbid{{$d->id}}").style.display="none";
+            }
+          </script>
+        @endforeach
+          <!-- /struktur bidang -->
         
 
         </div>
@@ -299,13 +324,6 @@
     }
     function closeBidangForm() {
       document.getElementById("bidang").style.display="none";
-    }
-
-    function showStrukBidForm() {
-      document.getElementById("strukbid").style.display="block";
-    }
-    function closeStrukBidForm() {
-      document.getElementById("strukbid").style.display="none";
     }
 
     function ConfirmDelete() {

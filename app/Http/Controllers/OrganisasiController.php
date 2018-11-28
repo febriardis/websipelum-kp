@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Jurusan;
 use App\Fakultas;
 use App\Organisasi;
-use App\JabatanUmum;
+use App\OrgJabtum;
+use App\OrgBidang;
+use App\OrgStrukBid;
 
 class OrganisasiController extends Controller
 {
@@ -108,8 +110,10 @@ class OrganisasiController extends Controller
     	}
 	}
 
+	// jabatan umum
+
 	function insertJabtum(Request $req, $id) {
-		$tb             = new JabatanUmum;
+		$tb             = new OrgJabtum;
 		$tb->org_id     = $id;
 		$tb->nm_jabatan = $req->nm_jabatan;
 		$tb->nm_penjabat= $req->nm_penjabat;
@@ -123,7 +127,7 @@ class OrganisasiController extends Controller
 	}
 
 	function updateJabtum(Request $req, $id) {
-		$tb             = JabatanUmum::find($id);
+		$tb             = OrgJabtum::find($id);
 		$tb->nm_jabatan = $req->nm_jabatan;
 		$tb->nm_penjabat= $req->nm_penjabat;
 		$tb->save();
@@ -136,7 +140,7 @@ class OrganisasiController extends Controller
 	}
 
 	function deleteJabtum($id, $ket, $ket2) {
-		JabatanUmum::find($id)->delete();
+		OrgJabtum::find($id)->delete();
 
 		if($ket2!= ''){
         	return redirect()->action('OrganisasiController@show', ['ket' => $ket, 'ket2' => $ket2]);
@@ -144,4 +148,83 @@ class OrganisasiController extends Controller
         	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $ket]);
     	}
 	}
+	// jabatan umum
+
+	// bidang - bidang
+	function insertBidang(Request $req, $id) {
+		$tb             = new OrgBidang;
+		$tb->org_id     = $id;
+		$tb->nm_bidang = $req->nm_bidang;
+		$tb->save();
+
+		if($req->ket2!= ''){
+        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
+    	}else{
+        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
+    	}
+	}
+
+	function updateBidang(Request $req, $id) {
+		$tb             = OrgBidang::find($id);
+		$tb->nm_bidang = $req->nm_bidang;
+		$tb->save();
+
+		if($req->ket2!= ''){
+        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
+    	}else{
+        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
+    	}
+	}
+
+	function deleteBidang($id, $ket, $ket2) {
+		OrgBidang::find($id)->delete();
+
+		if($ket2!= ''){
+        	return redirect()->action('OrganisasiController@show', ['ket' => $ket, 'ket2' => $ket2]);
+    	}else{
+        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $ket]);
+    	}
+	}
+	// bidang - bidang
+
+	// struktur bidang
+	function insertStrukBid(Request $req, $idBidang) {
+		$tb             = new OrgStrukBid;
+		$tb->bidang_id  = $idBidang;
+		$tb->nm_penjabat= $req->nm_penjabat;
+		$tb->nm_jabatan = $req->nm_jabatan;
+		$tb->angkatan   = $req->angkatan;
+		$tb->save();
+
+		if($req->ket2!= ''){
+        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
+    	}else{
+        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
+    	}
+	}
+
+	function updateStrukBid(Request $req, $id) {
+		$tb             = OrgStrukBid::find($id);
+		$tb->nm_penjabat= $req->nm_penjabat;
+		$tb->nm_jabatan = $req->nm_jabatan;
+		$tb->angkatan   = $req->angkatan;
+		$tb->save();
+
+		if($req->ket2!= ''){
+        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
+    	}else{
+        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
+    	}
+	}
+
+	function deleteStrukBid($id, $ket, $ket2) {
+		OrgStrukBid::find($id)->delete();
+
+		if($ket2!= ''){
+        	return redirect()->action('OrganisasiController@show', ['ket' => $ket, 'ket2' => $ket2]);
+    	}else{
+        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $ket]);
+    	}
+	}
+	// struktur bidang
 }

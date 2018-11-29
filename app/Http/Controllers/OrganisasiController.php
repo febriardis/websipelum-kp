@@ -27,8 +27,6 @@ class OrganisasiController extends Controller
 		}
 
 		return view('views_mahasiswa.organisasi')
-		->with('ket',$ket)
-		->with('ket2',$ket2)
 		->with('id_fak',$cekFak)
 		->with('id_jur',$cekJur)
 		->with('tb', $cekOrg);
@@ -39,12 +37,9 @@ class OrganisasiController extends Controller
 	function showOrgU($ket) { //SEMA-U or DEMA-U
 		$cekJur ='';
 		$cekFak ='';
-		$ket2   ='';
 		$cekOrg = Organisasi::where('ket_organisasi',$ket)->get();	
 		
 		return view('views_admin.organisasi_view')
-		->with('ket',$ket)
-		->with('ket2',$ket2)
 		->with('id_fak',$cekFak)
 		->with('id_jur',$cekJur)
 		->with('tb', $cekOrg);
@@ -61,8 +56,6 @@ class OrganisasiController extends Controller
 		}
 		
 		return view('views_admin.organisasi_view')
-		->with('ket',$ket)
-		->with('ket2',$ket2)
 		->with('id_fak',$cekFak)
 		->with('id_jur',$cekJur)
 		->with('tb', $cekOrg);
@@ -78,11 +71,7 @@ class OrganisasiController extends Controller
 		$tb->misi = '';
 		$tb->save();
 
-		if($req->ket2!= ''){
-        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
-    	}else{
-        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
-    	}
+		return redirect()->back();
 	}
 	
 	function updateNama(Request $req, $id) {
@@ -90,11 +79,7 @@ class OrganisasiController extends Controller
 		$tb->nm_organisasi = $req->nmOrg;
 		$tb->save();
 
-		if($req->ket2!= ''){
-        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
-    	}else{
-        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
-    	}
+		return redirect()->back();
 	}
 
 	function updateVisiMisi(Request $req, $id) {
@@ -103,11 +88,7 @@ class OrganisasiController extends Controller
 		$tb->misi = $req->misi;
 		$tb->save();
 
-		if($req->ket2!= ''){
-        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
-    	}else{
-        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
-    	}
+		return redirect()->back();
 	}
 
 	// jabatan umum
@@ -119,11 +100,7 @@ class OrganisasiController extends Controller
 		$tb->nm_penjabat= $req->nm_penjabat;
 		$tb->save();
 
-		if($req->ket2!= ''){
-        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
-    	}else{
-        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
-    	}
+		return redirect()->back();
 	}
 
 	function updateJabtum(Request $req, $id) {
@@ -132,21 +109,13 @@ class OrganisasiController extends Controller
 		$tb->nm_penjabat= $req->nm_penjabat;
 		$tb->save();
 
-		if($req->ket2!= ''){
-        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
-    	}else{
-        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
-    	}
+		return redirect()->back();
 	}
 
-	function deleteJabtum($id, $ket, $ket2) {
+	function deleteJabtum($id) {
 		OrgJabtum::find($id)->delete();
-
-		if($ket2!= ''){
-        	return redirect()->action('OrganisasiController@show', ['ket' => $ket, 'ket2' => $ket2]);
-    	}else{
-        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $ket]);
-    	}
+		
+		return redirect()->back();
 	}
 	// jabatan umum
 
@@ -157,11 +126,7 @@ class OrganisasiController extends Controller
 		$tb->nm_bidang = $req->nm_bidang;
 		$tb->save();
 
-		if($req->ket2!= ''){
-        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
-    	}else{
-        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
-    	}
+		return redirect()->back();
 	}
 
 	function updateBidang(Request $req, $id) {
@@ -169,21 +134,13 @@ class OrganisasiController extends Controller
 		$tb->nm_bidang = $req->nm_bidang;
 		$tb->save();
 
-		if($req->ket2!= ''){
-        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
-    	}else{
-        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
-    	}
+		return redirect()->back();
 	}
 
-	function deleteBidang($id, $ket, $ket2) {
+	function deleteBidang($id) {
 		OrgBidang::find($id)->delete();
 
-		if($ket2!= ''){
-        	return redirect()->action('OrganisasiController@show', ['ket' => $ket, 'ket2' => $ket2]);
-    	}else{
-        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $ket]);
-    	}
+		return redirect()->back();
 	}
 	// bidang - bidang
 
@@ -196,11 +153,7 @@ class OrganisasiController extends Controller
 		$tb->angkatan   = $req->angkatan;
 		$tb->save();
 
-		if($req->ket2!= ''){
-        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
-    	}else{
-        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
-    	}
+		return redirect()->back();
 	}
 
 	function updateStrukBid(Request $req, $id) {
@@ -210,21 +163,13 @@ class OrganisasiController extends Controller
 		$tb->angkatan   = $req->angkatan;
 		$tb->save();
 
-		if($req->ket2!= ''){
-        	return redirect()->action('OrganisasiController@show', ['ket' => $req->ket, 'ket2' => $req->ket2]);
-    	}else{
-        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $req->ket]);
-    	}
+		return redirect()->back();
 	}
 
-	function deleteStrukBid($id, $ket, $ket2) {
+	function deleteStrukBid($id) {
 		OrgStrukBid::find($id)->delete();
 
-		if($ket2!= ''){
-        	return redirect()->action('OrganisasiController@show', ['ket' => $ket, 'ket2' => $ket2]);
-    	}else{
-        	return redirect()->action('OrganisasiController@showOrgU', ['ket' => $ket]);
-    	}
+		return redirect()->back();
 	}
 	// struktur bidang
 }

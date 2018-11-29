@@ -60,7 +60,7 @@
               {{! $tb = \App\Kandidat::find($dt->kandidat_id) }}
               {{! $point = \Crypt::decrypt($dt->jumlah) }}
             </div>
-            @if($point == $large)
+            
               <div class="panel-count">
                 <div class="head-panel-count">
                   <img src="/uploads/fotomhs/{{$tb->foto}}" style="" width="100%" height="100%">
@@ -76,23 +76,7 @@
                   </div>
                 </div>
               </div>
-            @else
-              <div class="panel-count"> <!-- style="margin-top: 50px" -->
-                <div class="head-panel-count">
-                  <img src="/uploads/fotomhs/{{$tb->foto}}" style="" width="100%" height="100%">
-                  <div class="bg-text-count">
-                    <div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
-                    <h1 style="margin-top: 10px; font-size: 30px">{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
-                    <h2 class="fontArial" style="margin-top: -10px"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
-                  </div>
-                </div>
-                <div class="foot-panel-count">
-                  <div class="foot-count">
-                    <h4 class="capitalize">{{$tb->nama}}</h4>
-                  </div>
-                </div>
-              </div>
-            @endif
+
             <div style="display: none;">
               {{! $tot1+=$nil_p }}
               {{! $tot2+=$point }}

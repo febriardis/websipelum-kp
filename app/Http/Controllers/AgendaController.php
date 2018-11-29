@@ -66,7 +66,8 @@ class AgendaController extends Controller
             return redirect('/tabel agenda')
             ->with('pesan','Agenda berhasil dibuat');
         }else{
-            return redirect()->action('AgendaController@verif_view', ['id' => $req->id_bacara])
+            // return redirect()->action('AgendaController@verif_view', ['id' => $req->id_bacara])
+            return redirect()->back()
             ->with('pesan','Tanggal agenda sudah ada');
         }
     }

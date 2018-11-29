@@ -19,7 +19,7 @@ class PengAgendaController extends Controller {
     function insert(Request $req, $AdminId)
     {
         $this->validate($req, [
-            'file' => 'required|max:10000|mimes:doc,docx,pdf' //new DocType() //
+            'file' => 'required|max:20000|mimes:doc,docx,pdf' //new DocType() //
             ]
         );
     	
@@ -91,8 +91,10 @@ class PengAgendaController extends Controller {
 
     function delete($id) {
     	AgendaAjuan::find($id)->delete();
-    	return redirect('/pengajuan agenda')
-    	->with('pesan', 'Data berhasil dihapus');
+    	
+        // return redirect('/pengajuan agenda')
+    	return redirect()->back()
+        ->with('pesan', 'Data berhasil dihapus');
     } 
     // function Admin!=SuperAdmin
 
@@ -102,7 +104,8 @@ class PengAgendaController extends Controller {
         $tb->ket = 'agenda ditolak';
         $tb->save();
         
-        return redirect('/pengajuan agenda')
+        // return redirect('/pengajuan agenda')
+        return redirect()->back()
         ->with('pesan', 'Data berhasil disimpan');
     } 
 }

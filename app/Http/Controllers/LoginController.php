@@ -15,7 +15,8 @@ class LoginController extends Controller
         ])) {
     		return redirect('/beranda');
     	}else{
-    		return redirect('/')
+    		// return redirect('/')
+            return redirect()->back()
             ->with('pesan','Nim atau Password Salah');
     	}
     }
@@ -27,7 +28,8 @@ class LoginController extends Controller
         ])) {
             return redirect('/dashboard');
         }else{
-            return redirect('/admin/login')
+            // return redirect('/admin/login')
+            return redirect()->back()
             ->with('pesan','Username atau Password Salah');
         }
     }

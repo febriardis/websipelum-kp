@@ -44,7 +44,7 @@
 					<!-- /border quick count text -->
 
 					<div style="display: none;">
-						{{! $tbVoting=\App\Voting::where('agenda_id', $tbA->id)->get() }}
+						{{! $tbVoting=\App\Voting::orderBy('jumlah','DESC')->where('agenda_id', $tbA->id)->get() }}
 						
 						{{! $c = \App\Voting::where('agenda_id', $tbA->id)->max('jumlah') }}
 						{{! $large = \Crypt::decrypt($c) }}

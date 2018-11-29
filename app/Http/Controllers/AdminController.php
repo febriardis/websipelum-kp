@@ -46,7 +46,8 @@ class AdminController extends Controller
     
     function delete($id){
         Admin::find($id)->delete();
-        return redirect('/tabel admin')
+        
+        return redirect()->back()
         ->with('pesan', 'Data berhasil dihapus');
     }
 }

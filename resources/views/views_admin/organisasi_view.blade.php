@@ -9,8 +9,6 @@
       <!-- form update nama organisasi -->
       <form action="/UpnmOrganisasi/{{$tb->first()->id}}" method="POST"> <!-- set nama organisasi -->
         {{ csrf_field() }}
-        <input type="hidden" name="ket" value="{{$ket}}">
-        <input type="hidden" name="ket2" value="{{$ket2}}">
         <div class="form-group">      
           <div class="col-lg-11">
             <input type="text" class="form-control" value="{{$tb->first()->nm_organisasi}}" name="nmOrg" required="" placeholder="Masukan nama organisasi">
@@ -22,8 +20,6 @@
       <!-- form create nama organisasi -->
       <form action="/nmOrganisasi" method="POST"> <!-- set nama organisasi -->
         {{ csrf_field() }}
-        <input type="hidden" name="ket" value="{{$ket}}">
-        <input type="hidden" name="ket2" value="{{$ket2}}">
         <input type="hidden" name="idFak" value="{{$id_fak}}">
         <input type="hidden" name="idJur" value="{{$id_jur}}">
         <div class="form-group">      
@@ -49,8 +45,6 @@
       <div class="tab-pane active" id="highlighted-justified-tab1">
         <form action="/UpVMOrganisasi/{{$tb->first()->id}}" method="POST">
           {{ csrf_field() }}
-          <input type="hidden" name="ket" value="{{$ket}}">
-          <input type="hidden" name="ket2" value="{{$ket2}}">
           <div class="form-group">
             <label class="control-label">Visi</label>
             <input type="text" class="form-control" name="visi" value="{{$tb->first()->visi}}" required="" placeholder="Masukan visi organisasi">
@@ -81,8 +75,6 @@
 
             <form action="/insert jabtum/{{$tb->first()->id}}" method="POST">
               {{csrf_field()}}
-              <input type="hidden" name="ket" value="{{$ket}}">
-              <input type="hidden" name="ket2" value="{{$ket2}}">
               <div class="row">
                 <div class="col-sm-5">
                   <label>Jabatan :</label>
@@ -118,8 +110,6 @@
             @foreach($tbJabt as $d)
             <form action="/update jabtum/{{$d->id}}" method="POST">
               {{csrf_field()}}
-              <input type="hidden" name="ket" value="{{$ket}}">
-              <input type="hidden" name="ket2" value="{{$ket2}}">
               <tr>
                 <td>{{$i++}}</td>
                 <td width="200">
@@ -130,7 +120,7 @@
                 </td>
                 <td>
                   <button type="submit" class="btn btn-sm btn-info"><i class="icon-pencil7"></i> Perbaharui</button>
-                  <a href="/delete jabtum/{{$d->id}}/{{$ket}}/{{$ket2}}" onclick="ConfirmDelete()" class="btn btn-sm btn-danger"><i class="icon-trash"></i> Hapus</a>
+                  <a href="/delete jabtum/{{$d->id}}" onclick="ConfirmDelete()" class="btn btn-sm btn-danger"><i class="icon-trash"></i> Hapus</a>
                 </td>
               </tr>
             </form>
@@ -153,8 +143,6 @@
             
             <form action="/insert bidang/{{$tb->first()->id}}" method="POST">
               {{csrf_field()}}
-              <input type="hidden" name="ket" value="{{$ket}}">
-              <input type="hidden" name="ket2" value="{{$ket2}}">
               <div class="row">
                 <div class="col-sm-12">
                   <label>Nama Bidang :</label>
@@ -184,8 +172,6 @@
             @foreach($tbBid as $d)
             <form action="/update bidang/{{$d->id}}" method="POST">
               {{csrf_field()}}
-              <input type="hidden" name="ket" value="{{$ket}}">
-              <input type="hidden" name="ket2" value="{{$ket2}}">
               <tr>
                 <td>{{$i++}}</td>
                 <td width="500">
@@ -193,7 +179,7 @@
                 </td>
                 <td>
                   <button type="submit" class="btn btn-sm btn-info"><i class="icon-pencil7"></i> Perbaharui</button>
-                  <a href="/delete bidang/{{$d->id}}/{{$ket}}/{{$ket2}}" onclick="ConfirmDelete()" class="btn btn-sm btn-danger"><i class="icon-trash"></i> Hapus</a>
+                  <a href="/delete bidang/{{$d->id}}" onclick="ConfirmDelete()" class="btn btn-sm btn-danger"><i class="icon-trash"></i> Hapus</a>
                 </td>
               </tr>
             </form>
@@ -218,8 +204,6 @@
             </div>
             <form action="/insert strukbid/{{$d->id}}" method="POST">
               {{csrf_field()}}
-              <input type="hidden" name="ket" value="{{$ket}}">
-              <input type="hidden" name="ket2" value="{{$ket2}}">
               <div class="row">
                 <div class="col-sm-5">
                   <div class="form-group">
@@ -266,8 +250,6 @@
             @foreach($tbB as $t)
             <form action="/update strukbid/{{$t->id}}" method="POST">
               {{csrf_field()}}
-              <input type="hidden" name="ket" value="{{$ket}}">
-              <input type="hidden" name="ket2" value="{{$ket2}}">
               <tr>
                 <td>{{$i++}}</td>
                 <td width="300">
@@ -281,7 +263,7 @@
                 </td>
                 <td>
                   <button type="submit" class="btn btn-sm btn-info"><i class="icon-pencil7"></i> Perbaharui</button>
-                  <a href="/delete strukbid/{{$t->id}}/{{$ket}}/{{$ket2}}" onclick="ConfirmDelete()" class="btn btn-sm btn-danger"><i class="icon-trash"></i> Hapus</a>
+                  <a href="/delete strukbid/{{$t->id}}" onclick="ConfirmDelete()" class="btn btn-sm btn-danger"><i class="icon-trash"></i> Hapus</a>
                 </td>
               </tr>
             </form>

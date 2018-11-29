@@ -76,15 +76,13 @@ Route::post('/UpnmOrganisasi/{id}', 'OrganisasiController@updateNama')->middlewa
 Route::post('/UpVMOrganisasi/{id}', 'OrganisasiController@updateVisiMisi')->middleware('auth:admin');
 Route::post('/insert jabtum/{idOrg}', 'OrganisasiController@insertJabtum')->middleware('auth:admin');
 Route::post('/update jabtum/{id}', 'OrganisasiController@updateJabtum')->middleware('auth:admin');
-Route::get('/delete jabtum/{id}/{ket}/{ket2}', 'OrganisasiController@deleteJabtum')->middleware('auth:admin');
+Route::get('/delete jabtum/{id}', 'OrganisasiController@deleteJabtum')->middleware('auth:admin');
 Route::post('/insert bidang/{idOrg}', 'OrganisasiController@insertBidang')->middleware('auth:admin');
 Route::post('/update bidang/{id}', 'OrganisasiController@updateBidang')->middleware('auth:admin');
-Route::get('/delete bidang/{id}/{ket}/{ket2}', 'OrganisasiController@deleteBidang')->middleware('auth:admin');
-
+Route::get('/delete bidang/{id}', 'OrganisasiController@deleteBidang')->middleware('auth:admin');
 Route::post('/insert strukbid/{idBidang}', 'OrganisasiController@insertStrukBid')->middleware('auth:admin');
 Route::post('/update strukbid/{id}','OrganisasiController@updateStrukBid')->middleware('auth:admin');
-Route::get('/delete strukbid/{id}/{ket}/{ket2}','OrganisasiController@deleteStrukBid')->middleware('auth:admin');
-
+Route::get('/delete strukbid/{id}','OrganisasiController@deleteStrukBid')->middleware('auth:admin');
 
 // ==================================ADMIN-PEMILIH==================================
 Route::post('/tambah pemilih/{idAgenda}','PemilihController@insert');

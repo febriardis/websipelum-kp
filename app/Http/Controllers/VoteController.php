@@ -19,7 +19,7 @@ class VoteController extends Controller
 
     function viewQuickCount($idAgenda){
         $id = \Crypt::decrypt($idAgenda);
-        $tb = Voting::where('agenda_id', $id)->get();
+        $tb = Voting::orderBy('jumlah','DESC')->where('agenda_id', $id)->get();
 
         return view('views_admin.quickcount_view')
         ->with('idAgenda', $id)
@@ -48,7 +48,8 @@ class VoteController extends Controller
         $tbVote->jumlah = \Crypt::encrypt($nil); 
         $tbVote->save();
 
-    	return redirect('/pemilihan')
+    	// return redirect('/pemilihan')
+        return redirect()->back()
         ->with('pesanVote','berhasil memilih');
     }
 }

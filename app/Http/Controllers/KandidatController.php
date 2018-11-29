@@ -90,7 +90,7 @@ class KandidatController extends Controller
                 ->with('pesanVerif', 'Data berhasil disimpan'); //return ke agenda view
             }else {
                 //return redirect()->action('KandidatController@ViewTambah', ['idAgenda' => \Crypt::encrypt($idAgenda)])
-                return redirect()->back();
+                return redirect()->back()
                 ->with('pesanEr', 'NIM Sudah Terdaftar'); 
             }
         }else {

@@ -53,6 +53,7 @@ Route::post('/tambah agenda/{idAdmin}', 'AgendaController@insert');
 Route::get('/edit agenda/{id}', 'AgendaController@edit')->middleware('auth:admin');
 Route::post('/edit agenda/{id}', 'AgendaController@update');
 Route::get('/hapus agenda/{id}', 'AgendaController@delete')->middleware('auth:admin');
+Route::post('/update syaratK/{id}', 'AgendaController@updateSyaratK');
 Route::get('/tabel agenda', 'AgendaController@show')->middleware('auth:admin');
 Route::get('/detail agenda/{IdAgenda}', 'AgendaController@agendaview')->middleware('auth:admin');
 //----------------------------------------------------------------------------------
@@ -98,7 +99,6 @@ Route::get('/detail quick count/{idAgenda}', 'VoteController@viewQuickCount')->m
 
 // =============================ADMIN-SHOW-MAHASISWA================================
 Route::get('/tabel mahasiswa', 'MhsController@show')->middleware('auth:admin');
-
 
 // ==================================VOTE==================================
 Route::group(['middleware' => 'throttle:1'], function () {

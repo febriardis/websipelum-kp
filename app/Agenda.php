@@ -9,26 +9,30 @@ class Agenda extends Model
     protected $table = 'tb_agenda';
 
 	protected $fillable = [
-		'admin_id','nm_agenda', 'sistem_vote','kat_jurusan','kat_fakultas','tgl_agenda', 'timeA1', 'timeA2', 'StartDaftarK', 'LastDaftarK', 'tgl_filtering'
+		'admin_id',
+		'nm_agenda', 
+		'sistem_vote',
+		'kat_jurusan',
+		'kat_fakultas',
+		'tgl_agenda', 
+		'timeA1', 
+		'timeA2', 
+		'StartDaftarK', 
+		'LastDaftarK', 
+		'tgl_filtering', 
+		'syaratketentuan'
 	];
 
-	function PKAgendaA(){
+	function FKAgendaA(){
 		return $this->belongsTo(Admin::class);
 	}
-
 	function PKAgenda1() { 
-		return $this->hasMany(Pemilih::class);//sebagai refer Pemilih
+		return $this->hasMany(Pemilih::class);
 	}
 	function PKAgenda2() { 
-		return $this->hasMany(Tps::class);//sebagai refer Tps
+		return $this->hasMany(Kandidat::class);
 	}
 	function PKAgenda3() { 
-		return $this->hasMany(Paslon::class);//sebagai refer Paslon
-	}
-	function PKAgenda4() { 
-		return $this->hasMany(Balon::class);//sebagai refer Balon
-	}
-	function PKAgenda5() { 
-		return $this->hasMany(Voting::class);//sebagai refer Balon
+		return $this->hasMany(Voting::class);
 	}
 }

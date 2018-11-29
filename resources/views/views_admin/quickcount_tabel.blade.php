@@ -6,6 +6,7 @@
 
 @section('content')
   	{{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}
+    {{! $cekJam = \Carbon\Carbon::now('Asia/Jakarta')->format('G:i') }}
 	<!-- Basic datatable -->
 	<div class="panel panel-flat">
 		<div class="panel-heading">
@@ -43,7 +44,14 @@
 						@if($cekTgl > $dt->tgl_agenda)
 							<span class="label label-success">Selesai</span>
 						@elseif($cekTgl == $dt->tgl_agenda)
-							<span class="label label-danger">Sedang Berlangsung</span>
+							<span class="label label-danger">Agenda Hari Ini</span>
+							@if($cekJam >= $dt->timeA1 && $cekJam <= $dt->timeA2)
+								<span class="label label-danger">Sedang Berlangsung</span>		
+							@elseif($cekJam > $dt->timeA2)
+								<span class="label label-success">Pemilihan berakhir</span>
+							@else
+								<span class="label label-success">Menunggu waktu pemilihan</span>
+							@endif
 						@endif
 					</td>
 					<td>

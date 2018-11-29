@@ -56,6 +56,7 @@ class AgendaController extends Controller
             $tb->StartDaftarK= $req->StartDaftarK;
             $tb->LastDaftarK = $req->LastDaftarK;
             $tb->tgl_filtering= $req->tgl_filtering;
+            $tb->syaratketentuan = '';
             $tb->save();
 
             $tb_berita = AgendaAjuan::find($req->id_bacara);
@@ -79,20 +80,24 @@ class AgendaController extends Controller
     }
 
     function update(Request $req, $id) {    
-        $cek = Agenda::where('tgl_agenda', $req->tgl_agenda)->get();
-        if (count($cek)==0) {   
+        // $cek = Agenda::where([['tgl_agenda', $req->tgl_agenda],['id','!=',$id]])->get();
+        // if (count($cek)==0) {   
             $tb = Agenda::find($id);
-            $tb->nm_agenda = $req->nm_agenda;
-            $tb->sistem_vote = $req->sistem_pem;
-            $tb->tgl_agenda= $req->tgl_agenda;
+            $tb->timeA1      = $req->timeA1;
+            $tb->timeA2      = $req->timeA2;
+            $tb->StartDaftarK= $req->StartDaftarK;
+            $tb->LastDaftarK = $req->LastDaftarK;
+            $tb->tgl_filtering= $req->tgl_filtering;
+            $tb->save();
+            //tambahkan
             $tb->save();
         
             return redirect('/tabel agenda')
-            ->with('pesanA', 'Data berhasil diupdate');
-        }else{
-            return redirect()->action('AgendaController@edit', ['id' => \Crypt::encrypt($id)])
-            ->with('pesanErr','Tanggal agenda sudah ada');      
-        }
+            ->with('pesanA', 'Data berhasil disimpan');
+        // }else{
+        //     return redirect()->action('AgendaController@edit', ['id' => \Crypt::encrypt($id)])
+        //     ->with('pesanErr','Tanggal agenda sudah ada');      
+        // }
     }
 
     function delete($id) {
@@ -100,5 +105,14 @@ class AgendaController extends Controller
 
         return redirect('/tabel agenda')
         ->with('pesan', 'Data berhasil dihapus');
+    }
+
+    function updateSyaratK(Request $req, $id) {
+        $tb = Agenda::find($id);
+        $tb->syaratketentuan = $req->syaratketentuan;
+        $tb->save();
+    
+        return redirect('/tabel agenda')
+        ->with('pesanA', 'Data berhasil disimpan');
     }
 }

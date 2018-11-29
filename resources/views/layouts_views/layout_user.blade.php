@@ -25,8 +25,7 @@
 			<div class="navbar-brand">
 				<img src="/assets/images/icon.png" style="width: 75%; height: 35px; margin-top: -10px" alt="">
 			</div>
-	  		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">	    
-	  			<span class="navbar-toggler-icon"></span>
+	  		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">	 <span class="navbar-toggler-icon"></span>
 		  	</button>
 
 		  	<div class="collapse navbar-collapse fontArial" id="navb">
@@ -121,10 +120,10 @@
 			 				@endforeach
 				    	</div>
 				  	</div>
-				  	<span class="span">|</span>
+				  	<!-- <span class="span">|</span>
 				  	<li class="nav-item">
 				    	<a class="nav-link" href="javascript:void(0)" style="padding: 10px;">Syarat & Ketentuan</a>
-				  	</li>
+				  	</li> -->
 				</ul>
 			    <ul class="navbar-nav">
 			    	<li class="nav-item">
@@ -233,10 +232,10 @@
 					      <a class="dropdown-item" href="/daftar calon">Calon Kandidat</a>
 					    </div>
 				  	</li>	
-				  	<span class="span">|</span>
+				  	<!-- <span class="span">|</span>
 				  	<li class="nav-item">
 				    	<a class="nav-link" href="javascript:void(0)" style="padding: 10px;">Syarat &amp; Ketentuan</a>
-				  	</li>  	
+				  	</li>   -->	
 				</ul>
 
 			    <ul class="navbar-nav">

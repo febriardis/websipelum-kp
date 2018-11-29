@@ -1,10 +1,12 @@
 @extends('layouts_views.layout_user')
 
 @section('content')
+  <meta http-equiv="refresh" content="30"/>
   <div style="display: none;">
     {{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'), 
         $cek  = (App\Agenda::where('tgl_agenda', $cekTgl))->value('tgl_agenda')
     }}
+    {{! $cekJam = \Carbon\Carbon::now('Asia/Jakarta')->format('G:i') }}
   </div>
   <!-- tambah keterangan jika jam sudah jam 8.00 -->
   <!-- content -->
@@ -16,12 +18,14 @@
       {{! $cekNim=\App\Pemilih::where([['nim', Auth::user()->nim],['agenda_id', $tbA->id]])->get() }} 
       <!-- cek mhs.nim=pemilih.nim dan pemilih.agenda_id=agenda.id-->
       </div>
-
-      @if(Auth::user()->jurusan==$tbA->kat_jurusan && Auth::user()->fakultas==$tbA->kat_fakultas && count($cekNim)!=0 || $tbA->kat_jurusan=='Semua Jurusan' && Auth::user()->fakultas==$tbA->kat_fakultas && count($cekNim)!=0 || $tbA->kat_fakultas=='Semua Mahasiswa' && count($cekNim)!=0)      
+      
+      @if(Auth::user()->jurusan==$tbA->kat_jurusan && Auth::user()->fakultas==$tbA->kat_fakultas && count($cekNim)!=0 || $tbA->kat_jurusan=='Semua Jurusan' && Auth::user()->fakultas==$tbA->kat_fakultas && count($cekNim)!=0 || $tbA->kat_fakultas=='Semua Mahasiswa' && count($cekNim)!=0)   
+        <!-- jika jam sudah sesuai maka tampilkan -->
+        @if($cekJam >= $tbA->timeA1 && $cekJam <= $tbA->timeA2)
           <!-- list-content Ada Jadwal -->
           <div class="list-content-info">
             <h5>{{$tbA->nm_agenda}}</h5>
-            <p>{{ \Carbon\Carbon::now('Asia/Jakarta')->format('l, d F Y')  }}</p>
+            <p><b>Pelaksanaan :</b> {{ \Carbon\Carbon::now('Asia/Jakarta')->format('l, d F Y')  }} / Jam : {{ date('G:i', strtotime($tbA->timeA1)) }} - {{ date('G:i', strtotime($tbA->timeA2)) }} WIB</p>
             <div class="clear"></div>
           </div>
           @if(Session::has('pesanVote'))
@@ -131,18 +135,47 @@
             <div class="clear"></div>
           </div>
           <!-- /content-vote -->
+        @elseif($cekJam > $tbA->timeA2) <!-- jika jam sudah lewat -->
+            <!-- list-content jam belum sesuai -->
+            <div class="list-content-info">
+              <h5>{{$tbA->nm_agenda}}</h5>
+              <p><b>Pelaksanaan :</b> {{ \Carbon\Carbon::now('Asia/Jakarta')->format('l, d F Y')  }} / Jam : {{ date('G:i', strtotime($tbA->timeA1)) }} - {{ date('G:i', strtotime($tbA->timeA2)) }} WIB</p>
+              <div class="clear"></div>
+            </div>
+            <!-- /list-content -->
+            <div class="content-notfound">
+              <img src="assets/images/warning-ico.png" alt="waring">
+              <h3 class="text-muted fontArial capitalize">Waktu Pemilihan berakhir !</h3>
+              <a href="/hitung cepat">Lihat Hasil Vote</a>
+            </div>
+            <!-- list-content jam belum sesuai -->
+        @else <!-- jika jam belum sesuai -->
+            <!-- list-content jam belum sesuai -->
+            <div class="list-content-info">
+              <h5>{{$tbA->nm_agenda}}</h5>
+              <p><b>Pelaksanaan :</b> {{ \Carbon\Carbon::now('Asia/Jakarta')->format('l, d F Y')  }} / Jam : {{ date('G:i', strtotime($tbA->timeA1)) }} - {{ date('G:i', strtotime($tbA->timeA2)) }} WIB</p>
+              <div class="clear"></div>
+            </div>
+            <!-- /list-content -->
+            <div class="content-notfound">
+              <img src="assets/images/warning-ico.png" alt="waring">
+              <h3 class="text-muted fontArial capitalize">Menunggu waktu pemilihan!</h3>
+              <h3>Jam : {{ date('G:i', strtotime($tbA->timeA1)) }} - {{ date('G:i', strtotime($tbA->timeA2)) }} WIB</h3>
+            </div>
+            <!-- list-content jam belum sesuai -->
+        @endif
       @else
-          <!-- list-content Tidak Ada Jadwal -->
-          <div class="list-content-info">
-            <h5>tidak ada agenda</h5>
-            <p>{{ \Carbon\Carbon::now('Asia/Jakarta')->format('l, d F Y')  }}</p>
-            <div class="clear"></div>
-          </div>
-          <!-- /list-content -->
-          <div class="content-notfound">
-            <img src="assets/images/warning-ico.png" alt="waring">
-            <h3 class="text-muted fontArial capitalize">tidak ada pemilihan !</h3>
-          </div>
+        <!-- list-content Tidak Ada Jadwal -->
+        <div class="list-content-info">
+          <h5>tidak ada agenda</h5>
+          <p>{{ \Carbon\Carbon::now('Asia/Jakarta')->format('l, d F Y')  }}</p>
+          <div class="clear"></div>
+        </div>
+        <!-- /list-content -->
+        <div class="content-notfound">
+          <img src="assets/images/warning-ico.png" alt="waring">
+          <h3 class="text-muted fontArial capitalize">tidak ada pemilihan !</h3>
+        </div>
       @endif
     @else
       <!-- list-content Tidak Ada Jadwal -->

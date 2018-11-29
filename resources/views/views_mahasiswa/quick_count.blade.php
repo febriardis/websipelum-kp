@@ -3,7 +3,8 @@
 @section('content')
   	<div style="display: none;">
   	{{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'), 
-    	$cek  = (App\Agenda::where('tgl_agenda', $cekTgl))->value('tgl_agenda') }}		
+    	$cek  = (App\Agenda::where('tgl_agenda', $cekTgl))->value('tgl_agenda') }}	    	
+    {{! $cekJam = \Carbon\Carbon::now('Asia/Jakarta')->format('G:i') }}	
 	</div>
 
 	<!-- Content -->	
@@ -34,52 +35,7 @@
 					<div class="clear"></div>
 				</div>
 
-    			@if($tot!=100)
-				<meta http-equiv="refresh" content="30"/>
-					<!-- border quick count text -->
-					<div class="list-text-qc">
-						<hr><h3>Quick Count</h3><hr>
-						<div class="clear"></div>
-					</div>
-					<!-- /border quick count text -->
-
-					<div style="display: none;">
-						{{! $tbVoting=\App\Voting::where('agenda_id', $tbA->id)->get() }}
-					</div>
-					<div class="content-counting">
-						@foreach($tbVoting as $dt)
-						<div style="display: none;">
-							{{! $tb = \App\Kandidat::find($dt->kandidat_id) }}
-							{{! $point = \Crypt::decrypt($dt->jumlah) }}
-						</div>
-						<div class="panel-count">
-							<div class="head-panel-count">
-								<img src="/uploads/fotomhs/{{$tb->foto}}" style="" width="100%" height="100%">
-								<div class="bg-text-count">				
-									<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
-									<h1>{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
-									<div class="clear"></div>
-									<h2 class="fontArial"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
-								</div>
-							</div>
-							<div class="foot-panel-count">
-								<div class="foot-count">
-									<h4 class="capitalize">{{$tb->nama}}</h4>
-								</div>
-							</div>
-						</div>
-						<div style="display: none;">
-							{{! $tot1+=$nil_p }}
-							{{! $tot2+=$point }}
-						</div>
-						@endforeach
-						<div class="clear"></div>
-					</div>
-
-					<div class="progress" style="height: 50px">
-						<div class="progress-bar progress-bar-striped progress-bar-animated" style="width:{{number_format($tot1)}}%"><h3>Suara Masuk : {{number_format($tot1)}}<span style="font-size: 22px">%</span> / {{$tot2}}</h3></div>
-					</div>
-				@else
+    			@if($tot==100 || $cekJam > $tbA->timeA2)
 					<!-- border quick count text -->
 					<div class="list-text-qcl">
 						<hr><h3>Quick Count Results</h3><hr>
@@ -146,6 +102,51 @@
 
 					<div class="progress" style="height: 50px">
 						<div class="progress-bar progress-bar-striped progress-bar-animated" style="width:{{number_format($tot1)}}%"><h3>Total Suara Masuk : {{number_format($tot1)}}<span style="font-size: 22px">%</span> / {{$tot2}}</h3></div>
+					</div>
+				@else
+					<meta http-equiv="refresh" content="30"/>
+					<!-- border quick count text -->
+					<div class="list-text-qc">
+						<hr><h3>Quick Count</h3><hr>
+						<div class="clear"></div>
+					</div>
+					<!-- /border quick count text -->
+
+					<div style="display: none;">
+						{{! $tbVoting=\App\Voting::where('agenda_id', $tbA->id)->get() }}
+					</div>
+					<div class="content-counting">
+						@foreach($tbVoting as $dt)
+						<div style="display: none;">
+							{{! $tb = \App\Kandidat::find($dt->kandidat_id) }}
+							{{! $point = \Crypt::decrypt($dt->jumlah) }}
+						</div>
+						<div class="panel-count">
+							<div class="head-panel-count">
+								<img src="/uploads/fotomhs/{{$tb->foto}}" style="" width="100%" height="100%">
+								<div class="bg-text-count">				
+									<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
+									<h1>{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
+									<div class="clear"></div>
+									<h2 class="fontArial"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
+								</div>
+							</div>
+							<div class="foot-panel-count">
+								<div class="foot-count">
+									<h4 class="capitalize">{{$tb->nama}}</h4>
+								</div>
+							</div>
+						</div>
+						<div style="display: none;">
+							{{! $tot1+=$nil_p }}
+							{{! $tot2+=$point }}
+						</div>
+						@endforeach
+						<div class="clear"></div>
+					</div>
+
+					<div class="progress" style="height: 50px">
+						<div class="progress-bar progress-bar-striped progress-bar-animated" style="width:{{number_format($tot1)}}%"><h3>Suara Masuk : {{number_format($tot1)}}<span style="font-size: 22px">%</span> / {{$tot2}}</h3></div>
 					</div>
 				@endif
 			@else

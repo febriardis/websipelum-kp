@@ -56,12 +56,6 @@
 	<script type="text/javascript" src="/assets/js/pages/datatables_basic.js"></script>
 	<!-- /theme JS files -->
 
-	<!-- Theme JS files 
-	<script type="text/javascript" src="/assets/js/plugins/visualization/echarts/echarts.js"></script>
-	<script type="text/javascript" src="/assets/js/charts/echarts/columns_waterfalls.js"></script>
-	<script type="text/javascript" src="/assets/js/charts/echarts/timeline_option.js"></script>
-	/theme JS files -->
-
 	<!-- Theme JS files -->
 	<script type="text/javascript" src="/assets/js/plugins/ui/dragula.min.js"></script>
 	<script type="text/javascript" src="/assets/js/pages/extension_dnd.js"></script>

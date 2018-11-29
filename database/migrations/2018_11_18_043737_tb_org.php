@@ -36,6 +36,6 @@ class TbOrg extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('=tb_org');
+        Schema::dropIfExists('tb_org');
     }
 }

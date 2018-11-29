@@ -90,6 +90,18 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="form-group form-check">
+				<div class="row">
+					<label class="control-label col-sm-4"></label>
+					<div class="col-sm-8">
+			    		<label class="form-check-label">
+							<input type="checkbox" name=""> Saya menyetujui <a href="javascript::void(0)" data-toggle="modal" data-target="#myModalTerms">kebijakan &amp; persyaratan</a> pencalonan.
+						</label>
+					</div>
+				</div>
+			</div>
+
 			<div class="right">
 				<input type="submit" value="Daftar" class="btn btn-primary">
 				<a href="{{URL::previous()}}" class="btn btn-danger">Batal</a>
@@ -98,7 +110,30 @@
 			<div class="clear"></div>
 		</form>
 
+		<!-- The Modal -->
+		<div class="modal" id="myModalTerms" role="dialog">
+		    <div class="modal-dialog">
+		    	<div class="modal-content">
+			        <!-- Modal Header -->
+			        <div class="modal-header">
+			        	<span class="glyphicon glyphicon-user"></span> 
+			        	<h6 class="modal-title">Kebijakan dan persyaratan pencalonan</h6>
+			        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+			        </div>
+			        
+			        <!-- Modal body -->
+			        <div class="modal-body">
+			        	{!! $tb->syaratketentuan !!}
+			        </div>
+
+		    	</div>
+		    </div>
+		</div>
+		<!--End The Modal-->
+
 		<script type="text/javascript">
+			$('#myModalTerms').modal('show');
+
 		    $(document).ready(function() {
 		        var iCnt = 0;
 		        // CREATE A "DIV" ELEMENT.

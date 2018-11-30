@@ -105,7 +105,7 @@ class AgendaController extends Controller
         Agenda::find($id)->delete();
 
         // return redirect('/tabel agenda')
-        return redirect()->back();
+        return redirect()->back()
         ->with('pesan', 'Data berhasil dihapus');
     }
 

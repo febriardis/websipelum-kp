@@ -16,73 +16,93 @@
 		@endif
 		<div class="panel-body">
 			<form action="/tambah kandidat/{{$tb->id}}" method="POST" enctype="multipart/form-data">
-			{{csrf_field()}}
-			<div class="form-group">
-				<div class="row">
-					<label class="control-label col-sm-4">NIM</label>
-					<div class="col-sm-8">
-						<input type="text" class="form-control" required="" name="nim" placeholder="NIM Calon Kandidat">
-					</div>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<div class="row">
-					<label class="control-label col-sm-4">IPK</label>
-					<div class="col-sm-8">
-						<input type="text" class="form-control" required="" placeholder="Masukan nilai IPK anda" name="ipk">
-					</div>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<div class="row">
-					<label class="control-label col-sm-4">Transkrip Nilai</label>
-					<div class="col-sm-8">
-						<input type="file" required="" name="transkrip">
-					</div>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<div class="row">
-					<label class="control-label col-sm-4">Visi</label>
-					<div class="col-sm-8">
-						<input type="text" required="" autocomplete="off" name="visi" class="form-control" placeholder="Masukan visi anda">
-					</div>
-				</div>
-			</div>
- 			<!-- <div class="form-group">
-				<div class="row">
-					<label class="control-label col-sm-4">Misi</label>
-					<div class="col-sm-8">
-						<div>
-							<p class="text-muted" style="float: left;">*click the (+) or (-) button.</p>
-							<a href="javascript:void(0)" id="btRemove" class="btn-misi"><i class='fas fa-minus' style=""></i></a>
-							<a href="javascript:void(0)" id="btAdd" class="btn-misi"><i class='fas fa-plus' style=""></i></a>
-							<div class="clear"></div>	
+				{{csrf_field()}}
+				<div class="form-group">
+					<div class="row">
+						<label class="control-label col-sm-4">NIM</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" required="" name="nim" placeholder="NIM Calon Kandidat">
 						</div>
-						<div id="main"></div>
 					</div>
 				</div>
-			</div> -->	
-			 <div class="form-group">
-				<div class="row">
-					<label class="control-label col-sm-4">Misi</label>
-					<div class="col-sm-8">
-						<textarea name="misi" required="" class="ckeditor" id="ckedtor"></textarea>
+				
+				<div class="form-group">
+					<div class="row">
+						<label class="control-label col-sm-4">IPK</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" required="" placeholder="Masukan nilai IPK anda" name="ipk">
+						</div>
 					</div>
 				</div>
-			</div>
-			<div style="float: right;">
-				<input type="submit" value="Daftar" class="btn btn-primary">
-				<a href="{{URL::previous()}}" class="btn btn-danger">Batal</a>
-			</div>
-			<div class="clear"></div>
-		</form>
+				
+				<div class="form-group">
+					<div class="row">
+						<label class="control-label col-sm-4">Transkrip Nilai</label>
+						<div class="col-sm-8">
+							<input type="file" required="" name="transkrip">
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="row">
+						<label class="control-label col-sm-4">Visi</label>
+						<div class="col-sm-8">
+							<input type="text" required="" autocomplete="off" name="visi" class="form-control" placeholder="Masukan visi anda">
+						</div>
+					</div>
+				</div>
+	 			<!-- <div class="form-group">
+					<div class="row">
+						<label class="control-label col-sm-4">Misi</label>
+						<div class="col-sm-8">
+							<div>
+								<p class="text-muted" style="float: left;">*click the (+) or (-) button.</p>
+								<a href="javascript:void(0)" id="btRemove" class="btn-misi"><i class='fas fa-minus' style=""></i></a>
+								<a href="javascript:void(0)" id="btAdd" class="btn-misi"><i class='fas fa-plus' style=""></i></a>
+								<div class="clear"></div>	
+							</div>
+							<div id="main"></div>
+						</div>
+					</div>
+				</div> -->	
+				 <div class="form-group">
+					<div class="row">
+						<label class="control-label col-sm-4">Misi</label>
+						<div class="col-sm-8">
+							<textarea name="misi" required="" class="ckeditor" id="ckedtor"></textarea>
+						</div>
+					</div>
+				</div>
+				<div style="float: right;">
+					<input type="submit" value="Daftar" class="btn btn-primary">
+					<a href="{{URL::previous()}}" class="btn btn-danger">Batal</a>
+				</div>
+				<div class="clear"></div>
+			</form>
 		</div>
+		<!-- The Modal -->
+		<div class="modal" id="myModalTerms" role="dialog">
+		    <div class="modal-dialog">
+		    	<div class="modal-content">
+			        <!-- Modal Header -->
+			        <div class="modal-header">
+			        	<h6 class="modal-title">Kebijakan dan persyaratan pencalonan</h6>
+			        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+			        </div>
+			        
+			        <!-- Modal body -->
+			        <div class="modal-body">
+			        	{!! $tb->syaratketentuan !!}
+			        </div>
+
+		    	</div>
+		    </div>
+		</div>
+		<!--End The Modal-->
 
 		<script type="text/javascript">
+			$('#myModalTerms').modal('show');
 		    $(document).ready(function() {
 		        var iCnt = 0;
 		        // CREATE A "DIV" ELEMENT.

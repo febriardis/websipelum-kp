@@ -96,7 +96,7 @@
 					<label class="control-label col-sm-4"></label>
 					<div class="col-sm-8">
 			    		<label class="form-check-label">
-							<input type="checkbox" name=""> Saya menyetujui <a href="javascript::void(0)" data-toggle="modal" data-target="#myModalTerms">kebijakan &amp; persyaratan</a> pencalonan.
+							<input type="checkbox" name="" required=""> Saya menyetujui <a href="javascript::void(0)" data-toggle="modal" data-target="#myModalTerms">kebijakan &amp; persyaratan</a> pencalonan.
 						</label>
 					</div>
 				</div>
@@ -116,7 +116,6 @@
 		    	<div class="modal-content">
 			        <!-- Modal Header -->
 			        <div class="modal-header">
-			        	<span class="glyphicon glyphicon-user"></span> 
 			        	<h6 class="modal-title">Kebijakan dan persyaratan pencalonan</h6>
 			        	<button type="button" class="close" data-dismiss="modal">&times;</button>
 			        </div>

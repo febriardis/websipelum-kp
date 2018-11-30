@@ -120,7 +120,7 @@
                   @if($cek=='belum memilih')
                     <form action="/vote/{{$tbA->id}}/{{$tb->id}}/{{$idPemilih}}" method="POST">
                       {{csrf_field()}}
-                      <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-thumbs-o-up"></i> Vote</button>
+                      <button type="submit" data-action="reload" class="btn btn-danger btn-sm"><i class="fa fa-thumbs-o-up"></i> Vote </button>
                     </form>
                   @endif
                   </div>    

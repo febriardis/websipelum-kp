@@ -208,7 +208,7 @@
 									<a href="/tabel agenda"><i class="icon-calendar"></i><span>Agenda</span></a>
 								</li>
 								<li>
-									<a href="/data quick count"><i class="icon-stats-bars2"></i> <span>Quick Count</span></a>
+									<a href="/data quick count"><i class="icon-stats-bars2"></i> <span>Hitung Cepat</span></a>
 								</li>
 								<li>
 									<a href="/tabel mahasiswa"><i class="icon-database2"></i> <span>Data Mahasiswa</span></a>

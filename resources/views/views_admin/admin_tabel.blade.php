@@ -11,7 +11,9 @@
 		{{ Session::get('pesan') }} !
 	</div>
 	@endif
-<!-- Basic datatable -->
+
+@if(Auth::user()->ket=='Super Admin')
+	<!-- Basic datatable -->
 	<div class="panel panel-flat">
 		<div class="panel-heading">
 			<h5 class="panel-title">Data Admin</h5>
@@ -91,7 +93,7 @@
 												    		return false;
 												  	}
 												</script>
-												<li><a href="" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a></li>
+												<li><a href="/hapus admin/{{$tb->id}}" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a></li>
 											</ul>
 										</li>
 									</ul>
@@ -106,4 +108,5 @@
 		</table>
 	</div>
 	<!-- /basic datatable -->
+@endif
 @endsection

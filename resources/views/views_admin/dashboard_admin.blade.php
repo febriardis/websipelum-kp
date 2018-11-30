@@ -5,66 +5,55 @@
 @endsection
 
 @section('content')
+<div style="margin-top: 20px">
 	<!-- Quick stats boxes -->
 	<div class="row">
 		<a href="/tabel agenda">
-			<div class="col-lg-4">
+			<div class="col-lg-3">
 				<!-- Members online -->
-				<div class="panel bg-teal-400">
+				<div class="panel bg-teal-300">
 					<div class="panel-body">
-						<div class="heading-elements">
-							<span class="heading-text badge bg-teal-800">+53,6%</span>
-						</div>
 						<h3 class="no-margin">3,450</h3>
-						Agenda Pemilu
-						<div class="text-muted text-size-small">489</div>
-					</div>
-
-					<div class="container-fluid">
-						<div id="members-online"></div>
+						Agenda
 					</div>
 				</div>
 				<!-- /members online -->
 			</div>
 		</a>
-
 		<a href="/tabel mahasiswa">
-			<div class="col-lg-4">
+			<div class="col-lg-3">
 				<!-- Current server load -->
 				<div class="panel bg-pink-400">
 					<div class="panel-body">
-						<div class="heading-elements">
-							<span class="heading-text badge bg-teal-800">+53,6%</span>
-						</div>
-
-						<h3 class="no-margin">49.4%</h3>
-						Data Mahasiswa
-						<div class="text-muted text-size-small">34.6%</div>
+						<h3 class="no-margin">3,450</h3>
+						Pemilih
 					</div>
-
-					<div id="server-load"></div>
 				</div>
 				<!-- /current server load -->
 			</div>
 		</a>
 
-		<a href="/tabel admin">
-			<div class="col-lg-4">
+		<a href="/pengajuan agenda">
+			<div class="col-lg-3">
 				<!-- Today's revenue -->
 				<div class="panel bg-blue-400">
 					<div class="panel-body">
-						<div class="heading-elements">
-							<ul class="icons-list">
-							<span class="heading-text badge bg-teal-800">+53,6%</span>
-		                	</ul>
-	                	</div>
-
-						<h3 class="no-margin">18,390</h3>
-						Berita Acara
-						<div class="text-muted text-size-small">37,578</div>
+						<h3 class="no-margin">3,450</h3>
+						Pengajuan
 					</div>
+				</div>
+				<!-- /today's revenue -->
+			</div>
+		</a>
 
-					<div id="today-revenue"></div>
+		<a href="/data quick count">
+			<div class="col-lg-3">
+				<!-- Today's revenue -->
+				<div class="panel bg-green-400">
+					<div class="panel-body">
+						<h3 class="no-margin">3,450</h3>
+						Hitung Cepat
+					</div>
 				</div>
 				<!-- /today's revenue -->
 			</div>
@@ -75,7 +64,13 @@
 	<!-- Streamgraph chart -->
 	<div class="panel panel-flat">
 		<div class="panel-heading">
-
+			<h3>Live Vote</h3>
+			<div class="heading-elements">
+				<ul class="icons-list">
+            		<li><a data-action="reload"></a></li>
+            	</ul>
+        	</div>
+			<div id="server-load"></div>
 		</div>
 
 		<div class="panel-body">
@@ -87,4 +82,80 @@
 		</div>
 	</div>
 	<!-- /streamgraph chart -->
+
+	<!-- sales stats -->
+	<div class="col-lg-12">
+		<!-- Marketing campaigns -->
+		<div class="panel panel-flat">
+			<div class="panel-heading">
+				<h6 class="panel-title">Agenda</h6>
+			</div>
+
+			<div class="table-responsive">
+				<table class="table text-nowrap">
+					<thead>
+						<tr>
+							<th class="col-md-2">No</th>
+							<th class="col-md-2">Agenda+sistem</th>
+							<th class="col-md-2">Kategori Pemilih</th>
+							<th class="col-md-2">Tanggal</th>
+							<th class="col-md-2">Keterangan</th>
+							<th class="text-center" style="width: 20px;"><i class="icon-arrow-down12"></i></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="active border-double">
+							<td colspan="6">Belum terlaksana</td>
+						</tr>
+						@for($i=1;$i<=3;$i++)
+						<tr>
+							<td>{{$i}}</td>
+							<td><span class="text-muted">Muhammad Yusuf</span></td>
+							<td>{{date('d/m/Y')}}</td>
+							<td><span class="label bg-success-400">Belum Bayar</span></td>
+							<td><h6 class="text-semibold">Rp. 123.000</h6></td>
+							<td class="text-center">
+								<ul class="icons-list">
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+										<ul class="dropdown-menu dropdown-menu-right">
+											<li><a href="#"><i class="icon-eye"></i> Lihat detail</a></li>
+											<li><a href="#"><i class="icon-pencil7"></i> Update</a></li>
+										</ul>
+									</li>
+								</ul>
+							</td>
+						</tr>
+						@endfor
+						<tr class="active border-double">
+							<td colspan="6">Sudah terlaksana</td>
+						</tr>
+						@for($i=1;$i<=3;$i++)
+						<tr>
+							<td>{{$i}}</td>
+							<td><span class="text-muted">Muhammad Yusuf</span></td>
+							<td>{{date('d/m/Y')}}</td>
+							<td><span class="label bg-success-400">Belum Bayar</span></td>
+							<td><h6 class="text-semibold">Rp. 123.000</h6></td>
+							<td class="text-center">
+								<ul class="icons-list">
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+										<ul class="dropdown-menu dropdown-menu-right">
+											<li><a href="#"><i class="icon-eye"></i> Lihat detail</a></li>
+											<li><a href="#"><i class="icon-pencil7"></i> Update</a></li>
+										</ul>
+									</li>
+								</ul>
+							</td>
+						</tr>
+						@endfor
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- /marketing campaigns -->
+	</div>
+	<!-- /sales stats -->
+</div>
 @endsection

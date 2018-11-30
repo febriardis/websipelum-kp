@@ -352,10 +352,12 @@
 											<td>{{ $dt->th_angkatan }}</td>
 										</tr>
 										@endforeach
+										
 										<tr bgcolor="#fcfcfc">
 											<td>
-												<input type="checkbox" onclick="checkAllNim(this)" class="styled">&nbsp;
-												<label>All</label>
+												<div class="checkbox">
+													<label><input type="checkbox" onclick="checkAllNim(this)" class="styled">All</label>
+												</div>
 											</td>
 											<td>
 											</td><td></td><td></td><td></td><td></td>

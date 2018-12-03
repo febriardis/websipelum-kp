@@ -46,7 +46,6 @@
 	<!-- Theme JS files -->
 	<script type="text/javascript" src="/assets/js/plugins/forms/selects/select2.min.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/forms/styling/uniform.min.js"></script>
-	<script type="text/javascript" src="/assets/js/core/app.js"></script>
 	<script type="text/javascript" src="/assets/js/pages/form_layouts.js"></script>
 	<!-- /theme JS files -->
 
@@ -60,7 +59,9 @@
 	<script type="text/javascript" src="/assets/js/plugins/ui/dragula.min.js"></script>
 	<script type="text/javascript" src="/assets/js/pages/extension_dnd.js"></script>
 	<!-- /theme JS files -->
-
+	
+	<script type="text/javascript" src="/assets/js/core/app.js"></script>
+	
 </head>
 
 <body class="sidebar-xs">
@@ -194,11 +195,11 @@
 								@if(Auth::user()->ket=='Super Admin')
 								
 								@elseif(Auth::user()->ket=='Sema U' || Auth::user()->ket=='Dema U')
-								<li {{ (Request::is('organisasi univ/Auth::user()->ket') ? 'class=active' : '') }}>
+								<li {{ (Request::is('organisasi univ/*') ? 'class=active' : '') }}>
 									<a href="/organisasi univ/{{Auth::user()->ket}}"><i class="glyphicon glyphicon-th-large"></i> <span>Organisasi</span></a>
 								</li>
 								@else
-								<li {{ (Request::is('organisasi/Auth::user()->ket/Auth::user()->ket2') ? 'class=active' : '') }}>
+								<li {{ (Request::is('organisasi/*/*') ? 'class=active' : '') }}>
 									<a href="/organisasi/{{Auth::user()->ket}}/{{Auth::user()->ket2}}"><i class="glyphicon glyphicon-th-large"></i> <span>Organisasi</span></a>
 								</li>
 								@endif

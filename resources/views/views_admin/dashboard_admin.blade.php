@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+{{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}
+{{! $cekJam = \Carbon\Carbon::now('Asia/Jakarta')->format('G:i') }}
 <div style="margin-top: 20px">
 	<!-- Quick stats boxes -->
 	<div class="row">
@@ -88,68 +90,108 @@
 		<!-- Marketing campaigns -->
 		<div class="panel panel-flat">
 			<div class="panel-heading">
-				<h6 class="panel-title">Agenda</h6>
+				<h6 class="panel-title">Agenda Terkait</h6>
 			</div>
 
 			<div class="table-responsive">
 				<table class="table text-nowrap">
 					<thead>
 						<tr>
-							<th class="col-md-2">No</th>
-							<th class="col-md-2">Agenda+sistem</th>
-							<th class="col-md-2">Kategori Pemilih</th>
-							<th class="col-md-2">Tanggal</th>
-							<th class="col-md-2">Keterangan</th>
+							<th>No</th>
+							<th width="38%">Agenda</th>
+							<th>Kategori Pemilih</th>
+							<th>Tanggal</th>
+							<th>Keterangan</th>
 							<th class="text-center" style="width: 20px;"><i class="icon-arrow-down12"></i></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="active border-double">
-							<td colspan="6">Belum terlaksana</td>
-						</tr>
-						@for($i=1;$i<=3;$i++)
-						<tr>
-							<td>{{$i}}</td>
-							<td><span class="text-muted">Muhammad Yusuf</span></td>
-							<td>{{date('d/m/Y')}}</td>
-							<td><span class="label bg-success-400">Belum Bayar</span></td>
-							<td><h6 class="text-semibold">Rp. 123.000</h6></td>
-							<td class="text-center">
-								<ul class="icons-list">
-									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-										<ul class="dropdown-menu dropdown-menu-right">
-											<li><a href="#"><i class="icon-eye"></i> Lihat detail</a></li>
-											<li><a href="#"><i class="icon-pencil7"></i> Update</a></li>
-										</ul>
-									</li>
-								</ul>
-							</td>
-						</tr>
-						@endfor
-						<tr class="active border-double">
-							<td colspan="6">Sudah terlaksana</td>
-						</tr>
-						@for($i=1;$i<=3;$i++)
-						<tr>
-							<td>{{$i}}</td>
-							<td><span class="text-muted">Muhammad Yusuf</span></td>
-							<td>{{date('d/m/Y')}}</td>
-							<td><span class="label bg-success-400">Belum Bayar</span></td>
-							<td><h6 class="text-semibold">Rp. 123.000</h6></td>
-							<td class="text-center">
-								<ul class="icons-list">
-									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-										<ul class="dropdown-menu dropdown-menu-right">
-											<li><a href="#"><i class="icon-eye"></i> Lihat detail</a></li>
-											<li><a href="#"><i class="icon-pencil7"></i> Update</a></li>
-										</ul>
-									</li>
-								</ul>
-							</td>
-						</tr>
-						@endfor
+					<tr class="active border-double">
+						<td colspan="6">Belum terlaksana</td>
+					</tr>
+					{{! $no = 1 }}
+					@foreach($tbAgenda as $dt)
+						<div style="display: none;">	
+							{{! $cek1 = (App\Admin::find($dt->admin_id))->ket }}
+							{{! $cek2 = (App\Admin::find($dt->admin_id))->ket2 }}				
+							<!-- cek idfak jurusan dmna nm_jurusan==ket2admin-->
+							{{! $c1 =(App\Jurusan::where('nm_jurusan', Auth::user()->ket2)->value('fak_id')) }}
+							{{! $c2 = (App\Fakultas::where('nm_fakultas', $dt->kat_fakultas)->value('id')) }}
+						</div>		
+						@if(Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2 || Auth::user()->ket=='HMJ' && Auth::user()->ket2==$dt->kat_fakultas || Auth::user()->ket=='HMJ' && $dt->kat_fakultas=='Semua Mahasiswa' || Auth::user()->ket=='HMJ' && $dt->kat_jurusan=='Semua Jurusan' && $c1==$c2 || Auth::user()->ket=='Super Admin')
+							
+							@if($cekTgl < $dt->tgl_agenda)
+							<tr>
+								<td>{{ $no++ }}</td>
+								<td>{{ $dt->nm_agenda }}<p><b>{{ $dt->sistem_vote }}</b></p></td>
+								<td>{{ $dt->kat_jurusan }} <p><b>({{$dt->kat_fakultas}})</b></p></td>
+								<td>
+									{{ date('d M Y', strtotime($dt->tgl_agenda)) }}<br>
+									<p><b>Pukul:</b><br> {{ date('G:i', strtotime($dt->timeA1))}} - {{ date('G:i', strtotime($dt->timeA2))}}</p>
+								</td>
+								<td>
+									@if($cekTgl < $dt->tgl_agenda)
+										<span class="label label-info">Menunggu Tanggal Agenda</span>
+										@if($cekTgl == $dt->tgl_filtering)
+											<p><span class="label label-danger">Tahap Penyaringan Kandidat</span></p>
+										@elseif($cekTgl >= $dt->StartDaftarK && $cekTgl <= $dt->LastDaftarK)
+											<p><span class="label label-default">Tahap Pendaftaran Kandidat</span></p>
+										@endif
+									@elseif($cekTgl > $dt->tgl_agenda)
+										<span class="label label-success">Selesai</span>
+									@elseif($cekTgl == $dt->tgl_agenda)
+										<span class="label label-danger">Agenda Hari Ini</span>
+										@if($cekJam >= $dt->timeA1 && $cekJam <= $dt->timeA2)
+											<span class="label label-danger">Sedang Berlangsung</span>		
+										@elseif($cekJam > $dt->timeA2)
+											<span class="label label-success">Pemilihan berakhir</span>
+										@else
+											<span class="label label-success">Menunggu waktu pemilihan</span>
+										@endif
+									@endif
+								</td>
+								<td class="text-center"> 	
+									<a href="/detail agenda/{{\Crypt::encrypt($dt->id) }}"><i class="icon-eye"></i> Lihat</a>
+								</td>
+							</tr>
+							@endif
+						@endif
+					@endforeach
+
+					<!-- Sudah Terlaksana -->
+					
+					<tr class="active border-double">
+						<td colspan="6">Sudah terlaksana</td>
+					</tr>
+					{{! $no = 1 }}
+					@foreach($tbAgenda as $dt)
+						<div style="display: none;">	
+							{{! $cek1 = (App\Admin::find($dt->admin_id))->ket }}
+							{{! $cek2 = (App\Admin::find($dt->admin_id))->ket2 }}				
+							<!-- cek idfak jurusan dmna nm_jurusan==ket2admin-->
+							{{! $c1 =(App\Jurusan::where('nm_jurusan', Auth::user()->ket2)->value('fak_id')) }}
+							{{! $c2 = (App\Fakultas::where('nm_fakultas', $dt->kat_fakultas)->value('id')) }}
+						</div>		
+						@if(Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2 || Auth::user()->ket=='HMJ' && Auth::user()->ket2==$dt->kat_fakultas || Auth::user()->ket=='HMJ' && $dt->kat_fakultas=='Semua Mahasiswa' || Auth::user()->ket=='HMJ' && $dt->kat_jurusan=='Semua Jurusan' && $c1==$c2 || Auth::user()->ket=='Super Admin')
+							@if($cekTgl > $dt->tgl_agenda)
+							<tr>
+								<td>{{ $no++ }}</td>
+								<td>{{ $dt->nm_agenda }}<p><b>{{ $dt->sistem_vote }}</b></p></td>
+								<td>{{ $dt->kat_jurusan }} <p><b>({{$dt->kat_fakultas}})</b></p></td>
+								<td>
+									{{ date('d M Y', strtotime($dt->tgl_agenda)) }}<br>
+									<p><b>Pukul:</b><br> {{ date('G:i', strtotime($dt->timeA1))}} - {{ date('G:i', strtotime($dt->timeA2))}}</p>
+								</td>
+								<td>
+									<span class="label label-success">Selesai</span>
+								</td>
+								<td class="text-center"> 	
+									<a href="/detail agenda/{{\Crypt::encrypt($dt->id) }}"><i class="icon-eye"></i> Lihat</a>
+								</td>
+							</tr>
+							@endif
+						@endif
+					@endforeach
 					</tbody>
 				</table>
 			</div>

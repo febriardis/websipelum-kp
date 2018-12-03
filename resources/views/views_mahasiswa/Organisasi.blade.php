@@ -72,9 +72,8 @@
           <div style="width:510px; margin:5px; float: left;border:1px solid #cccccc; padding: 5px">
             <table class="table table-sm">
               <thead>
-                <tr>
-                  <th>{{$t->nm_bidang}}</th>
-                  <th></th>
+                <tr bgcolor="#666666">
+                  <th colspan="2"><span style="color: #ffffff">{{$t->nm_bidang}}</span></th>
                 </tr>
                 <tr>
                   <th>Nama</th>

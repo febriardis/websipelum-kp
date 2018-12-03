@@ -30,7 +30,7 @@ Route::get('/form pendaftaran/{IdAgenda}', 'KandidatController@daftar')->middlew
 Route::get('/batal daftar/{nim}/{IdAgenda}', 'KandidatController@batalDaftar')->middleware('auth:mahasiswa'); //pembatalan
 
 //======================================ADMIN======================================
-Route::get('/dashboard', function () {return view('views_admin.dashboard_admin');})->middleware('auth:admin');
+Route::get('/dashboard', 'HomeController@dashboard')->middleware('auth:admin');
 
 // ================================ADMIN-BERITA-ACARA==============================
 Route::get('/pengajuan agenda','PengAgendaController@show')->middleware('auth:admin');

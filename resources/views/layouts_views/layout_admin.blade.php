@@ -176,13 +176,14 @@
 
 								<!-- Main -->
 								<li class="navigation-header"><span>Main Menu</span> <i class="icon-menu" title="Main Menu"></i></li>
-								<li><a href="/dashboard"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+								
+								<li {{ (Request::is('dashboard') ? 'class=active' : '') }}><a href="/dashboard"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
 								@if(Auth::user()->ket=='Super Admin')
 								<li>
 									<a href="#"><i class="glyphicon glyphicon-user"></i> <span>Admin</span></a>
 									<ul>
-										<li><a href="/tambah admin">Tambah Admin</a></li>
-										<li><a href="/tabel admin">Data Admin</a></li>
+										<li {{ (Request::is('tambah admin') ? 'class=active' : '') }}><a href="/tambah admin">Tambah Admin</a></li>
+										<li {{ (Request::is('tabel admin') ? 'class=active' : '') }}><a href="/tabel admin">Data Admin</a></li>
 									</ul>
 								</li>	
 								<li>
@@ -193,24 +194,24 @@
 								@if(Auth::user()->ket=='Super Admin')
 								
 								@elseif(Auth::user()->ket=='Sema U' || Auth::user()->ket=='Dema U')
-								<li>
+								<li {{ (Request::is('organisasi univ/Auth::user()->ket') ? 'class=active' : '') }}>
 									<a href="/organisasi univ/{{Auth::user()->ket}}"><i class="glyphicon glyphicon-th-large"></i> <span>Organisasi</span></a>
 								</li>
 								@else
-								<li>
+								<li {{ (Request::is('organisasi/Auth::user()->ket/Auth::user()->ket2') ? 'class=active' : '') }}>
 									<a href="/organisasi/{{Auth::user()->ket}}/{{Auth::user()->ket2}}"><i class="glyphicon glyphicon-th-large"></i> <span>Organisasi</span></a>
 								</li>
 								@endif
-								<li>
+								<li {{ (Request::is('pengajuan agenda') ? 'class=active' : '') }}>
 									<a href="/pengajuan agenda"><i class="icon-clipboard3"></i><span>Pengajuan Agenda</span></a>
 								</li>							
-								<li>
+								<li {{ (Request::is('tabel agenda') ? 'class=active' : '') }}>
 									<a href="/tabel agenda"><i class="icon-calendar"></i><span>Agenda</span></a>
 								</li>
-								<li>
+								<li {{ (Request::is('data quick count') ? 'class=active' : '') }}>
 									<a href="/data quick count"><i class="icon-stats-bars2"></i> <span>Hitung Cepat</span></a>
 								</li>
-								<li>
+								<li {{ (Request::is('tabel mahasiswa') ? 'class=active' : '') }}>
 									<a href="/tabel mahasiswa"><i class="icon-database2"></i> <span>Data Mahasiswa</span></a>
 								</li>	
 								<!-- /main -->

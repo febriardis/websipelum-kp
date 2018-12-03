@@ -15,8 +15,8 @@
       <table class="table" style="text-transform: capitalize;">
         <thead>
           <tr>
-            <th>Agenda</th>
-            <th>Tanggal</th>
+            <th width="56%">Agenda</th>
+            <th>Tanggal Agenda</th>
             <th>Keterangan</th>
             <th class="text-center">Aksi</th>
           </tr>
@@ -32,33 +32,37 @@
               <div style="display: none;">
                 {{! $cekNim = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('nim')}}
               </div>
-              @if($cekTgl >= $dt->StartDaftarK && $cekTgl <= $dt->LastDaftarK)
-                @if($cekNim==Auth::user()->nim)
-                  <div style="display: none;">
-                    {{!$cekKet = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('keterangan')}} 
-                  </div>    
-                  @if($cekKet=='Menunggu Verifikasi')
-                    <span class="badge badge-info">{{$cekKet}}</span>
-                  @elseif($cekKet=='Diterima')
-                    <span class="badge badge-success">{{$cekKet}}</span>
-                  @else
-                    <span class="badge badge-danger">{{$cekKet}}</span>
-                  @endif
-                @else
-                  <span class="badge badge-secondary">Belum Terdaftar</span>
-                @endif
-              @else
-                  <span class="badge badge-secondary">Bukan Priode Pendaftaran</span>
-              @endif
-            </td>
-            <td>
-              <div style="display: none;">
-                {{!$cekNIM = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('nim')}}
-              </div>
               @if($cekTgl > $dt->tgl_agenda)
                 <span class="badge badge-success">Agenda Selesai</span>
               @elseif($cekTgl == $dt->tgl_agenda)
-                <span class="badge badge-danger">Sedang Berlangsung</span>
+                <span class="badge badge-danger">Agenda Berlangsung</span>
+              @else
+                @if($cekTgl >= $dt->StartDaftarK && $cekTgl <= $dt->LastDaftarK)
+                  @if($cekNim==Auth::user()->nim)
+                    <div style="display: none;">
+                      {{!$cekKet = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('keterangan')}} 
+                    </div>    
+                    @if($cekKet=='Menunggu Verifikasi')
+                      <span class="badge badge-info">{{$cekKet}}</span>
+                    @elseif($cekKet=='Diterima')
+                      <span class="badge badge-success">{{$cekKet}}</span>
+                    @else
+                      <span class="badge badge-danger">{{$cekKet}}</span>
+                    @endif
+                  @else
+                    <span class="badge badge-secondary">Belum Terdaftar</span>
+                  @endif
+                @else
+                    <span class="badge badge-secondary">Bukan Priode Pendaftaran</span>
+                @endif
+              @endif
+            </td>
+            <td class="text-center">
+              <div style="display: none;">
+                {{!$cekNIM = (App\Kandidat::where([['agenda_id',$dt->id],['nim',Auth::user()->nim]]))->value('nim')}}
+              </div>
+              @if($cekTgl > $dt->tgl_agenda || $cekTgl == $dt->tgl_agenda)
+                <a href="javascript::void(0)">no actions</a>
               <!--kondisi jika tanggal belum lewat -->
               @else
                 @if($cekNIM==Auth::user()->nim)
@@ -74,9 +78,9 @@
                   @endif
                 @else
                   @if($cekTgl >= $dt->StartDaftarK && $cekTgl <= $dt->LastDaftarK)
-                  <a href="/form pendaftaran/{{ \Crypt::encrypt($dt->id) }}" class="btn btn-primary btn-sm text-white"><i class='far fa-envelope'></i>&nbsp;Daftar</a>
+                    <a href="/form pendaftaran/{{ \Crypt::encrypt($dt->id) }}" class="btn btn-primary btn-sm text-white"><i class='far fa-envelope'></i>&nbsp;Daftar</a>
                   @else
-                  <a href="javascript::void(0)">no actions</a>
+                    <a href="javascript::void(0)">no actions</a>
                   @endif
                 @endif
               @endif

@@ -12,7 +12,4 @@ class Jurusan extends Model
     function FKJurusan(){
         return $this->belongsTo(Fakultas::class);
     }
-   	function PKJurusan(){
-		return $this->hasMany(TbOrganisasi::class);
-	}
 }

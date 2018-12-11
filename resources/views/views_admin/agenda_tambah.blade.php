@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+@if(Auth::user()->ket=='Super Admin')
 	@if(Session::has('pesan'))
 		<div class="alert alert-danger">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -104,4 +105,13 @@
 		</div>
 	</form>
 	<!-- /basic layout -->
+
+@else
+	<!-- Error title -->
+	<div class="text-center content-group">
+		<h1 class="error-title">403</h1>
+		<h5>Oops, an error has occurred. Forbidden!</h5>
+	</div>
+	<!-- /error title -->
+@endif
 @endsection

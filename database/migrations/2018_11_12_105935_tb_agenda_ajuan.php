@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TbBeritaacara extends Migration
+class TbAgendaAjuan extends Migration
 {
     /**
      * Run the migrations.

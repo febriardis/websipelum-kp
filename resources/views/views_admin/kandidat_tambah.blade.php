@@ -103,6 +103,7 @@
 
 		<script type="text/javascript">
 			$('#myModalTerms').modal('show');
+			
 		    $(document).ready(function() {
 		        var iCnt = 0;
 		        // CREATE A "DIV" ELEMENT.

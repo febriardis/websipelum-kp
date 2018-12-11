@@ -72,8 +72,8 @@
 							<button type="submit" class="btn btn-primary">Terima</button>
 							<a href="/tolak kandidat/{{$tbMhs->id}}/{{$idAgenda}}" class="btn btn-danger">Tolak</a>
 						@else
-							<a href="javascript:void(0)" onclick="alertDanger()" class="btn btn-primary">Terima</a>
-							<a href="javascript:void(0)" onclick="alertDanger()" class="btn btn-danger">Tolak</a>
+							<a href="javascript::void(0)" class="btn btn-primary" id="pnotify-solid-danger">Terima</a>
+							<a href="javascript::void(0)" class="btn btn-danger" id="pnotify-solid-danger">Tolak</a>
 						@endif
 					@endif
 				</div>
@@ -81,11 +81,5 @@
 		</div>
 	</form>
 	<!-- /basic layout -->
-
-	<script type="text/javascript">
-		function alertDanger(){
-			alert("Bukan priode penyaringan!!");
-		}
-	</script>
 </div>
 @endsection

@@ -59,8 +59,11 @@
 	<script type="text/javascript" src="/assets/js/plugins/ui/dragula.min.js"></script>
 	<script type="text/javascript" src="/assets/js/pages/extension_dnd.js"></script>
 	<!-- /theme JS files -->
+
+	<script type="text/javascript" src="/assets/js/plugins/notifications/pnotify.min.js"></script>
 	
 	<script type="text/javascript" src="/assets/js/core/app.js"></script>
+	<script type="text/javascript" src="/assets/js/pages/components_notifications_pnotify.js"></script>
 	
 </head>
 
@@ -191,18 +194,6 @@
 									<a href="#"><i class="icon-newspaper"></i> <span>Konten Berita</span></a>
 								</li>	
 								@endif
-
-								@if(Auth::user()->ket=='Super Admin')
-								
-								@elseif(Auth::user()->ket=='Sema U' || Auth::user()->ket=='Dema U')
-								<li {{ (Request::is('organisasi univ/*') ? 'class=active' : '') }}>
-									<a href="/organisasi univ/{{Auth::user()->ket}}"><i class="glyphicon glyphicon-th-large"></i> <span>Organisasi</span></a>
-								</li>
-								@else
-								<li {{ (Request::is('organisasi/*/*') ? 'class=active' : '') }}>
-									<a href="/organisasi/{{Auth::user()->ket}}/{{Auth::user()->ket2}}"><i class="glyphicon glyphicon-th-large"></i> <span>Organisasi</span></a>
-								</li>
-								@endif
 								<li {{ (Request::is('pengajuan agenda') ? 'class=active' : '') }}>
 									<a href="/pengajuan agenda"><i class="icon-clipboard3"></i><span>Pengajuan Agenda</span></a>
 								</li>							
@@ -249,7 +240,7 @@
 					@yield('content')
 					<!-- Footer -->
 					<div class="footer text-muted">
-						&copy; 2018. <a href="http://ptipd.uinsgd.ac.id/" target="_blank">PTIPD UIN Sunan Gunung Djati Bandung</a>
+						&copy; 2018. <a href="http://ptipd.uinsgd.ac.id/" target="_blank">PTIPD. UIN Sunan Gunung Djati Bandung</a>
 					</div>
 					<!-- /footer -->
 				</div>

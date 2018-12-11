@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-
+@if(Auth::user()->ket=='Super Admin')
 	@if(Session::has('pesan'))
 		<div class="alert alert-danger">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -42,17 +42,14 @@
 					</div>
 				</div>	
 
-				@if(Auth::user()->ket=='Super Admin')
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Keterangan</label>
 					<div class="col-lg-5" id="main">
 						<select class="form-control" style="font-size: 14px" id="pil_ket" name="ket" required="">
 							<option hidden="">Pilih Keterangan Admin</option>
 							<option value="Super Admin">Super Admin</option>
-							<option value="Sema U">Admin Sema U</option>
-							<option value="Dema U">Admin Dema U</option>
-							<option value="Sema F">Admin Sema F</option>
-							<option value="Dema F">Admin Dema F</option>
+							<option value="KPU U">Admin KPU Univ</option>
+							<option value="KPU F">Admin KPU Fak</option>
 							<option value="HMJ">Admin HMJ</option>
 						</select>
 					</div>
@@ -65,14 +62,14 @@
 			            {{! $cek = (\App\Fakultas::all())}}
 			        	var container = document.createElement("div");
 			        	container.className="col-lg-4";
-				        if($(this).val() == "Super Admin" || $(this).val() == "Sema U" || $(this).val() == "Dema U") {
+				        if($(this).val() == "Super Admin" || $(this).val() == "KPU U") {
 			                // ADD TEXTBOX.
 			            	$('#a').remove(); 
 			                $(container).append('<input type=hidden name="ket2" class="form-control" value="" id="a"/>');
 			                // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
 			                $('#main').after(container);
 
-			            }else if ($(this).val() == "Sema F" || $(this).val() == "Dema F"){
+			            }else if ($(this).val() == "KPU F"){
 			                // ADD TEXTBOX.
 			            	$('#a').remove(); 
 			                $(container).append('<select style="font-size:14px" class="form-control" name="ket2" id="a" required="">'+
@@ -106,10 +103,6 @@
 				    });
 				});
 				</script>
-				@else
-					<input type="hidden" name="ket" value="{{ Auth::user()->ket }}" readonly="">
-					<input type="hidden" name="ket2" value="{{ Auth::user()->ket2 }}" readonly="">
-				@endif
 				<div class="text-right">
 					<button type="submit" class="btn btn-primary">Simpan</button>
 					<a href="/tabel admin" class="btn btn-danger">Batal</a>
@@ -118,4 +111,12 @@
 		</div>
 	</form>
 	<!-- /basic layout -->
+@else
+	<!-- Error title -->
+	<div class="text-center content-group">
+		<h1 class="error-title">403</h1>
+		<h5>Oops, an error has occurred. Forbidden!</h5>
+	</div>
+	<!-- /error title -->
+@endif
 @endsection

@@ -47,6 +47,11 @@ a.nav-link:hover {
 	background-color: #e6e6e6;
 	color: #fff;
 }
+
+.active-me {
+	background-color: #e6e6e6;
+}
+
 .span{
 	display: none;
 	margin: 5px;

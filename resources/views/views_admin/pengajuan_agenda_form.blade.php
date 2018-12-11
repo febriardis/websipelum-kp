@@ -18,7 +18,22 @@
 				<div class="form-group">			
 					<label class="col-lg-3 control-label">Nama Agenda</label>
 					<div class="col-lg-9">
+						@if(Auth::user()->ket=='HMJ')
 						<input type="text" class="form-control" name="nm_agenda" readonly="" required= required value="Pemilihan Ketua {{Auth::user()->ket}} {{Auth::user()->ket2}}">
+						@elseif(Auth::user()->ket=='KPU U')
+						<select class="select" name="nm_agenda" required="" data-placeholder="Pilih Kategori">
+							<option value=""></option>
+							<option>Pemilihan Ketua Sema UIN SGD Bandung</option>
+							<option>Pemilihan Ketua Dema UIN SGD Bandung</option>
+						</select>
+						@else						
+						<select class="select" name="nm_agenda" required="" data-placeholder="Pilih Kategori">
+							<option value=""></option>
+							<option>Pemilihan Ketua Sema Fak. {{Auth::user()->ket2}}</option>
+							<option>Pemilihan Ketua Dema Fak. {{Auth::user()->ket2}}</option>
+						</select>
+						@endif
+
 					</div>
 				</div>
 				<div class="form-group">
@@ -35,7 +50,9 @@
 				<div class="form-group">
 					<label class="col-lg-3 control-label">File Berkas</label>
 					<div class="col-lg-9">
-						<input type="file" name="file" accept=".doc, .docx, .pdf, .txt" required="" class="form-control" placeholder="Left icon"><span class="text-danger">{{ $errors->first('file')}}</span> 
+						<input type="file" name="file" accept=".doc, .docx, .pdf, .txt" required="" class="form-control" placeholder="Left icon">
+						<label class="text-muted">file min. 2 Mb</label>
+						<span class="text-danger">{{ $errors->first('file')}}</span> 
 					</div>
 				</div>
 
@@ -60,6 +77,7 @@
 				    	// CREATE A "DIV" ELEMENT.
 			        	var container = document.createElement("div");
 			        	container.className="col-lg-4";
+			        	
 			        	@foreach($cekFak as $d)
 				       	if ($(this).val() == "{{$d->nm_fakultas}}"){
 				       		{{! $tb = (App\Jurusan::where('fak_id', $d->id))->get() }}
@@ -77,6 +95,7 @@
 			                $('#main').after(container);
 			            }
 			            @endforeach
+
 			            else if ($(this).val() == "Semua Mahasiswa"){
 			            	$('#a').remove(); 
 			            }

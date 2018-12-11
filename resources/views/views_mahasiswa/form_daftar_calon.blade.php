@@ -81,7 +81,7 @@
 						<div id="main"></div>
 					</div>
 				</div>
-			</div> -->	
+			</div>	 -->
 			 <div class="form-group">
 				<div class="row">
 					<label class="control-label col-sm-4">Misi</label>

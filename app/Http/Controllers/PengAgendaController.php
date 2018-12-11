@@ -10,7 +10,7 @@ use App\Rules\DocType;
 class PengAgendaController extends Controller {
     function show()
     {
-    	$tb = AgendaAjuan::orderBy('created_at', 'DESC')->get();
+    	$tb = AgendaAjuan::latest()->get();//orderBy('created_at', 'DESC')->get();
     	return view('views_admin.pengajuan_agenda_tabel')
     	->with('tb', $tb);
     }
@@ -19,7 +19,7 @@ class PengAgendaController extends Controller {
     function insert(Request $req, $AdminId)
     {
         $this->validate($req, [
-            'file' => 'required|max:20000|mimes:doc,docx,pdf' //new DocType() //
+            'file' => 'required|max:2000|mimes:doc,docx,pdf' //new DocType() //
             ]
         );
     	
@@ -41,7 +41,7 @@ class PengAgendaController extends Controller {
         $tb->timeA1      = $req->timeA1;
         $tb->timeA2      = $req->timeA2;
         
-        $tb->ket 		= 'belum diverifikasi'; //agenda sudah ada
+        $tb->ket 		 = 'belum diverifikasi'; //agenda sudah ada
         $tb->save();
 
     	return redirect('/pengajuan agenda')

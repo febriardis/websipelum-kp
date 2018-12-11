@@ -35,7 +35,7 @@ class AgendaController extends Controller
     }
 
     function show(){ //function agenda_tabel
-    	$table = Agenda::orderBy('created_at', 'ASC')->get(); 
+    	$table = Agenda::latest()->get();//orderBy('created_at', 'ASC')->get(); 
     	return view('views_admin.agenda_tabel')
     	->with("data", $table);
     }
@@ -66,7 +66,6 @@ class AgendaController extends Controller
             return redirect('/tabel agenda')
             ->with('pesan','Agenda berhasil dibuat');
         }else{
-            // return redirect()->action('AgendaController@verif_view', ['id' => $req->id_bacara])
             return redirect()->back()
             ->with('pesan','Tanggal agenda sudah ada');
         }

@@ -4,15 +4,25 @@
 		<title>Sipelum</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">	
-		<link rel="stylesheet" href="/assets-me/w3css/w3.css">
+		<link rel="stylesheet" type="text/css" href="/css/styleme.css">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="/css/styleme.css">
-		<link rel="stylesheet" type="text/css" href="/bootstrap-4.1.3/css/bootstrap.min.css">
-		<script src="/assets-me/googleapis/jquery.min.js"></script>
-		<script src="/assets-me/cloudflare/popper-js/popper.min.js"></script>
-		<script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  		  		
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
+  
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   		<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>	
+		
+		<!-- datatables -->
+		<!-- <script src="https://code.jquery.com/jquery-3.1.1.js"></script> -->
+  		<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  		<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+		<!-- datatables -->
+
 		<script type="text/javascript">
 			function openNav() {document.getElementById("myNav").style.display = "block";}
 			function closeNav() {document.getElementById("myNav").style.display = "none";}
@@ -31,99 +41,83 @@
 		  	<div class="collapse navbar-collapse fontArial" id="navb">
 			  	@guest
 			    <ul class="navbar-nav mr-auto nav-me">   	
-			  		<li class="nav-item">
+			  		<li class="nav-item {{ (Request::is('/') ? 'active-me' : '') }}">
 				  		<a class="nav-link" href="/" style="padding: 10px;">Beranda</a>
 				  	</li>
 				  	<span class="span">|</span>
-				  	<li class="nav-item">
+				  	<li class="nav-item {{ (Request::is('hc') ? 'active-me' : '') }}">
 				    	<a class="nav-link" href="/hc" style="padding: 10px;">Hitung Cepat</a>
 				  	</li>  	
 				  	<span class="span">|</span>
-					<li class="nav-item dropdown">
-				    	<a class="nav-link dropdown-toggle" href="javascript:void(0)" onclick="openNav()" style="padding: 10px;">Organisasi </a>
+					<li class="nav-item dropdown {{ (Request::is('info dpt/*/*') ? 'active-me' : '') }}">
+				    	<a class="nav-link dropdown-toggle" href="javascript:void(0)" onclick="openNav()" style="padding: 10px;">Informasi DPT </a>
 				   	</li>	
 				  	<div class="dropdown-menu dropdown-me" style="background-color: rgba(0,0,0,0.8); color: #fff; font-size: 15px" id="myNav">
 			    		<a href="javascript:void(0)" class="closeNav" onclick="closeNav()">&times;</a>
 			 			<div class="listdrop">
-			 				<h5>Organisasi Mahasiswa</h5>	
-			 				<a class="dropdown-item drop-me" href="/org/Sema U/Uin bandung">Sema Universitas</a>
-			 				<a class="dropdown-item drop-me" href="/org/Dema U/Uin bandung">Dema Universitas</a>
-			 				<div class="dropdown" style="width: 230px">
-			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Sema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
+			 				<a class="dropdown-item drop-me" style="font-size: 18px" href="/info dpt/Sema & Dema U/Uin bandung">Sema & Dema Universitas</a>
+			 				<div class="dropdown" style="font-size: 18px">
+			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Sema & Dema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
 							  	<div class="dropdown-menu" style="background-color:rgba(0,0,0,0.9);">
 							      	{{! $tbFak = (App\Fakultas::all()) }}
 							      	@foreach($tbFak as $d)
-							      		<a class="dropdown-item" href="/org/Sema F/{{$d->nm_fakultas}}">{{$d->nm_fakultas}}</a>
+							      		<a class="dropdown-item" href="/info dpt/Sema & Dema F/{{$d->nm_fakultas}}">{{$d->nm_fakultas}}</a>
 							      	@endforeach
 							  	</div>
 							</div>
-			 				<div class="dropdown" style="width: 230px">
-			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Dema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
-							  	<div class="dropdown-menu" style="background-color:rgba(0,0,0,0.9);">
-							      	{{! $tbFak = (App\Fakultas::all()) }}
-							      	@foreach($tbFak as $d)
-							      		<a class="dropdown-item" href="/org/Dema F/{{$d->nm_fakultas}}">{{$d->nm_fakultas}}</a>
-							      	@endforeach
-							  	</div>
-							</div>
-
 					      	<hr style="border: 0.5px solid #cccccc">
 			 				<h5>Fak. Tarbiyah dan Keguruan</h5>
 			 				{{! $cekJur1 = \App\Jurusan::where('fak_id', 2)->get() }}
 			 				@foreach($cekJur1 as $dt)
-						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/info dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 				    	</div>
 				    	<div class="listdrop">	
 				    		<h5>Fak. Syariah dan Hukum</h5>
 			 				{{! $cekJur2 = \App\Jurusan::where('fak_id', 3)->get() }}
 			 				@foreach($cekJur2 as $dt)
-						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/info dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 					      	<hr style="border: 0.5px solid #cccccc">
 					      	<h5>Fak. Ilmu Sosial dan Ilmu Politik</h5>
 			 				{{! $cekJur3 = \App\Jurusan::where('fak_id', 8)->get() }}
 			 				@foreach($cekJur3 as $dt)
-						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/info dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 				    	</div>
 				    	<div class="listdrop">	
 				    	 	<h5>Fak. Dakwah dan  Komunikasi</h5>
 			 				{{! $cekJur4 = \App\Jurusan::where('fak_id', 4)->get() }}
 			 				@foreach($cekJur4 as $dt)
-						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/info dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 					      	<hr style="border: 0.3px solid #cccccc">
 				    		<h5>Fak. Adab dan Humaniora</h5>
 			 				{{! $cekJur5 = \App\Jurusan::where('fak_id', 5)->get() }}
 			 				@foreach($cekJur5 as $dt)
-						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/info dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 					      	<hr style="border: 0.3px solid #cccccc">
 					      	<h5>Fak. Psikologi</h5>
 			 				{{! $cekJur6 = \App\Jurusan::where('fak_id', 6)->get() }}
 			 				@foreach($cekJur6 as $dt)
-						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/info dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 					    </div>
 				    	<div class="listdrop">
 					     	<h5>Fak. Sains dan Teknologi</h5>
 			 				{{! $cekJur7 = \App\Jurusan::where('fak_id', 7)->get() }}
 			 				@foreach($cekJur7 as $dt)
-						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/info dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 					      	<hr style="border: 0.2px solid #cccccc">
 					      	<h5>Fak. Ushuludin</h5>
 			 				{{! $cekJur8 = \App\Jurusan::where('fak_id', 1)->get() }}
 			 				@foreach($cekJur8 as $dt)
-						      	<a class="dropdown-item" href="/org/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/info dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 				    	</div>
 				  	</div>
-				  	<!-- <span class="span">|</span>
-				  	<li class="nav-item">
-				    	<a class="nav-link" href="javascript:void(0)" style="padding: 10px;">Syarat & Ketentuan</a>
-				  	</li> -->
 				</ul>
 			    <ul class="navbar-nav">
 			    	<li class="nav-item">
@@ -132,110 +126,98 @@
 			    </ul>
 				@else
 				<ul class="navbar-nav mr-auto nav-me">   	
-		  			<li class="nav-item">
-			  			<a class="nav-link" href="/" style="padding: 10px;">Beranda</a>
+		  			<li class="nav-item {{ (Request::is('beranda') ? 'active-me' : '') }}">
+			  			<a class="nav-link" href="/beranda" style="padding: 10px;">Beranda</a>
 				  	</li>
 				  	<span class="span">|</span>
-				  	<li class="nav-item">
+				  	<li class="nav-item {{ (Request::is('pemilihan') ? 'active-me' : '') }}">
 				  		<a class="nav-link" href="/pemilihan" style="padding: 10px;">Pemilihan</a>
 				  	</li>
 				  	<span class="span">|</span>
-				  	<li class="nav-item">
+				  	<li class="nav-item {{ (Request::is('hitung cepat') ? 'active-me' : '') }}">
 				    	<a class="nav-link" href="/hitung cepat" style="padding: 10px;">Hitung Cepat<span class="sr-only">(current)</span></a>
 				  	</li>
 				   	<span class="span">|</span>
-				  	<li class="nav-item dropdown">
-				    	<a class="nav-link dropdown-toggle" href="javascript:void(0)" onclick="openNav()" style="padding: 10px;">Organisasi </a>
+				  	<li class="nav-item dropdown {{ (Request::is('show organisasi/*/*') ? 'active-me' : '') }}">
+				    	<a class="nav-link dropdown-toggle" href="javascript:void(0)" onclick="openNav()" style="padding: 10px;">Informasi DPT </a>
 				   	</li>	
 				  	<div class="dropdown-menu dropdown-me" style="background-color: rgba(0,0,0,0.8); color: #fff; font-size: 15px" id="myNav">
 			    		<a href="javascript:void(0)" class="closeNav" onclick="closeNav()">&times;</a>
 			 			<div class="listdrop">
-			 				<h5>Organisasi Mahasiswa</h5>	
-			 				<a class="dropdown-item drop-me" href="/show organisasi/Sema U/Uin bandung">Sema Universitas</a>
-			 				<a class="dropdown-item drop-me" href="/show organisasi/Dema U/Uin bandung">Dema Universitas</a>
-			 				<div class="dropdown" style="width: 230px">
-			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Sema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
+			 				<a class="dropdown-item drop-me" style="font-size: 18px" href="/informasi dpt/Sema & Dema U/Uin bandung">Sema & Dema Universitas</a>
+			 				<div class="dropdown" style="font-size: 18px">
+			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Sema & Dema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
 							  	<div class="dropdown-menu" style="background-color:rgba(0,0,0,0.9);">
 							      	{{! $tbFak = (App\Fakultas::all()) }}
 							      	@foreach($tbFak as $d)
-							      		<a class="dropdown-item" href="/show organisasi/Sema F/{{$d->nm_fakultas}}">{{$d->nm_fakultas}}</a>
+							      		<a class="dropdown-item" href="/informasi dpt/Sema & Dema F/{{$d->nm_fakultas}}">{{$d->nm_fakultas}}</a>
 							      	@endforeach
 							  	</div>
 							</div>
-			 				<div class="dropdown" style="width: 230px">
-			 					<a class="dropdown-item drop-me" data-toggle="dropdown" href="javascript:void(0)">Dema Fakultas<i style="float: right;" class="fa fa-caret-down"></i></a>
-							  	<div class="dropdown-menu" style="background-color:rgba(0,0,0,0.9);">
-							      	{{! $tbFak = (App\Fakultas::all()) }}
-							      	@foreach($tbFak as $d)
-							      		<a class="dropdown-item" href="/show organisasi/Dema F/{{$d->nm_fakultas}}">{{$d->nm_fakultas}}</a>
-							      	@endforeach
-							  	</div>
-							</div>
-
 					      	<hr style="border: 0.5px solid #cccccc">
 			 				<h5>Fak. Tarbiyah dan Keguruan</h5>
 			 				{{! $cekJur1 = \App\Jurusan::where('fak_id', 2)->get() }}
 			 				@foreach($cekJur1 as $dt)
-						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/informasi dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 				    	</div>
 				    	<div class="listdrop">	
 				    		<h5>Fak. Syariah dan Hukum</h5>
 			 				{{! $cekJur2 = \App\Jurusan::where('fak_id', 3)->get() }}
 			 				@foreach($cekJur2 as $dt)
-						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/informasi dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 					      	<hr style="border: 0.5px solid #cccccc">
 					      	<h5>Fak. Ilmu Sosial dan Ilmu Politik</h5>
 			 				{{! $cekJur3 = \App\Jurusan::where('fak_id', 8)->get() }}
 			 				@foreach($cekJur3 as $dt)
-						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/informasi dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 				    	</div>
 				    	<div class="listdrop">	
 				    	 	<h5>Fak. Dakwah dan  Komunikasi</h5>
 			 				{{! $cekJur4 = \App\Jurusan::where('fak_id', 4)->get() }}
 			 				@foreach($cekJur4 as $dt)
-						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/informasi dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 					      	<hr style="border: 0.3px solid #cccccc">
 				    		<h5>Fak. Adab dan Humaniora</h5>
 			 				{{! $cekJur5 = \App\Jurusan::where('fak_id', 5)->get() }}
 			 				@foreach($cekJur5 as $dt)
-						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/informasi dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 					      	<hr style="border: 0.3px solid #cccccc">
 					      	<h5>Fak. Psikologi</h5>
 			 				{{! $cekJur6 = \App\Jurusan::where('fak_id', 6)->get() }}
 			 				@foreach($cekJur6 as $dt)
-						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/informasi dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 					    </div>
 				    	<div class="listdrop">
 					     	<h5>Fak. Sains dan Teknologi</h5>
 			 				{{! $cekJur7 = \App\Jurusan::where('fak_id', 7)->get() }}
 			 				@foreach($cekJur7 as $dt)
-						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/informasi dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 					      	<hr style="border: 0.2px solid #cccccc">
 					      	<h5>Fak. Ushuludin</h5>
 			 				{{! $cekJur8 = \App\Jurusan::where('fak_id', 1)->get() }}
 			 				@foreach($cekJur8 as $dt)
-						      	<a class="dropdown-item" href="/show organisasi/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
+						      	<a class="dropdown-item" href="/informasi dpt/HMJ/{{$dt->nm_jurusan}}">HMJ {{$dt->nm_jurusan}}</a>
 			 				@endforeach
 				    	</div>
 					</div>
 				  	<span class="span">|</span>
-				  	<li class="nav-item dropdown">
+				  	<li class="nav-item dropdown {{ (Request::is('daftar calon') ? 'active-me' : '') }}">
 				    	<a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" style="padding: 10px;">Daftar </a>
-				    	 <div class="dropdown-menu">
-					      <a class="dropdown-item" href="/daftar calon">Calon Kandidat</a>
+				    	<div class="dropdown-menu">
+					     	<a class="dropdown-item" href="/daftar calon">Calon Kandidat</a>
 					    </div>
 				  	</li>	
 				  	<!-- <span class="span">|</span>
 				  	<li class="nav-item">
-				    	<a class="nav-link" href="javascript:void(0)" style="padding: 10px;">Syarat &amp; Ketentuan</a>
-				  	</li>   -->	
+				    	<a class="nav-link" href="javascript:void(0)" style="padding: 10px;">Undangan <span class="badge badge-primary">4</span></a>
+				  	</li>  	 -->
 				</ul>
 
 			    <ul class="navbar-nav">

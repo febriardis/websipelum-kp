@@ -106,7 +106,26 @@
 							</li>
 						</ul>
 						@elseif($dt->ket=='agenda ditolak')
-						<a href="/edit pengajuan agenda/{{\Crypt::encrypt($dt->id)}}" class="btn btn-default btn-sm"><i class="icon-compose"></i>&nbsp;Ajukan Ulang</a>
+						<ul class="icons-list">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="icon-menu9"></i>
+								</a>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><a href="/upload pengajuan agenda/" class="btn btn-default btn-sm"><i class="icon-compose"></i>&nbsp;Ajukan Ulang</a></li>
+									<script>
+									  	function ConfirmDelete() {
+									  		var x = confirm("Yakin Akan Menghapus Data?");
+									  		if (x)
+									    		return true;
+									  		else
+									    		return false;
+									  	}
+									</script>
+									<li><a href="/cancel/{{ $dt->id }}" onclick="return ConfirmDelete()"><i class="icon-close2"></i>&nbsp;Hapus</a></li>
+								</ul>
+							</li>
+						</ul>
 						@else
 							<a href="javascript::void(0)">no actions</a>
 						@endif

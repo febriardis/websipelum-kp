@@ -25,7 +25,7 @@ class AdminTableSeeder extends Seeder
             'nama'        => 'Fhadli Zhilal',
             'username'    => 'fhadli',//str_random(10),
             'password'    => bcrypt('fhadli1234'),
-            'ket'         => 'Sema U',
+            'ket'         => 'KPU U',
             'ket2'        => '',
             'created_at'  => \Carbon\Carbon::now('Asia/Jakarta'),
             'updated_at'  => \Carbon\Carbon::now('Asia/Jakarta')
@@ -34,7 +34,7 @@ class AdminTableSeeder extends Seeder
             'nama'        => 'Wildan Adzani',
             'username'    => 'wildanadmin',//str_random(10),
             'password'    => bcrypt('wildan1234'),
-            'ket'         => 'Dema F',
+            'ket'         => 'KPU F',
             'ket2'        => 'Sains dan Teknologi',
             'created_at'  => \Carbon\Carbon::now('Asia/Jakarta'),
             'updated_at'  => \Carbon\Carbon::now('Asia/Jakarta')

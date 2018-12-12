@@ -14,10 +14,14 @@
 			<div class="col-lg-3">
 				<!-- Members online -->
 				<div class="panel bg-teal-300">
-					<div class="panel-body">
+					<div class="panel-body" style="float: left;">
 						<h3 class="no-margin">3,450</h3>
 						Agenda
 					</div>
+					<div class="panel-body" style="float: right; width: 100px; height: 100px">
+						<img src="/assets/images/dash1.png" width="100%" height="100%">
+					</div>
+					<div class="clear"></div>
 				</div>
 				<!-- /members online -->
 			</div>
@@ -26,10 +30,14 @@
 			<div class="col-lg-3">
 				<!-- Current server load -->
 				<div class="panel bg-pink-400">
-					<div class="panel-body">
+					<div class="panel-body" style="float: left;">
 						<h3 class="no-margin">3,450</h3>
-						Pemilih
+						Mahasiswa
 					</div>
+					<div class="panel-body" style="float: right; width: 110px; height: 100px">
+						<img src="/assets/images/dash2.png" width="100%" height="100%">
+					</div>
+					<div class="clear"></div>
 				</div>
 				<!-- /current server load -->
 			</div>
@@ -39,10 +47,14 @@
 			<div class="col-lg-3">
 				<!-- Today's revenue -->
 				<div class="panel bg-blue-400">
-					<div class="panel-body">
+					<div class="panel-body" style="float: left;">
 						<h3 class="no-margin">3,450</h3>
 						Pengajuan
 					</div>
+					<div class="panel-body" style="float: right; width: 110px; height: 100px">
+						<img src="/assets/images/dash3.png" width="100%" height="100%">
+					</div>
+					<div class="clear"></div>
 				</div>
 				<!-- /today's revenue -->
 			</div>
@@ -52,10 +64,14 @@
 			<div class="col-lg-3">
 				<!-- Today's revenue -->
 				<div class="panel bg-green-400">
-					<div class="panel-body">
+					<div class="panel-body" style="float: left;">
 						<h3 class="no-margin">3,450</h3>
-						Hitung Cepat
+						Quick Count
 					</div>
+					<div class="panel-body" style="float: right; width: 110px; height: 100px">
+						<img src="/assets/images/dash4.png" width="100%" height="100%">
+					</div>
+					<div class="clear"></div>
 				</div>
 				<!-- /today's revenue -->
 			</div>

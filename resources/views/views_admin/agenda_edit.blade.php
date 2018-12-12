@@ -29,7 +29,20 @@
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Sistem Pemilihan</label>
 					<div class="col-lg-9">
-						<input type="text" class="form-control" readonly="" name="sistem_vote" value="{{ $data->sistem_vote }}" required="" placeholder="Masukan nama agenda">
+						<select class="select" name="sistem_vote" required="" data-placeholder="Pilih Metode Pemilihan">
+							<option {{{ ($data->sistem_vote == 'Pemilu Raya' ? 'selected' : '') }}}>Pemilu Raya</option>
+							<option {{{ ($data->sistem_vote == 'Delegasi' ? 'selected' : '') }}}>Delegasi</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Kategori Pemilih</label>
+					<div class="col-lg-5">
+						<input type="text" class="form-control" readonly="readonly" name="fakultas" value="{{$data->kat_fakultas}}">
+					</div>
+					<div class="col-lg-4">
+						<input type="text" class="form-control" readonly="readonly" name="jurusan" value="{{$data->kat_jurusan}}">
 					</div>
 				</div>
 
@@ -38,7 +51,7 @@
 					<div class="col-lg-5">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="icon-calendar3"></i></span>
-							<input type="date" name="tgl_agenda" readonly="" required="" value="{{$data->tgl_agenda}}" class="form-control" placeholder="Left icon">
+							<input type="date" name="tgl_agenda" required="" value="{{$data->tgl_agenda}}" class="form-control" placeholder="Left icon">
 						</div>
 					</div>
 					<div class="col-lg-2">
@@ -49,7 +62,7 @@
 					</div>
 					<div class="col-lg-2">
 						<div class="input-group">
-							<span class="input-group-addon">is over</span>
+							<span class="input-group-addon">is-over</span>
 							<input type="time" name="timeA2" required="" value="{{$data->timeA2}}" class="form-control">
 						</div>
 					</div>

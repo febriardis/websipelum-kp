@@ -51,7 +51,7 @@
 					<label class="col-lg-3 control-label">File Berkas</label>
 					<div class="col-lg-9">
 						<input type="file" name="file" accept=".doc, .docx, .pdf, .txt" required="" class="form-control" placeholder="Left icon">
-						<label class="text-muted">file min. 2 Mb</label>
+						<span class="help-block"><i> max 2MB </i></span>
 						<span class="text-danger">{{ $errors->first('file')}}</span> 
 					</div>
 				</div>

@@ -28,11 +28,17 @@ class VoteController extends Controller
     // /function admin
 
     function QuickCountView() {
-        return view('views_mahasiswa.quick_count');
+        $agenda = Agenda::where('tgl_agenda', \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'))->get();
+
+        return view('views_mahasiswa.quick_count')
+        ->with('agenda', $agenda);
     }
 
     function voteView(){
-    	return view('views_mahasiswa.vote');
+        $agenda = Agenda::where('tgl_agenda', \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'))->get();
+
+    	return view('views_mahasiswa.vote')
+        ->with('agenda', $agenda);
     }
 
     function vote($idAgenda, $idKandidat, $idPemilih) {  

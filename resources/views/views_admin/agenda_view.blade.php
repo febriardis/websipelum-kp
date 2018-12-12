@@ -107,7 +107,7 @@
 				@foreach($tbK as $dt)
 				<tr>
 					<td>{{$no++}}</td>
-					<td><img src="{{ url('uploads/fotomhs/'.$dt->foto) }}" alt="image not found" width="90" height="100"> </td>
+					<td><img src="{{ url('uploads/foto-kandidat/'.$dt->foto) }}" alt="image not found" width="90" height="100"> </td>
 					<td>{{$dt->nim}}</td>
 					<td>{{$dt->nama}}</td>
 					<td>{{$dt->jurusan}}&nbsp;-&nbsp;{{$dt->angkatan}}</td>
@@ -198,7 +198,7 @@
 			<table class="table datatable-basic">
 				<thead>
 					<tr>
-						<!-- <th></th> -->
+						<th></th>
 						<th>No</th>
 						<th>NIM</th>
 						<th>Nama</th>
@@ -212,7 +212,7 @@
 				@if(Auth::user()->ket=='Super Admin' || Auth::user()->ket=='KPU U') 
 					@foreach($tbP as $dt)
 					<tr>
-						<!-- <td><input type="checkbox" class="styled" name="id[]" value="{{ $dt->id }}"> </td> -->
+						<td><input type="checkbox" name="id[]" value="{{ $dt->id }}"> </td>
 						<td>{{$no++}}</td>
 						<td>{{$dt->nim}}</td>
 						<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('nama')}}</td>
@@ -241,7 +241,7 @@
 					{{! $cekFak = \App\Mahasiswa::where('nim', $dt->nim)->value('fakultas') }}
 					@if($cekFak == Auth::user()->ket2)
 					<tr>
-						<!-- <td><input type="checkbox" class="styled" name="id[]" value="{{ $dt->id }}"> </td> -->
+						<td><input type="checkbox" name="id[]" value="{{ $dt->id }}"> </td>
 						<td>{{$no++}}</td>
 						<td>{{$dt->nim}}</td>
 						<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('nama')}}</td>
@@ -270,7 +270,7 @@
 					{{! $cekJur = \App\Mahasiswa::where('nim', $dt->nim)->value('jurusan') }}
 					@if($cekJur == Auth::user()->ket2)
 					<tr>
-						<!-- <td><input type="checkbox" class="styled" name="id[]" value="{{ $dt->id }}"> </td> -->
+						<td><input type="checkbox" name="id[]" value="{{ $dt->id }}"> </td>
 						<td>{{$no++}}</td>
 						<td>{{$dt->nim}}</td>
 						<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('nama')}}</td>
@@ -295,15 +295,17 @@
 					@endif
 					@endforeach
 				@endif
-<!-- 						<tr bgcolor="#fcfcfc">
-						<td>
-							<input type="checkbox" name="" value="" class="styled">&nbsp;
-							<label>All</label>
-						</td>
-						<td>
-						</td><td></td><td></td><td></td><td></td><td></td>
-					</tr> -->
 				</tbody>
+				<tfoot>
+					<tr bgcolor="#fcfcfc">
+						<td colspan="7">
+							<div class="checkbox">
+								<label><input type="checkbox" onclick="checkAllId(this)" class="styled">Check all</label>
+								&nbsp;<a href="">Hapus Data</a>
+							</div>
+						</td>
+					</tr>	
+				</tfoot>
 			</table>
 		<!-- ==================Table Daftar Pemilih Tetap================ -->
 
@@ -349,17 +351,17 @@
 										<td>{{ $dt->th_angkatan }}</td>
 									</tr>
 									@endforeach
-									
+								</tbody>
+								<tfoot>
 									<tr bgcolor="#fcfcfc">
-										<td>
+										<td colspan="5">
 											<div class="checkbox">
-												<label><input type="checkbox" onclick="checkAllNim(this)" class="styled">All</label>
+												<label><input type="checkbox" onclick="checkAllNim(this)" class="styled">Check all</label>
 											</div>
 										</td>
 										<td>
-										</td><td></td><td></td><td></td><td></td>
-									</tr>
-								</tbody>
+									</tr>	
+								</tfoot>
 							</table>
 						</div>
 						<div class="modal-footer">
@@ -389,6 +391,13 @@
 										
 		function checkAllNim(source) {
 		  checkboxes = document.getElementsByName('nim[]');
+		  for(var i=0, n=checkboxes.length;i<n;i++) {
+		    checkboxes[i].checked = source.checked;
+		  }
+		}
+
+		function checkAllId(source) {
+		  checkboxes = document.getElementsByName('id[]');
 		  for(var i=0, n=checkboxes.length;i<n;i++) {
 		    checkboxes[i].checked = source.checked;
 		  }

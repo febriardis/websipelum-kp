@@ -22,14 +22,21 @@ class KandidatController extends Controller
 
     function insert(Request $req, $idAgenda){ //insert oleh mahasiswa
         $this->validate($req, [
-            'foto'     => 'required'
+            'foto'     => 'required|file|max:2000'
         ]);
+
         $cek = Kandidat::where([['nim', $req->nim],['agenda_id', $idAgenda]])->get();
         if (count($cek)==0) {
             $tb = new Kandidat;
             $tb->nim         = $req->nim;
             $tb->nama        = $req->nama;
-            $tb->foto        = $req->foto;
+
+            $file    = $req->file('foto');
+            $ext     = $file->getClientOriginalExtension();
+            $newName = rand(100000,1001238912).".".$ext;
+            $file->move('uploads/foto-kandidat',$newName);
+
+            $tb->foto        = $newName;
             $tb->jurusan     = $req->jurusan;
             $tb->angkatan    = $req->th_angkatan;
             $tb->agenda_id   = $idAgenda;
@@ -77,7 +84,13 @@ class KandidatController extends Controller
                 $tb = new Kandidat;
                 $tb->nim         = $req->nim;
                 $tb->nama        = $Mhs->nama;
-                $tb->foto        = $Mhs->foto;
+
+                $file    = $req->file('foto');
+                $ext     = $file->getClientOriginalExtension();
+                $newName = rand(100000,1001238912).".".$ext;
+                $file->move('uploads/foto-kandidat',$newName);
+
+                $tb->foto        = $newName;
                 $tb->jurusan     = $Mhs->jurusan;
                 $tb->angkatan    = $Mhs->th_angkatan;
                 $tb->agenda_id   = $idAgenda;

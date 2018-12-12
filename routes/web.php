@@ -12,32 +12,37 @@
 // */
 
 // #---------------------------GUEST---------------------------------#
-Route::get('/', function(){return view('views_mahasiswa.beranda');})->middleware('guest');
+Route::get('/', function(){
+	return view('views_mahasiswa.index');
+})->middleware('guest');
 Route::get('/hc', 'VoteController@QuickCountView')->middleware('guest');
 Route::get('/info dpt/{ket}/{ket2}', 'PemilihController@showPemilih')->middleware('guest');
-// Route::get('/org/{ket}/{ket2}', 'OrganisasiController@showOrganisasi')->middleware('guest');
-Route::get('/admin/login',function(){return view('views_admin.login_form');})->middleware('guest');
+Route::get('/admin/login',function(){
+	return view('views_admin.login_form');
+})->middleware('guest');
 Route::post('/login', 'LoginController@login_mhs');
 Route::post('/login admin', 'LoginController@login_admin');
 Route::get('/keluar', 'LoginController@keluar');
 
-
 // ------------------------------MAHASISWA------------------------------------
-Route::get('/beranda', function(){return view('views_mahasiswa.beranda');})->middleware('auth:mahasiswa');
+Route::get('/beranda', function(){
+	return view('views_mahasiswa.index');
+})->middleware('auth:mahasiswa');
 Route::get('/pemilihan', 'VoteController@voteView')->middleware('auth:mahasiswa');
 Route::get('/hitung cepat', 'VoteController@QuickCountView')->middleware('auth:mahasiswa');
 Route::get('/informasi dpt/{ket}/{ket2}', 'PemilihController@showPemilih')->middleware('auth:mahasiswa');
-// Route::get('/show organisasi dpt/{ket}/{ket2}', 'OrganisasiController@showOrganisasi')->middleware('auth:mahasiswa');
 Route::get('/daftar calon', 'MhsController@ShowTabelAgenda')->middleware('auth:mahasiswa');
 Route::get('/form pendaftaran/{IdAgenda}', 'KandidatController@daftar')->middleware('auth:mahasiswa');
 Route::get('/batal daftar/{nim}/{IdAgenda}', 'KandidatController@batalDaftar')->middleware('auth:mahasiswa'); //pembatalan
 
-//======================================ADMIN======================================
+//===================================ADMIN======================================
 Route::get('/dashboard', 'HomeController@dashboard')->middleware('auth:admin');
 
 // ================================ADMIN-AGENDA_AJUAN==============================
 Route::get('/pengajuan agenda','PengAgendaController@show')->middleware('auth:admin');
-Route::get('/upload pengajuan agenda',function(){return view('views_admin.pengajuan_agenda_form');})->middleware('auth:admin');
+Route::get('/upload pengajuan agenda',function(){
+	return view('views_admin.pengajuan_agenda_form');
+})->middleware('auth:admin');
 Route::post('/upload ajuan/{id}','PengAgendaController@insert')->middleware('auth:admin');
 Route::get('/edit pengajuan agenda/{id}','PengAgendaController@edit')->middleware('auth:admin');
 Route::post('/edit ajuan/{id}','PengAgendaController@update')->middleware('auth:admin');
@@ -46,7 +51,9 @@ Route::get('/tolak/{id}','PengAgendaController@tolakAcara')->middleware('auth:ad
 
 // ================================ADMIN-KELOLA-ADMIN==================================
 Route::get('/tabel admin','AdminController@show')->middleware('auth:admin');
-Route::get('/tambah admin',function(){return view('views_admin.admin_tambah');})->middleware('auth:admin');
+Route::get('/tambah admin',function(){
+	return view('views_admin.admin_tambah');
+})->middleware('auth:admin');
 Route::post('/tambah admin','AdminController@insert');
 Route::get('/hapus admin/{id}', 'AdminController@delete');
 
@@ -81,7 +88,6 @@ Route::get('/hapus pemilih/{id}/{idAgenda}', 'PemilihController@delete')->middle
 Route::get('/data quick count', 'VoteController@tableQuickCount')->middleware('auth:admin');
 Route::get('/detail quick count/{idAgenda}', 'VoteController@viewQuickCount')->middleware('auth:admin');
 
-
 // =============================ADMIN-SHOW-MAHASISWA================================
 Route::get('/tabel mahasiswa', 'MhsController@show')->middleware('auth:admin');
 
@@ -89,19 +95,3 @@ Route::get('/tabel mahasiswa', 'MhsController@show')->middleware('auth:admin');
 Route::group(['middleware' => 'throttle:1'], function () {
 	Route::post('/vote/{Idagenda}/{IdKandidat}/{IdPemilih}', 'VoteController@vote')->middleware('auth:mahasiswa');
 });
-
-// ==================================ADMIN-ORGANISASI==================================
-// Route::get('/organisasi univ/{ket}', 'OrganisasiController@showOrgU')->middleware('auth:admin');
-// Route::get('/organisasi/{ket}/{ket2}', 'OrganisasiController@show')->middleware('auth:admin');
-// Route::post('/nmOrganisasi', 'OrganisasiController@insertNama')->middleware('auth:admin');
-// Route::post('/UpnmOrganisasi/{id}', 'OrganisasiController@updateNama')->middleware('auth:admin');
-// Route::post('/UpVMOrganisasi/{id}', 'OrganisasiController@updateVisiMisi')->middleware('auth:admin');
-// Route::post('/insert jabtum/{idOrg}', 'OrganisasiController@insertJabtum')->middleware('auth:admin');
-// Route::post('/update jabtum/{id}', 'OrganisasiController@updateJabtum')->middleware('auth:admin');
-// Route::get('/delete jabtum/{id}', 'OrganisasiController@deleteJabtum')->middleware('auth:admin');
-// Route::post('/insert bidang/{idOrg}', 'OrganisasiController@insertBidang')->middleware('auth:admin');
-// Route::post('/update bidang/{id}', 'OrganisasiController@updateBidang')->middleware('auth:admin');
-// Route::get('/delete bidang/{id}', 'OrganisasiController@deleteBidang')->middleware('auth:admin');
-// Route::post('/insert strukbid/{idBidang}', 'OrganisasiController@insertStrukBid')->middleware('auth:admin');
-// Route::post('/update strukbid/{id}','OrganisasiController@updateStrukBid')->middleware('auth:admin');
-// Route::get('/delete strukbid/{id}','OrganisasiController@deleteStrukBid')->middleware('auth:admin');

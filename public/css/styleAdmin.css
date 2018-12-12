@@ -51,6 +51,12 @@
 	color: #737373;
 }
 
+.showimage {
+	margin-top: 5px;
+	border:1px solid #cccccc;
+	width: 130px;
+	height: 150px;
+}
 
 /*--------------quickcountshow-------------------------*/
 .list-text-qc{

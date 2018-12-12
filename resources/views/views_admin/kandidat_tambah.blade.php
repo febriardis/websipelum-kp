@@ -25,6 +25,34 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-group">
+					<div class="row">
+						<label class="control-label col-sm-4">Foto</label>
+						<div class="col-sm-8">
+							<input type="file" accept="image/*" onchange="readURL(this);" name="foto">
+	          				<span class="help-block"><i> max 2MB </i></span>
+	          	          	<!-- js show image -->
+					        <script type="text/javascript">
+					            function readURL(input) {
+					              if (input.files && input.files[0]) {
+					                var reader = new FileReader();
+
+					                reader.onload = function(e) {
+					                  $('#cek-gambar')
+					                    .attr('src', e.target.result);
+					                };
+					                reader.readAsDataURL(input.files[0]);
+					              }
+					            }
+					        </script>
+					        <!--end-->
+					        <div class="showimage">
+					            <img id="cek-gambar" src="#" alt="image not found" width="100%" height="100%">
+					        </div>
+						</div>
+					</div>
+				</div>
 				
 				<div class="form-group">
 					<div class="row">

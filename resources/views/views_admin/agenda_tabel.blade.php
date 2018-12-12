@@ -84,7 +84,7 @@
 						<a href="/detail agenda/{{\Crypt::encrypt($dt->id) }}"><i class="icon-eye"></i> Lihat</a>
 					</td>
 					<td class="text-center"> 	
-					@if($cekTgl < $dt->tgl_agenda)	
+					@if($cekTgl <= $dt->tgl_agenda)	
 						@if(Auth::user()->ket=='Super Admin' || Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2)
 							<ul class="icons-list">
 								<li class="dropdown">
@@ -136,8 +136,10 @@
 									</div>
 						        </div>
 						        <div class="modal-footer">
-						        	<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>	
-									<button type="submit" class="btn btn-primary">Simpan</button>
+									@if(Auth::user()->ket=='Super Admin' || Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2)
+							        	<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>	
+										<button type="submit" class="btn btn-primary">Simpan</button>
+									@endif
 						        </div>
 					        </form>
 				    	</div>

@@ -72,7 +72,7 @@
 	<!-- Main navbar -->
 	<div class="navbar navbar-default header-highlight">
 		<div class="container ">
-			<a class="navbar-brand" href="/"><img src="/assets/images/icon.png" style="width: 75%; height: 35px; margin-top: -10px" alt=""></a>
+			<a class="navbar-brand"><img src="/assets/images/icon.png" style="width: 75%; height: 35px; margin-top: -10px" alt=""></a>
 		</div>
 	</div>
 	<!-- /Main navbar -->

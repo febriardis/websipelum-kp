@@ -23,15 +23,8 @@
 					<label class="col-lg-3 control-label">Sistem Pemilihan</label>
 					<div class="col-lg-9">
 						<select class="select" name="sistem_pem" required="" data-placeholder="Pilih Metode Pemilihan">
-							<option {{{ ($tb->sistem_vote == 'Pemilu Raya' ? 'selected' : '') }}}>{{ $tb->sistem_vote }}</option>
-							<option {{{ ($tb->sistem_vote == 'Delegasi' ? 'selected' : '') }}}>{{ $tb->sistem_vote }}</option>
-<!-- 							@if($tb->sistem_vote=='Pemilu Raya')
-								<option>{{$tb->sistem_vote}}</option>
-								<option>Delegasi</option>
-							@else
-								<option>{{$tb->sistem_vote}}</option>
-								<option>Pemilu Raya</option>
-							@endif -->
+							<option {{{ ($tb->sistem_vote == 'Pemilu Raya' ? 'selected' : '') }}}>Pemilu Raya</option>
+							<option {{{ ($tb->sistem_vote == 'Delegasi' ? 'selected' : '') }}}>Delegasi</option>
 						</select>
 					</div>
 				</div>
@@ -40,7 +33,7 @@
 					<label class="col-lg-3 control-label">File Berkas</label>
 					<div class="col-lg-9">
 						<input type="file" name="file" accept=".doc, .docx, .pdf" value="{{$tb->file}}" class="form-control">
-						<label class="text-muted">file min. 2 Mb</label>
+						<span class="help-block"><i> max 2MB </i></span>
 						<label class="text-muted">*abaikan jika tidak diganti</label>
 					</div>
 				</div>

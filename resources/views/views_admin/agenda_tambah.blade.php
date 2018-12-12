@@ -52,10 +52,6 @@
 							<span class="input-group-addon"><i class="icon-calendar3"></i></span>
 							<input type="date" name="tgl_agenda" required="" value="{{$tb->tgl_agenda}}" class="form-control" placeholder="Left icon">
 						</div>
-						{{!$cekT = \App\Agenda::where('tgl_agenda', $tb->tgl_agenda)->get()}}
-						@if(count($cekT) != 0)
-							<span class="label label-danger">Tanggal {{date('d', strtotime($tb->tgl_agenda))}} sudah ada agenda</span>
-						@endif
 					</div>
 					<div class="col-lg-2">
 						<div class="input-group">

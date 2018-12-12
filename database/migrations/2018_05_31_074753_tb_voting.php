@@ -17,7 +17,7 @@ class TbVoting extends Migration
             $table->increments('id');
             $table->unsignedInteger('agenda_id');
             $table->unsignedInteger('kandidat_id');
-            $table->integer('jumlah');
+            $table->string('jumlah');
             $table->timestamps();
         });
         Schema::table('tb_voting', function(Blueprint $kolom){

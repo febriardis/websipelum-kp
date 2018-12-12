@@ -16,14 +16,14 @@ class PemilihController extends Controller
     //show in mahasiswa page
     function showPemilih($ket,$ket2){
         if ($ket=='HMJ') {
-            $cekAgenda = Agenda::where([['kat_jurusan', $ket2] , ['tgl_agenda','>', date('Y-m-d')]])->value('id');
-            $Agenda    = Agenda::find($cekAgenda);
+            $Agenda = Agenda::where([['kat_jurusan', $ket2] , ['tgl_agenda','>=', \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d')]])->get();
+            // $Agenda    = Agenda::find($cekAgenda);
         }elseif ($ket=='Sema & Dema U') {
-            $cekAgenda = Agenda::where([['kat_fakultas', 'Semua Mahasiswa'] , ['tgl_agenda','>', date('Y-m-d')]])->value('id');
-            $Agenda    = Agenda::find($cekAgenda);
+            $Agenda = Agenda::where([['kat_fakultas', 'Semua Mahasiswa'] , ['tgl_agenda','>=', \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d')]])->get();
+            // $Agenda    = Agenda::find($cekAgenda);
         }elseif ($ket=='Sema & Dema F') {
-            $cekAgenda = Agenda::where([['kat_fakultas', $ket2] , ['tgl_agenda','>', date('Y-m-d')]])->value('id');
-            $Agenda    = Agenda::find($cekAgenda);
+            $Agenda = Agenda::where([['kat_fakultas', $ket2] , ['tgl_agenda','>=', \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d')]])->get();
+            // $Agenda    = Agenda::find($cekAgenda);
         }
 
         return view('views_mahasiswa.info_dpt')

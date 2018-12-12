@@ -17,7 +17,7 @@
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Foto</label>
 					<div class="col-lg-9">
-					<img src="/uploads/fotomhs/{{$tbMhs->foto}}" width="90" height="100">
+					<img src="/uploads/foto-kandidat/{{$tbMhs->foto}}" width="90" height="100">
 					</div>
 				</div>
 
@@ -58,7 +58,7 @@
 					</div>
 				</div>
 				<div class="text-right">
-				<a href="{{ URL::previous() }}" class="btn btn-default"><i class="icon-undo2"></i>&nbsp;Kembali</a>
+					<a href="{{ URL::previous() }}" class="btn btn-default"><i class="icon-undo2"></i>&nbsp;Kembali</a>
 					<div style="display: none;">
 					{{! $cekAdmin = (\App\Agenda::find($idAgenda))->admin_id,
 						$cekkat1Admin = (\App\Admin::find($cekAdmin))->ket,

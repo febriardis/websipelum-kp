@@ -41,34 +41,28 @@ class AgendaController extends Controller
     }
 
     function insert(Request $req, $idAdmin){
-        $cek = Agenda::where('tgl_agenda', $req->tgl_agenda)->get();
-        if (count($cek)==0) {
-            $tb = new Agenda;
-            $tb->admin_id    = $idAdmin;
-            $tb->nm_agenda   = $req->nm_agenda;
-            $tb->sistem_vote = $req->sistem_pem;
-            $tb->kat_fakultas= $req->fakultas;
-            $tb->kat_jurusan = $req->jurusan;
-            $tb->tgl_agenda  = $req->tgl_agenda;
+        $tb = new Agenda;
+        $tb->admin_id    = $idAdmin;
+        $tb->nm_agenda   = $req->nm_agenda;
+        $tb->sistem_vote = $req->sistem_pem;
+        $tb->kat_fakultas= $req->fakultas;
+        $tb->kat_jurusan = $req->jurusan;
+        $tb->tgl_agenda  = $req->tgl_agenda;
 
-            $tb->timeA1      = $req->timeA1;
-            $tb->timeA2      = $req->timeA2;
-            $tb->StartDaftarK= $req->StartDaftarK;
-            $tb->LastDaftarK = $req->LastDaftarK;
-            $tb->tgl_filtering= $req->tgl_filtering;
-            $tb->syaratketentuan = '';
-            $tb->save();
+        $tb->timeA1      = $req->timeA1;
+        $tb->timeA2      = $req->timeA2;
+        $tb->StartDaftarK= $req->StartDaftarK;
+        $tb->LastDaftarK = $req->LastDaftarK;
+        $tb->tgl_filtering= $req->tgl_filtering;
+        $tb->syaratketentuan = '';
+        $tb->save();
 
-            $tb_berita = AgendaAjuan::find($req->id_bacara);
-            $tb_berita->ket = 'sudah diverifikasi';
-            $tb_berita->save();
+        $tb_berita = AgendaAjuan::find($req->id_bacara);
+        $tb_berita->ket = 'sudah diverifikasi';
+        $tb_berita->save();
 
-            return redirect('/tabel agenda')
-            ->with('pesan','Agenda berhasil dibuat');
-        }else{
-            return redirect()->back()
-            ->with('pesan','Tanggal agenda sudah ada');
-        }
+        return redirect('/tabel agenda')
+        ->with('pesan','Agenda berhasil dibuat');
     }
 
     function edit($id){
@@ -80,24 +74,22 @@ class AgendaController extends Controller
     }
 
     function update(Request $req, $id) {    
-        // $cek = Agenda::where([['tgl_agenda', $req->tgl_agenda],['id','!=',$id]])->get();
-        // if (count($cek)==0) {   
-            $tb = Agenda::find($id);
-            $tb->timeA1      = $req->timeA1;
-            $tb->timeA2      = $req->timeA2;
-            $tb->StartDaftarK= $req->StartDaftarK;
-            $tb->LastDaftarK = $req->LastDaftarK;
-            $tb->tgl_filtering= $req->tgl_filtering;
-            $tb->save();
-            //tambahkan
-            $tb->save();
-        
-            return redirect('/tabel agenda')
-            ->with('pesanA', 'Data berhasil disimpan');
-        // }else{
-        //     return redirect()->action('AgendaController@edit', ['id' => \Crypt::encrypt($id)])
-        //     ->with('pesanErr','Tanggal agenda sudah ada');      
-        // }
+        $tb = Agenda::find($id);
+
+        $tb->sistem_vote = $req->sistem_pem;
+        $tb->tgl_agenda  = $req->tgl_agenda;
+        $tb->timeA1      = $req->timeA1;
+        $tb->timeA2      = $req->timeA2;
+        $tb->StartDaftarK= $req->StartDaftarK;
+        $tb->LastDaftarK = $req->LastDaftarK;
+        $tb->tgl_filtering= $req->tgl_filtering;
+        $tb->save();
+        //tambahkan
+        $tb->save();
+    
+        return redirect('/tabel agenda')
+        ->with('pesanA', 'Data berhasil disimpan');
+
     }
 
     function delete($id) {

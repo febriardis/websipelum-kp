@@ -39,6 +39,13 @@
     text-transform: capitalize;
 }
 
+.showimage {
+	margin-top: 5px;
+	border:1px solid #cccccc;
+	width: 130px;
+	height: 150px;
+}
+
 select option[data-default] {
   color: #888;
 }
@@ -279,7 +286,8 @@ a.closeNav:hover {
 }
 
 .list-text-qc hr{
-	width: 400px; float: left; 
+	width: 360px; 
+	float: left; 
 	border:2px solid #cccccc;
 }
 
@@ -332,7 +340,7 @@ a.closeNav:hover {
 }
 
 .list-text-qcl hr{
-	width: 350px; float: left; 
+	width: 320px; float: left; 
 	border:2px solid #cccccc;
 }
 

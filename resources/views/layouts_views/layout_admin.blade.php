@@ -191,7 +191,7 @@
 									</ul>
 								</li>	
 								<li>
-									<a href="#"><i class="icon-newspaper"></i> <span>Konten Berita</span></a>
+									<a href="/konten berita"><i class="icon-newspaper"></i> <span>Konten Berita</span></a>
 								</li>	
 								@endif
 								<li {{ (Request::is('pengajuan agenda') ? 'class=active' : '') }}>

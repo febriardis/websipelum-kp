@@ -31,6 +31,14 @@ class PemilihController extends Controller
     }
     // -/show in mahasiswa page
 
+    
+    // -/show in admin page
+    function show(){
+        $Agenda = Agenda::where('tgl_agenda','>=', \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'))->get();
+        
+        return view('views_admin.pemilih_tabel')
+        ->with('Agenda', $Agenda);
+    }
 
     function insert(Request $req, $idAgenda){
         $loop = $req->nim;
@@ -45,29 +53,34 @@ class PemilihController extends Controller
                     $tb->save();
                 }    
             }
-            // return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($idAgenda)]) 
             return redirect()->back()
             ->with('pesanP', 'Data berhasil disimpan');  
         }else{
-            // return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($idAgenda)])
             return redirect()->back()
             ->with('pesanE', 'Data gagal tersimpan');  
         }
     }
 
-    function delete($id, $idAgenda) {
+    function delete($id) {
         Pemilih::find($id)->delete();
 
-        // return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($idAgenda)]) //
         return redirect()->back()
         ->with('pesanP', 'Data berhasil dihapus');
     }
 
-    function deleteChecked($IdAgenda) {
-        Pemilih::where('agenda_id', $IdAgenda)->delete();
+    // function deleteChecked() {
+    //     $loop = $req->id;
+        
+    //     if (count($loop)!=0) {
+    //         foreach ($loop as $value) {
+    //             $cekMhs = Pemilih::find($value)->delete();
+    //         }
 
-        // return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($IdAgenda)]) //
-        return redirect()->back()
-        ->with('pesanP', 'Data berhasil dihapus');
-    }
+    //         return redirect()->back()
+    //         ->with('pesanP', 'Data berhasil dihapus');  
+    //     }else{
+    //         return redirect()->back()
+    //         ->with('pesanE', 'Tidak ada data yang berhasil dihapus!');  
+    //     }
+    // }
 }

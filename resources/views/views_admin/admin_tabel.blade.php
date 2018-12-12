@@ -5,12 +5,13 @@
 @endsection
 
 @section('content')
-	@if(Session::has('pesan'))
+
+@if(Session::has('pesan'))
 	<div class="alert alert-info">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 		{{ Session::get('pesan') }} !
 	</div>
-	@endif
+@endif
 
 @if(Auth::user()->ket=='Super Admin')
 	<!-- Basic datatable -->
@@ -32,81 +33,35 @@
 				</tr>
 			</thead>
 			<tbody>
-				{{!$no=1}}
-				@if(Auth::user()->ket=='Super Admin')
-					@foreach($tbAdmin as $tb)
-						<tr>
-							<td>{{ $no++ }}</td>
-							<td>{{ $tb->nama }}</td>
-							<td>{{ $tb->username }}</td>
-							<td>{{ $tb->created_at }}</td>
-							<td>{{ $tb->ket }} - <b>{{ $tb->ket2 }}</b></td>
-							<td class="text-center">
-								<ul class="icons-list">
-									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-											<i class="icon-menu9"></i>
-										</a>
-
-										<ul class="dropdown-menu dropdown-menu-right">
-											<li><a href=""><i class="icon-compose"></i> Edit Data</a></li>
-											<script>
-											  	function ConfirmDelete() {
-											  		var x = confirm("Yakin Akan Menghapus Data?");
-											  		if (x)
-											    		return true;
-											  		else
-											    		return false;
-											  	}
-											</script>
-											<li><a href="/hapus admin/{{$tb->id}}" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a></li>
-										</ul>
-									</li>
-								</ul>
-							</td>
-						</tr>
-					@endforeach
-				@else
-					@foreach($tbAdmin as $tb)
-						@if($tb->ket==Auth::user()->ket && $tb->ket2==Auth::user()->ket2)
-							<tr>
-								<td>{{ $no++ }}</td>
-								<td>{{ $tb->nama }}</td>
-								<td>{{ $tb->username }}</td>
-								<td>{{ $tb->created_at }}</td>
-								<td>{{ $tb->ket }}&nbsp;-&nbsp;<b>{{ $tb->ket2 }}</b></td>
-								<td class="text-center">
-									<ul class="icons-list">
-										<li class="dropdown">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-												<i class="icon-menu9"></i>
-											</a>
-
-											<ul class="dropdown-menu dropdown-menu-right">
-												<li><a href=""><i class="icon-compose"></i> Edit Data</a></li>
-												<script>
-												  	function ConfirmDelete() {
-												  		var x = confirm("Yakin Akan Menghapus Data?");
-												  		if (x)
-												    		return true;
-												  		else
-												    		return false;
-												  	}
-												</script>
-												<li><a href="/hapus admin/{{$tb->id}}" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a></li>
-											</ul>
-										</li>
-									</ul>
-								</td>
-							</tr>
-						@endif
-					@endforeach
-
-				@endif
-				
+			{{!$no=1}}
+			@foreach($tbAdmin as $tb)
+				<tr>
+					<td>{{ $no++ }}</td>
+					<td>{{ $tb->nama }}</td>
+					<td>{{ $tb->username }}</td>
+					<td>{{ $tb->created_at }}</td>
+					<td>{{ $tb->ket }} - <b>{{ $tb->ket2 }}</b></td>
+					<td class="text-center">
+	                  	<form action="/hapus admin/{{$tb->id}}" method="POST" onclick="return ConfirmDelete()">
+		                    @csrf
+		                    @method('DELETE')
+		                    <button type="submit" class="btn btn-danger btn-sm text-white"><i class='icon-trash'></i>&nbsp;Hapus</button>
+		                </form>
+					</td>
+				</tr>
+			@endforeach
 			</tbody>
 		</table>
 	</div>
 	<!-- /basic datatable -->
 @endif
+<script>
+  	function ConfirmDelete() {
+  		var x = confirm("Yakin Akan Menghapus Data?");
+  		if (x)
+    		return true;
+  		else
+    		return false;
+  	}
+</script>
 @endsection

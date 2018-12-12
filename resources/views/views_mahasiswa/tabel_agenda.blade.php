@@ -72,7 +72,13 @@
                   @if($cekKet=='Pendaftaran Tidak Diterima')
                     <a href="javascript::void(0)">no actions</a>
                   @elseif($cekKet=='Menunggu Verifikasi')
-                    <a href="/batal daftar/{{Auth::user()->nim}}/{{$dt->id}}" onclick="return ConfirmDelete()" class="btn btn-danger btn-sm text-white"><i class='far fa-times-circle'></i>&nbsp;Batal</a>
+                  
+                  <form action="/batal daftar/{{Auth::user()->nim}}/{{$dt->id}}" method="POST" onclick="return ConfirmDelete()">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm text-white"><i class='far fa-times-circle'></i>&nbsp;Batal</button>
+                  </form>
+
                   @else
                   <a href="javascript::void(0)">no actions</a>
                   @endif

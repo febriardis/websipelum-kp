@@ -10,7 +10,13 @@ use App\Agenda;
 class MhsController extends Controller
 {
     function show(){ //show table mahasiswa
-    	$tb = Mahasiswa::where('jurusan', Auth::user()->ket2)->get();
+        if (Auth::user()->ket=='HMJ') {
+            $tb = Mahasiswa::where('jurusan', Auth::user()->ket2)->get();
+        }elseif (Auth::user()->ket=='KPU F'){
+            $tb = Mahasiswa::where('fakultas', Auth::user()->ket2)->get();
+        }else {
+            $tb = Mahasiswa::all();
+        }
 
     	return view('views_admin.tabel_mahasiswa')
     	->with('tbMhs', $tb);

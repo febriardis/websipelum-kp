@@ -22,7 +22,7 @@ class KandidatController extends Controller
 
     function insert(Request $req, $idAgenda){ //insert oleh mahasiswa
         $this->validate($req, [
-            'foto'     => 'required|file|max:2000'
+            'foto'     => 'required|mimes:jpeg,jpg,png|max:2000'
         ]);
 
         $cek = Kandidat::where([['nim', $req->nim],['agenda_id', $idAgenda]])->get();
@@ -68,6 +68,10 @@ class KandidatController extends Controller
     }
 
     function insertK(Request $req, $idAgenda){ //insert oleh admin
+        $this->validate($req, [
+            'foto'     => 'required|mimes:jpeg,jpg,png|max:2000'
+        ]);
+
         $cekJurAg  = Agenda::find($idAgenda)->kat_jurusan; //cek kategori jurusan agenda 
         $cekFakAg  = Agenda::find($idAgenda)->kat_fakultas; //cek kategori jurusan agenda 
 
@@ -154,7 +158,6 @@ class KandidatController extends Controller
     function delete($id, $idAgenda) { //hapus kandidat oleh admin
         Kandidat::find($id)->delete();
 
-        // return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($idAgenda)])
         return redirect()->back()
         ->with('pesan', 'Data berhasil dihapus');
     }

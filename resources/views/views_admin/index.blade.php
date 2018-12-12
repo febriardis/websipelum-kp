@@ -26,13 +26,13 @@
 				<!-- /members online -->
 			</div>
 		</a>
-		<a href="/tabel mahasiswa">
+		<a href="/tabel pemilih">
 			<div class="col-lg-3">
 				<!-- Current server load -->
 				<div class="panel bg-pink-400">
 					<div class="panel-body" style="float: left;">
 						<h3 class="no-margin">3,450</h3>
-						Mahasiswa
+						Pemilih/Delegasi
 					</div>
 					<div class="panel-body" style="float: right; width: 110px; height: 100px">
 						<img src="/assets/images/dash2.png" width="100%" height="100%">
@@ -123,7 +123,7 @@
 					</thead>
 					<tbody>
 					<tr class="active border-double">
-						<td colspan="6">Belum terlaksana</td>
+						<td colspan="6">Belum Terlaksana</td>
 					</tr>
 					{{! $no = 1 }}
 					@foreach($tbAgenda as $dt)
@@ -174,10 +174,44 @@
 						@endif
 					@endforeach
 
-					<!-- Sudah Terlaksana -->
-					
+					<!-- sedang berlangsung -->
 					<tr class="active border-double">
-						<td colspan="6">Sudah terlaksana</td>
+						<td colspan="6">Sedang Berlangsung</td>
+					</tr>
+					{{! $no = 1 }}
+					@foreach($tbAgenda as $dt)
+						<div style="display: none;">	
+							{{! $cek1 = (App\Admin::find($dt->admin_id))->ket }}
+							{{! $cek2 = (App\Admin::find($dt->admin_id))->ket2 }}				
+							<!-- cek idfak jurusan dmna nm_jurusan==ket2admin-->
+							{{! $c1 =(App\Jurusan::where('nm_jurusan', Auth::user()->ket2)->value('fak_id')) }}
+							{{! $c2 = (App\Fakultas::where('nm_fakultas', $dt->kat_fakultas)->value('id')) }}
+						</div>		
+						@if(Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2 || Auth::user()->ket=='HMJ' && Auth::user()->ket2==$dt->kat_fakultas || Auth::user()->ket=='HMJ' && $dt->kat_fakultas=='Semua Mahasiswa' || Auth::user()->ket=='HMJ' && $dt->kat_jurusan=='Semua Jurusan' && $c1==$c2 || Auth::user()->ket=='Super Admin')
+							@if($cekTgl == $dt->tgl_agenda)
+							<tr>
+								<td>{{ $no++ }}</td>
+								<td>{{ $dt->nm_agenda }}<p><b>{{ $dt->sistem_vote }}</b></p></td>
+								<td>{{ $dt->kat_jurusan }} <p><b>({{$dt->kat_fakultas}})</b></p></td>
+								<td>
+									{{ date('d M Y', strtotime($dt->tgl_agenda)) }}<br>
+									<p><b>Pukul:</b><br> {{ date('G:i', strtotime($dt->timeA1))}} - {{ date('G:i', strtotime($dt->timeA2))}}</p>
+								</td>
+								<td>
+									<span class="label label-success">Selesai</span>
+								</td>
+								<td class="text-center"> 	
+									<a href="/detail agenda/{{\Crypt::encrypt($dt->id) }}"><i class="icon-eye"></i> Lihat</a>
+								</td>
+							</tr>
+							@endif
+						@endif
+					@endforeach
+					<!-- /sedang berlangsung -->
+
+					<!-- Sudah Terlaksana -->
+					<tr class="active border-double">
+						<td colspan="6">Sudah Terlaksana</td>
 					</tr>
 					{{! $no = 1 }}
 					@foreach($tbAgenda as $dt)

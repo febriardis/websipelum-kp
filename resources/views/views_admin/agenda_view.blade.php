@@ -129,19 +129,13 @@
 						@if(Auth::user()->ket=='Super Admin')
 							<a href="javascript:void(0)">no actions</a>
 						@else
-							@if(Auth::user()->id==$cekAdmin || Auth::user()->ket==$cekkat1Admin && Auth::user()->ket2==$cekkat2Admin)<ul class="icons-list">
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-										<i class="icon-menu9"></i>
-									</a>
-
-									<ul class="dropdown-menu dropdown-menu-right">
-										<li><a href="/detail kandidat/{{$dt->nim}}/{{\Crypt::encrypt($IdAgenda)}}"><i class="glyphicon glyphicon-ok-circle"></i> Verifikasi Data</a></li>
-										
-										<li><a href="/hapus kandidat/{{ $dt->id }}/{{ $IdAgenda }}" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a></li>
-									</ul>
-								</li>
-							</ul>
+							@if(Auth::user()->id==$cekAdmin || Auth::user()->ket==$cekkat1Admin && Auth::user()->ket2==$cekkat2Admin)
+								<a href="/detail kandidat/{{$dt->nim}}/{{\Crypt::encrypt($IdAgenda)}}" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-ok-circle"></i> Verifikasi</a>
+							    <form action="/hapus kandidat/{{$dt->id}}/{{$IdAgenda}}" method="POST" onclick="return ConfirmDelete()">
+				                    @csrf
+				                    @method('DELETE')
+			                    	<button type="submit" class="btn btn-danger btn-sm text-white"><i class='icon-close2'></i>&nbsp;Hapus Data</button>
+			                	</form>
 							@else
 							<a href="javascript:void(0)">no actions</a>
 							@endif
@@ -198,11 +192,12 @@
 			<table class="table datatable-basic">
 				<thead>
 					<tr>
-						<th></th>
+						<!-- <th></th> -->
 						<th>No</th>
 						<th>NIM</th>
 						<th>Nama</th>
 						<th>Jurusan</th>
+						<th>Angkatan</th>
 						<th>Keterangan</th>
 						<th class="text-center">Actions</th>
 					</tr>
@@ -212,18 +207,23 @@
 				@if(Auth::user()->ket=='Super Admin' || Auth::user()->ket=='KPU U') 
 					@foreach($tbP as $dt)
 					<tr>
-						<td><input type="checkbox" name="id[]" value="{{ $dt->id }}"> </td>
+						<!-- <td><input type="checkbox" name="id[]" value="{{ $dt->id }}"> </td> -->
 						<td>{{$no++}}</td>
 						<td>{{$dt->nim}}</td>
 						<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('nama')}}</td>
 						<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('jurusan')}}</td>
+						<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('th_angkatan')}}</td>
 						{{! $cek = \Crypt::decrypt($dt->ket_vote)}}
 						@if($cek == 'belum memilih')
 						<td>
 							<span class="label label-info">{{ $cek }}</span>
 						</td>
 						<td class="text-center">
-							<a href="/hapus pemilih/{{ $dt->id }}/{{ $IdAgenda }}" class="btn btn-sm btn-danger" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a>
+							<form action="/hapus pemilih/{{$dt->id}}/{{$IdAgenda}}" method="POST" onclick="return ConfirmDelete()">
+			                    @csrf
+			                    @method('DELETE')
+		                    	<button type="submit" class="btn btn-danger btn-xs text-white"><i class='icon-close2'></i>&nbsp;Hapus Data</button>
+			                </form>
 						</td>
 						@else
 							<td>
@@ -241,18 +241,23 @@
 					{{! $cekFak = \App\Mahasiswa::where('nim', $dt->nim)->value('fakultas') }}
 					@if($cekFak == Auth::user()->ket2)
 					<tr>
-						<td><input type="checkbox" name="id[]" value="{{ $dt->id }}"> </td>
+						<!-- <td><input type="checkbox" name="id[]" value="{{ $dt->id }}"> </td> -->
 						<td>{{$no++}}</td>
 						<td>{{$dt->nim}}</td>
 						<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('nama')}}</td>
 						<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('jurusan')}}</td>
+						<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('th_angkatan')}}</td>
 						{{! $cek = \Crypt::decrypt($dt->ket_vote)}}
 						@if($cek == 'belum memilih')
 						<td>
 							<span class="label label-info">{{ $cek }}</span>
 						</td>
 						<td class="text-center">
-							<a href="/hapus pemilih/{{ $dt->id }}/{{ $IdAgenda }}" class="btn btn-sm btn-danger" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a>
+							<form action="/hapus pemilih/{{$dt->id}}/{{$IdAgenda}}" method="POST" onclick="return ConfirmDelete()">
+			                    @csrf
+			                    @method('DELETE')
+		                    	<button type="submit" class="btn btn-danger btn-sm text-white"><i class='icon-close2'></i>&nbsp;Hapus Data</button>
+			                </form>
 						</td>
 						@else
 							<td>
@@ -270,18 +275,23 @@
 					{{! $cekJur = \App\Mahasiswa::where('nim', $dt->nim)->value('jurusan') }}
 					@if($cekJur == Auth::user()->ket2)
 					<tr>
-						<td><input type="checkbox" name="id[]" value="{{ $dt->id }}"> </td>
+						<!-- <td><input type="checkbox" name="id[]" value="{{ $dt->id }}"> </td> -->
 						<td>{{$no++}}</td>
 						<td>{{$dt->nim}}</td>
 						<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('nama')}}</td>
-						<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('jurusan')}}</td>							
+						<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('jurusan')}}</td>	
+						<td>{{\App\Mahasiswa::where('nim', $dt->nim)->value('th_angkatan')}}</td>						
 						{{! $cek = \Crypt::decrypt($dt->ket_vote) }}
 						@if($cek == 'belum memilih')
 						<td>
 							<span class="label label-info">{{ $cek }}</span>
 						</td>
 						<td class="text-center">
-							<a href="/hapus pemilih/{{ $dt->id }}/{{ $IdAgenda }}" class="btn btn-sm btn-danger" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a>
+							<form action="/hapus pemilih/{{$dt->id}}" method="POST" onclick="return ConfirmDelete()">
+			                    @csrf
+			                    @method('DELETE')
+		                    	<button type="submit" class="btn btn-danger btn-sm text-white"><i class='icon-close2'></i>&nbsp;Hapus Data</button>
+			                </form>
 						</td>
 						@else
 							<td>
@@ -296,16 +306,17 @@
 					@endforeach
 				@endif
 				</tbody>
-				<tfoot>
+				<!-- <tfoot>
 					<tr bgcolor="#fcfcfc">
-						<td colspan="7">
+						<td colspan="8">
 							<div class="checkbox">
 								<label><input type="checkbox" onclick="checkAllId(this)" class="styled">Check all</label>
-								&nbsp;<a href="">Hapus Data</a>
+								&nbsp;
+								<a href="" onclick="ConfirmDelete()">Hapus Data</a>							
 							</div>
 						</td>
 					</tr>	
-				</tfoot>
+				</tfoot> -->
 			</table>
 		<!-- ==================Table Daftar Pemilih Tetap================ -->
 
@@ -396,12 +407,12 @@
 		  }
 		}
 
-		function checkAllId(source) {
-		  checkboxes = document.getElementsByName('id[]');
-		  for(var i=0, n=checkboxes.length;i<n;i++) {
-		    checkboxes[i].checked = source.checked;
-		  }
-		}
+		// function checkAllId(source) {
+		//   checkboxes = document.getElementsByName('id[]');
+		//   for(var i=0, n=checkboxes.length;i<n;i++) {
+		//     checkboxes[i].checked = source.checked;
+		//   }
+		// }
 
 	</script>	
 

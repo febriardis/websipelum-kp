@@ -214,10 +214,6 @@
 					     	<a class="dropdown-item" href="/daftar calon">Calon Kandidat</a>
 					    </div>
 				  	</li>	
-				  	<!-- <span class="span">|</span>
-				  	<li class="nav-item">
-				    	<a class="nav-link" href="javascript:void(0)" style="padding: 10px;">Undangan <span class="badge badge-primary">4</span></a>
-				  	</li>  	 -->
 				</ul>
 
 			    <ul class="navbar-nav">

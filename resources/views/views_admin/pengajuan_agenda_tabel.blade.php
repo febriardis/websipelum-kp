@@ -64,20 +64,15 @@
 						@if($dt->ket=='belum diverifikasi')
 						<td width="270">
 							<a href="/verifikasi/{{\Crypt::encrypt($dt->id)}}" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-share"></i>&nbsp;Buat Agenda</a>
-							<a href="/tolak/{{$dt->id}}" class="btn btn-danger btn-xs" onclick="return ConfirmTolak()"><i class="glyphicon glyphicon-share"></i>&nbsp;Tolak Agenda</a>
+							<a href="/tolak/{{$dt->id}}" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-share"></i>&nbsp;Tolak Agenda</a>
 						</td>
 						@elseif($dt->ket=='agenda ditolak')
 						<td>
-							<script>
-							  	function ConfirmDelete() {
-							  		var x = confirm("Yakin Akan Menghapus Data?");
-							  		if (x)
-							    		return true;
-							  		else
-							    		return false;
-							  	}
-							</script>
-							<a href="/cancel/{{ $dt->id }}" class="btn btn-danger btn-sm" onclick="return ConfirmDelete()"><i class="icon-close2"></i>&nbsp;Hapus</a>
+		                  	<form action="/cancel/{{ $dt->id }}" method="POST" onclick="return ConfirmDelete()">
+			                    @csrf
+			                    @method('DELETE')
+			                    <button type="submit" class="btn btn-danger btn-sm"><i class='icon-trash'></i>&nbsp;Hapus</button>
+			                </form>
 						</td>
 						@else
 						<td><a href="javascript::void(0)">no actions</a></td>
@@ -85,47 +80,20 @@
 					@else
 					<td class="text-center">
 						@if($dt->ket=='belum diverifikasi') 
-						<ul class="icons-list">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<i class="icon-menu9"></i>
-								</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a href="/edit pengajuan agenda/{{\Crypt::encrypt($dt->id)}}"><i class="icon-compose"></i>&nbsp;Edit</a></li>
-									<script>
-									  	function ConfirmDelete() {
-									  		var x = confirm("Yakin Akan Menghapus Data?");
-									  		if (x)
-									    		return true;
-									  		else
-									    		return false;
-									  	}
-									</script>
-									<li><a href="/cancel/{{ $dt->id }}" onclick="return ConfirmDelete()"><i class="icon-close2"></i>&nbsp;Batal</a></li>
-								</ul>
-							</li>
-						</ul>
+							<a href="/edit pengajuan agenda/{{\Crypt::encrypt($dt->id)}}" class="btn btn-default btn-sm"><i class="icon-compose"></i>&nbsp;Edit</a>
+		
+						  	<form action="/cancel/{{$dt->id}}" method="POST" onclick="return ConfirmCancel()">
+			                    @csrf
+				               	@method('DELETE')
+					            <button type="submit" class="btn btn-danger btn-sm"><i class='icon-trash'></i>&nbsp;Batal</button>
+			                </form>											
 						@elseif($dt->ket=='agenda ditolak')
-						<ul class="icons-list">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<i class="icon-menu9"></i>
-								</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a href="/upload pengajuan agenda/" class="btn btn-default btn-sm"><i class="icon-compose"></i>&nbsp;Ajukan Ulang</a></li>
-									<script>
-									  	function ConfirmDelete() {
-									  		var x = confirm("Yakin Akan Menghapus Data?");
-									  		if (x)
-									    		return true;
-									  		else
-									    		return false;
-									  	}
-									</script>
-									<li><a href="/cancel/{{ $dt->id }}" onclick="return ConfirmDelete()"><i class="icon-close2"></i>&nbsp;Hapus</a></li>
-								</ul>
-							</li>
-						</ul>
+							<a href="/upload pengajuan agenda" class="btn btn-default btn-sm"><i class="icon-compose"></i>&nbsp;Edit</a>
+						  	<form action="/cancel/{{$dt->id}}" method="POST" onclick="return ConfirmDelete()">
+			                    @csrf
+				               	@method('DELETE')
+					            <button type="submit" class="btn btn-danger btn-sm"><i class='icon-trash'></i>&nbsp;Batal</button>
+			                </form>		
 						@else
 							<a href="javascript::void(0)">no actions</a>
 						@endif
@@ -139,4 +107,22 @@
 		</table>
 	</div>
 	<!-- /basic datatable -->
+	
+	<script>
+	  	function ConfirmDelete() {
+	  		var x = confirm("Yakin Akan Menghapus Data?");
+	  		if (x)
+	    		return true;
+	  		else
+	    		return false;
+	  	}
+
+	  	function ConfirmCancel() {
+	  		var x = confirm("Yakin Akan Membatalkan?");
+	  		if (x)
+	    		return true;
+	  		else
+	    		return false;
+	  	}
+	</script>
 @endsection

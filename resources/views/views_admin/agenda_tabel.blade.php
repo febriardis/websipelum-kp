@@ -86,26 +86,12 @@
 					<td class="text-center"> 	
 					@if($cekTgl <= $dt->tgl_agenda)	
 						@if(Auth::user()->ket=='Super Admin' || Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2)
-							<ul class="icons-list">
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-										<i class="icon-menu9"></i>
-									</a>
-									<ul class="dropdown-menu dropdown-menu-right">
-										<li><a href="/edit agenda/{{\Crypt::encrypt($dt->id) }}"><i class="icon-compose"></i> Edit Data</a></li>
-										<script>
-										  	function ConfirmDelete() {
-										  		var x = confirm("Yakin Akan Menghapus Data?");
-										  		if (x)
-										    		return true;
-										  		else
-										    		return false;
-										  	}
-										</script>
-										<li><a href="/hapus agenda/{{ $dt->id }}" onclick="return ConfirmDelete()"><i class="icon-close2"></i> Hapus Data</a></li>
-									</ul>
-								</li>
-							</ul>
+							<a href="/edit agenda/{{\Crypt::encrypt($dt->id)}}" class="btn btn-default btn-sm"><i class="icon-compose"></i> Edit Data</a>
+							<form action="/hapus agenda/{{$dt->id}}" method="POST" onclick="return ConfirmDelete()">
+			                    @csrf
+			                    @method('DELETE')
+			                    <button type="submit" class="btn btn-danger btn-sm text-white"><i class='icon-trash'></i>&nbsp;Hapus Data</button>
+			                </form>
 						@else
 							<a href="javascript::void(0)">no actions</a>
 						@endif
@@ -151,5 +137,13 @@
 		</table>
 	</div>
 	<!-- /basic datatable -->
-
+<script>
+  	function ConfirmDelete() {
+  		var x = confirm("Yakin Akan Menghapus Data?");
+  		if (x)
+    		return true;
+  		else
+    		return false;
+  	}
+</script>
 @endsection

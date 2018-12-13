@@ -190,7 +190,7 @@
 										<li {{ (Request::is('tabel admin') ? 'class=active' : '') }}><a href="/tabel admin">Data Admin</a></li>
 									</ul>
 								</li>	
-								<li>
+								<li {{ (Request::is('konten berita') ? 'class=active' : '') }}>
 									<a href="/konten berita"><i class="icon-newspaper"></i> <span>Konten Berita</span></a>
 								</li>	
 								@endif

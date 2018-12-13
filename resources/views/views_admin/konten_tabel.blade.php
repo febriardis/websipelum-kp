@@ -67,8 +67,8 @@
 			    		<td>{!! $content->content !!}</td>
 			    		<td>{{ date('d M Y', strtotime($content->created_at)) }}</td>
 		    			<td class="text-center">
-			    			<a href="/berita/{{$banner->id}}">Edit</a>
-			    			<form action="/berita/{{$banner->id}}" method="POST" onclick="return ConfirmDelete()">
+			    			<a href="/berita/{{$content->id}}">Edit</a>
+			    			<form action="/berita/{{$content->id}}" method="POST" onclick="return ConfirmDelete()">
 			    				@csrf
 			    				@method('DELETE')
 			    				<input type="submit" value="Hapus" style="border:none; background: none; color: blue">

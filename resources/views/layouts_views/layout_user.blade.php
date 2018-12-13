@@ -289,10 +289,18 @@
 	<div class="listbar fontArial">
 		<div class="container">
 			<h6 style="margin: 17px; float: left;">Sistem Pemilihan Umum UIN Sunan Gunung Djati Bandung</h6>
-			<form class="form-search">
-				<input type="text" class="in-search" autocomplete="off" id="myInput" placeholder="Cari...">	
+			@guest
+			<form action="/s" class="form-search" method="GET">
+				<input type="text" class="in-search" name="q" autocomplete="off" id="myInput" placeholder="Cari...">	
 				<button type="submit" style="outline: none;" class="btn-search"><i class="fa fa-search"></i></button>
 			</form>
+			@else
+			<form action="/search" class="form-search" method="GET">
+				<input type="text" class="in-search" name="q" autocomplete="off" id="myInput" placeholder="Cari...">	
+				<button type="submit" style="outline: none;" class="btn-search"><i class="fa fa-search"></i></button>
+			</form>
+			@endif
+			
 			<div class="clear"></div>
 		</div>
 	</div>

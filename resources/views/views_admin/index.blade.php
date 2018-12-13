@@ -7,7 +7,8 @@
 @section('content')
 {{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}
 {{! $cekJam = \Carbon\Carbon::now('Asia/Jakarta')->format('G:i') }}
-<div style="margin-top: 20px">
+<div class="content">
+	<div style="margin-top: 20px">
 	<!-- Quick stats boxes -->
 	<div class="row">
 		<a href="/tabel agenda">
@@ -92,11 +93,130 @@
 		</div>
 
 		<div class="panel-body">
-			<p class="content-group">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum..</p>
+			@if(count($agenda)!=0)
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+			    {{!$n=1}}
+			    @foreach($agenda as $dt)
+			    <li class="nav-item">
+			        <a class="nav-link" data-toggle="tab" href="#menu{{$dt->id}}">Pemilihan {{$n++}}</a>
+			    </li>
+			    @endforeach
+			</ul>
 
-			<div class="chart-container">
-				<div class="chart" id="d3-streamgraph"></div>
+			<!-- Tab panes -->
+			<div class="tab-content">
+			    @foreach($agenda as $a)
+			    <div id="menu{{$a->id}}" class="container tab-pane" style="width: 100%"><br>
+			        <div style="display: none;">
+			            {{! $jum_dpt=\App\Pemilih::where('agenda_id', $a->id)->count() }}
+			            {{! $tot1=0 }}
+			        	{{! $tot2=0 }}
+				        <!-- cek total suara -->
+				        {{! $tot=0  }}
+				        {{! $tbVote=\App\Voting::where('agenda_id', $a->id)->get() }}
+				        @foreach($tbVote as $dt)
+				        	{{! $point = \Crypt::decrypt($dt->jumlah) }}
+				          	{{! $nil_p = $point/$jum_dpt*100 }}
+				          	{{! $tot+=$nil_p }}
+				        @endforeach 
+				        <!-- /cek total suara --> 
+			        </div>
+			      	<div class="list-content-info capitalize">
+				        <h5>{{ $a->nm_agenda }} </h5>
+						<p>Pukul : {{ date('G:i', strtotime($a->timeA1))}} - {{ date('G:i', strtotime($a->timeA2))}}</p>
+				        <p>Update : {{ \Carbon\Carbon::now('Asia/Jakarta')->format('l, d F Y | H:i')  }}</p>
+				        <div class="clear"></div>
+			      	</div>
+
+	    			@if($tot==100 || $cekJam > $a->timeA2)
+		    			<!-- border quick count text -->
+						<div class="list-text-qcl">
+							<hr><h3>Quick Count Results</h3><hr>
+							<div class="clear"></div>
+						</div>
+						<!-- /border quick count text -->
+			        @else
+				        <!-- border quick count text -->
+				        <div class="list-text-qcl">
+				          	<hr><h3>Quick Count</h3><hr>
+				          	<div class="clear"></div>
+				        </div>
+				        <!-- /border quick count text -->
+			        @endif
+
+			        <div style="display: none;">
+			          	{{! $tbVoting=\App\Voting::orderBy('jumlah','DESC')->where('agenda_id', $a->id)->get() }}
+			          	{{! $c = \App\Voting::where('agenda_id', $a->id)->max('jumlah') }}
+			          	{{! $large = \Crypt::decrypt($c) }}
+			        </div>
+
+			        <div class="row">
+			        	<div class="col-md-9">
+			        		<div class="content-counting">
+					         	@foreach($tbVoting as $dt)        
+					            <div style="display: none;">
+					              	{{! $tb = \App\Kandidat::find($dt->kandidat_id) }}
+					              	{{! $point = \Crypt::decrypt($dt->jumlah) }}
+					            </div>
+					            
+					   	      	<div class="row">
+					   	      		<div style="float: left;">
+						      			<img src="/uploads/foto-kandidat/{{$tb->foto}}" style="" width="60" height="60">
+							      	</div>
+							      	<div class="col-md-10">
+							      		<h6>{{$tb->nama}}</h6>
+							      		<div class="progress content-group-sm" >
+											<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
+											<div class="progress-bar progress-bar-danger" style="width: {{ number_format($nil_p) }}%;">
+												<span>{{ number_format($nil_p) }}% / {{$point}} Votes</span>
+											</div>
+										</div>
+									</div>
+						      	</div>
+					            
+					            <div style="display: none;">
+					              	{{! $tot1+=$nil_p }}
+					              	{{! $tot2+=$point }}
+					            </div>
+					          	@endforeach
+					          	<div class="clear"></div>
+					        </div>
+			        	</div>	
+
+			        	<div class="col-lg-3">
+			   		        <div style="width: 90%">
+								@if($tot==100 || $cekJam > $a->timeA2)
+					        	<div style="color: #ffffff; background-color: #C62828; font-size: 1.5em; text-align: center; padding: 5px">
+					        		Total Suara Akhir
+					        	</div>
+			        			@else
+					        	<div style="color: #ffffff; background-color: #C62828; font-size: 1.5em; text-align: center; padding: 5px">
+					        		Total Suara Masuk
+					        	</div>
+					        	@endif
+					        	<div style="color: #ffffff; background-color: #F44336; font-size: 3.5em; text-align: center;">
+					        		<span class="fontArial">{{number_format($tot1)}}<span style="font-size: 18px">%</span></span>
+					        	</div>
+					        </div>
+					        <label>Jumlah Pemilih : {{$jum_dpt}}</label>
+			        	</div>
+			        </div>
+			    </div>
+			    @endforeach
 			</div>
+			<!-- Tab panes -->  
+			@else
+		  	<div class="list-content-info">
+			    <h5>Tidak ada agenda hari ini </h5>
+			    <p>Update : {{ \Carbon\Carbon::now('Asia/Jakarta')->format('l, d F Y | H:i')  }}</p>
+			    <div class="clear"></div>
+		  	</div>
+		  	<div class="content-notfound">
+			    <img src="assets/images/warning-ico.png" alt="waring">
+			    <h3 class="text-muted fontArial capitalize">tidak ada pemilihan !</h3>
+		  	</div>
+			@endif
 		</div>
 	</div>
 	<!-- /streamgraph chart -->
@@ -250,4 +370,8 @@
 	</div>
 	<!-- /sales stats -->
 </div>
+
+<script>
+    $('#myTab a:first').tab('show');  
+</script>
 @endsection

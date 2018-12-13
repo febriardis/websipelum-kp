@@ -13,6 +13,7 @@
 
 // #---------------------------GUEST---------------------------------#
 Route::get('/', 'HomeController@home')->middleware('guest');
+Route::get('/s', 'HomeController@search')->middleware('guest');
 Route::get('/hc', 'VoteController@QuickCountView')->middleware('guest');
 Route::get('/info dpt/{ket}/{ket2}', 'PemilihController@showPemilih')->middleware('guest');
 Route::get('/admin/login',function(){
@@ -24,6 +25,7 @@ Route::get('/keluar', 'LoginController@keluar');
 
 // ------------------------------MAHASISWA------------------------------------
 Route::get('/beranda', 'HomeController@home')->middleware('auth:mahasiswa');
+Route::get('/search', 'HomeController@search')->middleware('auth:mahasiswa');
 Route::get('/pemilihan', 'VoteController@voteView')->middleware('auth:mahasiswa');
 Route::get('/hitung cepat', 'VoteController@QuickCountView')->middleware('auth:mahasiswa');
 Route::get('/informasi dpt/{ket}/{ket2}', 'PemilihController@showPemilih')->middleware('auth:mahasiswa');

@@ -78,7 +78,7 @@
 				@endif
 			@endif
 			<div style="float: right;margin-bottom: 25px">
-				<button type="button" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-print"></i>&nbsp;Cetak</button>
+				<a href="/cetak kandidat/{{$IdAgenda}}" target="_blank" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-print"></i>&nbsp;Cetak</a>
 			</div>
 		</div>	
 
@@ -184,7 +184,7 @@
 				@endif
 			@endif
 			<div style="float: right;margin-bottom: 25px">
-				<button type="button" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-print"></i>&nbsp;Cetak</button>
+				<a href="/cetak pemilih/{{$IdAgenda}}" target="_blank" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-print"></i>&nbsp;Cetak</a>
 			</div>
 		</div>
 		

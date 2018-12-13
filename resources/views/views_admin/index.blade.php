@@ -213,7 +213,6 @@
 			    <div class="clear"></div>
 		  	</div>
 		  	<div class="content-notfound">
-			    <img src="assets/images/warning-ico.png" alt="waring">
 			    <h3 class="text-muted fontArial capitalize">tidak ada pemilihan !</h3>
 		  	</div>
 			@endif

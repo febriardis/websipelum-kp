@@ -162,12 +162,4 @@ class KandidatController extends Controller
         ->with('pesan', 'Data berhasil dihapus');
     }
     
-    function edit($id){
-
-    }
-
-    function update(Request $req, $id) {
-      
-    }
-
 }

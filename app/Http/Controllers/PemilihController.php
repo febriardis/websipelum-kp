@@ -17,13 +17,10 @@ class PemilihController extends Controller
     function showPemilih($ket,$ket2){
         if ($ket=='HMJ') {
             $Agenda = Agenda::where([['kat_jurusan', $ket2] , ['tgl_agenda','>=', \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d')]])->get();
-            // $Agenda    = Agenda::find($cekAgenda);
         }elseif ($ket=='Sema & Dema U') {
             $Agenda = Agenda::where([['kat_fakultas', 'Semua Mahasiswa'] , ['tgl_agenda','>=', \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d')]])->get();
-            // $Agenda    = Agenda::find($cekAgenda);
         }elseif ($ket=='Sema & Dema F') {
             $Agenda = Agenda::where([['kat_fakultas', $ket2] , ['tgl_agenda','>=', \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d')]])->get();
-            // $Agenda    = Agenda::find($cekAgenda);
         }
 
         return view('views_mahasiswa.info_dpt')

@@ -36,6 +36,9 @@ Route::delete('/batal daftar/{nim}/{IdAgenda}', 'KandidatController@batalDaftar'
 //===================================ADMIN======================================
 Route::get('/dashboard', 'HomeController@dashboard')->middleware('auth:admin');
 
+Route::get('/cetak kandidat/{idAgenda}', 'CetakController@cetakKandidat')->middleware('auth:admin');
+Route::get('/cetak pemilih/{idAgenda}', 'CetakController@cetakPemilih')->middleware('auth:admin');
+
 //===============================ADMIN-CONTENT====================================
 Route::get('/konten berita', 'ContentController@index')->middleware('auth:admin');
 Route::get('/tambah slideshow', function(){

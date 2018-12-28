@@ -201,6 +201,19 @@ a.closeNav:hover {
 	border-radius: 0px 10px 10px 0px;
 }
 
+@media only screen and (max-width: 480px) {
+	.form-search{
+		width: 100%;
+		float: left; 
+		margin: 10px;
+	}
+
+	.in-search{
+		float: left;
+		width: 85%;
+	}
+}
+
 .list-content-info {
 	padding: 2px; 
 	margin: 10px 0px; 
@@ -347,4 +360,22 @@ a.closeNav:hover {
 .list-text-qcl h3{
 	float: left;
 	margin: 0px 20px;
+}
+
+
+.capt-carousel {
+	border: 1px solid #ffffff; 
+	margin: 5%; 
+	background-color: rgba(0,0,0,0.3)
+}
+
+@media only screen and (max-width: 480px) {
+	.capt-carousel h3{
+		font-size: 1.1em;
+	}
+
+	.capt-carousel p{
+		font-size: 0.9em;
+	}
+
 }

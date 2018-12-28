@@ -13,7 +13,7 @@
 		  		@foreach($banners as $i => $banner)
 			    <div class="carousel-item @if($i == 0) {{ 'active' }} @endif">
 			      	<img src="/uploads/gambar-slide/{{$banner->image}}" alt="Los Angeles" width="1100" height="500">
-			      	<div class="carousel-caption" style="border: 1px solid #ffffff; margin: 5%; background-color: rgba(0,0,0,0.3)">
+			      	<div class="carousel-caption capt-carousel">
 			      		<h3>{{$banner->head_caption}}</h3>
 				       	<p>{{$banner->body_caption}}</p>
 			      	</div>   

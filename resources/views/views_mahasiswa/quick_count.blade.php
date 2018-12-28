@@ -25,18 +25,22 @@
 	        <div id="menu{{$a->id}}" class="container tab-pane"><br>
 	         	<div class="content-quickcount">
 	    		  	<div style="display: none;">
-	      				{{! $jum_dpt=\App\Pemilih::where('agenda_id', $a->id)->count() }}
+	    		  		{{! $cekPem=\App\Pemilih::where('agenda_id', $a->id)->get() }}
+			            {{! $jum_dpt= count($cekPem) }}
+
 	      				{{! $tot1=0 }}
 						{{! $tot2=0 }}	
 						
 						<!-- cek total suara -->
 						{{! $tot=0  }}
 						{{! $tbVote=\App\Voting::where('agenda_id', $a->id)->get() }}
-						@foreach($tbVote as $dt)
-							{{! $point = \Crypt::decrypt($dt->jumlah) }}
-							{{! $nil_p = $point/$jum_dpt*100 }}
-							{{! $tot+=$nil_p }}
-						@endforeach	
+						@if(count($cekPem)!=0)
+							@foreach($tbVote as $dt)
+								{{! $point = \Crypt::decrypt($dt->jumlah) }}
+								{{! $nil_p = $point/$jum_dpt*100 }}
+								{{! $tot+=$nil_p }}
+							@endforeach	
+						@endif
 						<!-- /cek total suara -->	
 	      			</div>
 				
@@ -65,52 +69,41 @@
 									{{! $tb = \App\Kandidat::find($dt->kandidat_id) }}
 									{{! $point = \Crypt::decrypt($dt->jumlah) }}
 								</div>
-								@if($point == $large)
-									<div class="panel-count">
-										<div class="head-panel-count">
-											<img src="/uploads/foto-kandidat/{{$tb->foto}}" style="" width="100%" height="100%">
-											<div class="bg-text-count">
-												<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
-												<h1>{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
-												<div class="clear"></div>
-												<h2 class="fontArial"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
-											</div>
-										</div>
-										<div class="foot-panel-count">
-											<div class="foot-count">
-												<h4 class="capitalize">{{$tb->nama}}</h4>
-											</div>
+								
+								<div class="panel-count">
+									<div class="head-panel-count">
+										<img src="/uploads/foto-kandidat/{{$tb->foto}}" style="" width="100%" height="100%">
+										<div class="bg-text-count">
+											@if(count($cekPem)!=0)
+											<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
+											<h1>{{ number_format($nil_p) }}@endif<span style="font-size: 24px">%</span></h1>
+											<div class="clear"></div>
+											<h2 class="fontArial"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
 										</div>
 									</div>
-								@else
-									<div class="panel-count"> <!-- style="margin-top: 50px" -->
-										<div class="head-panel-count">
-											<img src="/uploads/foto-kandidat/{{$tb->foto}}" style="" width="100%" height="100%">
-											<div class="bg-text-count">
-												<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
-												<h1>{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
-												<div class="clear"></div>
-												<h2 class="fontArial"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
-											</div>
-										</div>
-										<div class="foot-panel-count">
-											<div class="foot-count">
-												<h4 class="capitalize">{{$tb->nama}}</h4>
-											</div>
+									<div class="foot-panel-count">
+										<div class="foot-count">
+											<h4 class="capitalize">{{$tb->nama}}</h4>
 										</div>
 									</div>
-								@endif
+								</div>
+								@if(count($cekPem)!=0)
 								<div style="display: none;">
 									{{! $tot1+=$nil_p }}
 									{{! $tot2+=$point }}
 								</div>
+								@endif
 							@endforeach
 							<div class="clear"></div>
 						</div>
 
 						<div class="progress" style="height: 50px">
-							<div class="progress-bar progress-bar-striped progress-bar-animated" style="width:{{number_format($tot1)}}%"><h3>Total Suara Masuk : {{number_format($tot1)}}<span style="font-size: 22px">%</span> / {{$tot2}} Suara</h3></div>
+							<div class="progress-bar progress-bar-striped progress-bar-animated" style="width:{{number_format($tot1)}}%"><h3>Total Suara Masuk = {{number_format($tot1)}}<span style="font-size: 22px">%</span> / {{$tot2}} Suara</h3></div>
 						</div>
+
+				      	<div class="progress" style="height: 40px">
+				            <div class="progress-bar progress-bar-warning " style="width:100%"><h2 style="margin-top: 3px">Jumlah Pemilih = {{ $jum_dpt }} </h2></div>
+				        </div>
 					@else
 						<meta http-equiv="refresh" content="30"/>
 						<!-- border quick count text -->
@@ -132,9 +125,10 @@
 							<div class="panel-count">
 								<div class="head-panel-count">
 									<img src="/uploads/foto-kandidat/{{$tb->foto}}" style="" width="100%" height="100%">
-									<div class="bg-text-count">				
+									<div class="bg-text-count">		
+										@if(count($cekPem)!=0)		
 										<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
-										<h1>{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
+										<h1>{{ number_format($nil_p) }}@endif<span style="font-size: 24px">%</span></h1>
 										<div class="clear"></div>
 										<h2 class="fontArial"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
 									</div>
@@ -145,10 +139,12 @@
 									</div>
 								</div>
 							</div>
+							@if(count($cekPem)!=0)
 							<div style="display: none;">
 								{{! $tot1+=$nil_p }}
 								{{! $tot2+=$point }}
 							</div>
+							@endif
 							@endforeach
 							<div class="clear"></div>
 						</div>
@@ -167,18 +163,22 @@
 		@foreach($agenda as $a)
      	<div class="content-quickcount">
 		  	<div style="display: none;">
-  				{{! $jum_dpt=\App\Pemilih::where('agenda_id', $a->id)->count() }}
+		  		{{! $cekPem=\App\Pemilih::where('agenda_id', $a->id)->get() }}
+			    {{! $jum_dpt= count($cekPem) }}
+  				
   				{{! $tot1=0 }}
 				{{! $tot2=0 }}	
 				
 				<!-- cek total suara -->
 				{{! $tot=0  }}
 				{{! $tbVote=\App\Voting::where('agenda_id', $a->id)->get() }}
+				@if(count($cekPem)!=0)
 				@foreach($tbVote as $dt)
 					{{! $point = \Crypt::decrypt($dt->jumlah) }}
 					{{! $nil_p = $point/$jum_dpt*100 }}
 					{{! $tot+=$nil_p }}
 				@endforeach	
+				@endif
 				<!-- /cek total suara -->	
   			</div>
 		
@@ -208,45 +208,31 @@
 							{{! $tb = \App\Kandidat::find($dt->kandidat_id) }}
 							{{! $point = \Crypt::decrypt($dt->jumlah) }}
 						</div>
-						@if($point == $large)
-							<div class="panel-count">
-								<div class="head-panel-count">
-									<img src="/uploads/foto-kandidat/{{$tb->foto}}" style="" width="100%" height="100%">
-									<div class="bg-text-count">
-										<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
-										<h1>{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
-										<div class="clear"></div>
-										<h2 class="fontArial"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
-									</div>
-								</div>
-								<div class="foot-panel-count">
-									<div class="foot-count">
-										<h4 class="capitalize">{{$tb->nama}}</h4>
-									</div>
+						
+						<div class="panel-count">
+							<div class="head-panel-count">
+								<img src="/uploads/foto-kandidat/{{$tb->foto}}" style="" width="100%" height="100%">
+								<div class="bg-text-count">
+									@if(count($cekPem)!=0)
+									<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
+									<h1>{{ number_format($nil_p) }}@endif<span style="font-size: 24px">%</span></h1>
+									<div class="clear"></div>
+									<h2 class="fontArial"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
 								</div>
 							</div>
-						@else
-							<div class="panel-count"> <!-- style="margin-top: 50px" -->
-								<div class="head-panel-count">
-									<img src="/uploads/foto-kandidat/{{$tb->foto}}" style="" width="100%" height="100%">
-									<div class="bg-text-count">
-										<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
-										<h1>{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
-										<div class="clear"></div>
-										<h2 class="fontArial"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
-									</div>
-								</div>
-								<div class="foot-panel-count">
-									<div class="foot-count">
-										<h4 class="capitalize">{{$tb->nama}}</h4>
-									</div>
+							<div class="foot-panel-count">
+								<div class="foot-count">
+									<h4 class="capitalize">{{$tb->nama}}</h4>
 								</div>
 							</div>
-						@endif
+						</div>
+
+						@if(count($cekPem)!=0)
 						<div style="display: none;">
 							{{! $tot1+=$nil_p }}
 							{{! $tot2+=$point }}
 						</div>
+						@endif
 					@endforeach
 					<div class="clear"></div>
 				</div>
@@ -275,9 +261,10 @@
 					<div class="panel-count">
 						<div class="head-panel-count">
 							<img src="/uploads/foto-kandidat/{{$tb->foto}}" style="" width="100%" height="100%">
-							<div class="bg-text-count">				
+							<div class="bg-text-count">	
+								@if(count($cekPem)!=0)			
 								<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
-								<h1>{{ number_format($nil_p) }}<span style="font-size: 24px">%</span></h1>
+								<h1>{{ number_format($nil_p) }}@endif<span style="font-size: 24px">%</span></h1>
 								<div class="clear"></div>
 								<h2 class="fontArial"> {{$point}} <span style="font-size: 20px">Votes</span></h2>
 							</div>
@@ -288,10 +275,12 @@
 							</div>
 						</div>
 					</div>
+					@if(count($cekPem)!=0)
 					<div style="display: none;">
 						{{! $tot1+=$nil_p }}
 						{{! $tot2+=$point }}
 					</div>
+					@endif
 					@endforeach
 					<div class="clear"></div>
 				</div>

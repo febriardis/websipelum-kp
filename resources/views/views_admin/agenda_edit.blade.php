@@ -29,7 +29,7 @@
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Sistem Pemilihan</label>
 					<div class="col-lg-9">
-						<select class="select" name="sistem_vote" required="" data-placeholder="Pilih Metode Pemilihan">
+						<select class="select" name="sistem_pem" required="" data-placeholder="Pilih Metode Pemilihan">
 							<option {{{ ($data->sistem_vote == 'Pemilu Raya' ? 'selected' : '') }}}>Pemilu Raya</option>
 							<option {{{ ($data->sistem_vote == 'Delegasi' ? 'selected' : '') }}}>Delegasi</option>
 						</select>

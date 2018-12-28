@@ -19,13 +19,13 @@ class VoteController extends Controller
 
     function viewQuickCount($idAgenda){
         $id = \Crypt::decrypt($idAgenda);
-        $tb = Voting::orderBy('jumlah','DESC')->where('agenda_id', $id)->get();
+        $tb = Voting::latest()->where('agenda_id', $id)->get();
 
         return view('views_admin.quickcount_view')
         ->with('idAgenda', $id)
         ->with('tbVoting', $tb);
     }
-    // /function admin
+    // ~/function admin
 
     function QuickCountView() {
         $agenda = Agenda::where('tgl_agenda', \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'))->get();

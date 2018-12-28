@@ -6,7 +6,7 @@
 
 @section('content')
 {{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}
-{{! $cekJam = \Carbon\Carbon::now('Asia/Jakarta')->format('G:i') }}
+{{! $cekJam = \Carbon\Carbon::now('Asia/Jakarta')->format('G:i:s') }}
 <div class="content">
 	<div style="margin-top: 20px">
 	<!-- Quick stats boxes -->
@@ -80,7 +80,7 @@
 	</div>
 	<!-- /quick stats boxes -->
 
-	<!-- Streamgraph chart -->
+	<!-- Live Vote -->
 	<div class="panel panel-flat">
 		<div class="panel-heading">
 			<h3>Live Vote</h3>
@@ -107,20 +107,27 @@
 			<!-- Tab panes -->
 			<div class="tab-content">
 			    @foreach($agenda as $a)
+              	{{! $kandidat = (App\Kandidat::where([['agenda_id', $a->id],['keterangan', 'Diterima']])->get()) }}
 			    <div id="menu{{$a->id}}" class="container tab-pane" style="width: 100%"><br>
+			    @if(count($kandidat)!=0)
 			        <div style="display: none;">
-			            {{! $jum_dpt=\App\Pemilih::where('agenda_id', $a->id)->count() }}
+			            {{! $cekPem=\App\Pemilih::where('agenda_id', $a->id)->get() }}
+			            {{! $jum_dpt= count($cekPem) }}
+			            
 			            {{! $tot1=0 }}
 			        	{{! $tot2=0 }}
 				        <!-- cek total suara -->
 				        {{! $tot=0  }}
 				        {{! $tbVote=\App\Voting::where('agenda_id', $a->id)->get() }}
-				        @foreach($tbVote as $dt)
+
+				        @if(count($cekPem)!=0)				       
+				        	@foreach($tbVote as $dt)
 				        	{{! $point = \Crypt::decrypt($dt->jumlah) }}
 				          	{{! $nil_p = $point/$jum_dpt*100 }}
 				          	{{! $tot+=$nil_p }}
-				        @endforeach 
-				        <!-- /cek total suara --> 
+				       		@endforeach 
+			            @endif
+			            <!-- /cek total suara --> 
 			        </div>
 			      	<div class="list-content-info capitalize">
 				        <h5>{{ $a->nm_agenda }} </h5>
@@ -129,7 +136,7 @@
 				        <div class="clear"></div>
 			      	</div>
 
-	    			@if($tot==100 || $cekJam > $a->timeA2)
+	    			@if($tot==100 && $cekJam > $a->timeA2 )
 		    			<!-- border quick count text -->
 						<div class="list-text-qcl">
 							<hr><h3>Quick Count Results</h3><hr>
@@ -167,24 +174,35 @@
 							      	<div class="col-md-10">
 							      		<h6>{{$tb->nama}}</h6>
 							      		<div class="progress content-group-sm" >
+							      			@if(count($cekPem)!=0)	
 											<div style="display: none;">{{! $nil_p = $point/$jum_dpt*100 }}</div>
 											<div class="progress-bar progress-bar-danger" style="width: {{ number_format($nil_p) }}%;">
 												<span>{{ number_format($nil_p) }}% / {{$point}} Votes</span>
 											</div>
+											@endif
 										</div>
 									</div>
 						      	</div>
 					            
+					            @if(count($cekPem)!=0)	
 					            <div style="display: none;">
 					              	{{! $tot1+=$nil_p }}
 					              	{{! $tot2+=$point }}
 					            </div>
+					            @endif
 					          	@endforeach
 					          	<div class="clear"></div>
 					        </div>
 			        	</div>	
 
 			        	<div class="col-lg-3">
+							@if($cekJam >= $a->timeA1 && $cekJam <= $a->timeA2)
+								<span class="label label-danger">Sedang Berlangsung</span>		
+							@elseif($cekJam > $a->timeA2)
+								<span class="label label-success">Pemilihan berakhir</span>
+							@else
+								<span class="label label-success">Menunggu waktu pemilihan</span>
+							@endif
 			   		        <div style="width: 90%">
 								@if($tot==100 || $cekJam > $a->timeA2)
 					        	<div style="color: #ffffff; background-color: #C62828; font-size: 1.5em; text-align: center; padding: 5px">
@@ -202,6 +220,17 @@
 					        <label>Jumlah Pemilih : {{$jum_dpt}}</label>
 			        	</div>
 			        </div>
+			    @else
+			      	<div class="list-content-info capitalize">
+				        <h5>{{ $a->nm_agenda }} </h5>
+						<p>Pukul : {{ date('G:i', strtotime($a->timeA1))}} - {{ date('G:i', strtotime($a->timeA2))}}</p>
+				        <p>Update : {{ \Carbon\Carbon::now('Asia/Jakarta')->format('l, d F Y | H:i')  }}</p>
+				        <div class="clear"></div>
+			      	</div>
+			  	  	<div class="content-notfound">
+					    <h3 class="text-muted fontArial capitalize">tidak ada kandidat !</h3>
+				  	</div>
+			    @endif
 			    </div>
 			    @endforeach
 			</div>
@@ -218,11 +247,10 @@
 			@endif
 		</div>
 	</div>
-	<!-- /streamgraph chart -->
-
-	<!-- sales stats -->
+	<!-- /Live Vote -->
+	
+	<!-- List Agenda -->
 	<div class="col-lg-12">
-		<!-- Marketing campaigns -->
 		<div class="panel panel-flat">
 			<div class="panel-heading">
 				<h6 class="panel-title">Agenda Terkait</h6>
@@ -265,24 +293,11 @@
 									<p><b>Pukul:</b><br> {{ date('G:i', strtotime($dt->timeA1))}} - {{ date('G:i', strtotime($dt->timeA2))}}</p>
 								</td>
 								<td>
-									@if($cekTgl < $dt->tgl_agenda)
-										<span class="label label-info">Menunggu Tanggal Agenda</span>
-										@if($cekTgl == $dt->tgl_filtering)
-											<p><span class="label label-danger">Tahap Penyaringan Kandidat</span></p>
-										@elseif($cekTgl >= $dt->StartDaftarK && $cekTgl <= $dt->LastDaftarK)
-											<p><span class="label label-default">Tahap Pendaftaran Kandidat</span></p>
-										@endif
-									@elseif($cekTgl > $dt->tgl_agenda)
-										<span class="label label-success">Selesai</span>
-									@elseif($cekTgl == $dt->tgl_agenda)
-										<span class="label label-danger">Agenda Hari Ini</span>
-										@if($cekJam >= $dt->timeA1 && $cekJam <= $dt->timeA2)
-											<span class="label label-danger">Sedang Berlangsung</span>		
-										@elseif($cekJam > $dt->timeA2)
-											<span class="label label-success">Pemilihan berakhir</span>
-										@else
-											<span class="label label-success">Menunggu waktu pemilihan</span>
-										@endif
+									<span class="label label-info">Menunggu Tanggal Agenda</span>
+									@if($cekTgl == $dt->tgl_filtering)
+										<p><span class="label label-danger">Tahap Penyaringan Kandidat</span></p>
+									@elseif($cekTgl >= $dt->StartDaftarK && $cekTgl <= $dt->LastDaftarK)
+										<p><span class="label label-default">Tahap Pendaftaran Kandidat</span></p>
 									@endif
 								</td>
 								<td class="text-center"> 	
@@ -317,10 +332,17 @@
 									<p><b>Pukul:</b><br> {{ date('G:i', strtotime($dt->timeA1))}} - {{ date('G:i', strtotime($dt->timeA2))}}</p>
 								</td>
 								<td>
-									<span class="label label-success">Selesai</span>
+									<span class="label label-danger">Agenda Hari Ini</span>
+									@if($cekJam >= $dt->timeA1 && $cekJam <= $dt->timeA2)
+										<span class="label label-danger">Sedang Berlangsung</span>		
+									@elseif($cekJam > $dt->timeA2)
+										<span class="label label-success">Pemilihan berakhir</span>
+									@else
+										<span class="label label-success">Menunggu waktu pemilihan</span>
+									@endif
 								</td>
 								<td class="text-center"> 	
-									<a href="/detail agenda/{{\Crypt::encrypt($dt->id) }}"><i class="icon-eye"></i> Lihat</a>
+									<a href="/detail quick count/{{\Crypt::encrypt($dt->id) }}"><i class="icon-eye"></i> Lihat</a>
 								</td>
 							</tr>
 							@endif
@@ -355,7 +377,7 @@
 									<span class="label label-success">Selesai</span>
 								</td>
 								<td class="text-center"> 	
-									<a href="/detail agenda/{{\Crypt::encrypt($dt->id) }}"><i class="icon-eye"></i> Lihat</a>
+									<a href="/detail quick count/{{\Crypt::encrypt($dt->id) }}"><i class="icon-eye"></i> Lihat</a>
 								</td>
 							</tr>
 							@endif

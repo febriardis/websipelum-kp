@@ -31,7 +31,7 @@ class AdminController extends Controller
 		    return redirect('/tabel admin')
 		   	->with('pesan', 'Data berhasil disimpan');
     	}else{
-    		return redirect('/tambah admin')
+    		return redirect()->back()
     		->with('pesan', 'Username Sudah Terdaftar');
     	}
     }

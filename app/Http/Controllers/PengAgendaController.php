@@ -92,7 +92,6 @@ class PengAgendaController extends Controller {
     function delete($id) {
     	AgendaAjuan::find($id)->delete();
     	
-        // return redirect('/pengajuan agenda')
     	return redirect()->back()
         ->with('pesan', 'Data berhasil dihapus');
     } 
@@ -104,7 +103,6 @@ class PengAgendaController extends Controller {
         $tb->ket = 'agenda ditolak';
         $tb->save();
         
-        // return redirect('/pengajuan agenda')
         return redirect()->back()
         ->with('pesan', 'Data berhasil disimpan');
     } 

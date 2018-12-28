@@ -100,18 +100,16 @@ class KandidatController extends Controller
                 $tb->agenda_id   = $idAgenda;
                 $tb->visi        = $req->visi;
                 $tb->misi        = $req->misi;
-                $tb->keterangan  = 'Diterima';
+                $tb->keterangan  = 'Menunggu Verifikasi';
                 $tb->save();
                 
                 return redirect()->action('AgendaController@agendaview', ['idAgenda' => \Crypt::encrypt($idAgenda)])
                 ->with('pesanVerif', 'Data berhasil disimpan'); //return ke agenda view
             }else {
-                //return redirect()->action('KandidatController@ViewTambah', ['idAgenda' => \Crypt::encrypt($idAgenda)])
                 return redirect()->back()
                 ->with('pesanEr', 'NIM Sudah Terdaftar'); 
             }
         }else {
-            // return redirect()->action('KandidatController@ViewTambah', ['idAgenda' => \Crypt::encrypt($idAgenda)])
             return redirect()->back()
             ->with('pesanEr', 'NIM TIdak Sesuai');
         }

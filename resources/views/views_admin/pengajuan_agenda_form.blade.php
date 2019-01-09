@@ -19,18 +19,18 @@
 					<label class="col-lg-3 control-label">Nama Agenda</label>
 					<div class="col-lg-9">
 						@if(Auth::user()->ket=='HMJ')
-						<input type="text" class="form-control" name="nm_agenda" readonly="" required= required value="Pemilihan Ketua {{Auth::user()->ket}} {{Auth::user()->ket2}}">
+						<input type="text" class="form-control" name="nm_agenda" readonly="" required= required value="Pemilihan Ketua {{Auth::user()->ket}} {{Auth::user()->ket2}} (Periode {{\Carbon\Carbon::now('Asia/Jakarta')->format('Y')}}-{{\Carbon\Carbon::now('Asia/Jakarta')->format('Y')+1}})">
 						@elseif(Auth::user()->ket=='KPU U')
 						<select class="select" name="nm_agenda" required="" data-placeholder="Pilih Kategori">
 							<option value=""></option>
-							<option>Pemilihan Ketua Sema UIN SGD Bandung</option>
-							<option>Pemilihan Ketua Dema UIN SGD Bandung</option>
+							<option>Pemilihan Ketua Sema UIN SGD Bandung (Periode {{\Carbon\Carbon::now('Asia/Jakarta')->format('Y')}}-{{\Carbon\Carbon::now('Asia/Jakarta')->format('Y')+1}})</option>
+							<option>Pemilihan Ketua Dema UIN SGD Bandung (Periode {{\Carbon\Carbon::now('Asia/Jakarta')->format('Y')}}-{{\Carbon\Carbon::now('Asia/Jakarta')->format('Y')+1}})</option>
 						</select>
 						@else						
 						<select class="select" name="nm_agenda" required="" data-placeholder="Pilih Kategori">
 							<option value=""></option>
-							<option>Pemilihan Ketua Sema Fak. {{Auth::user()->ket2}}</option>
-							<option>Pemilihan Ketua Dema Fak. {{Auth::user()->ket2}}</option>
+							<option>Pemilihan Ketua Sema Fak. {{Auth::user()->ket2}} (Periode {{\Carbon\Carbon::now('Asia/Jakarta')->format('Y')}}-{{\Carbon\Carbon::now('Asia/Jakarta')->format('Y')+1}})</option>
+							<option>Pemilihan Ketua Dema Fak. {{Auth::user()->ket2}} (Periode {{\Carbon\Carbon::now('Asia/Jakarta')->format('Y')}}-{{\Carbon\Carbon::now('Asia/Jakarta')->format('Y')+1}})</option>
 						</select>
 						@endif
 

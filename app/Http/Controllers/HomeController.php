@@ -11,9 +11,9 @@ class HomeController extends Controller
 {
     function search(Request $req){
         $search   = $req->q;
-        $banners  = Banner::find(0);
+        $banners  = Banner::where('id',0)->get();
         $contents = Content::where('title', 'like', '%'.$search.'%')->orWhere('content', 'like', '%'.$search.'%')->get();
-        $agendasT  = Agenda::latest()->where('tgl_agenda', '>=', \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'))->limit(10)->get();
+        $agendasT = Agenda::latest()->where('tgl_agenda', '>=', \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'))->limit(10)->get();
         $agendasL  = Agenda::latest()->where('tgl_agenda', '<', \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'))->limit(10)->get();
 
         return view('views_mahasiswa.index')

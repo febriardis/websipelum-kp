@@ -71,7 +71,7 @@
 		                  	<form action="/cancel/{{ $dt->id }}" method="POST" onclick="return ConfirmDelete()">
 			                    @csrf
 			                    @method('DELETE')
-			                    <button type="submit" class="btn btn-danger btn-sm"><i class='icon-trash'></i>&nbsp;Hapus</button>
+			                    <button type="submit" class="btn btn-danger btn-sm"><i class='icon-trash'></i></button>
 			                </form>
 						</td>
 						@else
@@ -80,19 +80,19 @@
 					@else
 					<td class="text-center">
 						@if($dt->ket=='belum diverifikasi') 
-							<a href="/edit pengajuan agenda/{{\Crypt::encrypt($dt->id)}}" class="btn btn-default btn-sm"><i class="icon-compose"></i>&nbsp;Edit</a>
+							<a href="/edit pengajuan agenda/{{\Crypt::encrypt($dt->id)}}" class="btn btn-default btn-sm"><i class="icon-compose"></i></a>
 		
 						  	<form action="/cancel/{{$dt->id}}" method="POST" onclick="return ConfirmCancel()">
 			                    @csrf
 				               	@method('DELETE')
-					            <button type="submit" class="btn btn-danger btn-sm"><i class='icon-trash'></i>&nbsp;Batal</button>
+					            <button type="submit" class="btn btn-danger btn-sm"><i class='icon-trash'></i></button>
 			                </form>											
 						@elseif($dt->ket=='agenda ditolak')
-							<a href="/upload pengajuan agenda" class="btn btn-default btn-sm"><i class="icon-compose"></i>&nbsp;Edit</a>
+							<a href="/upload pengajuan agenda" class="btn btn-default btn-sm"><i class="icon-compose"></i></a>
 						  	<form action="/cancel/{{$dt->id}}" method="POST" onclick="return ConfirmDelete()">
 			                    @csrf
 				               	@method('DELETE')
-					            <button type="submit" class="btn btn-danger btn-sm"><i class='icon-trash'></i>&nbsp;Batal</button>
+					            <button type="submit" class="btn btn-danger btn-sm"><i class='icon-trash'></i></button>
 			                </form>		
 						@else
 							<a href="javascript::void(0)">no actions</a>

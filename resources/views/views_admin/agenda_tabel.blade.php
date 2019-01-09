@@ -86,11 +86,11 @@
 					<td class="text-center"> 	
 					@if($cekTgl <= $dt->tgl_agenda)	
 						@if(Auth::user()->ket=='Super Admin' || Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2)
-							<a href="/edit agenda/{{\Crypt::encrypt($dt->id)}}" class="btn btn-default btn-sm"><i class="icon-compose"></i> Edit Data</a>
+							<a href="/edit agenda/{{\Crypt::encrypt($dt->id)}}" class="btn btn-default btn-sm"><i class="icon-compose"></i></a>
 							<form action="/hapus agenda/{{$dt->id}}" method="POST" onclick="return ConfirmDelete()">
 			                    @csrf
 			                    @method('DELETE')
-			                    <button type="submit" class="btn btn-danger btn-sm text-white"><i class='icon-trash'></i>&nbsp;Hapus Data</button>
+			                    <button type="submit" class="btn btn-danger btn-sm text-white"><i class='icon-trash'></i></button>
 			                </form>
 						@else
 							<a href="javascript::void(0)">no actions</a>

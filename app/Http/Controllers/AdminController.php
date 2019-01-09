@@ -43,8 +43,26 @@ class AdminController extends Controller
         ->with('admin', $tb);
     }
     
-    function update(){
+    function update(Request $req, $id){
+        $tb = Admin::find($id);
+        $tb->nama = $req->nama;
+        $tb->username = $req->username;
+        if ($req->password!='') {  
+            $tb->password = Hash::make($req->password);
+        }
+        $tb->ket = $req->ket;
+        if ($req->ket=='Super Admin'||$req->ket=='KPU U') {
+            $tb->ket2 = '';
+        }
+        
+        if ($req->ket2!='') {
+            $tb->ket2 = $req->ket2;
+        }
 
+        $tb->save();
+
+        return redirect('/tabel admin')
+        ->with('pesan', 'Data berhasil diupdate');
     }
     
     function delete($id){

@@ -16,7 +16,13 @@
 				<!-- Members online -->
 				<div class="panel bg-teal-300">
 					<div class="panel-body" style="float: left;">
-						<h3 class="no-margin">3,450</h3>
+						<h3 class="no-margin">
+							@if(Auth::user()->ket=='Super Admin')
+								{{ count(App\Agenda::all()) }}
+							@else
+								{{ count(App\Agenda::where('admin_id', Auth::user()->id)->get()) }}
+							@endif
+						</h3>
 						Agenda
 					</div>
 					<div class="panel-body" style="float: right; width: 100px; height: 100px">
@@ -32,7 +38,7 @@
 				<!-- Current server load -->
 				<div class="panel bg-pink-400">
 					<div class="panel-body" style="float: left;">
-						<h3 class="no-margin">3,450</h3>
+						<h3 class="no-margin">{{count(App\Pemilih::all())}}</h3>
 						Pemilih/Delegasi
 					</div>
 					<div class="panel-body" style="float: right; width: 110px; height: 100px">
@@ -49,7 +55,13 @@
 				<!-- Today's revenue -->
 				<div class="panel bg-blue-400">
 					<div class="panel-body" style="float: left;">
-						<h3 class="no-margin">3,450</h3>
+						<h3 class="no-margin">
+							@if(Auth::user()->ket=='Super Admin')
+								{{ count(App\AgendaAjuan::all()) }}
+							@else
+								{{ count(App\AgendaAjuan::where('admin_id', Auth::user()->id)->get()) }}
+							@endif
+						</h3>
 						Pengajuan
 					</div>
 					<div class="panel-body" style="float: right; width: 110px; height: 100px">
@@ -66,7 +78,26 @@
 				<!-- Today's revenue -->
 				<div class="panel bg-green-400">
 					<div class="panel-body" style="float: left;">
-						<h3 class="no-margin">3,450</h3>
+						<div style="display: none;">
+							{{! $no = 0 }}
+							{{! $Agenda = App\Agenda::all()  }}
+						</div>
+						<h3 class="no-margin">
+							@foreach($Agenda as $dt)
+							@if($cekTgl >= $dt->tgl_agenda)
+								{{! $cek1 = (App\Admin::find($dt->admin_id))->ket }}
+								{{! $cek2 = (App\Admin::find($dt->admin_id))->ket2 }}	
+								
+								{{! $c1 =(App\Jurusan::where('nm_jurusan', Auth::user()->ket2)->value('fak_id')) }}
+								{{! $c2 = (App\Fakultas::where('nm_fakultas', $dt->kat_fakultas)->value('id')) }}
+								@if(Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2 || Auth::user()->ket=='HMJ' && Auth::user()->ket2==$dt->kat_fakultas || Auth::user()->ket=='HMJ' && $dt->kat_fakultas=='Semua Mahasiswa' || Auth::user()->ket=='HMJ' && $dt->kat_jurusan=='Semua Jurusan' && $c1==$c2 || Auth::user()->ket=='Super Admin')
+								
+									{{ $no++ }}
+								
+								@endif
+							@endif
+							@endforeach
+						</h3>
 						Quick Count
 					</div>
 					<div class="panel-body" style="float: right; width: 110px; height: 100px">

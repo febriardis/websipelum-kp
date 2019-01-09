@@ -74,6 +74,8 @@ Route::get('/tambah admin',function(){
 	return view('views_admin.admin_tambah');
  })->middleware('auth:admin');
 Route::post('/tambah admin','AdminController@insert');
+Route::get('/edit admin/{id}', 'AdminController@edit')->middleware('auth:admin');
+Route::put('/edit admin/{id}', 'AdminController@update');
 Route::delete('/hapus admin/{id}', 'AdminController@delete');
 
 // ==================================ADMIN-AGENDA`==================================

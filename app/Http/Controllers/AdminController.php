@@ -36,8 +36,11 @@ class AdminController extends Controller
     	}
     }
     
-    function edit(){
+    function edit($id){
+        $tb = Admin::find($id);
 
+        return view('views_admin.admin_edit')
+        ->with('admin', $tb);
     }
     
     function update(){

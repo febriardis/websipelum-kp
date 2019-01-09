@@ -42,6 +42,7 @@
 					<td>{{ $tb->created_at }}</td>
 					<td>{{ $tb->ket }} - <b>{{ $tb->ket2 }}</b></td>
 					<td class="text-center">
+						<a href="/edit admin/{{$tb->id}}" class="btn btn-info btn-sm"><i class='icon-pencil'></i>&nbsp;Edit</a>
 	                  	<form action="/hapus admin/{{$tb->id}}" method="POST" onclick="return ConfirmDelete()">
 		                    @csrf
 		                    @method('DELETE')

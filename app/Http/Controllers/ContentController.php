@@ -20,11 +20,11 @@ class ContentController extends Controller
     function createSlideshow(Request $req){
     	$this->validate($req, [
             'image'     => 'required|mimes:jpeg,jpg,png|max:2000'
-        ]);
+      ]);
 
     	$tb = new Banner;
 
-    	$file = $req->file('image');
+    	  $file = $req->file('image');
         $ext  = $file->getClientOriginalExtension();
         $newName = rand(100000,1001238912).".".$ext;
         $file->move('uploads/gambar-slide',$newName);

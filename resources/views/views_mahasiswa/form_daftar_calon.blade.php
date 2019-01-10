@@ -11,7 +11,6 @@
 		<form action="/daftar kandidat/{{$tb->id}}" method="POST" enctype="multipart/form-data">
 			<h5 style="text-transform: capitalize;">I. BIODATA DIRI</h5>
 			{{csrf_field()}}
-			<span class="text-danger">{{ $errors->first('foto')}}</span> 
 			<div class="form-group">
 				<div class="row">
 					<label class="control-label col-sm-4">Nama</label>
@@ -24,8 +23,8 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Jenis Kelamin</label>
 					<div class="col-sm-8">
-						<label><input type="radio" name="jk" value="lk"> Laki-laki</label><br>
-						<label><input type="radio" name="jk" value="pr"> Perempuan</label>
+						<label><input type="radio" name="jen_kelamin" required="" value="lk"> Laki-laki</label><br>
+						<label><input type="radio" name="jen_kelamin" required="" value="pr"> Perempuan</label>
 					</div>
 				</div>
 			</div>
@@ -34,7 +33,7 @@
 					<label class="control-label col-sm-4">Tempat, Tanggal Lahir</label>
 					<div class="col-sm-8">
 						<input type="text" class="form-control" required="" name="tmp_lahir" style="width: 30%;float: left;">
-						<input type="date" name="tgl_lahir" class="form-control" style="width: 30%;float: left;">
+						<input type="date" name="tgl_lahir" required="" class="form-control" style="width: 30%;float: left;">
 					</div>
 				</div>
 			</div>
@@ -61,6 +60,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Foto</label>
 					<div class="col-sm-8">
+						<span class="text-danger">{{ $errors->first('foto')}}</span> 
 						<input type="file" name="foto" accept="image/*" onchange="readURL(this);" required="">
           				<span class="help-block"><i> max 2MB </i></span>
           	          	<!-- js show image -->
@@ -152,7 +152,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Asal SMA</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" required="" name="asal_sekolah">
+						<input type="text" class="form-control" required="" name="asal_sma">
 					</div>
 				</div>
 			</div>
@@ -184,7 +184,8 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Transkrip Nilai</label>
 					<div class="col-sm-8">
-						<input type="file" required="" name="transkrip">
+						<span class="text-danger">{{ $errors->first('transkrip_nilai')}}</span> 
+						<input type="file" required="" name="transkrip_nilai">
 						<span class="help-block"><i> max 2MB </i></span>
 					</div>
 				</div>
@@ -226,8 +227,9 @@
 				<div class="row">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-8">
-						<input type="file" name="" required=""><br>
-						<a href="" target="_blank">Download Template</a><br>
+						<span class="text-danger">{{ $errors->first('riwayat_hidup')}}</span> 
+						<input type="file" name="riwayat_hidup" required=""><br>
+						<a href="/uploads/temp_riwayat_hidup/{{$tb->temp_riwayat_hidup}}" download="">Download Template</a><br>
 					</div>
 				</div>
 			</div>
@@ -247,7 +249,7 @@
 					<label class="control-label col-sm-4"></label>
 					<div class="col-sm-8">
 			    		<label class="form-check-label">
-							<input type="checkbox" name="" required=""> Saya menyetujui <a href="javascript::void(0)" data-toggle="modal" data-target="#myModalTerms">surat pernyataan</a> pencalonan.
+							<input type="checkbox" name="" required=""> Saya menyetujui <a href="javascript::void(0)" data-toggle="modal" data-target="#myModalSP">surat pernyataan</a> pencalonan.
 						</label>
 					</div>
 				</div>
@@ -262,7 +264,7 @@
 		</form>
 
 		<!-- The Modal -->
-		<div class="modal" id="myModalTerms" role="dialog">
+		<div class="modal fade" id="myModalTerms" role="dialog">
 		    <div class="modal-dialog">
 		    	<div class="modal-content">
 			        <!-- Modal Header -->
@@ -276,6 +278,32 @@
 			        	{!! $tb->syaratketentuan !!}
 			        </div>
 
+			        <div class="modal-footer"> 	
+			        	<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+			        </div>
+		    	</div>
+		    </div>
+		</div>
+		<!--End The Modal-->
+
+		<!-- The Modal -->
+		<div class="modal fade" id="myModalSP">
+		    <div class="modal-dialog modal-lg">
+		    	<div class="modal-content">
+			        <!-- Modal Header -->
+			        <div class="modal-header">
+			        	<h6 class="modal-title">Surat Pernyataan Calon Ketua</h6>
+			        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+			        </div>
+			        
+			        <div class="modal-body">
+		       			<div class="form-group">
+							<iframe src="/uploads/surat_pernyataan/{{$tb->surat_pernyataan}}" style="width: 100%; height: 450px"></iframe>
+						</div>
+			        </div>
+			        <div class="modal-footer"> 	
+			        	<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+			        </div>
 		    	</div>
 		    </div>
 		</div>

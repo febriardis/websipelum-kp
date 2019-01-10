@@ -112,6 +112,10 @@ class AgendaController extends Controller
     }
 
     function updateSuratPernyataan(Request $req, $id) {
+        $this->validate($req, [
+            'surat_pernyataan' => 'required|mimes:doc,docx,pdf|max:2000'
+        ]);
+    
         $tb = Agenda::find($id);
         
         $file = $req->file('surat_pernyataan');
@@ -126,6 +130,10 @@ class AgendaController extends Controller
     }
 
     function updateTempRiwayatHidup(Request $req, $id) {
+        $this->validate($req, [
+            'temp_riwayat_hidup' => 'required|mimes:doc,docx,pdf|max:2000'
+        ]);
+
         $tb = Agenda::find($id);
         
         $file = $req->file('temp_riwayat_hidup');

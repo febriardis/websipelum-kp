@@ -20,9 +20,10 @@ class Agenda extends Model
 		'StartDaftarK', 
 		'LastDaftarK', 
 		'tgl_filtering', 
-		'syaratketentuan'
+		'syaratketentuan',
+		'temp_riwayat_hidup',
+		'surat_pernyataan'
 	];
-
 	function FKAgendaA(){
 		return $this->belongsTo(Admin::class);
 	}

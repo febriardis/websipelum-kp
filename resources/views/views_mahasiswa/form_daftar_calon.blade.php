@@ -5,7 +5,7 @@
 <div class="content">	
 	<div style="width: 80%; margin: 20px auto">
 		<div style="margin: 30px auto; text-align: center;">
-			<h4 style="text-transform: capitalize;">Formulir Pendaftaran Bakal Calon Ketua <br> Agenda {{ $tb->nm_agenda }}</h4>
+			<h4 style="text-transform: capitalize;">Formulir Pendaftaran Calon Ketua <br> Agenda {{ $tb->nm_agenda }}</h4>
 			<hr>
 		</div>
 		<form action="/daftar kandidat/{{$tb->id}}" method="POST" enctype="multipart/form-data">
@@ -110,25 +110,49 @@
 			</div>
 			<div class="form-group">
 				<div class="row">
-					<label class="control-label col-sm-4">Blog/Website</label>
+					<label class="control-label col-sm-4">Media Sosial</label>
 					<div class="col-sm-8">
-						<input type="email" class="form-control" required="" name="email">
+						<div class="row">
+							<label class="control-label col-sm-2">Facebook</label>
+							<input type="text" class="form-control col-sm-5 required="" name="medsos1">
+						</div>
+						<div class="row">
+							<label class="control-label col-sm-2">Twitter</label>
+							<input type="text" class="form-control col-sm-5 required="" name="medsos2">
+						</div>
+						<div class="row">
+							<label class="control-label col-sm-2">Instagram</label>
+							<input type="text" class="form-control col-sm-5 required="" name="medsos3">
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="row">
-					<label class="control-label col-sm-4">Anak Ke-, dari - ..saudara</label>
+					<label class="control-label col-sm-4">Blog/Website</label>
 					<div class="col-sm-8">
-						<input type="email" class="form-control" required="" name="email">
+						<input type="text" class="form-control" required="" name="blog">
 					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<label class="control-label col-sm-4">Anak Ke-</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" required="" name="anak_ke">
+					</div>
+					<label class="control-label col-sm-1">dari - </label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" required="" name="jum_saudara">
+					</div>
+					<label class="control-label col-sm-1">Saudara</label>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="row">
 					<label class="control-label col-sm-4">Asal SMA</label>
 					<div class="col-sm-8">
-						<input type="email" class="form-control" required="" name="email">
+						<input type="text" class="form-control" required="" name="asal_sekolah">
 					</div>
 				</div>
 			</div>
@@ -136,7 +160,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Asal Daerah</label>
 					<div class="col-sm-8">
-						<input type="email" class="form-control" required="" name="email">
+						<input type="text" class="form-control" required="" name="asal_daerah">
 					</div>
 				</div>
 			</div>
@@ -144,15 +168,15 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Motto Hidup</label>
 					<div class="col-sm-8">
-						<input type="email" class="form-control" required="" name="email">
+						<input type="text" class="form-control" required="" name="motto">
 					</div>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="row">
-					<label class="control-label col-sm-4">Motivasi jadi Ketua HIMATIF</label>
+					<label class="control-label col-sm-4">Motivasi jadi Ketua </label>
 					<div class="col-sm-8">
-						<input type="email" class="form-control" required="" name="email">
+						<textarea class="form-control" required="" name="motivasi" rows="4"></textarea>
 					</div>
 				</div>
 			</div>

@@ -61,7 +61,7 @@ class PengAgendaController extends Controller {
     function update(Request $req, $id)
     {       
         $this->validate($req, [
-            'file' => 'max:20000|mimes:doc,docx,pdf' //new DocType() //
+            'file' => 'max:2000|mimes:doc,docx,pdf' //new DocType() //
             ]
         );
         $tb = AgendaAjuan::find($id);

@@ -27,6 +27,8 @@ class TbAgenda extends Migration
             $table->date('LastDaftarK');//tambahan
             $table->date('tgl_filtering');//tambahan
             $table->text('syaratketentuan')->nullable(true);//tambahan
+            $table->text('temp_riwayat_hidup')->nullable(true);//tambahan
+            $table->text('surat_pernyataan')->nullable(true);//tambahan
             $table->timestamps();
         });
         Schema::table('tb_agenda', function(Blueprint $kolom) {

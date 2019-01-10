@@ -84,7 +84,9 @@ Route::post('/tambah agenda/{idAdmin}', 'AgendaController@insert');
 Route::get('/edit agenda/{id}', 'AgendaController@edit')->middleware('auth:admin');
 Route::post('/edit agenda/{id}', 'AgendaController@update');
 Route::delete('/hapus agenda/{id}', 'AgendaController@delete')->middleware('auth:admin');
-Route::post('/update syaratK/{id}', 'AgendaController@updateSyaratK');
+Route::put('/update syaratK/{id}', 'AgendaController@updateSyaratK');
+Route::put('/update temp RH/{id}', 'AgendaController@updateTempRiwayatHidup');
+Route::put('/update surat pernyataan/{id}', 'AgendaController@updateSuratPernyataan');
 Route::get('/tabel agenda', 'AgendaController@show')->middleware('auth:admin');
 Route::get('/detail agenda/{IdAgenda}', 'AgendaController@agendaview')->middleware('auth:admin');
 //----------------------------------------------------------------------------------

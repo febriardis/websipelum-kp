@@ -28,6 +28,8 @@
 					<th>Kategori Pemilih</th>
 					<th>Waktu Pelaksanaan</th>
 					<th>Persyaratan & Kebijakan</th>
+					<th>Template Riwayat Hidup</th>
+					<th>Surat Pernyataan</th>
 					<th>Katerangan</th>
 					<th>Detail</th>
 					<th class="text-center">Aksi</th>
@@ -36,13 +38,13 @@
 			<tbody>
 			{{! $no = 1 }}
 			@foreach($data as $dt)
-			<div style="display: none;">	
-				{{! $cek1 = (App\Admin::find($dt->admin_id))->ket }}
-				{{! $cek2 = (App\Admin::find($dt->admin_id))->ket2 }}				
-				<!-- cek idfak jurusan dmna nm_jurusan==ket2admin-->
-				{{! $c1 =(App\Jurusan::where('nm_jurusan', Auth::user()->ket2)->value('fak_id')) }}
-				{{! $c2 = (App\Fakultas::where('nm_fakultas', $dt->kat_fakultas)->value('id')) }}
-			</div>		
+				<div style="display: none;">	
+					{{! $cek1 = (App\Admin::find($dt->admin_id))->ket }}
+					{{! $cek2 = (App\Admin::find($dt->admin_id))->ket2 }}				
+					<!-- cek idfak jurusan dmna nm_jurusan==ket2admin-->
+					{{! $c1 =(App\Jurusan::where('nm_jurusan', Auth::user()->ket2)->value('fak_id')) }}
+					{{! $c2 = (App\Fakultas::where('nm_fakultas', $dt->kat_fakultas)->value('id')) }}
+				</div>		
 				@if(Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2 || Auth::user()->ket=='HMJ' && Auth::user()->ket2==$dt->kat_fakultas || Auth::user()->ket=='HMJ' && $dt->kat_fakultas=='Semua Mahasiswa' || Auth::user()->ket=='HMJ' && $dt->kat_jurusan=='Semua Jurusan' && $c1==$c2 || Auth::user()->ket=='Super Admin')
 				<tr>
 					<td>{{ $no++ }}</td>
@@ -56,6 +58,18 @@
 					<td>
 						<a href="javascript::void(0)" data-toggle="modal" data-target="#myModalTerms{{$dt->id}}"><i class="icon-eye"></i> Lihat</a>
 						@if($dt->syaratketentuan=='')
+                 			<span class="badge badge-danger">belum diisi</span>
+						@endif
+					</td>
+					<td>
+						<a href="javascript::void(0)" data-toggle="modal" data-target="#myModalTempRH{{$dt->id}}"><i class="icon-eye"></i> Lihat</a>
+						@if($dt->temp_riwayat_hidup=='')
+                 			<span class="badge badge-danger">belum diisi</span>
+						@endif
+					</td>
+					<td>
+						<a href="javascript::void(0)" data-toggle="modal" data-target="#myModalSP{{$dt->id}}"><i class="icon-eye"></i> Lihat</a>
+						@if($dt->surat_pernyataan=='')
                  			<span class="badge badge-danger">belum diisi</span>
 						@endif
 					</td>
@@ -114,11 +128,80 @@
 					        <hr>
 
 					        <form action="/update syaratK/{{$dt->id}}" method="POST">
-					        	{{csrf_field()}}
+					        	@csrf
+					        	@method('PUT')
 						        <div class="modal-body">
 					       			<div class="form-group">
 										<label class="control-label">Syarat & kebijakan : </label>
 										<textarea name="syaratketentuan" required="" class="ckeditor" id="ckedtor">{{ $dt->syaratketentuan }}</textarea>
+									</div>
+						        </div>
+						        <div class="modal-footer">
+									@if(Auth::user()->ket=='Super Admin' || Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2)
+							        	<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>	
+										<button type="submit" class="btn btn-primary">Simpan</button>
+									@endif
+						        </div>
+					        </form>
+				    	</div>
+				    </div>
+				</div>
+				<!--End The Modal-->
+
+				<!-- The Modal -->
+				<div class="modal" id="myModalTempRH{{$dt->id}}" role="dialog">
+				    <div class="modal-dialog modal-lg">
+				    	<div class="modal-content">
+					        <!-- Modal Header -->
+					        <div class="modal-header">
+					        	<h6 class="modal-title">Template Formulir Riwayat Hidup</h6>
+					        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+					        </div>
+					        <hr>
+
+					        <form action="/update temp RH/{{$dt->id}}" method="POST" enctype="multipart/form-data">
+					        	@csrf
+					        	@method('PUT')
+						        <div class="modal-body">
+					       			<div class="form-group">
+										<label class="control-label">Upload Template : </label>
+										<input type="file" name="temp_riwayat_hidup">
+									</div>
+									<iframe src="/uploads/temp_riwayat_hidup/{{$dt->temp_riwayat_hidup}}" style="width: 100%; height: 450px"></iframe>
+						        </div>
+						        <div class="modal-footer">
+									@if(Auth::user()->ket=='Super Admin' || Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2)
+							        	<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>	
+										<button type="submit" class="btn btn-primary">Simpan</button>
+									@endif
+						        </div>
+					        </form>
+				    	</div>
+				    </div>
+				</div>
+				<!--End The Modal-->
+
+				<!-- The Modal -->
+				<div class="modal" id="myModalSP{{$dt->id}}" role="dialog">
+				    <div class="modal-dialog modal-lg">
+				    	<div class="modal-content">
+					        <!-- Modal Header -->
+					        <div class="modal-header">
+					        	<h6 class="modal-title">Surat Pernyataan Pencalonan</h6>
+					        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+					        </div>
+					        <hr>
+
+					        <form action="/update surat pernyataan/{{$dt->id}}" method="POST" enctype="multipart/form-data">
+					        	@csrf
+					        	@method('PUT')
+						        <div class="modal-body">
+					       			<div class="form-group">
+										<div class="form-group">
+											<label class="control-label">Upload Surat : </label>
+											<input type="file" name="surat_pernyataan">
+										</div>
+										<iframe src="/uploads/surat_pernyataan/{{$dt->surat_pernyataan}}" style="width: 100%; height: 450px"></iframe>
 									</div>
 						        </div>
 						        <div class="modal-footer">

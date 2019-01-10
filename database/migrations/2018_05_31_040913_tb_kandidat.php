@@ -15,14 +15,32 @@ class TbKandidat extends Migration
     {
         Schema::create('tb_kandidat', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('nim'); //$table->unsignedInteger('mhs_id');
             $table->string('nama');
-            $table->string('foto');
+            $table->string('jen_kelamin');
+            $table->string('tmp_lahir');
+            $table->date('tgl_lahir');
+            $table->unsignedInteger('nim');
             $table->string('jurusan');
-            $table->string('angkatan');
+            $table->string('fakultas');
+            $table->string('foto');
+            $table->string('agama');
+            $table->string('no_hp');
+            $table->string('email');
+            $table->string('medsos1');
+            $table->string('medsos2');
+            $table->string('medsos3');
+            $table->string('blog');
+            $table->string('anak_ke');
+            $table->string('jum_saudara');
+            $table->string('asal_sma');
+            $table->text('asal_daerah');
+            $table->text('motto');
+            $table->text('motivasi');
+            $table->string('transkrip_nilai');
             $table->unsignedInteger('agenda_id');
             $table->text('visi');
             $table->text('misi');
+            $table->string('riwayat_hidup');
             $table->string('keterangan');
             $table->timestamps();
         });

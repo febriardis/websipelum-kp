@@ -377,5 +377,13 @@ a.closeNav:hover {
 	.capt-carousel p{
 		font-size: 0.9em;
 	}
+}
 
+@media only screen and (max-width: 580px) {
+	#info-dpt {
+		display: none;
+	}
+	#nav-daftar {
+		display: none;
+	}
 }

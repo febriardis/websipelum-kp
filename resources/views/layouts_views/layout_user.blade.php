@@ -49,7 +49,7 @@
 				    	<a class="nav-link" href="/hc" style="padding: 10px;">Hitung Cepat</a>
 				  	</li>  	
 				  	<span class="span">|</span>
-					<li class="nav-item dropdown {{ (Request::is('info dpt/*/*') ? 'active-me' : '') }}">
+					<li class="nav-item dropdown {{ (Request::is('info dpt/*/*') ? 'active-me' : '') }}" id="info-dpt">
 				    	<a class="nav-link dropdown-toggle" href="javascript:void(0)" onclick="openNav()" style="padding: 10px;">Informasi DPT </a>
 				   	</li>	
 				  	<div class="dropdown-menu dropdown-me" style="background-color: rgba(0,0,0,0.8); color: #fff; font-size: 15px" id="myNav">
@@ -138,7 +138,7 @@
 				    	<a class="nav-link" href="/hitung cepat" style="padding: 10px;">Hitung Cepat<span class="sr-only">(current)</span></a>
 				  	</li>
 				   	<span class="span">|</span>
-				  	<li class="nav-item dropdown {{ (Request::is('show organisasi/*/*') ? 'active-me' : '') }}">
+				  	<li class="nav-item dropdown {{ (Request::is('show organisasi/*/*') ? 'active-me' : '') }}" id="info-dpt">
 				    	<a class="nav-link dropdown-toggle" href="javascript:void(0)" onclick="openNav()" style="padding: 10px;">Informasi DPT </a>
 				   	</li>	
 				  	<div class="dropdown-menu dropdown-me" style="background-color: rgba(0,0,0,0.8); color: #fff; font-size: 15px" id="myNav">
@@ -208,7 +208,7 @@
 				    	</div>
 					</div>
 				  	<span class="span">|</span>
-				  	<li class="nav-item dropdown {{ (Request::is('daftar calon') ? 'active-me' : '') }}">
+				  	<li class="nav-item dropdown {{ (Request::is('daftar calon') ? 'active-me' : '') }}" id="nav-daftar">
 				    	<a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" style="padding: 10px;">Daftar </a>
 				    	<div class="dropdown-menu">
 					     	<a class="dropdown-item" href="/daftar calon">Calon Kandidat</a>
@@ -288,7 +288,7 @@
 	
 	<div class="listbar fontArial">
 		<div class="container">
-			<h6 style="margin: 17px; float: left;">Sistem Pemilihan Umum UIN Sunan Gunung Djati Bandung</h6>
+			<h6 style="margin: 17px; float: left;">Sistem Informasi Pemilihan Umum UIN Sunan Gunung Djati Bandung</h6>
 			@guest
 			<form action="/s" class="form-search" method="GET">
 				<input type="text" class="in-search" name="q" autocomplete="off" id="myInput" placeholder="Cari...">	

@@ -7,26 +7,23 @@
 @section('content')
 
 <div class="content">
-	<form action="/terima kandidat/{{$tbMhs->id}}/{{$idAgenda}}" method="POST" class="form-horizontal">
+	<form action="/terima kandidat/{{$tbMhs->id}}/{{$idAgenda}}" method="POST" class="form-horizontal" >
 		{{ csrf_field() }}
-		<div class="panel panel-flat">
-			<div class="panel-heading">
-				<h5 class="panel-title">Detail Kandidat</h5>
+		<div class="panel panel-flat" style="padding: 50px">
+			<div class="panel-heading" style="text-align: center;">
+				<h4 style="text-transform: capitalize;">Detail Kandidat</h4>
+			<hr>
 			</div>
+			
 			<div class="panel-body">
+				<h5 style="text-transform: capitalize;">I. BIODATA DIRI</h5>
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Foto</label>
 					<div class="col-lg-9">
 					<img src="/uploads/foto-kandidat/{{$tbMhs->foto}}" width="90" height="100">
 					</div>
 				</div>
-
-				<div class="form-group">
-					<label class="col-lg-3 control-label">NIM</label>
-					<div class="col-lg-9">
-						<input type="text" name="nama" class="form-control" value="{{$tbMhs->nim}}" readonly="readonly">
-					</div>
-				</div>
+				
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Nama</label>
 					<div class="col-lg-9">
@@ -34,21 +31,115 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-lg-3 control-label">Jurusan</label>
+					<label class="control-label col-lg-3">Jenis Kelamin</label>
 					<div class="col-lg-9">
-						<input type="text" name="nama" class="form-control" value="{{$tbMhs->jurusan}}" readonly="readonly">
+						<label><input type="radio" name="jen_kelamin" required="" readonly="" value="lk" {{{ ($tbMhs->jen_kelamin == 'lk' ? 'checked' : '') }}}> Laki-laki</label><br>
+						<label><input type="radio" name="jen_kelamin" required="" readonly="" value="pr" {{{ ($tbMhs->jen_kelamin == 'pr' ? 'checked' : '') }}}> Perempuan</label>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-lg-3 control-label">Tahun Angkatan</label>
+					<label class="control-label col-lg-3">Tempat, Tanggal Lahir</label>
 					<div class="col-lg-9">
-						<input type="text" name="nama" class="form-control" value="{{$tbMhs->angkatan}}" readonly="readonly">
+						<input type="text" class="form-control" required="" readonly="" name="tmp_lahir" value="{{$tbMhs->tmp_lahir}}" style="width: 30%;float: left;">
+						<input type="date" name="tgl_lahir" required="" readonly="" class="form-control" value="{{$tbMhs->tgl_lahir}}" style="width: 30%;float: left;">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">NIM</label>
+					<div class="col-lg-9">
+						<input type="text" name="nama" class="form-control" readonly="" value="{{$tbMhs->nim}}" readonly="readonly">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Jurusan/Fakultas</label>
+					<div class="col-lg-4">
+						<input type="text" name="nama" class="form-control" readonly="" value="{{$tbMhs->jurusan}}" readonly="readonly">
+					</div>
+					<div class="col-lg-4">
+						<input type="text" name="nama" class="form-control" readonly="" value="{{$tbMhs->fakultas}}" readonly="readonly">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Agama</label>
+					<div class="col-lg-9">
+						<input type="text" name="nama" class="form-control" readonly="" value="{{$tbMhs->agama}}" readonly="readonly">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">No Hp</label>
+					<div class="col-lg-9">
+						<input type="text" name="nama" class="form-control" readonly="" value="{{$tbMhs->no_hp}}" readonly="readonly">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Email</label>
+					<div class="col-lg-9">
+						<input type="text" name="nama" class="form-control" readonly="" value="{{$tbMhs->email}}" readonly="readonly">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">No Hp</label>
+					<div class="col-lg-9">
+						<input type="text" name="nama" class="form-control" readonly="" value="{{$tbMhs->no_hp}}" readonly="readonly">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Media Sosial</label>
+					<div class="col-lg-9">
+						<label>Facebook : {{$tbMhs->medsos1}}</label><br>
+						<label>Twitter : {{$tbMhs->medsos2}}</label><br>
+						<label>Instagram : {{$tbMhs->medsos3}}</label>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Blog/Website</label>
+					<div class="col-lg-9">
+						<input type="text" name="nama" class="form-control" readonly="" value="{{$tbMhs->blog}}" readonly="readonly">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-lg-3">Anak Ke-</label>
+					<div class="col-lg-2">
+						<input type="text" class="form-control" readonly="" required="" value="{{$tbMhs->anak_ke}}" name="anak_ke">
+					</div>
+					<label class="control-label col-lg-1">dari - </label>
+					<div class="col-lg-2">
+						<input type="text" class="form-control" readonly="" required="" value="{{$tbMhs->jum_saudara}}" name="jum_saudara">
+					</div>
+					<label class="control-label col-lg-1">Saudara</label>
+				</div>
+
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Asal SMA</label>
+					<div class="col-lg-9">
+						<input type="text" name="nama" class="form-control" readonly="" value="{{$tbMhs->asal_sma}}" readonly="readonly">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Asal Daerah</label>
+					<div class="col-lg-9">
+						<input type="text" name="nama" class="form-control" readonly="" value="{{$tbMhs->asal_daerah}}" readonly="readonly">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Motto Hidup</label>
+					<div class="col-lg-9">
+						<input type="text" name="nama" class="form-control" readonly="" value="{{$tbMhs->motto}}" readonly="readonly">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Motivasi Jadi Ketua</label>
+					<div class="col-lg-9">
+						<textarea class="form-control" readonly="" rows="4">{{$tbMhs->motivasi}}</textarea>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-lg-3 control-label">Visi</label>
 					<div class="col-lg-9">
-						<p>{{$tbMhs->visi}}</p>
+						<p>&quot;{{$tbMhs->visi}}&quot;</p>
 					</div>
 				</div>
 				<div class="form-group">
@@ -57,7 +148,22 @@
 						<p>{!! $tbMhs->misi !!}</p>
 					</div>
 				</div>
-				<div class="text-right">
+				
+				<hr>
+				<h5 style="text-transform: capitalize;">II. DAFTAR RIWAYAT HIDUP</h5>
+				<div class="form-group">
+					<iframe src="/uploads/riwayat_hidup/{{$tbMhs->riwayat_hidup}}" style="width: 100%; height: 600px"></iframe>
+				</div>
+
+				<hr>
+				<h5 style="text-transform: capitalize;">Lampiran</h5>
+				<h6 style="text-transform: capitalize;">Transkrip Nilai : </h6>
+				<div class="form-group">
+					<iframe src="/uploads/transkrip_nilai/{{$tbMhs->transkrip_nilai}}" style="width: 100%; height: 600px"></iframe>
+				</div>
+			</div>
+			<div class="panel-footer">
+					<div class="text-right">
 					<a href="{{ URL::previous() }}" class="btn btn-default"><i class="icon-undo2"></i>&nbsp;Kembali</a>
 					<div style="display: none;">
 					{{! $cekAdmin = (\App\Agenda::find($idAgenda))->admin_id,

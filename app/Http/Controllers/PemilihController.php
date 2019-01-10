@@ -38,6 +38,10 @@ class PemilihController extends Controller
     }
 
     function insert(Request $req, $idAgenda){
+        $this->validate($req, [
+            'nim' => 'required',
+        ]);
+        
         $loop = $req->nim;
         if (count($loop)!=0) {
             foreach ($loop as $value) {

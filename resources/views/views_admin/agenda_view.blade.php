@@ -290,7 +290,7 @@
 							<form action="/hapus pemilih/{{$dt->id}}" method="POST" onclick="return ConfirmDelete()">
 			                    @csrf
 			                    @method('DELETE')
-		                    	<button type="submit" class="btn btn-danger btn-sm text-white"><i class='icon-close2'></i>&nbsp;Hapus Data</button>
+		                    	<button type="submit" class="btn btn-danger btn-sm text-white"><i class='icon-trash'></i></button>
 			                </form>
 						</td>
 						@else

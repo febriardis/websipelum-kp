@@ -112,23 +112,51 @@ class KandidatController extends Controller
 
         if ($cekJurAg==$cekJurMhs && $cekFakAg==$cekFakMhs && count($cekMhs) !=0 || $cekJurAg=='Semua Jurusan' && $cekFakAg==$cekFakMhs && count($cekMhs) !=0 || $cekFakAg=='Semua Mahasiswa' && count($cekMhs) !=0) {
             if (count($cekKandidat)==0) {
-                $Mhs = Mahasiswa::find($req->nim);
+                // $Mhs = Mahasiswa::find($req->nim);
 
                 $tb = new Kandidat;
+                $tb->nama        = $req->nama;
+                $tb->jen_kelamin = $req->jen_kelamin;
+                $tb->tmp_lahir   = $req->tmp_lahir;
+                $tb->tgl_lahir   = $req->tgl_lahir;
                 $tb->nim         = $req->nim;
-                $tb->nama        = $Mhs->nama;
-
+                $tb->jurusan     = $req->jurusan;
+                $tb->fakultas    = $req->fakultas;
                 $file    = $req->file('foto');
                 $ext     = $file->getClientOriginalExtension();
                 $newName = rand(100000,1001238912).".".$ext;
                 $file->move('uploads/foto-kandidat',$newName);
-
                 $tb->foto        = $newName;
-                $tb->jurusan     = $Mhs->jurusan;
-                $tb->angkatan    = $Mhs->th_angkatan;
+                $tb->agama       = $req->agama;
+                $tb->no_hp       = $req->no_hp;
+                $tb->email       = $req->email;
+                $tb->medsos1     = $req->medsos1;
+                $tb->medsos2     = $req->medsos2;
+                $tb->medsos3     = $req->medsos3;
+                $tb->blog        = $req->blog;
+                $tb->anak_ke     = $req->anak_ke;
+                $tb->jum_saudara = $req->jum_saudara;
+                $tb->asal_sma    = $req->asal_sma;
+                $tb->asal_daerah = $req->asal_daerah;
+                $tb->motto       = $req->motto;
+                $tb->motivasi    = $req->motivasi;
+
+                $file2    = $req->file('transkrip_nilai');
+                $ext2     = $file2->getClientOriginalExtension();
+                $newName2 = rand(100000,1001238912).".".$ext2;
+                $file2->move('uploads/transkrip_nilai',$newName2);
+                $tb->transkrip_nilai = $newName2;
+                
                 $tb->agenda_id   = $idAgenda;
                 $tb->visi        = $req->visi;
                 $tb->misi        = $req->misi;
+
+                $file3    = $req->file('riwayat_hidup');
+                $ext3     = $file3->getClientOriginalExtension();
+                $newName3 = rand(100000,1001238912).".".$ext3;
+                $file3->move('uploads/riwayat_hidup',$newName3);
+                $tb->riwayat_hidup = $newName3;
+                
                 $tb->keterangan  = 'Menunggu Verifikasi';
                 $tb->save();
                 

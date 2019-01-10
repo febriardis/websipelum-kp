@@ -114,15 +114,15 @@
 					<div class="col-sm-8">
 						<div class="row">
 							<label class="control-label col-sm-2">Facebook</label>
-							<input type="text" class="form-control col-sm-5 required="" name="medsos1">
+							<input type="text" class="form-control col-sm-5" required="" name="medsos1">
 						</div>
 						<div class="row">
 							<label class="control-label col-sm-2">Twitter</label>
-							<input type="text" class="form-control col-sm-5 required="" name="medsos2">
+							<input type="text" class="form-control col-sm-5" required="" name="medsos2">
 						</div>
 						<div class="row">
 							<label class="control-label col-sm-2">Instagram</label>
-							<input type="text" class="form-control col-sm-5 required="" name="medsos3">
+							<input type="text" class="form-control col-sm-5" required="" name="medsos3">
 						</div>
 					</div>
 				</div>

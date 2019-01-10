@@ -28,8 +28,7 @@
 					<th>Kategori Pemilih</th>
 					<th>Waktu Pelaksanaan</th>
 					<th>Persyaratan & Kebijakan</th>
-					<th>Template Riwayat Hidup</th>
-					<th>Surat Pernyataan</th>
+					<th>Dokumen</th>
 					<th>Katerangan</th>
 					<th>Detail</th>
 					<th class="text-center">Aksi</th>
@@ -62,17 +61,22 @@
 						@endif
 					</td>
 					<td>
-						<a href="javascript::void(0)" data-toggle="modal" data-target="#myModalTempRH{{$dt->id}}"><i class="icon-eye"></i> Lihat</a>
-						@if($dt->temp_riwayat_hidup=='')
-                 			<span class="badge badge-danger">belum diisi</span>
-						@endif
-					</td>
-					<td>
-						<a href="javascript::void(0)" data-toggle="modal" data-target="#myModalSP{{$dt->id}}"><i class="icon-eye"></i> Lihat</a>
-						@if($dt->surat_pernyataan=='')
-                 			<span class="badge badge-danger">belum diisi</span>
-						@endif
-					</td>
+						<div>
+							<b>Template Riwayat Hidup :</b><br>
+							<a href="javascript::void(0)" data-toggle="modal" data-target="#myModalTempRH{{$dt->id}}"><i class="icon-eye"></i> Lihat</a>
+							@if($dt->temp_riwayat_hidup=='')
+	                 			<span class="badge badge-danger">belum diisi</span>
+							@endif
+						</div>
+						<hr>
+						<div>
+							<b>Surat Pernyataan :</b><br>
+							<a href="javascript::void(0)" data-toggle="modal" data-target="#myModalSP{{$dt->id}}"><i class="icon-eye"></i> Lihat</a>
+							@if($dt->surat_pernyataan=='')
+	                 			<span class="badge badge-danger">belum diisi</span>
+							@endif
+						</div>
+					</td>		
 					<td>
 						@if($cekTgl < $dt->tgl_agenda)
 							<span class="label label-info">Menunggu Tanggal Agenda</span>
@@ -167,7 +171,7 @@
 										<label class="control-label">Upload Template : </label>
 										<input type="file" name="temp_riwayat_hidup">
 									</div>
-									<iframe src="/uploads/temp_riwayat_hidup/{{$dt->temp_riwayat_hidup}}" style="width: 100%; height: 450px"></iframe>
+									<embed src="/uploads/temp_riwayat_hidup/{{$dt->temp_riwayat_hidup}}" style="width: 100%; height: 450px; border: 1px solid black"></embed>
 						        </div>
 						        <div class="modal-footer">
 									@if(Auth::user()->ket=='Super Admin' || Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2)
@@ -201,7 +205,8 @@
 											<label class="control-label">Upload Surat : </label>
 											<input type="file" name="surat_pernyataan">
 										</div>
-										<iframe src="/uploads/surat_pernyataan/{{$dt->surat_pernyataan}}" style="width: 100%; height: 450px"></iframe>
+										<!-- <iframe src="/uploads/surat_pernyataan/{{$dt->surat_pernyataan}}" style="width: 100%; height: 450px"></iframe> -->
+										<embed src="/uploads/surat_pernyataan/{{$dt->surat_pernyataan}}" style="width: 100%; height: 450px; border: 1px solid black"></embed>
 									</div>
 						        </div>
 						        <div class="modal-footer">

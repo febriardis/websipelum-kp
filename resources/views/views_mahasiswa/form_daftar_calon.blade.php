@@ -298,7 +298,8 @@
 			        
 			        <div class="modal-body">
 		       			<div class="form-group">
-							<iframe src="/uploads/surat_pernyataan/{{$tb->surat_pernyataan}}" style="width: 100%; height: 450px"></iframe>
+							<!-- <iframe src="/uploads/surat_pernyataan/{{$tb->surat_pernyataan}}" style="width: 100%; height: 450px"></iframe> -->
+							<embed src="/uploads/surat_pernyataan/{{$tb->surat_pernyataan}}" style="width: 100%; height: 450px; border: 1px solid black"></embed>
 						</div>
 			        </div>
 			        <div class="modal-footer"> 	

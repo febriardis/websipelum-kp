@@ -20,12 +20,20 @@
 				{{csrf_field()}}
 				<div class="form-group">
 					<div class="row">
+						<label class="control-label col-sm-4">NIM</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" required="" name="nim" value="">
+						</div>
+					</div>
+				</div>
+				<!-- <div class="form-group">
+					<div class="row">
 						<label class="control-label col-sm-4">Nama</label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" required="" name="nama" value="">
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div class="form-group">
 					<div class="row">
 						<label class="control-label col-sm-4">Jenis Kelamin</label>
@@ -44,7 +52,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
+<!-- 				<div class="form-group">
 					<div class="row">
 						<label class="control-label col-sm-4">NIM</label>
 						<div class="col-sm-8">
@@ -52,7 +60,6 @@
 						</div>
 					</div>
 				</div>
-				
 
 				<div class="form-group">
 					<div class="row">
@@ -68,8 +75,8 @@
 						</div>
 					</div>
 				</div>
-
-				{{! $cekFak = (App\Fakultas::all()) }}
+ -->
+				<!-- {{! $cekFak = (App\Fakultas::all()) }}
 				<script type="text/javascript">
 				$(document).ready(function() {
 				    $("#fakultas").change(function(){
@@ -99,7 +106,7 @@
 			            }
 				    });
 				});
-				</script>
+				</script> -->
 
 				<div class="form-group">
 					<div class="row">

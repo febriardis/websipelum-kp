@@ -112,16 +112,16 @@ class KandidatController extends Controller
 
         if ($cekJurAg==$cekJurMhs && $cekFakAg==$cekFakMhs && count($cekMhs) !=0 || $cekJurAg=='Semua Jurusan' && $cekFakAg==$cekFakMhs && count($cekMhs) !=0 || $cekFakAg=='Semua Mahasiswa' && count($cekMhs) !=0) {
             if (count($cekKandidat)==0) {
-                // $Mhs = Mahasiswa::find($req->nim);
+                $Mhs = Mahasiswa::find($req->nim);
 
                 $tb = new Kandidat;
-                $tb->nama        = $req->nama;
+                $tb->nama        = $Mhs->nama;//$req->nama;
                 $tb->jen_kelamin = $req->jen_kelamin;
                 $tb->tmp_lahir   = $req->tmp_lahir;
                 $tb->tgl_lahir   = $req->tgl_lahir;
                 $tb->nim         = $req->nim;
-                $tb->jurusan     = $req->jurusan;
-                $tb->fakultas    = $req->fakultas;
+                $tb->jurusan     = $Mhs->jurusan;//$req->jurusan;
+                $tb->fakultas    = $Mhs->fakultas;//$req->fakultas;
                 $file    = $req->file('foto');
                 $ext     = $file->getClientOriginalExtension();
                 $newName = rand(100000,1001238912).".".$ext;

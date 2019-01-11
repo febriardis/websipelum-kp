@@ -152,14 +152,16 @@
 				<hr>
 				<h5 style="text-transform: capitalize;">II. DAFTAR RIWAYAT HIDUP</h5>
 				<div class="form-group">
-					<iframe src="/uploads/riwayat_hidup/{{$tbMhs->riwayat_hidup}}" style="width: 100%; height: 600px"></iframe>
+					<a href="/uploads/temp_riwayat_hidup/{{$tbMhs->riwayat_hidup}}" download="">Download</a><br>
+					<embed src="/uploads/riwayat_hidup/{{$tbMhs->riwayat_hidup}}" style="width: 100%; height: 600px;border: 1px solid black"></embed>
 				</div>
 
 				<hr>
 				<h5 style="text-transform: capitalize;">Lampiran</h5>
 				<h6 style="text-transform: capitalize;">Transkrip Nilai : </h6>
 				<div class="form-group">
-					<iframe src="/uploads/transkrip_nilai/{{$tbMhs->transkrip_nilai}}" style="width: 100%; height: 600px"></iframe>
+					<a href="/uploads/temp_riwayat_hidup/{{$tbMhs->transkrip_nilai}}" download="">Download</a><br>
+					<embed src="/uploads/transkrip_nilai/{{$tbMhs->transkrip_nilai}}" style="width: 100%; height: 600px; border: 1px solid black"></embed>
 				</div>
 			</div>
 			<div class="panel-footer">

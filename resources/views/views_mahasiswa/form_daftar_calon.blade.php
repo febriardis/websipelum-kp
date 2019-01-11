@@ -228,7 +228,8 @@
 					<div class="col-sm-4"></div>
 					<div class="col-sm-8">
 						<span class="text-danger">{{ $errors->first('riwayat_hidup')}}</span> 
-						<input type="file" name="riwayat_hidup" required=""><br>
+						<input type="file" name="riwayat_hidup" required="">
+          				<span class="help-block"><i> max 2MB </i></span><br>
 						<a href="/uploads/temp_riwayat_hidup/{{$tb->temp_riwayat_hidup}}" download="">Download Template</a><br>
 					</div>
 				</div>

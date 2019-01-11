@@ -8,10 +8,11 @@
 <div class="content" style="min-height: 450px; margin-bottom: 60px">
   <div style="display: none;">
   <!-- cek jumlah DPT -->
-  {{! $jum_dpt = \App\Pemilih::where('agenda_id', $idAgenda)->count() }}
+  {{! $cek_dpt = \App\Pemilih::where('agenda_id', $idAgenda)->get() }}
+  {{! $jum_dpt = count($cek_dpt) }}
   <!-- /cek jumlah DPT -->  
   </div>
-  @if(count($jum_dpt)!=0 && count($tbVoting)!=0)
+  @if(count($cek_dpt)!=0 && count($tbVoting)!=0)
 
     <div style="display: none;">
       {{! $cekTgl = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}
@@ -137,27 +138,25 @@
           </div>
       @endif
     </div>
-@else
-  <div class="content" style="min-height: 450px; margin-bottom: 60px">
-    <div style="padding: 0px 20px; background-color: #ffffff; border-radius: 5px">
-      <h1 class="fontArial capitalize" style="float: left;margin-top: 8px; padding: 0px 10px; background-color: #f2f2f2;">{{\App\Agenda::find($idAgenda)->nm_agenda }}</h1>
+  @else
+    <div class="content" style="min-height: 450px; margin-bottom: 60px">
+      <div style="padding: 0px 20px; background-color: #ffffff; border-radius: 5px">
+        <h1 class="fontArial capitalize" style="float: left;margin-top: 8px; padding: 0px 10px; background-color: #f2f2f2;">{{\App\Agenda::find($idAgenda)->nm_agenda }}</h1>
+        
+        <h4 style="float: right; margin-top: 14px; padding: 0px 5px; background-color: #f2f2f2;">{{ date( 'l, d F Y', strtotime(\App\Agenda::find($idAgenda)->tgl_agenda)) }}</h4>
+        <div class="clear"></div>
+      </div>
+
+      <!-- border quick count text -->
+      <div class="list-text-qcl">
+        <hr><h3>Quick Count Results</h3><hr>
+        <div class="clear"></div>
+      </div>
+      <!-- /border quick count text -->
       
-      <h4 style="float: right; margin-top: 14px; padding: 0px 5px; background-color: #f2f2f2;">{{ date( 'l, d F Y', strtotime(\App\Agenda::find($idAgenda)->tgl_agenda)) }}</h4>
-      <div class="clear"></div>
+      <div class="text-center">Hasil Suara Tidak Ditemukan</div>
+
     </div>
-
-    <!-- border quick count text -->
-    <div class="list-text-qcl">
-      <hr><h3>Quick Count Results</h3><hr>
-      <div class="clear"></div>
-    </div>
-    <!-- /border quick count text -->
-    
-
-    <div class="text-center">Kandidat Tidak Ditemukan</div>
-
-
-  </div>
-@endif
+  @endif
 </div>
 @endsection

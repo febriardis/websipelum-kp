@@ -85,11 +85,12 @@
 						<h3 class="no-margin">
 							@foreach($Agenda as $dt)
 							@if($cekTgl >= $dt->tgl_agenda)
+								<div style="display: none;">
 								{{! $cek1 = (App\Admin::find($dt->admin_id))->ket }}
-								{{! $cek2 = (App\Admin::find($dt->admin_id))->ket2 }}	
-								
+								{{! $cek2 = (App\Admin::find($dt->admin_id))->ket2 }}
 								{{! $c1 =(App\Jurusan::where('nm_jurusan', Auth::user()->ket2)->value('fak_id')) }}
 								{{! $c2 = (App\Fakultas::where('nm_fakultas', $dt->kat_fakultas)->value('id')) }}
+								</div>
 								@if(Auth::user()->ket==$cek1 && Auth::user()->ket2==$cek2 || Auth::user()->ket=='HMJ' && Auth::user()->ket2==$dt->kat_fakultas || Auth::user()->ket=='HMJ' && $dt->kat_fakultas=='Semua Mahasiswa' || Auth::user()->ket=='HMJ' && $dt->kat_jurusan=='Semua Jurusan' && $c1==$c2 || Auth::user()->ket=='Super Admin')
 								
 									{{ $no++ }}

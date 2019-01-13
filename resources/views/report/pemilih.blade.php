@@ -26,11 +26,11 @@
 		    	@foreach($pemilihs as $pemilih)
 		    	<tr>
 		    		<td>{{$no++}}</td>
-			        <td>{{$kandidat->nim}}</td>
+			        <td>{{$pemilih->nim}}</td>
 			        <td>{{\App\Mahasiswa::where('nim', $pemilih->nim)->value('nama')}}</td>
 			        <td>{{\App\Mahasiswa::where('nim', $pemilih->nim)->value('jurusan')}}</td>
 			        <td>{{\App\Mahasiswa::where('nim', $pemilih->nim)->value('th_angkatan')}}</td>
-			        <td>{{$kandidat->keterangan}}</td>
+			        <td>{{$pemilih->keterangan}}</td>
 		      	</tr>
 		      	@endforeach
 		    </tbody>

@@ -22,7 +22,7 @@
 					<div class="row">
 						<label class="control-label col-sm-4">NIM</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" required="" name="nim" value="">
+							<input type="text" class="form-control" required="" name="nim" value="{{ old('nim') }}">
 						</div>
 					</div>
 				</div>
@@ -38,8 +38,8 @@
 					<div class="row">
 						<label class="control-label col-sm-4">Jenis Kelamin</label>
 						<div class="col-sm-8">
-							<label><input type="radio" name="jen_kelamin" required="" value="lk"> Laki-laki</label><br>
-							<label><input type="radio" name="jen_kelamin" required="" value="pr"> Perempuan</label>
+							<label><input type="radio" name="jen_kelamin" required="" value="lk" @if(old('jen_kelamin')) checked @endif> Laki-laki</label><br>
+							<label><input type="radio" name="jen_kelamin" required="" value="pr" @if(old('jen_kelamin')) checked @endif> Perempuan</label>
 						</div>
 					</div>
 				</div>
@@ -47,8 +47,8 @@
 					<div class="row">
 						<label class="control-label col-sm-4">Tempat, Tanggal Lahir</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" required="" name="tmp_lahir" style="width: 30%;float: left;">
-							<input type="date" name="tgl_lahir" required="" class="form-control" style="width: 30%;float: left;">
+							<input type="text" class="form-control" value="{{old('tmp_lahir')}}" required="" name="tmp_lahir" style="width: 30%;float: left;">
+							<input type="date" name="tgl_lahir" required="" value="{{old('tgl_lahir')}}" class="form-control" style="width: 30%;float: left;">
 						</div>
 					</div>
 				</div>
@@ -113,7 +113,7 @@
 						<label class="control-label col-sm-4">Foto</label>
 						<div class="col-sm-8">
 							<span class="text-danger">{{ $errors->first('foto')}}</span> 
-							<input type="file" name="foto" accept="image/*" onchange="readURL(this);" required="">
+							<input type="file" name="foto" accept="image/*"value="{{old('foto')}}" onchange="readURL(this);" required="">
 		      				<span class="help-block"><i> max 2MB </i></span>
 		      	          	<!-- js show image -->
 					        <script type="text/javascript">
@@ -140,7 +140,7 @@
 					<div class="row">
 						<label class="control-label col-sm-4">Agama</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" required="" name="agama">
+							<input type="text" class="form-control" required="" value="{{old('agama')}}" name="agama">
 						</div>
 					</div>
 				</div>
@@ -148,7 +148,7 @@
 					<div class="row">
 						<label class="control-label col-sm-4">No Hp</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" required="" name="no_hp">
+							<input type="text" class="form-control" required="" value="{{old('no_hp')}}" name="no_hp">
 						</div>
 					</div>
 				</div>
@@ -156,7 +156,7 @@
 					<div class="row">
 						<label class="control-label col-sm-4">Email</label>
 						<div class="col-sm-8">
-							<input type="email" class="form-control" required="" name="email">
+							<input type="email" class="form-control" required="" value="{{old('email')}}" name="email">
 						</div>
 					</div>
 				</div>
@@ -166,15 +166,15 @@
 						<div class="col-sm-8">
 							<div class="row">
 								<label class="control-label col-sm-2">Facebook</label>
-								<input type="text" class="form-control" style="width: 40%" required="" name="medsos1">
+								<input type="text" class="form-control" style="width: 40%" value="{{old('medsos1')}}" required="" name="medsos1">
 							</div>
 							<div class="row">
 								<label class="control-label col-sm-2">Twitter</label>
-								<input type="text" class="form-control" style="width: 40%" required="" name="medsos2">
+								<input type="text" class="form-control" style="width: 40%" value="{{old('medsos2')}}" required="" name="medsos2">
 							</div>
 							<div class="row">
 								<label class="control-label col-sm-2">Instagram</label>
-								<input type="text" class="form-control" style="width: 40%" required="" name="medsos3">
+								<input type="text" class="form-control" style="width: 40%" value="{{old('medsos3')}}" required="" name="medsos3">
 							</div>
 						</div>
 					</div>
@@ -183,7 +183,7 @@
 					<div class="row">
 						<label class="control-label col-sm-4">Blog/Website</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" required="" name="blog">
+							<input type="text" class="form-control" value="{{old('blog')}}" required="" name="blog">
 						</div>
 					</div>
 				</div>
@@ -191,11 +191,11 @@
 					<div class="row">
 						<label class="control-label col-sm-4">Anak Ke-</label>
 						<div class="col-sm-2">
-							<input type="text" class="form-control" required="" name="anak_ke">
+							<input type="text" class="form-control" value="{{old('anak_ke')}}" required="" name="anak_ke">
 						</div>
 						<label class="control-label col-sm-1">dari - </label>
 						<div class="col-sm-2">
-							<input type="text" class="form-control" required="" name="jum_saudara">
+							<input type="text" class="form-control" value="{{old('jum_saudara')}}" required="" name="jum_saudara">
 						</div>
 						<label class="control-label col-sm-1">Saudara</label>
 					</div>
@@ -204,7 +204,7 @@
 					<div class="row">
 						<label class="control-label col-sm-4">Asal SMA</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" required="" name="asal_sma">
+							<input type="text" class="form-control" value="{{old('asal_sma')}}" required="" name="asal_sma">
 						</div>
 					</div>
 				</div>
@@ -212,7 +212,7 @@
 					<div class="row">
 						<label class="control-label col-sm-4">Asal Daerah</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" required="" name="asal_daerah">
+							<input type="text" class="form-control" value="{{old('asal_daerah')}}" required="" name="asal_daerah">
 						</div>
 					</div>
 				</div>
@@ -220,7 +220,7 @@
 					<div class="row">
 						<label class="control-label col-sm-4">Motto Hidup</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" required="" name="motto">
+							<input type="text" class="form-control" value="{{old('motto')}}" required="" name="motto">
 						</div>
 					</div>
 				</div>
@@ -228,7 +228,7 @@
 					<div class="row">
 						<label class="control-label col-sm-4">Motivasi jadi Ketua </label>
 						<div class="col-sm-8">
-							<textarea class="form-control" required="" name="motivasi" rows="4"></textarea>
+							<textarea class="form-control" required="" name="motivasi" rows="4">{{old('motivasi')}}</textarea>
 						</div>
 					</div>
 				</div>
@@ -246,7 +246,7 @@
 					<div class="row">
 						<label class="control-label col-sm-4">Visi</label>
 						<div class="col-sm-8">
-							<input type="text" required="" autocomplete="off" name="visi" class="form-control" placeholder="Masukan visi anda">
+							<input type="text" required="" autocomplete="off" value="{{old('visi')}}" name="visi" class="form-control" placeholder="Masukan visi anda">
 						</div>
 					</div>
 				</div>
@@ -268,7 +268,7 @@
 					<div class="row">
 						<label class="control-label col-sm-4">Misi</label>
 						<div class="col-sm-8">
-							<textarea name="misi" required="" class="ckeditor" id="ckedtor"></textarea>
+							<textarea name="misi" required="" class="ckeditor" id="ckedtor">{!! old('misi') !!}</textarea>
 						</div>
 					</div>
 				</div>
@@ -282,6 +282,7 @@
 							<span class="text-danger">{{ $errors->first('riwayat_hidup')}}</span> 
 							<input type="file" name="riwayat_hidup" required=""><br>
 							<a href="/uploads/temp_riwayat_hidup/{{$tb->temp_riwayat_hidup}}" download="">Download Template</a><br>
+							<span class="help-block"><i> max 2MB </i></span>
 						</div>
 					</div>
 				</div>

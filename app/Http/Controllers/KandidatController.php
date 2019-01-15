@@ -98,7 +98,9 @@ class KandidatController extends Controller
 
     function insertK(Request $req, $idAgenda){ //insert oleh admin
         $this->validate($req, [
-            'foto'     => 'required|mimes:jpeg,jpg,png|max:2000'
+            'foto'              => 'required|mimes:jpeg,jpg,png|max:2000',
+            'transkrip_nilai'   => 'required|mimes:doc,docx,pdf|max:2000',
+            'riwayat_hidup'     => 'required|mimes:doc,docx,pdf|max:2000',
         ]);
 
         $cekJurAg  = Agenda::find($idAgenda)->kat_jurusan; //cek kategori jurusan agenda 

@@ -18,7 +18,7 @@ class CetakController extends Controller
         $pdf       = PDF::loadView('report.kandidat', compact('kandidats','idAgenda'));
         $pdf->setPaper('A4', 'portrait');
 
-        return $pdf->download('dafar-pemilih('.$agenda.").".'pdf');
+        return $pdf->download('daftar-kandidat('.$agenda.").".'pdf');
     }
 
     function cetakPemilih($idAgenda) 
@@ -28,6 +28,6 @@ class CetakController extends Controller
         $pdf      = PDF::loadView('report.pemilih', compact('pemilihs','idAgenda'));
         $pdf->setPaper('A4', 'portrait');
 
-        return $pdf->download('dafar-pemilih('.$agenda.").".'pdf');
+        return $pdf->download('daftar-pemilih('.$agenda.").".'pdf');
     }
 }

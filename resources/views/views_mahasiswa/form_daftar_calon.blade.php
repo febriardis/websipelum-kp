@@ -23,8 +23,8 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Jenis Kelamin</label>
 					<div class="col-sm-8">
-						<label><input type="radio" name="jen_kelamin" required="" value="lk"> Laki-laki</label><br>
-						<label><input type="radio" name="jen_kelamin" required="" value="pr"> Perempuan</label>
+						<label><input type="radio" name="jen_kelamin" required="" value="lk" @if(old('jen_kelamin')) checked @endif> Laki-laki</label><br>
+						<label><input type="radio" name="jen_kelamin" required="" value="pr" @if(old('jen_kelamin')) checked @endif> Perempuan</label>
 					</div>
 				</div>
 			</div>
@@ -32,8 +32,8 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Tempat, Tanggal Lahir</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" required="" name="tmp_lahir" style="width: 30%;float: left;">
-						<input type="date" name="tgl_lahir" required="" class="form-control" style="width: 30%;float: left;">
+						<input type="text" class="form-control" required="" name="tmp_lahir" value="{{old('tmp_lahir')}}" style="width: 30%;float: left;">
+						<input type="date" name="tgl_lahir" required="" class="form-control" value="{{old('tgl_lahir')}}" style="width: 30%;float: left;">
 					</div>
 				</div>
 			</div>
@@ -88,7 +88,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Agama</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" required="" name="agama">
+						<input type="text" class="form-control" required="" value="{{old('agama')}}" name="agama">
 					</div>
 				</div>
 			</div>
@@ -96,7 +96,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">No Hp</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" required="" name="no_hp">
+						<input type="text" class="form-control" required="" value="{{old('no_hp')}}" name="no_hp">
 					</div>
 				</div>
 			</div>
@@ -104,7 +104,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Email</label>
 					<div class="col-sm-8">
-						<input type="email" class="form-control" required="" name="email">
+						<input type="email" class="form-control" required="" value="{{old('email')}}" name="email">
 					</div>
 				</div>
 			</div>
@@ -114,15 +114,15 @@
 					<div class="col-sm-8">
 						<div class="row">
 							<label class="control-label col-sm-2">Facebook</label>
-							<input type="text" class="form-control col-sm-5" required="" name="medsos1">
+							<input type="text" class="form-control col-sm-5" required="" value="{{old('medsos1')}}" name="medsos1">
 						</div>
 						<div class="row">
 							<label class="control-label col-sm-2">Twitter</label>
-							<input type="text" class="form-control col-sm-5" required="" name="medsos2">
+							<input type="text" class="form-control col-sm-5" required="" value="{{old('medsos2')}}" name="medsos2">
 						</div>
 						<div class="row">
 							<label class="control-label col-sm-2">Instagram</label>
-							<input type="text" class="form-control col-sm-5" required="" name="medsos3">
+							<input type="text" class="form-control col-sm-5" required="" value="{{old('medsos3')}}" name="medsos3">
 						</div>
 					</div>
 				</div>
@@ -131,7 +131,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Blog/Website</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" required="" name="blog">
+						<input type="text" class="form-control" required="" name="blog" value="{{old('blog')}}">
 					</div>
 				</div>
 			</div>
@@ -139,11 +139,11 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Anak Ke-</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" required="" name="anak_ke">
+						<input type="text" class="form-control" required="" name="anak_ke" value="{{old('anak_ke')}}">
 					</div>
 					<label class="control-label col-sm-1">dari - </label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" required="" name="jum_saudara">
+						<input type="text" class="form-control" required="" name="jum_saudara" value="{{old('jum_saudara')}}">
 					</div>
 					<label class="control-label col-sm-1">Saudara</label>
 				</div>
@@ -152,7 +152,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Asal SMA</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" required="" name="asal_sma">
+						<input type="text" class="form-control" required="" name="asal_sma" value="{{old('asal_sma')}}">
 					</div>
 				</div>
 			</div>
@@ -160,7 +160,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Asal Daerah</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" required="" name="asal_daerah">
+						<input type="text" class="form-control" required="" name="asal_daerah" value="{{old('asal_daerah')}}">
 					</div>
 				</div>
 			</div>
@@ -168,7 +168,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Motto Hidup</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" required="" name="motto">
+						<input type="text" class="form-control" required="" name="motto" value="{{old('motto')}}">
 					</div>
 				</div>
 			</div>
@@ -176,7 +176,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Motivasi jadi Ketua </label>
 					<div class="col-sm-8">
-						<textarea class="form-control" required="" name="motivasi" rows="4"></textarea>
+						<textarea class="form-control" required="" name="motivasi" rows="4">{{old('motivasi')}}</textarea>
 					</div>
 				</div>
 			</div>
@@ -194,7 +194,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Visi</label>
 					<div class="col-sm-8">
-						<input type="text" required="" autocomplete="off" name="visi" class="form-control" placeholder="Masukan visi anda">
+						<input type="text" required="" autocomplete="off" name="visi" value="{{old('visi')}}" class="form-control" placeholder="Masukan visi anda">
 					</div>
 				</div>
 			</div>
@@ -216,7 +216,7 @@
 				<div class="row">
 					<label class="control-label col-sm-4">Misi</label>
 					<div class="col-sm-8">
-						<textarea name="misi" required="" class="ckeditor" id="ckedtor"></textarea>
+						<textarea name="misi" required="" class="ckeditor" id="ckedtor">{!! old('misi') !!}</textarea>
 					</div>
 				</div>
 			</div>
@@ -227,7 +227,7 @@
 				<div class="row">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-8">
-						<span class="text-danger">{{ $errors->first('riwayat_hidup')}}</span> 
+						<span class="text-danger">{{ $errors->first('riwayat_hidup')}}</span><br>
 						<input type="file" name="riwayat_hidup" required="">
           				<span class="help-block"><i> max 2MB </i></span><br>
 						<a href="/uploads/temp_riwayat_hidup/{{$tb->temp_riwayat_hidup}}" download="">Download Template</a><br>

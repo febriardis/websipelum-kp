@@ -108,19 +108,19 @@
 					<div class="col-lg-5">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="icon-calendar3"></i></span>
-							<input type="date" name="tgl_agenda" required="" class="form-control" placeholder="Left icon">
+							<input type="date" name="tgl_agenda" required="" value="{{old('tgl_agenda')}}" class="form-control" placeholder="Left icon">
 						</div>
 					</div>
 					<div class="col-lg-2">
 						<div class="input-group">
 							<span class="input-group-addon">start</span>
-							<input type="time" name="timeA1" required="" class="form-control">
+							<input type="time" name="timeA1" required="" value="{{old('timeA1')}}" class="form-control">
 						</div>
 					</div>
 					<div class="col-lg-2">
 						<div class="input-group">
 							<span class="input-group-addon">is over</span>
-							<input type="time" name="timeA2" required="" class="form-control">
+							<input type="time" name="timeA2" required="" value="{{old('timeA2')}}" class="form-control">
 						</div>
 					</div>
 				</div>

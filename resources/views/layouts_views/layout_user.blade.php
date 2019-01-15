@@ -239,14 +239,9 @@
 		</div>
 	</nav>
 	<!-- /Main Navbar -->
-	@if(Session::has('pesan'))
-		<div class="alert alert-danger">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			{{ Session::get('pesan') }} !
-		</div>
-	@endif
+
 	<!-- The Modal -->
-	<div class="modal modal-login" id="myModal" >
+	<div class="modal modal-login" id="myModal">
 	    <div class="modal-dialog">
 	    	<div class="modal-content">
 		        <!-- Modal Header -->
@@ -255,23 +250,25 @@
 		        	<h6 class="modal-title"><i class="fa fa-key"></i> Masuk dengan akun portal akademik</h6>
 		        	<button type="button" class="close" data-dismiss="modal">&times;</button>
 		        </div>
-		        
 		        <!-- Modal body -->
-		        <div class="modal-body">
+		        <div class="modal-body">		        
+		        	@if(Session::has('pesan'))
+						<p class="text-danger">{{Session::get('pesan') }}!</p>
+					@endif
 					<form action="/login" method="POST" >
 						{{ csrf_field() }}
 						<div class="input-group mb-3">
 						    <div class="input-group-prepend">
 						    	<span class="input-group-text"><i class="fa fa-user"></i> </span>
 						    </div>
-						    <input type="text" name="nim" class="form-control" placeholder="NIM">
+						    <input type="text" name="nim" class="form-control" value="{{old('nim')}}" placeholder="NIM">
 						</div>
 						
 						<div class="input-group mb-3">
 						    <div class="input-group-prepend">
 						    	<span class="input-group-text"><i class="fa fa-lock"></i> </span>
 						    </div>
-						    <input type="password" name="password" class="form-control" placeholder="Kata Sandi">
+						    <input type="password" name="password" class="form-control" value="{{old('password')}}" placeholder="Kata Sandi">
 						</div>
 						<div style="float: right;">
 							<input type="submit" class="btn btn-primary" value="Masuk">
@@ -284,8 +281,15 @@
 	</div>
 	<!--End The Modal-->
 
-	<!-- List Bar -->
-	
+	@if(!empty(Session::get('error_code')) && Session::get('error_code') == 5)
+	<script>
+		$(function() {
+		    $('#myModal').modal('show');
+		});
+	</script>
+	@endif
+
+	<!-- List Bar -->	
 	<div class="listbar fontArial">
 		<div class="container">
 			<h6 class="info-header" style="margin: 17px; float: left;">Sistem Informasi Pemilihan Umum UIN Sunan Gunung Djati Bandung</h6>

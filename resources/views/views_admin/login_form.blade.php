@@ -20,13 +20,13 @@
 				</div>
 			@endif
 			<div class="form-group has-feedback has-feedback-left">
-				<input type="text" class="form-control input-lg" autocomplete="off" name="username" required="" placeholder="Username">
+				<input type="text" class="form-control input-lg" autocomplete="off" value="{{old('username')}}" name="username" required="" placeholder="Username">
 				<div class="form-control-feedback">
 					<i class="icon-user text-muted"></i>
 				</div>
 			</div>
 			<div class="form-group has-feedback has-feedback-left">
-				<input type="password" class="form-control input-lg" name="password" required="" placeholder="Password">
+				<input type="password" class="form-control input-lg" name="password" value="{{old('password')}}" required="" placeholder="Password">
 				<div class="form-control-feedback">
 					<i class="icon-lock2 text-muted"></i>
 				</div>

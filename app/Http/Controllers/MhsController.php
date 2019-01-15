@@ -24,7 +24,7 @@ class MhsController extends Controller
 
 
     function ShowTabelAgenda(){
-    	$tb = Agenda::all();
+    	$tb = Agenda::latest()->get();
     	return view('views_mahasiswa.tabel_agenda')
     	->with('tbAgenda', $tb);
     }

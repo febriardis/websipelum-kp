@@ -288,7 +288,7 @@
 	
 	<div class="listbar fontArial">
 		<div class="container">
-			<h6 style="margin: 17px; float: left;">Sistem Informasi Pemilihan Umum UIN Sunan Gunung Djati Bandung</h6>
+			<h6 class="info-header" style="margin: 17px; float: left;">Sistem Informasi Pemilihan Umum UIN Sunan Gunung Djati Bandung</h6>
 			@guest
 			<form action="/s" class="form-search" method="GET">
 				<input type="text" class="in-search" name="q" autocomplete="off" id="myInput" placeholder="Cari...">	

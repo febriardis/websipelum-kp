@@ -91,7 +91,7 @@
 						<!-- Footer -->
 						<div class="footer text-muted">
 							<div class="container">
-								&copy; 2018. <a href="" target="_blank">UIN Sunan Gunung Djati Bandung</a>
+								&copy; 2018. <a href="http://ptipd.uinsgd.ac.id/" target="_blank">PTIPD. UIN Sunan Gunung Djati Bandung</a>
 							</div>
 						</div>
 						<!-- /footer -->

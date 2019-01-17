@@ -69,6 +69,13 @@
 					}
 				</script>
 				@endforeach
+				<div class="text-center" style="margin: 20px">
+					@guest
+					<a href="/more" class="btn btn-info">More Info</a>
+					@else
+					<a href="/berita" class="btn btn-info">More Info</a>
+					@endguest
+				</div>
 			@else
 				<div class="alert alert-info">
 					<h4>No items found</h4>

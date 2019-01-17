@@ -124,7 +124,7 @@
 					</a>
 				</li>
 			</ul>
-			<a class="navbar-brand" href=""><img src="/assets/images/icon.png" style="width: 75%; height: 35px; margin-top: -10px" alt=""></a>
+			<a class="navbar-brand" href="" id="brand-list"><img src="/assets/images/icon.png" style="width: 75%; height: 35px; margin-top: -10px" alt=""></a>
 			<div class="navbar-right">
 				<ul class="nav navbar-nav">
 					<li class="dropdown dropdown-user">

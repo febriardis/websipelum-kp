@@ -33,8 +33,8 @@
 				<div class="form-group">
 					<label class="control-label col-lg-3">Jenis Kelamin</label>
 					<div class="col-lg-9">
-						<label><input type="radio" name="jen_kelamin" required="" readonly="" value="lk" {{{ ($tbMhs->jen_kelamin == 'lk' ? 'checked' : '') }}}> Laki-laki</label><br>
-						<label><input type="radio" name="jen_kelamin" required="" readonly="" value="pr" {{{ ($tbMhs->jen_kelamin == 'pr' ? 'checked' : '') }}}> Perempuan</label>
+						<label><input type="radio" name="jen_kelamin" required="" disabled="" value="lk" {{{ ($tbMhs->jen_kelamin == 'lk' ? 'checked' : '') }}}> Laki-laki</label><br>
+						<label><input type="radio" name="jen_kelamin" required="" disabled="" value="pr" {{{ ($tbMhs->jen_kelamin == 'pr' ? 'checked' : '') }}}> Perempuan</label>
 					</div>
 				</div>
 				<div class="form-group">

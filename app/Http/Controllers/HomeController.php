@@ -23,6 +23,19 @@ class HomeController extends Controller
         ->with('agendasL', $agendasL);
     }
 
+    function more(){
+        $banners  = Banner::where('id',0)->get();
+        $contents = Content::all();
+        $agendasT = Agenda::latest()->where('tgl_agenda', '>=', \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'))->limit(10)->get();
+        $agendasL  = Agenda::latest()->where('tgl_agenda', '<', \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'))->limit(10)->get();
+
+        return view('views_mahasiswa.index')
+        ->with('banners', $banners)
+        ->with('contents', $contents)
+        ->with('agendasT', $agendasT)
+        ->with('agendasL', $agendasL);
+    }
+
     function home(){
 		$banners  = Banner::all();
         $contents = Content::latest()->limit(6)->get();

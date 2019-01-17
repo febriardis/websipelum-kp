@@ -56,12 +56,12 @@
                   </div>     
                   <div class="caption text-center" style="margin: 15px 0px 0px 0px;">
                     <h6 style="margin: 0px">{{$tb->nama}}</h6>
-                    <small class="text-info"><i class="fa fa-thumbs-o-up"></i> 
+                    <!-- <small class="text-info"><i class="fa fa-thumbs-o-up"></i> 
                       <div style="display: none;">
                         {{! $nilVote = \App\Voting::where([['agenda_id',$a->id],['kandidat_id', $tb->id]])->value('jumlah') }}
+                        {{ \Crypt::decrypt($nilVote) }}&nbsp;Votes
                       </div>
-                      {{ \Crypt::decrypt($nilVote) }}&nbsp;Votes
-                    </small>
+                    </small> -->
                     <div class="button-vote">    
                       {{! $Kvote = App\Pemilih::where([['nim', Auth::user()->nim],['agenda_id', $a->id]])->value('ket_vote') }}
                       {{! $cekK = \Crypt::decrypt($Kvote) }}
@@ -98,13 +98,14 @@
                         <div class="modal-foto">
                           <img src="/uploads/foto-kandidat/{{$tb->foto}}" style="width: 125px; float: left; height: 140px;" alt="">
                           <div style="float: left;margin: 20px">
-                            <h6 style="margin: 0px">{{$tb->nama}}</h6>
-                            <small class="text-info"><i class="fa fa-thumbs-o-up"></i>
+                            <h6 style="margin: 0px">{{$tb->nama}}</h6><br>
+                            <h6 style="margin: 0px">{{$tb->jurusan}} - {{$tb->fakultas}}</h6>
+                            <!-- <small class="text-info"><i class="fa fa-thumbs-o-up"></i>
                             <div style="display: none;">
                               {{! $nilVote = \App\Voting::where([['agenda_id',$a->id],['kandidat_id', $tb->id]])->value('jumlah') }}
+                              {{ \Crypt::decrypt($nilVote) }}&nbsp;Votes
                             </div>
-                            {{ \Crypt::decrypt($nilVote) }}&nbsp;Votes
-                            </small> 
+                            </small>  -->
                           </div>
                           <div class="clear"></div>
                         </div> 
@@ -125,7 +126,7 @@
                       @if($cekK=='belum memilih')
                         <form action="/vote/{{$a->id}}/{{$tb->id}}/{{$idPemilih}}" method="POST">
                           {{csrf_field()}}
-                          <button type="submit" data-action="reload" class="btn btn-danger btn-sm"><i class="fa fa-thumbs-o-up"></i> Vote </button>
+                          <!-- <button type="submit" data-action="reload" class="btn btn-danger btn-sm"><i class="fa fa-thumbs-o-up"></i> Vote </button> -->
                         </form>
                       @endif
                       </div>    
@@ -218,12 +219,12 @@
                   </div>     
                   <div class="caption text-center" style="margin: 15px 0px 0px 0px;">
                     <h6 style="margin: 0px">{{$tb->nama}}</h6>
-                    <small class="text-info"><i class="fa fa-thumbs-o-up"></i> 
+                    <!-- <small class="text-info"><i class="fa fa-thumbs-o-up"></i> 
                       <div style="display: none;">
                         {{! $nilVote = \App\Voting::where([['agenda_id',$a->id],['kandidat_id', $tb->id]])->value('jumlah') }}
+                        {{ \Crypt::decrypt($nilVote) }}&nbsp;Votes
                       </div>
-                      {{ \Crypt::decrypt($nilVote) }}&nbsp;Votes
-                    </small>
+                    </small> -->
                     <div class="button-vote">    
                       {{! $Kvote = App\Pemilih::where([['nim', Auth::user()->nim],['agenda_id', $a->id]])->value('ket_vote') }}
                       {{! $cekK = \Crypt::decrypt($Kvote) }}
@@ -260,13 +261,14 @@
                         <div class="modal-foto">
                           <img src="/uploads/foto-kandidat/{{$tb->foto}}" style="width: 125px; float: left; height: 140px;" alt="">
                           <div style="float: left;margin: 20px">
-                            <h6 style="margin: 0px">{{$tb->nama}}</h6>
-                            <small class="text-info"><i class="fa fa-thumbs-o-up"></i>
+                            <h6 style="margin: 0px">{{$tb->nama}}</h6><br>
+                            <h6 style="margin: 0px">{{$tb->jurusan}} - {{$tb->fakultas}}</h6>
+                            <!-- <small class="text-info"><i class="fa fa-thumbs-o-up"></i>
                             <div style="display: none;">
                               {{! $nilVote = \App\Voting::where([['agenda_id',$a->id],['kandidat_id', $tb->id]])->value('jumlah') }}
+                              {{ \Crypt::decrypt($nilVote) }}&nbsp;Votes
                             </div>
-                            {{ \Crypt::decrypt($nilVote) }}&nbsp;Votes
-                            </small> 
+                            </small>  -->
                           </div>
                           <div class="clear"></div>
                         </div> 
@@ -287,7 +289,7 @@
                       @if($cekK=='belum memilih')
                         <form action="/vote/{{$a->id}}/{{$tb->id}}/{{$idPemilih}}" method="POST">
                           {{csrf_field()}}
-                          <button type="submit" data-action="reload" class="btn btn-danger btn-sm"><i class="fa fa-thumbs-o-up"></i> Vote </button>
+                          <!-- <button type="submit" data-action="reload" class="btn btn-danger btn-sm"><i class="fa fa-thumbs-o-up"></i> Vote </button> -->
                         </form>
                       @endif
                       </div>    

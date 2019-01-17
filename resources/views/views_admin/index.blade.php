@@ -38,7 +38,7 @@
 				<!-- Current server load -->
 				<div class="panel bg-pink-400">
 					<div class="panel-body" style="float: left;">
-						<h3 class="no-margin">{{count(App\Pemilih::all())}}</h3>
+						<h3 class="no-margin"><!-- {{count(App\Pemilih::all())}} --></h3>
 						Pemilih/Delegasi
 					</div>
 					<div class="panel-body" style="float: right; width: 110px; height: 100px">
@@ -83,7 +83,7 @@
 							{{! $Agenda = App\Agenda::all()  }}
 						</div>
 						<h3 class="no-margin">
-							@foreach($Agenda as $dt)
+						<!-- 	@foreach($Agenda as $dt)
 							@if($cekTgl >= $dt->tgl_agenda)
 								<div style="display: none;">
 								{{! $cek1 = (App\Admin::find($dt->admin_id))->ket }}
@@ -97,7 +97,7 @@
 								
 								@endif
 							@endif
-							@endforeach
+							@endforeach -->
 						</h3>
 						Quick Count
 					</div>

@@ -36,12 +36,12 @@ class MhsTableSeeder extends Seeder
             ],
             [
               'nim'         => '1157050053',
-              'nama'        => 'Harist Rahman MM',
+              'nama'        => 'Harits Rahman MM',
               'jurusan'     => 'Teknik Informatika',
               'fakultas'    => 'Sains dan Teknologi',
               'th_angkatan' => '2015',
               'foto'        => '3123124.JPG',
-              'password'    => bcrypt('harist1234'),
+              'password'    => bcrypt('haris1234'),
               'created_at'  => \Carbon\Carbon::now('Asia/Jakarta'),
               'updated_at'  => \Carbon\Carbon::now('Asia/Jakarta')
             ],          

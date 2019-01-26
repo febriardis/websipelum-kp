@@ -12,6 +12,7 @@
 			{{ Session::get('pesan') }} !
 		</div>
 	@endif
+
 <!-- Basic layout-->
 	<form action="/tambah admin" method="POST" class="form-horizontal">
 		{{ csrf_field() }}

@@ -206,6 +206,17 @@
 								<li {{ (Request::is('tabel mahasiswa') ? 'class=active' : '') }}>
 									<a href="/tabel mahasiswa"><i class="icon-database2"></i> <span>Data Mahasiswa</span></a>
 								</li>	
+								<li>
+									@if(Auth::user()->ket=='Super Admin')
+									<a href="/panduan/panduan-super admin.pdf" download=""><i class="icon-book3"></i> <span>Panduan Pengguna</span></a>
+									@elseif(Auth::user()->ket=='KPU U')
+									<a href="/panduan/panduan-kpu-universitas.pdf" download=""><i class="icon-book3"></i> <span>Panduan Pengguna</span></a>
+									@elseif(Auth::user()->ket=='KPU F')
+									<a href="/panduan/panduan-kpu-fakultas.pdf" download=""><i class="icon-book3"></i> <span>Panduan Pengguna</span></a>
+									@elseif(Auth::user()->ket=='HMJ')
+									<a href="/panduan/panduan-admin-hmj.pdf" download=""><i class="icon-book3"></i> <span>Panduan Pengguna</span></a>
+									@endif
+								</li>
 								<!-- /main -->
 							</ul>
 						</div>

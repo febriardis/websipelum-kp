@@ -34,10 +34,12 @@ Route::get('/informasi dpt/{ket}/{ket2}', 'PemilihController@showPemilih')->midd
 Route::get('/daftar calon', 'MhsController@ShowTabelAgenda')->middleware('auth:mahasiswa');
 Route::get('/form pendaftaran/{IdAgenda}', 'KandidatController@daftar')->middleware('auth:mahasiswa');
 Route::delete('/batal daftar/{nim}/{IdAgenda}', 'KandidatController@batalDaftar')->middleware('auth:mahasiswa');
+Route::group(['middleware' => 'throttle:1'], function () {
+	Route::post('/vote/{Idagenda}/{IdKandidat}/{IdPemilih}', 'VoteController@vote')->middleware('auth:mahasiswa');
+});
 
 //===================================ADMIN======================================
 Route::get('/dashboard', 'HomeController@dashboard')->middleware('auth:admin');
-
 Route::get('/cetak kandidat/{idAgenda}', 'CetakController@cetakKandidat')->middleware('auth:admin');
 Route::get('/cetak pemilih/{idAgenda}', 'CetakController@cetakPemilih')->middleware('auth:admin');
 
@@ -115,8 +117,3 @@ Route::get('/detail quick count/{idAgenda}', 'VoteController@viewQuickCount')->m
 
 // =============================ADMIN-SHOW-MAHASISWA================================
 Route::get('/tabel mahasiswa', 'MhsController@show')->middleware('auth:admin');
-
-// ==================================VOTE==================================
-Route::group(['middleware' => 'throttle:1'], function () {
-	Route::post('/vote/{Idagenda}/{IdKandidat}/{IdPemilih}', 'VoteController@vote')->middleware('auth:mahasiswa');
-});

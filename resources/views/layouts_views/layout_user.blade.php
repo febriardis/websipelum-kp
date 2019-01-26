@@ -120,8 +120,8 @@
 				    	</div>
 				  	</div>
 				  	<span class="span">|</span>
-				  	<li class="nav-item {{ (Request::is('hc') ? 'active-me' : '') }}">
-				    	<a class="nav-link" href="/hc" style="padding: 10px;">Panduan</a>
+				  	<li class="nav-item">
+				    	<a class="nav-link" href="/panduan/panduan-mahasiswa.pdf" download="" style="padding: 10px;">Panduan</a>
 				  	</li> 
 				</ul>
 			    <ul class="navbar-nav">
@@ -219,6 +219,10 @@
 					     	<a class="dropdown-item" href="/daftar calon">Calon Kandidat</a>
 					    </div>
 				  	</li>	
+				  	<span class="span">|</span>
+				  	<li class="nav-item">
+				    	<a class="nav-link" href="/panduan/panduan-mahasiswa.pdf" download="" style="padding: 10px;">Panduan</a>
+				  	</li> 
 				</ul>
 
 			    <ul class="navbar-nav">

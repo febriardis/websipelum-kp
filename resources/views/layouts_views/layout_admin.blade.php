@@ -4,9 +4,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Sipelum | Admin</title>
+	<title>SIPELUM - UIN SGD Bandung | Admin</title>
 
-	<link rel="stylesheet" type="text/css" href="/css/styleAdmin.css">
+	<link rel="stylesheet" type="text/css" href="/css/style_admin.css">
 
 	<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>	
 
